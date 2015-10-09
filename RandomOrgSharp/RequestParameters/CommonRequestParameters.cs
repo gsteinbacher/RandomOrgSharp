@@ -22,9 +22,9 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 
             JObject jsonParams = new JObject(
                 new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                new JProperty(RandomOrgConstants.METHOD_PARAMETER_NAME, method),
-                new JProperty(RandomOrgConstants.PARAMETERS_PARAMETER_NAME, parameters),
-                new JProperty(RandomOrgConstants.ID_PARAMETER_NAME, RandomNumberGenerator.Instance.Next()));
+                new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, method),
+                new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME, parameters),
+                new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, RandomNumberGenerator.Instance.Next()));
 
             return jsonParams;
         }

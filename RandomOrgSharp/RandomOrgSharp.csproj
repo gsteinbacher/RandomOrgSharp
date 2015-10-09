@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseNumberOptions.cs" />
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="ResourceConstants.cs" />
     <Compile Include="Properties\Strings.Designer.cs">

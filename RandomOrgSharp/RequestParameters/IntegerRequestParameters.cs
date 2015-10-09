@@ -35,11 +35,11 @@ namespace Obacher.RandomOrgSharp.RequestParameters
         {
 
             JObject jsonParameters = new JObject(
-                new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, _numberOfItemsToReturn),
-                new JProperty(RandomOrgConstants.MINIMUM_VALUE_PARAMETER_NAME, _minimumValue),
-                new JProperty(RandomOrgConstants.MAXIMUM_VALUE_PARAMETER_NAME, _maximumValue),
-                new JProperty(RandomOrgConstants.REPLACEMENT_PARAMETER_NAME, _allowDuplicates),
-                new JProperty(RandomOrgConstants.BASE_NUMBER_PARAMETER_NAME, (int)_baseNumber)
+                new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, _numberOfItemsToReturn),
+                new JProperty(RandomOrgConstants.JSON_MINIMUM_VALUE_PARAMETER_NAME, _minimumValue),
+                new JProperty(RandomOrgConstants.JSON_MAXIMUM_VALUE_PARAMETER_NAME, _maximumValue),
+                new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, _allowDuplicates),
+                new JProperty(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME, (int)_baseNumber)
                 );
 
             JObject jsonRequest = CreateJsonRequestInternal(RandomOrgConstants.INTEGER_METHOD, jsonParameters);

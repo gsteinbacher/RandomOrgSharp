@@ -84,16 +84,16 @@ namespace RandomOrgSharpUnitTest
             JObject expected =
                 new JObject(
                     new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                    new JProperty(RandomOrgConstants.METHOD_PARAMETER_NAME, "generateIntegers"),
-                    new JProperty(RandomOrgConstants.PARAMETERS_PARAMETER_NAME,
+                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, "generateIntegers"),
+                    new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME,
                         new JObject(
-                            new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                            new JProperty(RandomOrgConstants.MINIMUM_VALUE_PARAMETER_NAME, minimumValue),
-                            new JProperty(RandomOrgConstants.MAXIMUM_VALUE_PARAMETER_NAME, maximumValue),
-                            new JProperty(RandomOrgConstants.REPLACEMENT_PARAMETER_NAME, true),
-                            new JProperty(RandomOrgConstants.BASE_NUMBER_PARAMETER_NAME, 10),
+                            new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
+                            new JProperty(RandomOrgConstants.JSON_MINIMUM_VALUE_PARAMETER_NAME, minimumValue),
+                            new JProperty(RandomOrgConstants.JSON_MAXIMUM_VALUE_PARAMETER_NAME, maximumValue),
+                            new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, true),
+                            new JProperty(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME, 10),
                            new JProperty(RandomOrgConstants.APIKEY_KEY, RandomOrgConstants.APIKEY_VALUE))),
-                        new JProperty(RandomOrgConstants.ID_PARAMETER_NAME, 999));
+                        new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, 999));
 
 
             var random = new Mock<IRandom>();
