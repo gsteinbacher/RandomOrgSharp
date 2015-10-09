@@ -11,7 +11,6 @@ namespace Obacher.RandomOrgSharp
    public class RandomOrgSharp
     {
         // Values which identifies information for random.org
-       private const string INTEGER_METHOD = "generateIntegers";
        private const string DECIMALFRACTION_METHOD = "generateDecimalFractions";
        private const string GAUSSIAN_METHOD = "generateGaussians";
        private const string STRING_METHOD = "generateStrings";
@@ -35,18 +34,18 @@ namespace Obacher.RandomOrgSharp
        private const string REQUESTSLEFT_KEY = "requestsLeft";
        private const string ADVISORYDELAY_KEY = "advisoryDelay";
        private const string APIKEY_KEY = "apiKey";
-       private const string APIKEY_VALUE = "00000000-0000-0000-0000-000000000000";
+       private const string APIKEY_VALUE = "a0fc5d8d-8812-4093-851d-5bf64b4310d0";
 
-       private readonly IRandomOrgWrapper _wrapper;
+       private readonly IRandomOrgService _service;
 
         public RandomOrgSharp()
         {
-            _wrapper = new RandomOrgWrapper();
+            _service = new RandomOrgService();
         }
 
-        public RandomOrgSharp(IRandomOrgWrapper randomOrgWrapper)
+        public RandomOrgSharp(IRandomOrgService randomOrgService)
        {
-           _wrapper = randomOrgWrapper;
+           _service = randomOrgService;
        }
 
         /// <summary>
@@ -58,7 +57,7 @@ namespace Obacher.RandomOrgSharp
             var jsonParams = new JObject(
                 new JProperty(APIKEY_KEY, APIKEY_VALUE),
                 new JProperty(GET_USAGE_METHOD));
-            var jsonResponse = _wrapper.SendRequest(jsonRequest);
+            var jsonResponse = _service.SendRequest(jsonParams);
             return jsonResponse;
         }
 
@@ -101,17 +100,6 @@ namespace Obacher.RandomOrgSharp
             return dataValue;
 
         }
-
-       private JObject ParseBitsLeft(JObject jsonResponse)
-       {
- {
-            if (jsonResponse == null || DateTime.Now.Ticks > _lastResponseReceived + ONE_HOUR_IN_MILLIS)
-                GetUsage();
-            JObject resultObject = (JObject)_jsonResponse.GetValue(value);
-            return (int)resultObject.GetValue(token);
-        }
-    }
-
-        ReturnMessage 
+   
     }
 }

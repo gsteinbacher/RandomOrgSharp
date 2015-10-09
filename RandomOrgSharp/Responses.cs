@@ -5,7 +5,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp
 {
-    public abstract class RandomOrgResponse
+    public interface IResponse
+    {
+    }
+
+    public abstract class RandomOrgResponse : IResponse
     {
         protected static string JsonToString(JToken token, string defaultValue = null)
         {
@@ -35,6 +39,7 @@ namespace Obacher.RandomOrgSharp
             return !DateTime.TryParse(token.ToString(), out returnValue) ? localDefaultValue : returnValue;
         }
     }
+
 
     public enum UsageStatus
     {

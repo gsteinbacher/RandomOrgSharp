@@ -7,8 +7,10 @@ using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp
 {
-    public interface IRandomOrgWrapper
+    public interface IRandomOrgService
     {
-        Task<JObject> SendRequest(JObject jsonRequest);
+        JObject SendRequest(JObject jsonRequest);
+
+        Task<JObject> SendRequestAsync(JObject jsonRequest);
     }
 }

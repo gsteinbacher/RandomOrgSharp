@@ -32,6 +32,15 @@ namespace Obacher.RandomOrgSharp
             : base(message)
         { Code = code; }
 
+
+        public RandomOrgRunTimeException(string message)
+            : base(message)
+        { Code = 9999; }
+
+        public RandomOrgRunTimeException(string message, Exception innerException)
+            : base(message, innerException)
+        { Code = 9999; }
+
         public RandomOrgRunTimeException(int code, string message, Exception innerException)
             : base(message, innerException)
         { Code = code; }
