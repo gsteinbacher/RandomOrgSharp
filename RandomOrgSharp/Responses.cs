@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp
@@ -114,7 +115,50 @@ namespace Obacher.RandomOrgSharp
         }
     }
 
-    public class RandomValueResponse<T> : RandomOrgResponse
+    public class RandomOrgIntegerResponse : RandomOrgResponse
+    {
+        public static RandomOrgResponse Parse(JObject json)
+        {
+            return RandomOrgResponse<int>.Parse(json);
+        }
+    }
+
+    public class RandomOrgDecimalResponse : RandomOrgResponse
+    {
+        public static RandomOrgResponse Parse(JObject json)
+        {
+            return RandomOrgResponse<decimal>.Parse(json);
+        }
+    }
+
+
+    public class RandomOrgStringResponse : RandomOrgResponse
+    {
+        public static RandomOrgResponse Parse(JObject json)
+        {
+            return RandomOrgResponse<string>.Parse(json);
+        }
+    }
+
+
+    public class RandomOrgUUIDResponse : RandomOrgResponse
+    {
+        public static RandomOrgResponse Parse(JObject json)
+        {
+            return RandomOrgResponse<Guid>.Parse(json);
+        }
+    }
+
+
+    public class RandomOrgBlobResponse : RandomOrgResponse
+    {
+        public static RandomOrgResponse Parse(JObject json)
+        {
+            return RandomOrgResponse<string>.Parse(json);
+        }
+    }
+
+    class RandomOrgResponse<T> : RandomOrgResponse
     {
         public string Version { get; private set; }
         public T[] Data { get; private set; }
@@ -125,7 +169,7 @@ namespace Obacher.RandomOrgSharp
         public int AdvisoryDelay { get; private set; }
         public int Id { get; private set; }
 
-        private RandomValueResponse(string version, T[] data, DateTime completionTime, int bitsUsed, int bitsLeft, int requestsLeft, int advisoryDelay, int id)
+        private RandomOrgResponse(string version, T[] data, DateTime completionTime, int bitsUsed, int bitsLeft, int requestsLeft, int advisoryDelay, int id)
         {
             Version = version;
             Data = data;
@@ -137,7 +181,7 @@ namespace Obacher.RandomOrgSharp
             Id = id;
         }
 
-        public static RandomValueResponse<T> Parse(JObject json)
+        public static RandomOrgResponse<T> Parse(JObject json)
         {
             var version = JsonToString(json.GetValue("jsonrpc"));
             var result = json.GetValue("result") as JObject;
@@ -166,7 +210,7 @@ namespace Obacher.RandomOrgSharp
             }
             var id = JsonToInt(json.GetValue("id"));
 
-            var response = new RandomValueResponse<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
+            var response = new RandomOrgResponse<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
             return response;
         }
     }
