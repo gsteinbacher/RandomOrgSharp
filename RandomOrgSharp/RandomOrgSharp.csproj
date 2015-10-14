@@ -84,7 +84,6 @@
     <Compile Include="RandomOrgException.cs" />
     <Compile Include="RandomOrgHttpService.cs" />
     <Compile Include="RandomOrgHttpEmulator.cs" />
-    <Compile Include="RandomOrgSharp.cs" />
     <Compile Include="RequestParameters\CommonRequestParameters.cs" />
     <Compile Include="RequestParameters\IntegerRequestParameters.cs" />
     <Compile Include="RequestParameters\IRequestParameters.cs" />

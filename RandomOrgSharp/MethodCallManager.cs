@@ -50,9 +50,12 @@ namespace Obacher.RandomOrgSharp
 
         public void Delay()
         {
-            long waitingTime = DateTime.UtcNow.Ticks - _advisoryDelay;
-            if (waitingTime > 0)
-                Thread.Sleep(TimeSpan.FromTicks(waitingTime * 10000));
+            if (_advisoryDelay > 0)
+            {
+                long waitingTime = DateTime.UtcNow.Ticks - _advisoryDelay;
+                if (waitingTime > 0)
+                    Thread.Sleep(TimeSpan.FromTicks(waitingTime * 10000));
+            }
         }
 
         public void SetAdvisoryDelay(int advisoryDelay)

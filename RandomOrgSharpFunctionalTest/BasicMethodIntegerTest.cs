@@ -11,11 +11,15 @@ namespace RandomOrgSharpFunctionalTest
     [TestClass]
     public class BasicMethodIntegerTest
     {
-        private readonly Random _random;
+        private Random _random;
+        private IMethodCallManager _manager;
 
-        public BasicMethodIntegerTest()
+        [TestInitialize]
+        public void InitializeTests()
         {
+            _manager = new MethodCallManager();
             _random = new Random();
+
         }
 
         [TestMethod]
@@ -29,7 +33,7 @@ namespace RandomOrgSharpFunctionalTest
 
             IRandomOrgService service = new RandomOrgApiService();
 
-            BasicMethodInteger target = new BasicMethodInteger(service);
+            BasicMethodInteger target = new BasicMethodInteger(service, _manager);
 
             IRequestParameters requestParameters = new IntegerRequestParameters(numberToReturn, minNumber, maxNumber, allowDuplicates, baseNumber);
             var results = target.Execute(requestParameters);

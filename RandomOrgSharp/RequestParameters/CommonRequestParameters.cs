@@ -14,7 +14,7 @@ namespace Obacher.RandomOrgSharp.RequestParameters
         {
             _apiKey = SettingsManager.Instance.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY);
             if (_apiKey == null)
-                throw new RandomOrgRunTimeException(9999, Strings.ResourceManager.GetString(StringsConstants.APIKEY_REQUIRED));
+                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.APIKEY_REQUIRED));
         }
 
         protected JObject CreateJsonRequestInternal(string method, JObject parameters)

@@ -8,9 +8,9 @@ namespace Obacher.RandomOrgSharp.BasicMethod
     {
         private readonly IBasicMethod<int> _basicMethod;
 
-        public BasicMethodInteger(IRandomOrgService service)
+        public BasicMethodInteger(IRandomOrgService service, IMethodCallManager methodCallManager)
         {
-            _basicMethod = new BasicMethod<int>(service);
+            _basicMethod = new BasicMethod<int>(service, methodCallManager);
         }
 
         public BasicMethodInteger(IBasicMethod<int> basicMethod)
