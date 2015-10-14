@@ -19,7 +19,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             JObject jsonRequest = requestParameters.CreateJsonRequest();
             JObject jsonReponse = _serviceService.SendRequest(jsonRequest);
 
-            var response = RandomOrgResponse<int>.Parse(jsonReponse);
+            var response = RandomOrgIntegerResponse.Parse(jsonReponse);
 
             return response;
         }
@@ -30,7 +30,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             JObject jsonRequest = requestParameters.CreateJsonRequest();
             JObject jsonReponse = await _serviceService.SendRequestAsync(jsonRequest);
 
-            var response = RandomOrgResponse<int>.Parse(jsonReponse);
+            var response = RandomOrgIntegerResponse.Parse(jsonReponse);
 
             return response;
         }

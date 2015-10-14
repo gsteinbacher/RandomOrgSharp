@@ -10,8 +10,7 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 
         protected CommonRequestParameters()
         {
-            //_apiKey = SettingsManager.Instance.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY);
-            _apiKey = RandomOrgConstants.APIKEY_VALUE;
+            _apiKey = SettingsManager.Instance.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY);
             if (_apiKey == null)
                 throw new RandomOrgRunTimeException(9999, Strings.ResourceManager.GetString(ResourceConstants.APIKEY_REQUIRED));
         }

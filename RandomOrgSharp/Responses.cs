@@ -82,10 +82,6 @@ namespace Obacher.RandomOrgSharp
         {
         }
 
-        public static IResponse Parse(JObject json)
-        {
-            return ParseInternal(json);
-        }
     }
     
     public enum UsageStatus

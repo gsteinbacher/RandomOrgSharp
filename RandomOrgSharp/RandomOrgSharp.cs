@@ -40,7 +40,7 @@ namespace Obacher.RandomOrgSharp
 
         public RandomOrgSharp()
         {
-            _service = new RandomOrgService();
+            _service = new RandomOrgApiService();
         }
 
         public RandomOrgSharp(IRandomOrgService randomOrgService)

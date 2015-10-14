@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp
 {
-    public class RandomOrgService : IRandomOrgService
+    public class RandomOrgApiService : IRandomOrgService
     {
 
         private const string URL = "https://api.random.org/json-rpc/1/invoke";
@@ -23,7 +23,7 @@ namespace Obacher.RandomOrgSharp
         private readonly int _httpRequestTimeout;
         private readonly int _httpReadWriteTimeout;
 
-        public RandomOrgService()
+        public RandomOrgApiService()
         {
             _httpRequestTimeout = SettingsManager.Instance.GetConfigurationValue(HTTP_REQUEST_TIMEOUT_KEY, DEFAULT_REQUEST_TIMEOUT);
             _httpReadWriteTimeout = SettingsManager.Instance.GetConfigurationValue(HTTP_READWRITE_TIMEOUT_KEY, DEFAULT_READWRITE_TIMEOUT);

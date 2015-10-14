@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomOrgSharp", "RandomOrg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomOrgSharpUnitTest", "RandomOrgSharpUnitTest\RandomOrgSharpUnitTest.csproj", "{AB9A399D-01F2-4B69-87EA-1735D9EA882A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomOrgSharpFunctionalTest", "RandomOrgSharpFunctionalTest\RandomOrgSharpFunctionalTest.csproj", "{F5528057-9FB2-43DF-B164-9EE458DA0E01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AB9A399D-01F2-4B69-87EA-1735D9EA882A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9A399D-01F2-4B69-87EA-1735D9EA882A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9A399D-01F2-4B69-87EA-1735D9EA882A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5528057-9FB2-43DF-B164-9EE458DA0E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5528057-9FB2-43DF-B164-9EE458DA0E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5528057-9FB2-43DF-B164-9EE458DA0E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5528057-9FB2-43DF-B164-9EE458DA0E01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
