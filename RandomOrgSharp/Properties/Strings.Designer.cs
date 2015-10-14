@@ -61,6 +61,195 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Method not (yet) implemented.
+        /// </summary>
+        internal static string ERROR_CODE_100 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service offline; please try again later.
+        /// </summary>
+        internal static string ERROR_CODE_101 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is malformed.
+        /// </summary>
+        internal static string ERROR_CODE_200 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_200", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has illegal value.
+        /// </summary>
+        internal static string ERROR_CODE_201 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_201", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is out of range; allowable values are [{1},{2}].
+        /// </summary>
+        internal static string ERROR_CODE_202 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_202", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has length {1}, which is too long; maximum length is {2}.
+        /// </summary>
+        internal static string ERROR_CODE_203 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_203", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has length {1}, which is too short; minimum length is {2}.
+        /// </summary>
+        internal static string ERROR_CODE_204 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_204", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than parameter &apos;{1}&apos;.
+        /// </summary>
+        internal static string ERROR_CODE_300 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_300", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You requested {0} values without replacement but the domain you specified only contains {1}.
+        /// </summary>
+        internal static string ERROR_CODE_301 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_301", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value you specified for parameter &apos;{0}&apos; has already been taken.
+        /// </summary>
+        internal static string ERROR_CODE_302 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_302", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The resource identified by &apos;{0}&apos; was not found.
+        /// </summary>
+        internal static string ERROR_CODE_303 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_303", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The resulting data&apos;s size would be {0}, which exceeds the maximum of {1}.
+        /// </summary>
+        internal static string ERROR_CODE_304 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_304", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error: {0}.
+        /// </summary>
+        internal static string ERROR_CODE_32000 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_32000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The API key you specified does not exist.
+        /// </summary>
+        internal static string ERROR_CODE_400 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The API key you specified is not running.
+        /// </summary>
+        internal static string ERROR_CODE_401 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation requires {0} requests, but the API key only has {1} left.
+        /// </summary>
+        internal static string ERROR_CODE_402 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_402", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation requires {0} bits, but the API key only has {1} left.
+        /// </summary>
+        internal static string ERROR_CODE_403 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not subscribed to {0}.
+        /// </summary>
+        internal static string ERROR_CODE_500 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_500", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The credentials &apos;{0}&apos; you specified are not valid or have expired.
+        /// </summary>
+        internal static string ERROR_CODE_501 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_501", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your prepaid account credit is negative; please top up and retry.
+        /// </summary>
+        internal static string ERROR_CODE_502 {
+            get {
+                return ResourceManager.GetString("ERROR_CODE_502", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id passed into the request does not match the Id returned in response.
+        /// </summary>
+        internal static string ERROR_IDS_NOT_MATCHED {
+            get {
+                return ResourceManager.GetString("ERROR_IDS_NOT_MATCHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \&quot;APIKEY\&quot;.
         /// </summary>
         internal static string VALIDATION_APIKEY_REQUIRED {

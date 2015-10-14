@@ -7,10 +7,9 @@ using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
-    public interface IBasicMethod
+    public interface IBasicMethod<T>
     {
-        IResponse Execute(IRequestParameters requestParameters);
-        Task<IResponse> ExecuteAsync(IRequestParameters requestParameters);
-        bool CanExecute(MethodType methodType);
+        IEnumerable<T> Execute(IRequestParameters requestParameters);
+        Task<IEnumerable<T>> ExecuteAsync(IRequestParameters requestParameters);
     }
 }

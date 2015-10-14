@@ -19,11 +19,11 @@ namespace RandomOrgSharpFunctionalTest
         }
 
         [TestMethod]
-        public void Execute_ShouldReturnValuesInRange()
+        public void BasicMethodInteger_Execute_ShouldReturnIntegerValuesInRange()
         {
             int numberToReturn = _random.Next(100, 1000);
             int minNumber = _random.Next(1, 1000);
-            int maxNumber = _random.Next(minNumber+1, 1000000);
+            int maxNumber = _random.Next(minNumber + 1, 1000000);
             const bool allowDuplicates = false;
             const BaseNumberOptions baseNumber = BaseNumberOptions.Ten;
 
@@ -32,14 +32,13 @@ namespace RandomOrgSharpFunctionalTest
             BasicMethodInteger target = new BasicMethodInteger(service);
 
             IRequestParameters requestParameters = new IntegerRequestParameters(numberToReturn, minNumber, maxNumber, allowDuplicates, baseNumber);
-            IResponse results = target.Execute(requestParameters);
+            var results = target.Execute(requestParameters);
 
             results.Should().Not.Be.Null();
-            results.Data.Should().Not.Be.Null();
-            results.Data.Should().Not.Be.Empty();
-            results.Data.Count().Should().Equal(numberToReturn);
+            results.Should().Not.Be.Empty();
+            results.Count().Should().Equal(numberToReturn);
 
-            foreach (var result in results.Data)
+            foreach (var result in results)
                 result.Should().Be.InRange(minNumber, maxNumber);
         }
     }

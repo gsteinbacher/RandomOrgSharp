@@ -7,12 +7,12 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Properties;
 
 namespace Obacher.RandomOrgSharp
 {
     public class RandomOrgApiService : IRandomOrgService
     {
-
         private const string URL = "https://api.random.org/json-rpc/1/invoke";
         private const string CONTENT_TYPE = "application/json";
 
@@ -25,6 +25,7 @@ namespace Obacher.RandomOrgSharp
 
         public RandomOrgApiService()
         {
+
             _httpRequestTimeout = SettingsManager.Instance.GetConfigurationValue(HTTP_REQUEST_TIMEOUT_KEY, DEFAULT_REQUEST_TIMEOUT);
             _httpReadWriteTimeout = SettingsManager.Instance.GetConfigurationValue(HTTP_READWRITE_TIMEOUT_KEY, DEFAULT_READWRITE_TIMEOUT);
         }
@@ -50,7 +51,7 @@ namespace Obacher.RandomOrgSharp
             }
             catch (Exception e)
             {
-                throw new RandomOrgRunTimeException(9999, e.Message, e);
+                throw new RandomOrgRunTimeException(e.Message, e);
             }
 
             return jsonResponse;
@@ -77,12 +78,11 @@ namespace Obacher.RandomOrgSharp
             }
             catch (Exception e)
             {
-                throw new RandomOrgRunTimeException(9999, e.Message, e);
+                throw new RandomOrgRunTimeException(e.Message, e);
             }
 
             return jsonResponse;
         }
-
 
         /// <summary>
         /// Setup the HTTP Request object
@@ -115,6 +115,7 @@ namespace Obacher.RandomOrgSharp
                     jsonResponse = JObject.Parse(content);
                 }
             }
+
             return jsonResponse;
         }
     }

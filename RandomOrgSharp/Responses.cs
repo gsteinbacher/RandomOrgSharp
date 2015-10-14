@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
@@ -8,82 +9,82 @@ namespace Obacher.RandomOrgSharp
     {
     }
 
-    public class RandomOrgIntegerResponse : RandomOrgResponse<int>
-    {
-        private RandomOrgIntegerResponse(string version, int[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
-       int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
-        {
-        }
-        public static IResponse Parse(JObject json)
-        {
-            return ParseInternal(json);
-        }
-    }
+    //public class RandomOrgIntegerResponse : RandomOrgResponse<int>
+    //{
+    //    private RandomOrgIntegerResponse(string version, int[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
+    //   int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
+    //    {
+    //    }
+    //    public static IResponse Parse(JObject json)
+    //    {
+    //        return ParseInternal(json);
+    //    }
+    //}
 
-    public class RandomOrgDecimalResponse : RandomOrgResponse<decimal>
-    {
-        private RandomOrgDecimalResponse(string version, decimal[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
-       int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
-        {
-        }
+    //public class RandomOrgDecimalResponse : RandomOrgResponse<decimal>
+    //{
+    //    private RandomOrgDecimalResponse(string version, decimal[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
+    //   int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
+    //    {
+    //    }
 
-        public static IResponse Parse(JObject json)
-        {
-            return ParseInternal(json);
-        }
-    }
-
-
-    public class RandomOrgStringResponse : RandomOrgResponse<string>
-    {
-        private RandomOrgStringResponse(string version, string[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
-       int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
-        {
-        }
-
-        public static IResponse Parse(JObject json)
-        {
-            return ParseInternal(json);
-        }
-    }
+    //    public static IResponse Parse(JObject json)
+    //    {
+    //        return ParseInternal(json);
+    //    }
+    //}
 
 
-    public class RandomOrgGuassianResponse : RandomOrgResponse<double>
-    {
-        private RandomOrgGuassianResponse(string version, double[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
-            int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
-        {
-        }
+    //public class RandomOrgStringResponse : RandomOrgResponse<string>
+    //{
+    //    private RandomOrgStringResponse(string version, string[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
+    //   int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
+    //    {
+    //    }
 
-        public static IResponse Parse(JObject json)
-        {
-            return ParseInternal(json);
-        }
-    }
-
-    public class RandomOrgUUIDResponse : RandomOrgResponse<Guid>
-    {
-        private RandomOrgUUIDResponse(string version, Guid[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
-            int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
-        {
-        }
-
-        public static IResponse Parse(JObject json)
-        {
-            return ParseInternal(json);
-        }
-    }
+    //    public static IResponse Parse(JObject json)
+    //    {
+    //        return ParseInternal(json);
+    //    }
+    //}
 
 
-    public class RandomOrgBlobResponse : RandomOrgResponse<string>
-    {
-        private RandomOrgBlobResponse(string version, string[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
-            int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
-        {
-        }
+    //public class RandomOrgGuassianResponse : RandomOrgResponse<double>
+    //{
+    //    private RandomOrgGuassianResponse(string version, double[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
+    //        int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
+    //    {
+    //    }
 
-    }
-    
+    //    public static IResponse Parse(JObject json)
+    //    {
+    //        return ParseInternal(json);
+    //    }
+    //}
+
+    //public class RandomOrgUUIDResponse : RandomOrgResponse<Guid>
+    //{
+    //    private RandomOrgUUIDResponse(string version, Guid[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
+    //        int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
+    //    {
+    //    }
+
+    //    public static IResponse Parse(JObject json)
+    //    {
+    //        return ParseInternal(json);
+    //    }
+    //}
+
+
+    //public class RandomOrgBlobResponse : RandomOrgResponse<string>
+    //{
+    //    private RandomOrgBlobResponse(string version, string[] data, DateTime completionTime, int bitsUsed, int bitsLeft,
+    //        int requestsLeft, int advisoryDelay, int id) : base(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id)
+    //    {
+    //    }
+
+    //}
+
     public enum UsageStatus
     {
         Stopped,
@@ -155,10 +156,10 @@ namespace Obacher.RandomOrgSharp
         }
     }
 
-    public class RandomOrgResponse<T> : IResponse
+    public class BasicMethodResponse
     {
         public string Version { get; private set; }
-        public T[] Data { get; private set; }
+        public JArray Data { get; private set; }
         public DateTime CompletionTime { get; private set; }
         public int BitsUsed { get; private set; }
         public int BitsLeft { get; private set; }
@@ -166,7 +167,7 @@ namespace Obacher.RandomOrgSharp
         public int AdvisoryDelay { get; private set; }
         public int Id { get; private set; }
 
-        protected RandomOrgResponse(string version, T[] data, DateTime completionTime, int bitsUsed, int bitsLeft, int requestsLeft, int advisoryDelay, int id)
+        protected BasicMethodResponse(string version, JArray data, DateTime completionTime, int bitsUsed, int bitsLeft, int requestsLeft, int advisoryDelay, int id)
         {
             Version = version;
             Data = data;
@@ -178,11 +179,11 @@ namespace Obacher.RandomOrgSharp
             Id = id;
         }
 
-        protected static RandomOrgResponse<T> ParseInternal(JObject json)
+        public static BasicMethodResponse Parse(JObject json)
         {
             var version = JsonHelper.JsonToString(json.GetValue(RandomOrgConstants.JSON_RPC_PARAMETER_NAME));
             var result = json.GetValue(RandomOrgConstants.JSON_RESULT_PARAMETER_NAME) as JObject;
-            var data = default(T[]);
+            JArray data = null;
             var completionTime = DateTime.MinValue;
             var bitsUsed = 0;
             var bitsLeft = 0;
@@ -194,10 +195,7 @@ namespace Obacher.RandomOrgSharp
                 var random = result.GetValue(RandomOrgConstants.JSON_RANDOM_PARAMETER_NAME) as JObject;
                 if (random != null)
                 {
-                    JArray dataArray = random.GetValue(RandomOrgConstants.JSON_DATA_PARAMETER_NAME) as JArray;
-                    if (dataArray != null && dataArray.HasValues)
-                        data = dataArray.Values<T>().ToArray();
-
+                    data = random.GetValue(RandomOrgConstants.JSON_DATA_PARAMETER_NAME) as JArray;
                     completionTime = JsonHelper.JsonToDateTime(random.GetValue(RandomOrgConstants.JSON_COMPLETION_TIME_PARAMETER_NAME));
                 }
                 bitsUsed = JsonHelper.JsonToInt(result.GetValue(RandomOrgConstants.JSON_BITS_USED_PARAMETER_NAME));
@@ -207,7 +205,7 @@ namespace Obacher.RandomOrgSharp
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            var response = new RandomOrgResponse<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
+            var response = new BasicMethodResponse(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
             return response;
         }
     }

@@ -16,13 +16,13 @@ namespace Obacher.RandomOrgSharp.RequestParameters
             bool allowDuplicates = true, BaseNumberOptions baseNumber = BaseNumberOptions.Ten)
         {
             if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > 9999)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(ResourceConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE));
+                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE));
 
             if (minimumValue < -1000000000 || minimumValue > 1000000000)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(ResourceConstants.MINIMUM_VALUE_OUT_OF_RANGE));
+                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.MINIMUM_VALUE_OUT_OF_RANGE));
 
             if (maximumValue < -1000000000 || maximumValue > 1000000000)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(ResourceConstants.MAXIMUM_VALUE_OUT_OF_RANGE));
+                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.MAXIMUM_VALUE_OUT_OF_RANGE));
 
             _numberOfItemsToReturn = numberOfItemsToReturn;
             _minimumValue = minimumValue;

@@ -1,43 +1,34 @@
-﻿using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
-    public class BasicMethodInteger : IBasicMethod
+    public class BasicMethodInteger
     {
+        private readonly IBasicMethod<int> _basicMethod;
 
-        private readonly IRandomOrgService _serviceService;
-
-        public BasicMethodInteger(IRandomOrgService serviceService)
+        public BasicMethodInteger(IRandomOrgService service)
         {
-            _serviceService = serviceService;
+            _basicMethod = new BasicMethod<int>(service);
         }
 
-        public IResponse Execute(IRequestParameters requestParameters)
+        public BasicMethodInteger(IBasicMethod<int> basicMethod)
         {
-            JObject jsonRequest = requestParameters.CreateJsonRequest();
-            JObject jsonReponse = _serviceService.SendRequest(jsonRequest);
+            _basicMethod = basicMethod;
+        }
 
-            var response = RandomOrgIntegerResponse.Parse(jsonReponse);
-
+        public IEnumerable<int> Execute(IRequestParameters requestParameters)
+        {
+            var response = _basicMethod.Execute(requestParameters);
             return response;
         }
 
 
-        public async Task<IResponse> ExecuteAsync(IRequestParameters requestParameters)
+        public async Task<IEnumerable<int>> ExecuteAsync(IRequestParameters requestParameters)
         {
-            JObject jsonRequest = requestParameters.CreateJsonRequest();
-            JObject jsonReponse = await _serviceService.SendRequestAsync(jsonRequest);
-
-            var response = RandomOrgIntegerResponse.Parse(jsonReponse);
-
+            var response = await _basicMethod.ExecuteAsync(requestParameters);
             return response;
-        }
-
-        public bool CanExecute(MethodType methodType)
-        {
-            return methodType == MethodType.Integer;
         }
     }
 }

@@ -42,6 +42,11 @@ namespace Obacher.RandomOrgSharp
         public const string JSON_TOTAL_BITS_PARAMETER_NAME = "totalBits";
         public const string JSON_TOTAL_REQUESTS_PARAMETER_NAME = "totalRequests";
 
+        // Parameter names that are used in the JSON error response object
+        public const string JSON_ERROR_PARAMETER_NAME = "error";
+        public const string JSON_CODE_PARAMETER_NAME = "code";
+        public const string JSON_MESSAGE_PARAMETER_NAME = "message";
+
         // Possible status values returned in JSON response
         public const string JSON_STATUS_STOPPED = "stopped";
         public const string JSON_STATUS_PAUSED = "paused";

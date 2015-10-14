@@ -9,6 +9,8 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 {
     public interface IRequestParameters
     {
+        int Id { get; }
+
         JObject CreateJsonRequest();
     }
 }
