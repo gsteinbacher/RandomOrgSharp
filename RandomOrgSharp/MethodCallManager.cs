@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Newtonsoft.Json.Linq;
+using Obacher.Framework.Common.SystemWrapper;
+using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp.Properties;
 using Obacher.RandomOrgSharp.RequestParameters;
 
@@ -17,17 +19,42 @@ namespace Obacher.RandomOrgSharp
     /// </summary>
     public class MethodCallManager : IMethodCallManager, IDisposable
     {
+        private readonly IDateTime _dateTimeWrap;
         private int _code;
         private string _message;
         private string _apiKey;
-        private DateTime _lastResponse;
+        private IDateTime _lastResponse;
         private long _advisoryDelay;
 
-        public MethodCallManager()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <summary>
+        /// Instantiates an instance of <see cref="MethodCallManager" />  with <see cref="DateTimeWrap"/> as the class used to handle the instance of <see cref="DateTime"/>.
+        /// </summary>
+        public MethodCallManager() : this(new DateTimeWrap()) { }
+
+        /// <summary>
+        /// Instantiates an instance of <see cref="Obacher.RandomOrgSharp.MethodCallManager" /> 
+        /// </summary>
+        /// <param name="dateTimeWrap">Instance of <see cref="IDateTime"/> to handle <see cref="DateTime"/> processing</param>
+        public MethodCallManager(IDateTime dateTimeWrap)
         {
+            _dateTimeWrap = dateTimeWrap;
             _advisoryDelay = Settings.Default.LastResponse;
         }
 
+        /// <summary>
+        /// Is it possible that a call to random.org will be successful
+        /// <remarks>
+        /// This class does not guarantee that a call to random.org will be successful.  There are a couple conditions that we know will cause a call to random.org to fail.
+        /// This method tests those to condition to be more friendly to random.org by not making the call when it knows a failure will occur.
+        /// The condittions are:
+        ///    An error code 400 (The API key you specified does not exist) occurred on the previous call and the API Key has not changed.
+        ///    random.org only allows so many bits and requests to be sent per day.  If a 402 or 403 are received then this method will return <value>false</value> until the date rolls
+        ///    over to the next day (using UTC)
+        /// </remarks>
+        /// </summary>
         public void CanSendRequest()
         {
             // If an error was returned in a previous call that indicated the API Key was incorrect then check to see if API Key has been changed.
@@ -41,7 +68,7 @@ namespace Obacher.RandomOrgSharp
             if (_code == 402 || _code == 403)
             {
                 // If the next date has rolled over to a new date then we get a whole new set of requests and bits available
-                if (_lastResponse.Date == DateTime.UtcNow.Date)
+                if (Equals(_lastResponse.Date, _dateTimeWrap.UtcNow.Date))
                     throw new RandomOrgException(_code, _message);
 
                 _code = 0;
@@ -52,7 +79,7 @@ namespace Obacher.RandomOrgSharp
         {
             if (_advisoryDelay > 0)
             {
-                long waitingTime = DateTime.UtcNow.Ticks - _advisoryDelay;
+                long waitingTime = _dateTimeWrap.UtcNow.Ticks - _advisoryDelay;
                 if (waitingTime > 0)
                     Thread.Sleep(TimeSpan.FromTicks(waitingTime * 10000));
             }
@@ -60,7 +87,7 @@ namespace Obacher.RandomOrgSharp
 
         public void SetAdvisoryDelay(int advisoryDelay)
         {
-            _advisoryDelay = DateTime.UtcNow.Ticks + advisoryDelay;
+            _advisoryDelay = _dateTimeWrap.UtcNow.Ticks + advisoryDelay;
         }
 
         /// <summary>
@@ -95,7 +122,7 @@ namespace Obacher.RandomOrgSharp
                     _apiKey = SettingsManager.Instance.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY);
 
                 if (_code == 402 || _code == 403)
-                    _lastResponse = DateTime.UtcNow;
+                    _lastResponse = _dateTimeWrap.UtcNow;
 
                 throw new RandomOrgException(_code, _message);
             }

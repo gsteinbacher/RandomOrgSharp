@@ -104,6 +104,12 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Obacher.Framework.Common\Obacher.Framework.Common.csproj">
+      <Project>{0AAD80A2-3CF4-4F2A-9573-320E3F28AF46}</Project>
+      <Name>Obacher.Framework.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
