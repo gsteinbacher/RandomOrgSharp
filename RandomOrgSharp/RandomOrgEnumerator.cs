@@ -9,9 +9,17 @@ namespace Obacher.RandomOrgSharp
 {
     public class RandomOrgEnumerator<T> : IEnumerable<T>, IEnumerator<T>
     {
+        private IList<T> _list;
+        private bool _isDisposed;
+
+        public RandomOrgEnumerator(IList<T> list)
+        {
+            _list = list;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _list.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -21,24 +29,34 @@ namespace Obacher.RandomOrgSharp
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            return _list.GetEnumerator().MoveNext();
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            _list.GetEnumerator().Reset();
         }
 
-        public T Current { get; }
+        public T Current => _list.GetEnumerator().Current;
 
-        object IEnumerator.Current
-        {
-            get { return Current; }
-        }
+        object IEnumerator.Current => Current;
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                if (disposing)
+                {
+                }
+
+                _isDisposed = true;
+            }
         }
     }
 }

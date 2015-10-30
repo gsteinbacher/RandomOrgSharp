@@ -6,8 +6,9 @@ using Obacher.RandomOrgSharp.BasicMethod;
 using Obacher.RandomOrgSharp.RequestParameters;
 using Should.Fluent;
 
-namespace RandomOrgSharpFunctionalTest
+namespace RandomOrgSharp.FunctionalTest
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [TestClass]
     public class BasicMethodIntegerTest
     {

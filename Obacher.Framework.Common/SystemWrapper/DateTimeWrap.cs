@@ -681,7 +681,7 @@ namespace Obacher.Framework.Common.SystemWrapper
         /// <returns>A string representation of the value of the current IDateTimeWrap object.</returns>
         public override string ToString()
         {
-            return DateTimeInstance.ToString(CultureInfo.InvariantCulture);
+            return DateTimeInstance.ToString();
         }
 
         /// <inheritdoc />

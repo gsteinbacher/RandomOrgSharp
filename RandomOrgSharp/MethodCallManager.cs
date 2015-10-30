@@ -26,6 +26,8 @@ namespace Obacher.RandomOrgSharp
         private IDateTime _lastResponse;
         private long _advisoryDelay;
 
+        private bool _isDisposed;
+
         /// <summary>
         /// 
         /// </summary>
@@ -136,10 +138,24 @@ namespace Obacher.RandomOrgSharp
 
         public void Dispose()
         {
-            // Save the advisory delay to ensure it is used the next time this class is instantiated
-            // This is a precaution in case the developer using this class is instantiating it inside a loop
-            Settings.Default.LastResponse = _advisoryDelay;
-            Settings.Default.Save();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                if (disposing)
+                {
+                    // Save the advisory delay to ensure it is used the next time this class is instantiated
+                    // This is a precaution in case the developer using this class is instantiating it inside a loop
+                    Settings.Default.LastResponse = _advisoryDelay;
+                    Settings.Default.Save();
+                }
+
+                _isDisposed = true;
+            }
         }
     }
 }

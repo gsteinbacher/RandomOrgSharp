@@ -21,6 +21,11 @@ namespace Obacher.RandomOrgSharp
         protected RandomOrgException(SerializationInfo info, StreamingContext ctxt)
             : base(info, ctxt)
         { }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+        }
     }
 
     [Serializable]

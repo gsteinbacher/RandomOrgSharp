@@ -100,6 +100,10 @@ namespace RandomOrgSharpUnitTest
             random.Setup(m => m.Next()).Returns(id);
             RandomNumberGenerator.Instance = random.Object;
 
+            var settings = new Mock<ISettingsManager>();
+            settings.Setup(m => m.GetConfigurationValue<string>(It.IsAny<string>())).Returns(RandomOrgConstants.APIKEY_VALUE);
+            SettingsManager.Instance = settings.Object;
+
             var target = new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
             var actual = target.CreateJsonRequest();
 
