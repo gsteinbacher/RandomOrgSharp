@@ -9,6 +9,7 @@
               <Exclude>
                 <ModulePath>.*UnitTest.dll</ModulePath>
                 <ModulePath>.*FunctionalTest.dll</ModulePath>
+                <ModulePath>.*UnitTest.Tools.dll</ModulePath>
               </Exclude>
             </ModulePaths>
           </CodeCoverage>

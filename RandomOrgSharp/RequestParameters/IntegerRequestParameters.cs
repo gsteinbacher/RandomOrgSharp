@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Properties;
 
 namespace Obacher.RandomOrgSharp.RequestParameters

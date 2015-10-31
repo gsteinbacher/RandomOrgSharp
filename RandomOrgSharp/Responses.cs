@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp
 {
     public interface IResponse
     {
+        int Id { get; }
     }
 
     //public class RandomOrgIntegerResponse : RandomOrgResponse<int>
@@ -102,6 +104,7 @@ namespace Obacher.RandomOrgSharp
         public int RequestsLeft { get; private set; }
         public int TotalBits { get; private set; }
         public int TotalRequests { get; private set; }
+        public int Id { get; private set; }
 
         private UsageResponse(string version, UsageStatus status, DateTime creationTime, int bitsLeft, int requestsLeft, int totalBits, int totalRequests)
         {
@@ -156,7 +159,7 @@ namespace Obacher.RandomOrgSharp
         }
     }
 
-    public class BasicMethodResponse
+    public class BasicMethodResponse : IResponse
     {
         public string Version { get; private set; }
         public JArray Data { get; private set; }

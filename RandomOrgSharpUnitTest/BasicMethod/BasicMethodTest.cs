@@ -9,7 +9,7 @@ using Obacher.RandomOrgSharp.BasicMethod;
 using Obacher.RandomOrgSharp.RequestParameters;
 using Should.Fluent;
 
-namespace RandomOrgSharpUnitTest.BasicMethod
+namespace RandomOrgSharp.UnitTest.BasicMethod
 {
     [TestClass]
     public class BasicMethodTest

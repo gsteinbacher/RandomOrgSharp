@@ -9,6 +9,6 @@ namespace Obacher.RandomOrgSharp
         void SetAdvisoryDelay(int advisoryDelay);
         void CanSendRequest();
         void ThrowExceptionOnError(JObject jsonResponse);
-        void VerifyResponse(IRequestParameters requestParameters, BasicMethodResponse response);
+        void VerifyResponse(IRequestParameters requestParameters, IResponse response);
     }
 }
