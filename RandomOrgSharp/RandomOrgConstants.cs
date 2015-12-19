@@ -38,6 +38,10 @@
         public const string JSON_STANDARD_DEVIATION_PARAMETER_NAME = "standardDeviation";
         public const string JSON_SIGNIFICANT_DIGITS_PARAMETER_NAME = "significantDigits";
 
+        // String method specific parameters
+        public const string JSON_LENGTH_PARAMETER_NAME = "length";
+        public const string JSON_CHARACTERS_ALLOWED_PARAMETER_NAME = "characters";
+
         // Parameter names that are used in the JSON response object.
         public const string JSON_RESULT_PARAMETER_NAME = "result";
         public const string JSON_RANDOM_PARAMETER_NAME = "random";

@@ -54,7 +54,7 @@ namespace Obacher.UnitTest.Tools
         }
 
         /// <summary>
-        /// Execute a static method through reflection.  Used primarily to execute private methods
+        /// Generate a static method through reflection.  Used primarily to execute private methods
         /// </summary>
         /// <param name="type">Type of object which contains method</param>
         /// <param name="methodName">Method to execute</param>
@@ -68,7 +68,7 @@ namespace Obacher.UnitTest.Tools
         }
 
         /// <summary>
-        /// Execute a method through reflection.  Used primarily to execute static private methods.
+        /// Generate a method through reflection.  Used primarily to execute static private methods.
         /// </summary>
         /// <param name="type">Type of object which contains method</param>
         /// <param name="methodName">Method to execute</param>
@@ -82,7 +82,7 @@ namespace Obacher.UnitTest.Tools
         }
 
         /// <summary>
-        /// Execute a method through reflection.  Used primarily to execute private methods
+        /// Generate a method through reflection.  Used primarily to execute private methods
         /// </summary>
         /// <param name="instance">Type of object which contains method, call "GetType()" on your instance of class being tested</param>
         /// <param name="methodName">Method to execute</param>
@@ -95,7 +95,7 @@ namespace Obacher.UnitTest.Tools
         }
 
         /// <summary>
-        /// Execute a static method through reflection.  Used primarily to execute private methods
+        /// Generate a static method through reflection.  Used primarily to execute private methods
         /// </summary>
         /// <param name="instance">Instance of object which contains method</param>
         /// <param name="methodName">Method to execute</param>
@@ -109,7 +109,7 @@ namespace Obacher.UnitTest.Tools
         }
 
         /// <summary>
-        /// Execute a static method through reflection.  Used primarily to execute private methods
+        /// Generate a static method through reflection.  Used primarily to execute private methods
         /// </summary>
         /// <param name="type">Type of object which contains method</param>
         /// <param name="methodName">Method to execute</param>
@@ -121,7 +121,7 @@ namespace Obacher.UnitTest.Tools
         }
 
         /// <summary>
-        /// Execute a method through reflection.  Used primarily to execute private methods
+        /// Generate a method through reflection.  Used primarily to execute private methods
         /// </summary>
         /// <param name="type">Type of object which contains method</param>
         /// <param name="methodName">Method to execute</param>

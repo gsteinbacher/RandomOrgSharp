@@ -17,7 +17,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             _methodCallManager = methodCallManager;
         }
 
-        public IEnumerable<T> Execute(IRequestParameters requestParameters)
+        public IEnumerable<T> Generate(IRequestParameters requestParameters)
         {
             _methodCallManager.CanSendRequest();
 
@@ -32,7 +32,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         }
 
 
-        public async Task<IEnumerable<T>> ExecuteAsync(IRequestParameters requestParameters)
+        public async Task<IEnumerable<T>> GenerateAsync(IRequestParameters requestParameters)
         {
             _methodCallManager.CanSendRequest();
 

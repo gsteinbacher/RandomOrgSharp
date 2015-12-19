@@ -58,6 +58,8 @@
     <Compile Include="GuassianBasicMethodTest.cs" />
     <Compile Include="IntegerBasicMethodTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringBasicMethodTest.cs" />
+    <Compile Include="UUIDBasicMethodTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

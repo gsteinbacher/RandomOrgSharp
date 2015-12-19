@@ -20,14 +20,14 @@ namespace Obacher.RandomOrgSharp.BasicMethod
 
         public IEnumerable<int> Execute(IRequestParameters requestParameters)
         {
-            var response = _basicMethod.Execute(requestParameters);
+            var response = _basicMethod.Generate(requestParameters);
             return response;
         }
 
 
         public async Task<IEnumerable<int>> ExecuteAsync(IRequestParameters requestParameters)
         {
-            var response = await _basicMethod.ExecuteAsync(requestParameters);
+            var response = await _basicMethod.GenerateAsync(requestParameters);
             return response;
         }
     }

@@ -69,10 +69,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BasicMethod\BasicMethodTest.cs" />
+    <Compile Include="BasicMethod\DecimalBasicMethodTest.cs" />
+    <Compile Include="BasicMethod\GuassianBasicMethodTest.cs" />
     <Compile Include="BasicMethod\IntegerBasicMethodTest.cs" />
-    <Compile Include="RequestParameters\DecimalRequestParameters.cs" />
+    <Compile Include="BasicMethod\StringBasicMethodTest.cs" />
+    <Compile Include="BasicMethod\UUIDBasicMethodTest.cs" />
+    <Compile Include="RequestParameters\DecimalRequestParametersTest.cs" />
+    <Compile Include="RequestParameters\GuassianRequestParametersTest.cs" />
     <Compile Include="RequestParameters\IntegerRequestParametersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestParameters\StringRequestParametersTest.cs" />
+    <Compile Include="RequestParameters\UUIDRequestParametersTest.cs" />
     <Compile Include="ResponsesTest.cs" />
     <Compile Include="JsonHelperTest.cs" />
     <Compile Include="MethodCallManagerTest.cs" />

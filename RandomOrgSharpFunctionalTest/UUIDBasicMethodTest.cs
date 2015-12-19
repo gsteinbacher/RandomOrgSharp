@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,7 +11,7 @@ namespace RandomOrgSharp.FunctionalTest
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [TestClass]
-    public class GuassianBasicMethodTest
+    public class UUIDBasicMethodTest
     {
         private Random _random;
         private IMethodCallManager _manager;
@@ -27,43 +25,34 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
         [TestMethod]
-        public void GuassianBasicMethodTest_Execute_ShouldReturnDoubleValuesInRange()
+        public void UUIDBasicMethod_Execute_ShouldReturnGuidValues()
         {
             int numberToReturn = _random.Next(5, 20);
-            int mean = _random.Next(-1000000, 1000000);
-            int standardDeviation = _random.Next(-1000000, 1000000);
-            int signifantDigits = _random.Next(2, 20);
+
             IRandomOrgService service = new RandomOrgApiService();
 
-            var target = new GuassianBasicMethod(service, _manager);
+            var target = new UUIDBasicMethod(service, _manager);
 
-            IRequestParameters requestParameters = new GuassianRequestParameters(numberToReturn, mean, standardDeviation, signifantDigits);
+            IRequestParameters requestParameters = new UUIDRequestParameters(numberToReturn);
             var results = target.Execute(requestParameters);
 
-            TestResults(results, numberToReturn, mean);
+            results.Should().Not.Be.Null();
+            results.Count().Should().Equal(numberToReturn);
         }
 
+
         [TestMethod]
-        public async Task GuassianBasicMethod_ExecuteAsync_ShouldReturnDoubleValuesInRange()
+        public async Task UUIDBasicMethod_ExecuteAsync_ShouldReturnGuidValues()
         {
             int numberToReturn = _random.Next(5, 20);
-            int mean = _random.Next(-1000000, 1000000);
-            int standardDeviation = _random.Next(-1000000, 1000000);
-            int signifantDigits = _random.Next(2, 20);
 
             IRandomOrgService service = new RandomOrgApiService();
 
-            var target = new GuassianBasicMethod(service, _manager);
+            var target = new UUIDBasicMethod(service, _manager);
 
-            IRequestParameters requestParameters = new GuassianRequestParameters(numberToReturn, mean, standardDeviation, signifantDigits);
+            IRequestParameters requestParameters = new UUIDRequestParameters(numberToReturn);
             var results = await target.ExecuteAsync(requestParameters);
 
-            TestResults(results, numberToReturn, mean);
-        }
-
-
-        private static void TestResults(IEnumerable<double> results, int numberToReturn, int numberOfDecimalPlaces)
-        {
             results.Should().Not.Be.Null();
             results.Should().Not.Be.Empty();
             results.Count().Should().Equal(numberToReturn);

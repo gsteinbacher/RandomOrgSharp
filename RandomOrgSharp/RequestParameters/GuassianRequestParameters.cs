@@ -12,7 +12,7 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 
         public GuassianRequestParameters(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
         {
-            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > 1000000)
+            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > 10000)
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE));
 
             if (mean < -1000000 || mean > 1000000)
@@ -21,7 +21,7 @@ namespace Obacher.RandomOrgSharp.RequestParameters
             if (standardDeviation < -1000000 || standardDeviation > 1000000)
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.STANDARD_DEVIATION_OUT_OF_RANGE));
 
-            if (significantDigits < 1 || significantDigits > 20)
+            if (significantDigits < 2 || significantDigits > 20)
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.SIGNIFICANT_DIGITS_OUT_OF_RANGE));
 
             _numberOfItemsToReturn = numberOfItemsToReturn;

@@ -61,6 +61,8 @@
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="RequestParameters\DecimalRequestParameters.cs" />
     <Compile Include="RequestParameters\GuassianRequestParameters.cs" />
+    <Compile Include="RequestParameters\StringRequestParameters.cs" />
+    <Compile Include="RequestParameters\UUIDRequestParameters.cs" />
     <Compile Include="StringsConstants.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>

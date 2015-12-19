@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -9,19 +10,21 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.BasicMethod
 {
     [TestClass]
-    public class IntegerBasicMethodTest
+    public class UUIDBasicMethodTest
     {
         [TestMethod]
         public void WhenExecuteCalled_ExpectNoException()
         {
             // Arrange
-            var expected = Enumerable.Empty<int>();
+            var parameters = Enumerable.Empty<string>();
+            var expected = Array.ConvertAll(parameters.ToArray(), id => new Guid(id));
+
             Mock<IRequestParameters> mockRequest = new Mock<IRequestParameters>();
-            Mock<IBasicMethod<int>> basicMethod = new Mock<IBasicMethod<int>>();
-            basicMethod.Setup(m => m.Generate(mockRequest.Object)).Returns(expected);
+            Mock<IBasicMethod<string>> basicMethod = new Mock<IBasicMethod<string>>();
+            basicMethod.Setup(m => m.Generate(mockRequest.Object)).Returns(parameters);
 
             // Act
-            IntegerBasicMethod target = new IntegerBasicMethod(basicMethod.Object);
+            var target = new UUIDBasicMethod(basicMethod.Object);
             var actual = target.Execute(mockRequest.Object);
 
             // Assert
@@ -32,13 +35,14 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
         public async Task WhenExecuteAsyncCalled_ExpectNoException()
         {
             // Arrange
-            var expected = Enumerable.Empty<int>();
+            var parameters = Enumerable.Empty<string>();
+            var expected = Array.ConvertAll(parameters.ToArray(), id => new Guid(id));
             Mock<IRequestParameters> mockRequest = new Mock<IRequestParameters>();
-            Mock<IBasicMethod<int>> basicMethod = new Mock<IBasicMethod<int>>();
-            basicMethod.Setup(m => m.GenerateAsync(mockRequest.Object)).ReturnsAsync(expected);
+            Mock<IBasicMethod<string>> basicMethod = new Mock<IBasicMethod<string>>();
+            basicMethod.Setup(m => m.GenerateAsync(mockRequest.Object)).ReturnsAsync(parameters);
 
             // Act
-            IntegerBasicMethod target = new IntegerBasicMethod(basicMethod.Object);
+            var target = new UUIDBasicMethod(basicMethod.Object);
             var actual = await target.ExecuteAsync(mockRequest.Object);
 
             // Assert

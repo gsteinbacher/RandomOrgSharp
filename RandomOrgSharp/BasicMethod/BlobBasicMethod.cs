@@ -1,12 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
-    class BasicMethodBlob
+    public class BlobBasicMethod
     {
+        private readonly IBasicMethod<string> _basicMethod;
+
+        public BlobBasicMethod(IRandomOrgService service, IMethodCallManager methodCallManager)
+        {
+            _basicMethod = new BasicMethod<string>(service, methodCallManager);
+        }
+
+        public BlobBasicMethod(IBasicMethod<string> basicMethod)
+        {
+            _basicMethod = basicMethod;
+        }
+
+        public IEnumerable<string> Execute(IRequestParameters requestParameters)
+        {
+            var response = _basicMethod.Generate(requestParameters);
+            return response;
+        }
+
+
+        public async Task<IEnumerable<string>> ExecuteAsync(IRequestParameters requestParameters)
+        {
+            var response = await _basicMethod.GenerateAsync(requestParameters);
+            return response;
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
         [TestMethod]
-        public void DecimalBasicMethod_Execute_ShouldReturnIntegerValuesInRange()
+        public void DecimalBasicMethod_Execute_ShouldReturnDecimalValuesInRange()
         {
             int numberToReturn = _random.Next(5, 20);
             int numberOfDecimalPlaces = _random.Next(1, 20);
@@ -45,7 +45,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
         [TestMethod]
-        public async Task DecimalBasicMethod_ExecuteAsync_ShouldReturnIntegerValuesInRange()
+        public async Task DecimalBasicMethod_ExecuteAsync_ShouldReturnDecimalValuesInRange()
         {
             int numberToReturn = _random.Next(5, 20);
             int numberOfDecimalPlaces = _random.Next(1, 20);

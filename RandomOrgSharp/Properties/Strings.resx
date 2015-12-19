@@ -121,87 +121,93 @@
     <value>Method not (yet) implemented</value>
   </data>
   <data name="ERROR_CODE_101" xml:space="preserve">
-    <value>Service offline; please try again later</value>
+    <value>Service offline; please try again later.</value>
   </data>
   <data name="ERROR_CODE_200" xml:space="preserve">
-    <value>Parameter '{0}' is malformed</value>
+    <value>Parameter '{0}' is malformed.</value>
   </data>
   <data name="ERROR_CODE_201" xml:space="preserve">
-    <value>Parameter '{0}' has illegal value</value>
+    <value>Parameter '{0}' has illegal value.</value>
   </data>
   <data name="ERROR_CODE_202" xml:space="preserve">
-    <value>Parameter '{0}' is out of range; allowable values are [{1},{2}]</value>
+    <value>Parameter '{0}' is out of range; allowable values are [{1},{2}].</value>
   </data>
   <data name="ERROR_CODE_203" xml:space="preserve">
-    <value>Parameter '{0}' has length {1}, which is too long; maximum length is {2}</value>
+    <value>Parameter '{0}' has length {1}, which is too long; maximum length is {2}.</value>
   </data>
   <data name="ERROR_CODE_204" xml:space="preserve">
-    <value>Parameter '{0}' has length {1}, which is too short; minimum length is {2}</value>
+    <value>Parameter '{0}' has length {1}, which is too short; minimum length is {2}.</value>
   </data>
   <data name="ERROR_CODE_300" xml:space="preserve">
-    <value>Parameter '{0}' must be less than parameter '{1}'</value>
+    <value>Parameter '{0}' must be less than parameter '{1}'.</value>
   </data>
   <data name="ERROR_CODE_301" xml:space="preserve">
-    <value>You requested {0} values without replacement but the domain you specified only contains {1}</value>
+    <value>You requested {0} values without replacement but the domain you specified only contains {1}.</value>
   </data>
   <data name="ERROR_CODE_302" xml:space="preserve">
-    <value>The value you specified for parameter '{0}' has already been taken</value>
+    <value>The value you specified for parameter '{0}' has already been taken.</value>
   </data>
   <data name="ERROR_CODE_303" xml:space="preserve">
-    <value>The resource identified by '{0}' was not found</value>
+    <value>The resource identified by '{0}' was not found.</value>
   </data>
   <data name="ERROR_CODE_304" xml:space="preserve">
-    <value>The resulting data's size would be {0}, which exceeds the maximum of {1}</value>
+    <value>The resulting data's size would be {0}, which exceeds the maximum of {1}.</value>
   </data>
   <data name="ERROR_CODE_32000" xml:space="preserve">
-    <value>Unknown error: {0}</value>
+    <value>Unknown error: {0}.</value>
   </data>
   <data name="ERROR_CODE_400" xml:space="preserve">
-    <value>The API key you specified does not exist</value>
+    <value>The API key you specified does not exist.</value>
   </data>
   <data name="ERROR_CODE_401" xml:space="preserve">
-    <value>The API key you specified is not running</value>
+    <value>The API key you specified is not running.</value>
   </data>
   <data name="ERROR_CODE_402" xml:space="preserve">
-    <value>The operation requires {0} requests, but the API key only has {1} left</value>
+    <value>The operation requires {0} requests, but the API key only has {1} left.</value>
   </data>
   <data name="ERROR_CODE_403" xml:space="preserve">
-    <value>The operation requires {0} bits, but the API key only has {1} left</value>
+    <value>The operation requires {0} bits, but the API key only has {1} left.</value>
   </data>
   <data name="ERROR_CODE_500" xml:space="preserve">
-    <value>You are not subscribed to {0}</value>
+    <value>You are not subscribed to {0}.</value>
   </data>
   <data name="ERROR_CODE_501" xml:space="preserve">
-    <value>The credentials '{0}' you specified are not valid or have expired</value>
+    <value>The credentials '{0}' you specified are not valid or have expired.</value>
   </data>
   <data name="ERROR_CODE_502" xml:space="preserve">
-    <value>Your prepaid account credit is negative; please top up and retry</value>
+    <value>Your prepaid account credit is negative; please top up and retry.</value>
   </data>
   <data name="ERROR_IDS_NOT_MATCHED" xml:space="preserve">
-    <value>Id passed into the request does not match the Id returned in response</value>
+    <value>Id passed into the request does not match the Id returned in response.</value>
   </data>
   <data name="VALIDATION_APIKEY_REQUIRED" xml:space="preserve">
-    <value>API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \"APIKEY\"</value>
+    <value>API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \"APIKEY\".</value>
+  </data>
+  <data name="VALIDATION_CHARACTERS_ALLOWED_OUT_OF_RANGE" xml:space="preserve">
+    <value>Maximum number of characters allowed is 80.</value>
   </data>
   <data name="VALIDATION_DECIMAL_PLACES_VALUE_OUT_OF_RANGE" xml:space="preserve">
-    <value>Number of decimal places to return must be between 1 and 20</value>
+    <value>Number of decimal places to return must be between 1 and 20.</value>
   </data>
   <data name="VALIDATION_MAXIMUM_VALUE_OUT_OF_RANGE" xml:space="preserve">
-    <value>Maximum Value must be between -1000000000 and 1000000000</value>
+    <value>Maximum Value must be between -1000000000 and 1000000000.</value>
   </data>
   <data name="VALIDATION_MEAN_VALUE_OUT_OF_RANGE" xml:space="preserve">
-    <value>Mean value must be between -1000000 and 1000000</value>
+    <value>Mean value must be between -1000000 and 1000000.</value>
   </data>
   <data name="VALIDATION_MINIMUM_VALUE_OUT_OF_RANGE" xml:space="preserve">
-    <value>Minimum Value must be between -1000000000 and 1000000000</value>
+    <value>Minimum Value must be between -1000000000 and 1000000000.</value>
   </data>
   <data name="VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE" xml:space="preserve">
-    <value>Number of items to return must be between 1 and 10000</value>
+    <value>Number of items to return must be between 1 and 10000.</value>
   </data>
   <data name="VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE" xml:space="preserve">
-    <value>Standard Deviation must be between 2 and 20</value>
+    <value>Standard Deviation must be between 2 and 20.</value>
   </data>
   <data name="VALIDATION_STANDARD_DEVIATION_OUT_OF_RANGE" xml:space="preserve">
-    <value>Standard Deviation must be between -1000000 and 1000000</value>
+    <value>Standard Deviation must be between -1000000 and 1000000.</value>
+  </data>
+  <data name="VALIDATION_STRING_LENGTH_OUT_OF_RANGE" xml:space="preserve">
+    <value>Length of string must be between 1 and 20 characters.</value>
   </data>
 </root>
