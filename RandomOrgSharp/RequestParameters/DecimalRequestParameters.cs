@@ -3,29 +3,24 @@ using Obacher.RandomOrgSharp.Properties;
 
 namespace Obacher.RandomOrgSharp.RequestParameters
 {
-    public class IntegerRequestParameters : CommonRequestParameters
+    public class DecimalRequestParameters : CommonRequestParameters
     {
         private readonly int _numberOfItemsToReturn;
-        private readonly int _minimumValue;
-        private readonly int _maximumValue;
+        private readonly int _numberOfDecimalPlaces;
         private readonly bool _allowDuplicates;
         private readonly BaseNumberOptions _baseNumber;
 
-        public IntegerRequestParameters(int numberOfItemsToReturn, int minimumValue, int maximumValue,
+        public DecimalRequestParameters(int numberOfItemsToReturn, int numberOfDecimalPlaces, 
             bool allowDuplicates = true, BaseNumberOptions baseNumber = BaseNumberOptions.Ten)
         {
             if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > 10000)
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE));
 
-            if (minimumValue < -1000000000 || minimumValue > 1000000000)
+            if (numberOfDecimalPlaces < 1 || numberOfDecimalPlaces > 20)
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.MINIMUM_VALUE_OUT_OF_RANGE));
 
-            if (minimumValue < -1000000000 || minimumValue > 1000000000)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.MAXIMUM_VALUE_OUT_OF_RANGE));
-
             _numberOfItemsToReturn = numberOfItemsToReturn;
-            _minimumValue = minimumValue;
-            _maximumValue = maximumValue;
+            _numberOfDecimalPlaces = numberOfDecimalPlaces;
             _allowDuplicates = allowDuplicates;
             _baseNumber = baseNumber;
         }
@@ -35,13 +30,11 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 
             JObject jsonParameters = new JObject(
                 new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, _numberOfItemsToReturn),
-                new JProperty(RandomOrgConstants.JSON_MINIMUM_VALUE_PARAMETER_NAME, _minimumValue),
-                new JProperty(RandomOrgConstants.JSON_MAXIMUM_VALUE_PARAMETER_NAME, _maximumValue),
-                new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, _allowDuplicates),
-                new JProperty(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME, (int)_baseNumber)
+                new JProperty(RandomOrgConstants.JSON_DECIMAL_PLACES_PARAMETER_NAME, _numberOfDecimalPlaces),
+                new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, _allowDuplicates)
                 );
 
-            JObject jsonRequest = CreateJsonRequestInternal(RandomOrgConstants.INTEGER_METHOD, jsonParameters);
+            JObject jsonRequest = CreateJsonRequestInternal(RandomOrgConstants.DECIMAL_METHOD, jsonParameters);
             return jsonRequest;
         }
     }

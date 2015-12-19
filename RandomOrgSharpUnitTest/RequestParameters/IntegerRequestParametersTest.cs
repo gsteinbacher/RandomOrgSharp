@@ -6,7 +6,7 @@ using Obacher.RandomOrgSharp.RequestParameters;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
-namespace RandomOrgSharp.UnitTest
+namespace RandomOrgSharp.UnitTest.RequestParameters
 {
     [TestClass]
     public class IntegerRequestParametersTest

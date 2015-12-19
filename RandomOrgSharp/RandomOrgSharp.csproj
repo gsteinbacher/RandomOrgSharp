@@ -59,6 +59,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RandomNumberGenerator.cs" />
+    <Compile Include="RequestParameters\DecimalRequestParameters.cs" />
+    <Compile Include="RequestParameters\GuassianRequestParameters.cs" />
     <Compile Include="StringsConstants.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -66,13 +68,13 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <None Include="BasicMethod\BasicMethodFactory" />
-    <Compile Include="BasicMethod\BasicMethodBlob.cs" />
-    <Compile Include="BasicMethod\BasicMethodDecimal.cs" />
-    <Compile Include="BasicMethod\BasicMethodGuassian.cs" />
-    <Compile Include="BasicMethod\BasicMethodInteger.cs" />
-    <Compile Include="BasicMethod\BasicMethodString.cs" />
-    <Compile Include="BasicMethod\BasicMethodUUID.cs" />
+    <Compile Include="BasicMethod\BasicMethodFactory.cs" />
+    <Compile Include="BasicMethod\BlobBasicMethod.cs" />
+    <Compile Include="BasicMethod\DecimalBasicMethod.cs" />
+    <Compile Include="BasicMethod\GuassianBasicMethod.cs" />
+    <Compile Include="BasicMethod\IntegerBasicMethod.cs" />
+    <Compile Include="BasicMethod\StringBasicMethod.cs" />
+    <Compile Include="BasicMethod\UUIDBasicMethod.cs" />
     <Compile Include="BasicMethod\IBasicMethod.cs" />
     <Compile Include="IRandomOrgService.cs" />
     <Compile Include="IRandomOrgSharp.cs" />

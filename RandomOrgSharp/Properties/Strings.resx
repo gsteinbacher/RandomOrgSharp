@@ -183,13 +183,25 @@
   <data name="VALIDATION_APIKEY_REQUIRED" xml:space="preserve">
     <value>API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \"APIKEY\"</value>
   </data>
+  <data name="VALIDATION_DECIMAL_PLACES_VALUE_OUT_OF_RANGE" xml:space="preserve">
+    <value>Number of decimal places to return must be between 1 and 20</value>
+  </data>
   <data name="VALIDATION_MAXIMUM_VALUE_OUT_OF_RANGE" xml:space="preserve">
-    <value>Maximum Value must be between -1e9 and 1e9</value>
+    <value>Maximum Value must be between -1000000000 and 1000000000</value>
+  </data>
+  <data name="VALIDATION_MEAN_VALUE_OUT_OF_RANGE" xml:space="preserve">
+    <value>Mean value must be between -1000000 and 1000000</value>
   </data>
   <data name="VALIDATION_MINIMUM_VALUE_OUT_OF_RANGE" xml:space="preserve">
-    <value>Minimum Value must be between -1e9 and 1e9</value>
+    <value>Minimum Value must be between -1000000000 and 1000000000</value>
   </data>
   <data name="VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE" xml:space="preserve">
-    <value>Number of items to return must be between 1 and 9999</value>
+    <value>Number of items to return must be between 1 and 10000</value>
+  </data>
+  <data name="VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE" xml:space="preserve">
+    <value>Standard Deviation must be between 2 and 20</value>
+  </data>
+  <data name="VALIDATION_STANDARD_DEVIATION_OUT_OF_RANGE" xml:space="preserve">
+    <value>Standard Deviation must be between -1000000 and 1000000</value>
   </data>
 </root>

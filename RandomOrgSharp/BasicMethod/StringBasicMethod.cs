@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
-    class BasicMethodUUID
+    class StringBasicMethod
     {
     }
 }

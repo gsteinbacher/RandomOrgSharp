@@ -1,19 +1,18 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Obacher.RandomOrgSharp
+﻿namespace Obacher.RandomOrgSharp
 {
-    public static class RandomOrgConstants
+    internal static class RandomOrgConstants
     {
         public const string APIKEY_KEY = "apiKey";
         public const string APIKEY_VALUE = "a0fc5d8d-8812-4093-851d-5bf64b4310d0";
 
         public const string INTEGER_METHOD = "generateIntegers";
+        public const string DECIMAL_METHOD = "generateDecimalFractions";
+        public const string GAUSSIAN_METHOD = "generateGaussians";
+        public const string STRING_METHOD = "generateStrings";
+        public const string UUID_METHOD = "generateUUIDs";
+        public const string BLOB_METHOD = "generateBlobs";
+
+        public const string USAGE_METHOD = "getUsage";
 
         // Parameter names that are used in the JSON request object.
         public const string JSON_RPC_PARAMETER_NAME = "jsonrpc";
@@ -22,11 +21,22 @@ namespace Obacher.RandomOrgSharp
         public const string JSON_PARAMETERS_PARAMETER_NAME = "params";
         public const string JSON_ID_PARAMETER_NAME = "id";
 
+        // General method parameters
         public const string JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME = "n";
-        public const string JSON_MINIMUM_VALUE_PARAMETER_NAME = "min";
-        public const string JSON_MAXIMUM_VALUE_PARAMETER_NAME = "max";
         public const string JSON_REPLACEMENT_PARAMETER_NAME = "replacement";
         public const string JSON_BASE_NUMBER_PARAMETER_NAME = "base";
+
+        // Integer method specific parameters
+        public const string JSON_MINIMUM_VALUE_PARAMETER_NAME = "min";
+        public const string JSON_MAXIMUM_VALUE_PARAMETER_NAME = "max";
+
+        // Decimal method specific parameters
+        public const string JSON_DECIMAL_PLACES_PARAMETER_NAME = "decimalPlaces";
+
+        // Guassian method specific parameters
+        public const string JSON_MEAN_PARAMETER_NAME = "mean";
+        public const string JSON_STANDARD_DEVIATION_PARAMETER_NAME = "standardDeviation";
+        public const string JSON_SIGNIFICANT_DIGITS_PARAMETER_NAME = "significantDigits";
 
         // Parameter names that are used in the JSON response object.
         public const string JSON_RESULT_PARAMETER_NAME = "result";

@@ -11,7 +11,7 @@ namespace RandomOrgSharp.FunctionalTest
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [TestClass]
-    public class BasicMethodIntegerTest
+    public class IntegerBasicMethodTest
     {
         private Random _random;
         private IMethodCallManager _manager;
@@ -25,7 +25,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
         [TestMethod]
-        public void BasicMethodInteger_Execute_ShouldReturnIntegerValuesInRange()
+        public void IntegerBasicMethod_Execute_ShouldReturnIntegerValuesInRange()
         {
             int numberToReturn = _random.Next(5, 20);
             int minNumber = _random.Next(1, 1000);
@@ -35,7 +35,7 @@ namespace RandomOrgSharp.FunctionalTest
 
             IRandomOrgService service = new RandomOrgApiService();
 
-            BasicMethodInteger target = new BasicMethodInteger(service, _manager);
+            IntegerBasicMethod target = new IntegerBasicMethod(service, _manager);
 
             IRequestParameters requestParameters = new IntegerRequestParameters(numberToReturn, minNumber, maxNumber, allowDuplicates, baseNumber);
             var results = target.Execute(requestParameters);
@@ -50,7 +50,7 @@ namespace RandomOrgSharp.FunctionalTest
 
 
         [TestMethod]
-        public async Task BasicMethodInteger_ExecuteAsync_ShouldReturnIntegerValuesInRange()
+        public async Task IntegerBasicMethod_ExecuteAsync_ShouldReturnIntegerValuesInRange()
         {
             int numberToReturn = _random.Next(5, 20);
             int minNumber = _random.Next(1, 1000);
@@ -60,7 +60,7 @@ namespace RandomOrgSharp.FunctionalTest
 
             IRandomOrgService service = new RandomOrgApiService();
 
-            BasicMethodInteger target = new BasicMethodInteger(service, _manager);
+            IntegerBasicMethod target = new IntegerBasicMethod(service, _manager);
 
             IRequestParameters requestParameters = new IntegerRequestParameters(numberToReturn, minNumber, maxNumber, allowDuplicates, baseNumber);
             var results = await target.ExecuteAsync(requestParameters);

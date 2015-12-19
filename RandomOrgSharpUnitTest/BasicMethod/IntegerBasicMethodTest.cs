@@ -9,7 +9,7 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.BasicMethod
 {
     [TestClass]
-    public class BasicMethodIntegerTest
+    public class IntegerBasicMethodTest
     {
         [TestMethod]
         public void WhenExecuteCalled_ExpectNoException()
@@ -21,7 +21,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             basicMethod.Setup(m => m.Execute(mockRequest.Object)).Returns(expected);
 
             // Act
-            BasicMethodInteger target = new BasicMethodInteger(basicMethod.Object);
+            IntegerBasicMethod target = new IntegerBasicMethod(basicMethod.Object);
             var actual = target.Execute(mockRequest.Object);
 
             // Assert
@@ -38,7 +38,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             basicMethod.Setup(m => m.ExecuteAsync(mockRequest.Object)).ReturnsAsync(expected);
 
             // Act
-            BasicMethodInteger target = new BasicMethodInteger(basicMethod.Object);
+            IntegerBasicMethod target = new IntegerBasicMethod(basicMethod.Object);
             var actual = await target.ExecuteAsync(mockRequest.Object);
 
             // Assert

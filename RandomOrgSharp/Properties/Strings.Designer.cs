@@ -259,7 +259,16 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Value must be between -1e9 and 1e9.
+        ///   Looks up a localized string similar to Number of decimal places to return must be between 1 and 20.
+        /// </summary>
+        internal static string VALIDATION_DECIMAL_PLACES_VALUE_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_DECIMAL_PLACES_VALUE_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Value must be between -1000000000 and 1000000000.
         /// </summary>
         internal static string VALIDATION_MAXIMUM_VALUE_OUT_OF_RANGE {
             get {
@@ -268,7 +277,16 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum Value must be between -1e9 and 1e9.
+        ///   Looks up a localized string similar to Mean value must be between -1000000 and 1000000.
+        /// </summary>
+        internal static string VALIDATION_MEAN_VALUE_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_MEAN_VALUE_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Value must be between -1000000000 and 1000000000.
         /// </summary>
         internal static string VALIDATION_MINIMUM_VALUE_OUT_OF_RANGE {
             get {
@@ -277,11 +295,29 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of items to return must be between 1 and 9999.
+        ///   Looks up a localized string similar to Number of items to return must be between 1 and 10000.
         /// </summary>
         internal static string VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE {
             get {
                 return ResourceManager.GetString("VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Deviation must be between 2 and 20.
+        /// </summary>
+        internal static string VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Deviation must be between -1000000 and 1000000.
+        /// </summary>
+        internal static string VALIDATION_STANDARD_DEVIATION_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_STANDARD_DEVIATION_OUT_OF_RANGE", resourceCulture);
             }
         }
     }

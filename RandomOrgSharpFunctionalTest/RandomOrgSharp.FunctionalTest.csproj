@@ -54,7 +54,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BasicMethodIntegerTest.cs" />
+    <Compile Include="DecimalBasicMethodTest.cs" />
+    <Compile Include="GuassianBasicMethodTest.cs" />
+    <Compile Include="IntegerBasicMethodTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

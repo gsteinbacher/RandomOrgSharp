@@ -4,16 +4,16 @@ using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
-    public class BasicMethodInteger
+    public class IntegerBasicMethod
     {
         private readonly IBasicMethod<int> _basicMethod;
 
-        public BasicMethodInteger(IRandomOrgService service, IMethodCallManager methodCallManager)
+        public IntegerBasicMethod(IRandomOrgService service, IMethodCallManager methodCallManager)
         {
             _basicMethod = new BasicMethod<int>(service, methodCallManager);
         }
 
-        public BasicMethodInteger(IBasicMethod<int> basicMethod)
+        public IntegerBasicMethod(IBasicMethod<int> basicMethod)
         {
             _basicMethod = basicMethod;
         }
