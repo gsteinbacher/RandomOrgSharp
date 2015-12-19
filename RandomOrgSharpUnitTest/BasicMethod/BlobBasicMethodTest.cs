@@ -9,19 +9,19 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.BasicMethod
 {
     [TestClass]
-    public class GuassianBasicMethodTest
+    public class BlobBasicMethodTest
     {
         [TestMethod]
         public void WhenExecuteCalled_ExpectNoException()
         {
             // Arrange
-            var expected = Enumerable.Empty<decimal>();
+            var expected = Enumerable.Empty<string>();
             Mock<IRequestParameters> mockRequest = new Mock<IRequestParameters>();
-            Mock<IBasicMethod<decimal>> basicMethod = new Mock<IBasicMethod<decimal>>();
+            Mock<IBasicMethod<string>> basicMethod = new Mock<IBasicMethod<string>>();
             basicMethod.Setup(m => m.Generate(mockRequest.Object)).Returns(expected);
 
             // Act
-            var target = new GuassianBasicMethod(basicMethod.Object);
+            var target = new BlobBasicMethod(basicMethod.Object);
             var actual = target.Execute(mockRequest.Object);
 
             // Assert
@@ -32,13 +32,13 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
         public async Task WhenExecuteAsyncCalled_ExpectNoException()
         {
             // Arrange
-            var expected = Enumerable.Empty<decimal>();
+            var expected = Enumerable.Empty<string>();
             Mock<IRequestParameters> mockRequest = new Mock<IRequestParameters>();
-            Mock<IBasicMethod<decimal>> basicMethod = new Mock<IBasicMethod<decimal>>();
+            Mock<IBasicMethod<string>> basicMethod = new Mock<IBasicMethod<string>>();
             basicMethod.Setup(m => m.GenerateAsync(mockRequest.Object)).ReturnsAsync(expected);
 
             // Act
-            var target = new GuassianBasicMethod(basicMethod.Object);
+            var target = new BlobBasicMethod(basicMethod.Object);
             var actual = await target.ExecuteAsync(mockRequest.Object);
 
             // Assert

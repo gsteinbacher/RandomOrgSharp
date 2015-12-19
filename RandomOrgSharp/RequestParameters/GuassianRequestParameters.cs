@@ -5,6 +5,8 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 {
     public class GuassianRequestParameters : CommonRequestParameters
     {
+        private const int MAX_ITEMS_ALLOWED = 10000;
+
         private readonly int _numberOfItemsToReturn;
         private readonly int _mean;
         private readonly int _standardDeviation;
@@ -12,8 +14,8 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 
         public GuassianRequestParameters(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
         {
-            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > 10000)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE));
+            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > MAX_ITEMS_ALLOWED)
+                throw new RandomOrgRunTimeException(string.Format(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE), MAX_ITEMS_ALLOWED));
 
             if (mean < -1000000 || mean > 1000000)
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.MEAN_VALUE_OUT_OF_RANGE));

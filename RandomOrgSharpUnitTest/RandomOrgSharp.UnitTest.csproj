@@ -69,11 +69,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BasicMethod\BasicMethodTest.cs" />
+    <Compile Include="BasicMethod\BlobBasicMethodTest.cs" />
     <Compile Include="BasicMethod\DecimalBasicMethodTest.cs" />
     <Compile Include="BasicMethod\GuassianBasicMethodTest.cs" />
     <Compile Include="BasicMethod\IntegerBasicMethodTest.cs" />
     <Compile Include="BasicMethod\StringBasicMethodTest.cs" />
     <Compile Include="BasicMethod\UUIDBasicMethodTest.cs" />
+    <Compile Include="RandomOrgHttpEmulatorTest.cs" />
+    <Compile Include="RequestParameters\BlobRequestParametersTest.cs" />
     <Compile Include="RequestParameters\DecimalRequestParametersTest.cs" />
     <Compile Include="RequestParameters\GuassianRequestParametersTest.cs" />
     <Compile Include="RequestParameters\IntegerRequestParametersTest.cs" />

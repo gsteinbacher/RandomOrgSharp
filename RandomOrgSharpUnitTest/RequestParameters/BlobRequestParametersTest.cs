@@ -9,56 +9,56 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.RequestParameters
 {
     [TestClass]
-    public class DecimalRequestParametersTest
+    public class BlobRequestParametersTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()
         {
             // Arrange
             const int numberOfItems = -1;
-            const int numberOfdecimalPlaces = 10;
+            const int size = 10;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
             // Act
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            new BlobRequestParameters(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnGreaterThenMaximumAllowed_ExpectException()
         {
-            const int numberOfItems = 10001;
-            const int numberOfdecimalPlaces = 10;
+            const int numberOfItems = 101;
+            const int size = 1;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            new BlobRequestParameters(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenNumberOfDecimalPlacesLessThenMinimumAllowed_ExpectException()
+        public void WhenSizeLessThenMinimumAllowed_ExpectException()
         {
             const int numberOfItems = 1;
-            const int numberOfdecimalPlaces = int.MinValue;
+            const int size = int.MinValue;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            new BlobRequestParameters(numberOfItems, size);
         }
 
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenNumberOfDecimalPlacesGreaterThanMaximumllowed_ExpectException()
+        public void WhenSizeGreaterThenMaximumllowed_ExpectException()
         {
             const int numberOfItems = 1;
-            const int numberOfdecimalPlaces = int.MaxValue;
+            const int size = int.MaxValue;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            new BlobRequestParameters(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenApiIsNull_ExpectException()
         {
             SettingsManager.Instance = null;
-            new DecimalRequestParameters(1, 1);
+            new BlobRequestParameters(1, 1);
         }
 
 
@@ -66,18 +66,19 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
         public void WhenParametersCorrect_ExpectJsonReturned()
         {
             const int numberOfItems = 1;
-            const int numberOfdecimalPlaces = 10;
+            const int size = 8;
+            BlobFormat format = BlobFormat.Base64;
             const int id = 999;
 
             JObject expected =
                 new JObject(
                     new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, "generateDecimalFractions"),
+                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, RandomOrgConstants.BLOB_METHOD),
                     new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME,
                         new JObject(
                             new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                            new JProperty(RandomOrgConstants.JSON_DECIMAL_PLACES_PARAMETER_NAME, numberOfdecimalPlaces),
-                            new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, true),
+                            new JProperty(RandomOrgConstants.JSON_SIZE_PARAMETER_NAME, size),
+                            new JProperty(RandomOrgConstants.JSON_FORMAT_PARAMETER_NAME, format.ToString().ToLowerInvariant()),
                            new JProperty(RandomOrgConstants.APIKEY_KEY, ConfigMocks.MOCK_API_KEY))),
                         new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, 999));
 
@@ -87,7 +88,7 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             RandomNumberGenerator.Instance = random.Object;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            var target = new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            var target = new BlobRequestParameters(numberOfItems, size, format);
             var actual = target.CreateJsonRequest();
 
             actual.Should().Equal(expected);

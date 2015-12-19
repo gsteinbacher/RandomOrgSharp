@@ -59,6 +59,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RandomNumberGenerator.cs" />
+    <Compile Include="RequestParameters\BlobRequestParameters.cs" />
     <Compile Include="RequestParameters\DecimalRequestParameters.cs" />
     <Compile Include="RequestParameters\GuassianRequestParameters.cs" />
     <Compile Include="RequestParameters\StringRequestParameters.cs" />

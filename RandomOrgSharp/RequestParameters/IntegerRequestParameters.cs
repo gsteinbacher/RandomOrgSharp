@@ -1,10 +1,13 @@
 ﻿using Newtonsoft.Json.Linq;
+using Obacher.Framework.Common;
 using Obacher.RandomOrgSharp.Properties;
 
 namespace Obacher.RandomOrgSharp.RequestParameters
 {
     public class IntegerRequestParameters : CommonRequestParameters
     {
+        private const int MAX_ITEMS_ALLOWED = 10000;
+
         private readonly int _numberOfItemsToReturn;
         private readonly int _minimumValue;
         private readonly int _maximumValue;
@@ -14,13 +17,13 @@ namespace Obacher.RandomOrgSharp.RequestParameters
         public IntegerRequestParameters(int numberOfItemsToReturn, int minimumValue, int maximumValue,
             bool allowDuplicates = true, BaseNumberOptions baseNumber = BaseNumberOptions.Ten)
         {
-            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > 10000)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE));
+            if (!numberOfItemsToReturn.Between(1, MAX_ITEMS_ALLOWED))
+                throw new RandomOrgRunTimeException(string.Format(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE), MAX_ITEMS_ALLOWED));
 
-            if (minimumValue < -1000000000 || minimumValue > 1000000000)
+            if (!minimumValue.Between(-1000000000, 1000000000))
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.MINIMUM_VALUE_OUT_OF_RANGE));
 
-            if (minimumValue < -1000000000 || minimumValue > 1000000000)
+            if (!maximumValue.Between(-1000000000, 1000000000))
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.MAXIMUM_VALUE_OUT_OF_RANGE));
 
             _numberOfItemsToReturn = numberOfItemsToReturn;

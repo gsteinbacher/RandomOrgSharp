@@ -16,6 +16,8 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 
     public class StringRequestParameters : CommonRequestParameters
     {
+        private const int MAX_ITEMS_ALLOWED = 10000;
+
         private readonly int _numberOfItemsToReturn;
         private readonly int _length;
         private readonly string _charactersAllowed;
@@ -55,8 +57,8 @@ namespace Obacher.RandomOrgSharp.RequestParameters
 
         public StringRequestParameters(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
-            if (!numberOfItemsToReturn.Between(1, 10000))
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE));
+            if (!numberOfItemsToReturn.Between(1, MAX_ITEMS_ALLOWED))
+                throw new RandomOrgRunTimeException(string.Format(Strings.ResourceManager.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE), MAX_ITEMS_ALLOWED));
 
             if (!length.Between(1, 20))
                 throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.STRING_LENGTH_OUT_OF_RANGE));

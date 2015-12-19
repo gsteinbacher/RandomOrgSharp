@@ -259,6 +259,24 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Block size must be divisible by 8..
+        /// </summary>
+        internal static string VALIDATION_BLOB_SIZE_NOT_DIVISIBLE_BY_8 {
+            get {
+                return ResourceManager.GetString("VALIDATION_BLOB_SIZE_NOT_DIVISIBLE_BY_8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blob size must be between 1 and 1048576..
+        /// </summary>
+        internal static string VALIDATION_BLOB_SIZE_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_BLOB_SIZE_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum number of characters allowed is 80..
         /// </summary>
         internal static string VALIDATION_CHARACTERS_ALLOWED_OUT_OF_RANGE {
@@ -304,7 +322,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of items to return must be between 1 and 10000..
+        ///   Looks up a localized string similar to Number of items to return must be between 1 and {0}..
         /// </summary>
         internal static string VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE {
             get {

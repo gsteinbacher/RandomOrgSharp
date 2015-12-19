@@ -32,13 +32,12 @@ namespace RandomOrgSharp.FunctionalTest
             int numberToReturn = _random.Next(5, 20);
             int numberOfDecimalPlaces = _random.Next(1, 20);
             const bool allowDuplicates = false;
-            const BaseNumberOptions baseNumber = BaseNumberOptions.Ten;
 
             IRandomOrgService service = new RandomOrgApiService();
 
             var target = new DecimalBasicMethod(service, _manager);
 
-            IRequestParameters requestParameters = new DecimalRequestParameters(numberToReturn, numberOfDecimalPlaces, allowDuplicates, baseNumber);
+            IRequestParameters requestParameters = new DecimalRequestParameters(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
             var results = target.Execute(requestParameters);
 
             TestResults(results, numberToReturn, numberOfDecimalPlaces);
@@ -50,13 +49,12 @@ namespace RandomOrgSharp.FunctionalTest
             int numberToReturn = _random.Next(5, 20);
             int numberOfDecimalPlaces = _random.Next(1, 20);
             const bool allowDuplicates = false;
-            const BaseNumberOptions baseNumber = BaseNumberOptions.Ten;
 
             IRandomOrgService service = new RandomOrgApiService();
 
             var target = new DecimalBasicMethod(service, _manager);
 
-            IRequestParameters requestParameters = new DecimalRequestParameters(numberToReturn, numberOfDecimalPlaces, allowDuplicates, baseNumber);
+            IRequestParameters requestParameters = new DecimalRequestParameters(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
             var results = await target.ExecuteAsync(requestParameters);
 
             TestResults(results, numberToReturn, numberOfDecimalPlaces);

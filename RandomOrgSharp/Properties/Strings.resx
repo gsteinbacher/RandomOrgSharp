@@ -183,6 +183,12 @@
   <data name="VALIDATION_APIKEY_REQUIRED" xml:space="preserve">
     <value>API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \"APIKEY\".</value>
   </data>
+  <data name="VALIDATION_BLOB_SIZE_NOT_DIVISIBLE_BY_8" xml:space="preserve">
+    <value>Block size must be divisible by 8.</value>
+  </data>
+  <data name="VALIDATION_BLOB_SIZE_OUT_OF_RANGE" xml:space="preserve">
+    <value>Blob size must be between 1 and 1048576.</value>
+  </data>
   <data name="VALIDATION_CHARACTERS_ALLOWED_OUT_OF_RANGE" xml:space="preserve">
     <value>Maximum number of characters allowed is 80.</value>
   </data>
@@ -199,7 +205,7 @@
     <value>Minimum Value must be between -1000000000 and 1000000000.</value>
   </data>
   <data name="VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE" xml:space="preserve">
-    <value>Number of items to return must be between 1 and 10000.</value>
+    <value>Number of items to return must be between 1 and {0}.</value>
   </data>
   <data name="VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE" xml:space="preserve">
     <value>Standard Deviation must be between 2 and 20.</value>

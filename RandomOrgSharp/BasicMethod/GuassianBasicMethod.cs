@@ -6,26 +6,26 @@ namespace Obacher.RandomOrgSharp.BasicMethod
 {
     public class GuassianBasicMethod
     {
-        private readonly IBasicMethod<double> _basicMethod;
+        private readonly IBasicMethod<decimal> _basicMethod;
 
         public GuassianBasicMethod(IRandomOrgService service, IMethodCallManager methodCallManager)
         {
-            _basicMethod = new BasicMethod<double>(service, methodCallManager);
+            _basicMethod = new BasicMethod<decimal>(service, methodCallManager);
         }
 
-        public GuassianBasicMethod(IBasicMethod<double> basicMethod)
+        public GuassianBasicMethod(IBasicMethod<decimal> basicMethod)
         {
             _basicMethod = basicMethod;
         }
 
-        public IEnumerable<double> Execute(IRequestParameters requestParameters)
+        public IEnumerable<decimal> Execute(IRequestParameters requestParameters)
         {
             var response = _basicMethod.Generate(requestParameters);
             return response;
         }
 
 
-        public async Task<IEnumerable<double>> ExecuteAsync(IRequestParameters requestParameters)
+        public async Task<IEnumerable<decimal>> ExecuteAsync(IRequestParameters requestParameters)
         {
             var response = await _basicMethod.GenerateAsync(requestParameters);
             return response;

@@ -62,7 +62,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
 
-        private static void TestResults(IEnumerable<double> results, int numberToReturn, int numberOfDecimalPlaces)
+        private static void TestResults(IEnumerable<decimal> results, int numberToReturn, int numberOfDecimalPlaces)
         {
             results.Should().Not.Be.Null();
             results.Should().Not.Be.Empty();
