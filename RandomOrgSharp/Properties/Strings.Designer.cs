@@ -70,7 +70,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Service offline; please try again later.
+        ///   Looks up a localized string similar to Service offline; please try again later..
         /// </summary>
         internal static string ERROR_CODE_101 {
             get {
@@ -79,7 +79,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is malformed.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is malformed..
         /// </summary>
         internal static string ERROR_CODE_200 {
             get {
@@ -88,7 +88,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has illegal value.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has illegal value..
         /// </summary>
         internal static string ERROR_CODE_201 {
             get {
@@ -97,7 +97,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is out of range; allowable values are [{1},{2}].
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is out of range; allowable values are [{1},{2}]..
         /// </summary>
         internal static string ERROR_CODE_202 {
             get {
@@ -106,7 +106,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has length {1}, which is too long; maximum length is {2}.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has length {1}, which is too long; maximum length is {2}..
         /// </summary>
         internal static string ERROR_CODE_203 {
             get {
@@ -115,7 +115,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has length {1}, which is too short; minimum length is {2}.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; has length {1}, which is too short; minimum length is {2}..
         /// </summary>
         internal static string ERROR_CODE_204 {
             get {
@@ -124,7 +124,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than parameter &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; must be less than parameter &apos;{1}&apos;..
         /// </summary>
         internal static string ERROR_CODE_300 {
             get {
@@ -133,7 +133,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You requested {0} values without replacement but the domain you specified only contains {1}.
+        ///   Looks up a localized string similar to You requested {0} values without replacement but the domain you specified only contains {1}..
         /// </summary>
         internal static string ERROR_CODE_301 {
             get {
@@ -142,7 +142,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value you specified for parameter &apos;{0}&apos; has already been taken.
+        ///   Looks up a localized string similar to The value you specified for parameter &apos;{0}&apos; has already been taken..
         /// </summary>
         internal static string ERROR_CODE_302 {
             get {
@@ -151,7 +151,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The resource identified by &apos;{0}&apos; was not found.
+        ///   Looks up a localized string similar to The resource identified by &apos;{0}&apos; was not found..
         /// </summary>
         internal static string ERROR_CODE_303 {
             get {
@@ -160,7 +160,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The resulting data&apos;s size would be {0}, which exceeds the maximum of {1}.
+        ///   Looks up a localized string similar to The resulting data&apos;s size would be {0}, which exceeds the maximum of {1}..
         /// </summary>
         internal static string ERROR_CODE_304 {
             get {
@@ -169,7 +169,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown error: {0}.
+        ///   Looks up a localized string similar to Unknown error: {0}..
         /// </summary>
         internal static string ERROR_CODE_32000 {
             get {
@@ -178,7 +178,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The API key you specified does not exist.
+        ///   Looks up a localized string similar to The API key you specified does not exist..
         /// </summary>
         internal static string ERROR_CODE_400 {
             get {
@@ -187,7 +187,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The API key you specified is not running.
+        ///   Looks up a localized string similar to The API key you specified is not running..
         /// </summary>
         internal static string ERROR_CODE_401 {
             get {
@@ -196,7 +196,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The operation requires {0} requests, but the API key only has {1} left.
+        ///   Looks up a localized string similar to The operation requires {0} requests, but the API key only has {1} left..
         /// </summary>
         internal static string ERROR_CODE_402 {
             get {
@@ -205,7 +205,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The operation requires {0} bits, but the API key only has {1} left.
+        ///   Looks up a localized string similar to The operation requires {0} bits, but the API key only has {1} left..
         /// </summary>
         internal static string ERROR_CODE_403 {
             get {
@@ -214,7 +214,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are not subscribed to {0}.
+        ///   Looks up a localized string similar to You are not subscribed to {0}..
         /// </summary>
         internal static string ERROR_CODE_500 {
             get {
@@ -223,7 +223,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The credentials &apos;{0}&apos; you specified are not valid or have expired.
+        ///   Looks up a localized string similar to The credentials &apos;{0}&apos; you specified are not valid or have expired..
         /// </summary>
         internal static string ERROR_CODE_501 {
             get {
@@ -232,7 +232,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your prepaid account credit is negative; please top up and retry.
+        ///   Looks up a localized string similar to Your prepaid account credit is negative; please top up and retry..
         /// </summary>
         internal static string ERROR_CODE_502 {
             get {
@@ -241,7 +241,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Id passed into the request does not match the Id returned in response.
+        ///   Looks up a localized string similar to Id passed into the request does not match the Id returned in response..
         /// </summary>
         internal static string ERROR_IDS_NOT_MATCHED {
             get {
@@ -250,7 +250,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \&quot;APIKEY\&quot;.
+        ///   Looks up a localized string similar to API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \&quot;APIKEY\&quot;..
         /// </summary>
         internal static string VALIDATION_APIKEY_REQUIRED {
             get {
@@ -259,7 +259,43 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Value must be between -1e9 and 1e9.
+        ///   Looks up a localized string similar to Block size must be divisible by 8..
+        /// </summary>
+        internal static string VALIDATION_BLOB_SIZE_NOT_DIVISIBLE_BY_8 {
+            get {
+                return ResourceManager.GetString("VALIDATION_BLOB_SIZE_NOT_DIVISIBLE_BY_8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blob size must be between 1 and 1048576..
+        /// </summary>
+        internal static string VALIDATION_BLOB_SIZE_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_BLOB_SIZE_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of characters allowed is 80..
+        /// </summary>
+        internal static string VALIDATION_CHARACTERS_ALLOWED_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_CHARACTERS_ALLOWED_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of decimal places to return must be between 1 and 20..
+        /// </summary>
+        internal static string VALIDATION_DECIMAL_PLACES_VALUE_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_DECIMAL_PLACES_VALUE_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Value must be between -1000000000 and 1000000000..
         /// </summary>
         internal static string VALIDATION_MAXIMUM_VALUE_OUT_OF_RANGE {
             get {
@@ -268,7 +304,16 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum Value must be between -1e9 and 1e9.
+        ///   Looks up a localized string similar to Mean value must be between -1000000 and 1000000..
+        /// </summary>
+        internal static string VALIDATION_MEAN_VALUE_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_MEAN_VALUE_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Value must be between -1000000000 and 1000000000..
         /// </summary>
         internal static string VALIDATION_MINIMUM_VALUE_OUT_OF_RANGE {
             get {
@@ -277,11 +322,38 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of items to return must be between 1 and 9999.
+        ///   Looks up a localized string similar to Number of items to return must be between 1 and {0}..
         /// </summary>
         internal static string VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE {
             get {
                 return ResourceManager.GetString("VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Deviation must be between 2 and 20..
+        /// </summary>
+        internal static string VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Deviation must be between -1000000 and 1000000..
+        /// </summary>
+        internal static string VALIDATION_STANDARD_DEVIATION_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_STANDARD_DEVIATION_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length of string must be between 1 and 20 characters..
+        /// </summary>
+        internal static string VALIDATION_STRING_LENGTH_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_STRING_LENGTH_OUT_OF_RANGE", resourceCulture);
             }
         }
     }

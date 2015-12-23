@@ -6,10 +6,9 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
-using Obacher.RandomOrgSharp.RequestParameters;
 using Should.Fluent;
 
-namespace RandomOrgSharpUnitTest.BasicMethod
+namespace RandomOrgSharp.UnitTest.BasicMethod
 {
     [TestClass]
     public class BasicMethodTest
@@ -46,7 +45,7 @@ namespace RandomOrgSharpUnitTest.BasicMethod
             mockService.Setup(m => m.SendRequest(It.IsAny<JObject>())).Returns(input);
 
             var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object);
-            var actual = target.Execute(mockRequest.Object);
+            var actual = target.Generate(mockRequest.Object);
 
             actual.Should().Equal(expected);
         }
@@ -84,7 +83,7 @@ namespace RandomOrgSharpUnitTest.BasicMethod
             mockService.Setup(m => m.SendRequestAsync(It.IsAny<JObject>())).ReturnsAsync(input);
 
             var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object);
-            var actual = await target.ExecuteAsync(mockRequest.Object);
+            var actual = await target.GenerateAsync(mockRequest.Object);
 
             actual.Should().Equal(expected);
         }

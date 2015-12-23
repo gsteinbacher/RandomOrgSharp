@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Obacher.Framework.Common.SystemWrapper;
 
@@ -34,9 +35,28 @@ namespace Obacher.Framework.Common.UnitTest.SystemWrapper
         }
 
         [TestMethod]
+        public void OpenExeConfigurationWithConfigurationUserLevel_Does_Not_Throw_Exception()
+        {
+            _mgr.OpenExeConfiguration(It.IsAny<ConfigurationUserLevel>());
+        }
+
+        [TestMethod]
         public void OpenExeConfiguration_Does_Not_Throw_Exception()
         {
             _mgr.OpenExeConfiguration(It.IsAny<string>());
+        }
+
+        [TestMethod]
+        public void OpenMappedExeConfiguration_Does_Not_Throw_Exception()
+        {
+            _mgr.OpenMappedExeConfiguration(It.IsAny<ExeConfigurationFileMap>(), It.IsAny<ConfigurationUserLevel>());
+        }
+
+
+        [TestMethod]
+        public void OpenMappedMachineConfiguration_Does_Not_Throw_Exception()
+        {
+            _mgr.OpenMappedMachineConfiguration(It.IsAny<ConfigurationFileMap>());
         }
 
         [TestMethod]

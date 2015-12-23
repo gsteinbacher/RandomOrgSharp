@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp.Properties;
-using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp
 {
@@ -70,7 +69,7 @@ namespace Obacher.RandomOrgSharp
             if (_code == 402 || _code == 403)
             {
                 // If the next date has rolled over to a new date then we get a whole new set of requests and bits available
-                if (Equals(_lastResponse.Date, _dateTimeWrap.UtcNow.Date))
+                if (_lastResponse.Equals(_lastResponse.Date, _dateTimeWrap.UtcNow.Date))
                     throw new RandomOrgException(_code, _message);
 
                 _code = 0;
@@ -105,15 +104,13 @@ namespace Obacher.RandomOrgSharp
                 _code = JsonHelper.JsonToInt(result.GetValue(RandomOrgConstants.JSON_CODE_PARAMETER_NAME));
                 JToken data = result.GetValue(RandomOrgConstants.JSON_DATA_PARAMETER_NAME);
 
-                if (data == null)
-                    _message = Strings.ResourceManager.GetString(StringsConstants.ERROR_CODE_KEY + _code);
+                if (!data.HasValues)
+                    _message = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + _code);
                 else
                 {
-                    IEnumerable<string> dataList = data.Values<string>() ?? Enumerable.Empty<string>();
-
-                    string unformattedMessage = Strings.ResourceManager.GetString(StringsConstants.ERROR_CODE_KEY + _code);
+                    string unformattedMessage = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + _code);
                     if (!string.IsNullOrWhiteSpace(unformattedMessage))
-                        _message = string.Format(unformattedMessage, dataList);
+                        _message = string.Format(unformattedMessage, data.Values<object>().ToArray());
                 }
 
                 if (string.IsNullOrWhiteSpace(_message))
@@ -130,10 +127,10 @@ namespace Obacher.RandomOrgSharp
             }
         }
 
-        public void VerifyResponse(IRequestParameters requestParameters, BasicMethodResponse response)
+        public void VerifyResponse(IRequestParameters requestParameters, IResponse response)
         {
             if (requestParameters.Id != response.Id)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.IDS_NOT_MATCHED));
+                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.IDS_NOT_MATCHED));
         }
 
         public void Dispose()
