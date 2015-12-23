@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
 using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Request;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -34,12 +35,14 @@ namespace RandomOrgSharp.FunctionalTest
             int size = _random.Next(1, 1000) * 8;
             BlobFormat format = BlobFormat.Base64;
 
+
+            BlobRequestParameters requestParameters = new BlobRequestParameters(numberToReturn, size, format);
+            IParameterBuilder parameterBuilder = new BlobJsonParameterBuilder(requestParameters);
+            IRequestBuilder requestBuilder = new JsonRequestBuilder(parameterBuilder);
+
             IRandomOrgService service = new RandomOrgApiService();
-
             var target = new BlobBasicMethod(service, _manager);
-
-            IRequestParameters requestParameters = new BlobRequestParameters(numberToReturn, size, format);
-            var results = target.Execute(requestParameters);
+            var results = target.Execute(requestBuilder);
 
             results.Should().Not.Be.Null();
             results.Should().Not.Be.Empty();

@@ -180,6 +180,9 @@
   <data name="ERROR_IDS_NOT_MATCHED" xml:space="preserve">
     <value>Id passed into the request does not match the Id returned in response.</value>
   </data>
+  <data name="EXCEPTION_INVALID_ARGUMENT" xml:space="preserve">
+    <value>Expected parameter one to be of type {0}.</value>
+  </data>
   <data name="VALIDATION_APIKEY_REQUIRED" xml:space="preserve">
     <value>API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \"APIKEY\".</value>
   </data>

@@ -3,45 +3,39 @@ using System.Runtime.Serialization;
 
 namespace Obacher.RandomOrgSharp
 {
+    /// <summary>
+    /// Exceptions that occur during the API request to api.random.org
+    /// </summary>
     [Serializable]
     public class RandomOrgException : Exception
     {
         public int Code { get; private set; }
-        public RandomOrgException(int code, string message)
-            : base(message)
-        { Code = code; }
 
-        public RandomOrgException(int code, string message, Exception innerException)
-            : base(message, innerException)
+        public RandomOrgException(int code, string message) : base(message)
         {
             Code = code;
         }
 
-        // Make sure you include this so your Excpetion is properly Serializable
-        protected RandomOrgException(SerializationInfo info, StreamingContext ctxt)
-            : base(info, ctxt)
-        { }
-
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public RandomOrgException(int code, string message, Exception innerException) : base(message, innerException)
         {
-            base.GetObjectData(info, context);
+            Code = code;
         }
+
+        // Make sure you include this so your Exception is properly Serializable
+        protected RandomOrgException(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) { }
     }
 
+    /// <summary>
+    /// Exceptions that occur within <see cref="Obacher.RandomOrgSharp"/>.
+    /// </summary>
     [Serializable]
     public class RandomOrgRunTimeException : Exception
     {
-        public RandomOrgRunTimeException(string message)
-            : base(message)
-        { }
+        public RandomOrgRunTimeException(string message) : base(message) { }
 
-        public RandomOrgRunTimeException(string message, Exception innerException)
-            : base(message, innerException)
-        { }
+        public RandomOrgRunTimeException(string message, Exception innerException) : base(message, innerException) { }
 
-        protected RandomOrgRunTimeException(SerializationInfo info, StreamingContext ctxt)
-            : base(info, ctxt)
-        { }
+        protected RandomOrgRunTimeException(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) { }
     }
 }
 

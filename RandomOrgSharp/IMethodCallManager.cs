@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Response;
 
 namespace Obacher.RandomOrgSharp
 {
@@ -8,6 +10,6 @@ namespace Obacher.RandomOrgSharp
         void SetAdvisoryDelay(int advisoryDelay);
         void CanSendRequest();
         void ThrowExceptionOnError(JObject jsonResponse);
-        void VerifyResponse(IRequestParameters requestParameters, IResponse response);
+        void VerifyResponse(IParameters requestParameters, IResponse response);
     }
 }

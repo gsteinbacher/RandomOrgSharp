@@ -50,31 +50,43 @@
   <ItemGroup>
     <Compile Include="BaseNumberOptions.cs" />
     <Compile Include="BasicMethod\BasicMethod.cs" />
+    <Compile Include="BasicMethod\UsageMethod.cs" />
     <Compile Include="IMethodCallManager.cs" />
+    <Compile Include="Parameter\IParameters.cs" />
+    <Compile Include="Parameter\UsageParameters.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RequestBuilder\BlobJsonParameterBuilder.cs" />
-    <Compile Include="RequestBuilder\GuassianJsonParameterBuilder.cs" />
-    <Compile Include="RequestBuilder\IRequestBuilder.cs" />
-    <Compile Include="RequestBuilder\IntegerJsonParameterBuilder.cs" />
-    <Compile Include="RequestBuilder\IParameterBuilder.cs" />
-    <Compile Include="RequestBuilder\StringJsonParameterBuilder.cs" />
-    <Compile Include="RequestBuilder\UUIDJsonParameterBuilder.cs" />
+    <Compile Include="Request\BlobJsonParameterBuilder.cs" />
+    <Compile Include="Request\GuassianJsonParameterBuilder.cs" />
+    <Compile Include="Request\IParameterBuilderFactory.cs" />
+    <Compile Include="Request\IRequestBuilder.cs" />
+    <Compile Include="Request\IntegerJsonParameterBuilder.cs" />
+    <Compile Include="Request\ParameterBuilderFactory.cs" />
+    <Compile Include="Request\StringJsonParameterBuilder.cs" />
+    <Compile Include="Request\DefaultJsonParameterBuilder.cs" />
+    <Compile Include="Request\UuidJsonParameterBuilder.cs" />
     <Compile Include="Parameter\DecimalParameters.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MethodCallManager.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="Parameter\BlobParameters.cs" />
-    <Compile Include="RequestBuilder\DecimalJsonParameterBuilder.cs" />
+    <Compile Include="Request\DecimalJsonParameterBuilder.cs" />
     <Compile Include="Parameter\GuassianParameters.cs" />
     <Compile Include="Parameter\CommonParameters.cs" />
     <Compile Include="Parameter\StringParameters.cs" />
-    <Compile Include="Parameter\UUIDParameters.cs" />
-    <Compile Include="RequestBuilder\JsonRequestBuilder.cs" />
+    <Compile Include="Parameter\UuidParameters.cs" />
+    <Compile Include="Request\JsonRequestBuilder.cs" />
     <Compile Include="ResourceHelper.cs" />
+    <Compile Include="Response\BasicMethodResponse.cs" />
+    <Compile Include="Response\BasicMethodResponseParser.cs" />
+    <Compile Include="Response\IBasicMethodResponse.cs" />
+    <Compile Include="Response\IParser.cs" />
+    <Compile Include="Response\IResponse.cs" />
+    <Compile Include="Response\IUsageMethodResponse.cs" />
+    <Compile Include="StatusType.cs" />
     <Compile Include="StringsConstants.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>

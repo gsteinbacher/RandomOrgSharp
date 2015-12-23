@@ -76,6 +76,12 @@
     <Compile Include="BasicMethod\StringBasicMethodTest.cs" />
     <Compile Include="BasicMethod\UUIDBasicMethodTest.cs" />
     <Compile Include="RandomOrgHttpEmulatorTest.cs" />
+    <Compile Include="RequestBuilder\BlobJsonParameterBuilderTest.cs" />
+    <Compile Include="RequestBuilder\DecimalJsonParameterBuilderTest.cs" />
+    <Compile Include="RequestBuilder\GuassianJsonParameterBuilderTest.cs" />
+    <Compile Include="RequestBuilder\IntegerJsonParameterBuilderTest.cs" />
+    <Compile Include="RequestBuilder\StringJsonParameterBuilderTest.cs" />
+    <Compile Include="RequestBuilder\UuidJsonParameterBuilder.cs" />
     <Compile Include="RequestParameters\BlobRequestParametersTest.cs" />
     <Compile Include="RequestParameters\DecimalRequestParametersTest.cs" />
     <Compile Include="RequestParameters\GuassianRequestParametersTest.cs" />
@@ -93,10 +99,6 @@
       <Project>{0aad80a2-3cf4-4f2a-9573-320e3f28af46}</Project>
       <Name>Obacher.Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Obacher.UnitTest.Tools\Obacher.UnitTest.Tools.csproj">
-      <Project>{885bd1a0-d92f-4007-a8cc-6f320574bcee}</Project>
-      <Name>Obacher.UnitTest.Tools</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
       <Name>Obacher.RandomOrgSharp</Name>
@@ -104,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Parameter\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

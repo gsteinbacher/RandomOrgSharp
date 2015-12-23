@@ -3,14 +3,15 @@ using System.Configuration;
 
 namespace Obacher.RandomOrgSharp
 {
-    public class SettingsManager : ISettingsManager
+    public sealed class SettingsManager : ISettingsManager
     {
-        private static ISettingsManager _settingsManager;
-        public static ISettingsManager Instance
-        {
-            get { return _settingsManager ?? (_settingsManager = new SettingsManager()); }
-            set { _settingsManager = value; }
-        }
+        /// <remarks>
+        /// An instance of the <see cref="SettingsManager"/> is always called, even if the Instance variable it set to a different class.
+        /// I decided to take this approach to make the singleton thread safe, since the only time the Instance variable will be set to a different
+        /// value is during unit testing.
+        /// </remarks>
+
+        public static ISettingsManager Instance { get; set; } = new SettingsManager();
 
         /// <summary>
         /// Retrieve the value from the configuration file based on the specified key

@@ -1,9 +1,12 @@
-﻿namespace Obacher.RandomOrgSharp.Parameter
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Obacher.RandomOrgSharp.Parameter
 {
-    /// <summary>
-    /// Class which contains the parameters used when requesting random blob values from random.org
-    /// </summary>
-    public class UuidParameters : CommonParameters
+    public class UsageParameters : CommonParameters
     {
         private const int MAX_ITEMS_ALLOWED = 1000;
 
@@ -14,9 +17,9 @@
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 1000.</param>
         /// <returns>Instance of <see cref="UuidParameters"/></returns>
-        public static UuidParameters Set(int numberOfItemsToReturn)
+        public static UsageParameters Set(int numberOfItemsToReturn)
         {
-            var parameters = new UuidParameters();
+            var parameters = new UsageParameters();
             parameters.SetParameters(numberOfItemsToReturn);
             return parameters;
         }
@@ -31,7 +34,8 @@
 
             NumberOfItemsToReturn = numberOfItemsToReturn;
 
-            MethodType = MethodType.Uuid;
+            MethodType = MethodType.Usage;
         }
+
     }
 }

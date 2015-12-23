@@ -6,11 +6,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp
 {
-    public interface IResponse
-    {
-        int Id { get; }
-    }
-
     //public class RandomOrgIntegerResponse : RandomOrgResponse<int>
     //{
     //    private RandomOrgIntegerResponse(string version, int[] data, DateTime completionTime, int bitsUsed, int bitsLeft,

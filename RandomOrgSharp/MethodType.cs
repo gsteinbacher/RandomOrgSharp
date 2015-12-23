@@ -1,21 +1,21 @@
 ﻿namespace Obacher.RandomOrgSharp
 {
-    internal enum MethodType
+    public enum MethodType
     {
         Integer,
         Decimal,
         Gaussian,
         String,
-        UUID,
+        Uuid,
         Blob,
         Usage,
-        SignedInteger,
-        SignedDecimal,
-        SignedGaussian,
-        SignedString,
-        SignedUUID,
-        SignedBlob,
         VerifySignature
     }
+    //SignedInteger,
+    //    SignedDecimal,
+    //    SignedGaussian,
+    //    SignedString,
+    //    SignedUuid,
+    //    SignedBlob,
 
 }

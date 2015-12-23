@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Request;
+using Obacher.RandomOrgSharp.Response;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
     public class BasicMethod<T> : IBasicMethod<T>
     {
-
         private readonly IRandomOrgService _service;
         private readonly IMethodCallManager _methodCallManager;
 
@@ -16,46 +17,44 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             _methodCallManager = methodCallManager;
         }
 
-        public IEnumerable<T> Generate(IRequestParameters requestParameters)
+        public IBasicMethodResponse<T> Generate(IRequestBuilder requestBuilder, IParser basicMethodResponseParser, IParameters parameters)
         {
             _methodCallManager.CanSendRequest();
 
-            JObject jsonRequest = requestParameters.CreateJsonRequest();
+            JObject jsonRequest = requestBuilder.Create(parameters);
 
             _methodCallManager.Delay();
-            JObject jsonReponse = _service.SendRequest(jsonRequest);
+            JObject jsonResponse = _service.SendRequest(jsonRequest);
 
-            BasicMethodResponse response = HandleResponse(requestParameters, jsonReponse);
-
-            return response.Data.Values<T>();
-        }
-
-
-        public async Task<IEnumerable<T>> GenerateAsync(IRequestParameters requestParameters)
-        {
-            _methodCallManager.CanSendRequest();
-
-            JObject jsonRequest = requestParameters.CreateJsonRequest();
-
-            _methodCallManager.Delay();
-            JObject jsonReponse = await _service.SendRequestAsync(jsonRequest);
-
-            var response = HandleResponse(requestParameters, jsonReponse);
-
-            return response.Data.Values<T>();
-        }
-
-
-        private BasicMethodResponse HandleResponse(IRequestParameters requestParameters, JObject jsonReponse)
-        {
-            _methodCallManager.ThrowExceptionOnError(jsonReponse);
-
-            BasicMethodResponse response = BasicMethodResponse.Parse(jsonReponse);
-            _methodCallManager.SetAdvisoryDelay(response.AdvisoryDelay);
-
-            _methodCallManager.VerifyResponse(requestParameters, response);
+            IBasicMethodResponse<T> response = HandleResponse(jsonResponse, basicMethodResponseParser, parameters);
 
             return response;
+        }
+
+        public async Task<IBasicMethodResponse<T>> GenerateAsync(IRequestBuilder requestBuilder, IParser basicMethodResponseParser, IParameters parameters)
+        {
+            _methodCallManager.CanSendRequest();
+
+            JObject jsonRequest = requestBuilder.Create(parameters);
+
+            _methodCallManager.Delay();
+            JObject jsonResponse = await _service.SendRequestAsync(jsonRequest);
+
+            IBasicMethodResponse<T> response = HandleResponse(jsonResponse, basicMethodResponseParser, parameters);
+
+            return response;
+        }
+
+        private IBasicMethodResponse<T> HandleResponse(JObject jsonResponse, IParser basicMethodResponseParser, IParameters parameters)
+        {
+            _methodCallManager.ThrowExceptionOnError(jsonResponse);
+
+            IResponse response = basicMethodResponseParser.Parse(jsonResponse);
+            _methodCallManager.SetAdvisoryDelay(response.AdvisoryDelay);
+
+            _methodCallManager.VerifyResponse(parameters, response);
+
+            return response as IBasicMethodResponse<T>;
         }
 
     }

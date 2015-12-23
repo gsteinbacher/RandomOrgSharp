@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.Win32;
+using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Request;
+using Obacher.RandomOrgSharp.Response;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
@@ -17,16 +22,28 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             _basicMethod = basicMethod;
         }
 
-        public IEnumerable<string> Execute(IRequestParameters requestParameters)
+        public IBasicMethodResponse<string> Execute(int numberOfItemsToReturn, int size, BlobFormat format)
         {
-            var response = _basicMethod.Generate(requestParameters);
+            var parameters = BlobParameters.Set(numberOfItemsToReturn, size, format);
+            var parameterBuilder = new BlobJsonParameterBuilder();
+            var requestBuilder = new JsonRequestBuilder(parameterBuilder);
+
+            var responseParser = new BasicMethodResponseParser<string>();
+
+            var response = _basicMethod.Generate(requestBuilder, responseParser, parameters);
             return response;
         }
 
 
-        public async Task<IEnumerable<string>> ExecuteAsync(IRequestParameters requestParameters)
+        public async Task<IBasicMethodResponse<string>> ExecuteAsync(int numberOfItemsToReturn, int size, BlobFormat format)
         {
-            var response = await _basicMethod.GenerateAsync(requestParameters);
+            var parameters = BlobParameters.Set(numberOfItemsToReturn, size, format);
+            var parameterBuilder = new BlobJsonParameterBuilder(parameters);
+            var requestBuilder = new JsonRequestBuilder(parameterBuilder);
+
+            var responseParser = new BasicMethodResponseParser<string>();
+
+            var response = await _basicMethod.GenerateAsync(requestBuilder, responseParser, parameters);
             return response;
         }
     }

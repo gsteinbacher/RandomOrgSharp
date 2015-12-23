@@ -250,6 +250,15 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expected parameter one to be of type {0}..
+        /// </summary>
+        internal static string EXCEPTION_INVALID_ARGUMENT {
+            get {
+                return ResourceManager.GetString("EXCEPTION_INVALID_ARGUMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \&quot;APIKEY\&quot;..
         /// </summary>
         internal static string VALIDATION_APIKEY_REQUIRED {

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Request;
+using Obacher.RandomOrgSharp.Response;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
     public interface IBasicMethod<T>
     {
-        IEnumerable<T> Generate(IRequestParameters requestParameters);
-        Task<IEnumerable<T>> GenerateAsync(IRequestParameters requestParameters);
+        IBasicMethodResponse<T> Generate(IRequestBuilder requestBuilder, IParser responseParser, IParameters parameters);
+        Task<IBasicMethodResponse<T>> GenerateAsync(IRequestBuilder requestBuilder, IParser responseParser, IParameters parameters);
     }
 }

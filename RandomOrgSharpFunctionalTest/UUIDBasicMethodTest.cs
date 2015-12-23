@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
-using Obacher.RandomOrgSharp.RequestBuilder;
+using Obacher.RandomOrgSharp.Request;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -33,7 +33,7 @@ namespace RandomOrgSharp.FunctionalTest
 
             var target = new UUIDBasicMethod(service, _manager);
 
-            IRequestParameters requestParameters = new UUIDJsonParameterBuilder(numberToReturn);
+            IRequestParameters requestParameters = new UuidJsonParameterBuilder(numberToReturn);
             var results = target.Execute(requestParameters);
 
             results.Should().Not.Be.Null();
@@ -50,7 +50,7 @@ namespace RandomOrgSharp.FunctionalTest
 
             var target = new UUIDBasicMethod(service, _manager);
 
-            IRequestParameters requestParameters = new UUIDJsonParameterBuilder(numberToReturn);
+            IRequestParameters requestParameters = new UuidJsonParameterBuilder(numberToReturn);
             var results = await target.ExecuteAsync(requestParameters);
 
             results.Should().Not.Be.Null();
