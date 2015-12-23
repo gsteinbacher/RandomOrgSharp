@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp
 {

@@ -58,9 +58,9 @@
       <Project>{0aad80a2-3cf4-4f2a-9573-320e3f28af46}</Project>
       <Name>Obacher.Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RandomOrgSharp\RandomOrgSharp.csproj">
+    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.csproj">
       <Project>{D12E7982-A721-4D2A-AC0C-AD2DB942329D}</Project>
-      <Name>RandomOrgSharp</Name>
+      <Name>Obacher.RandomOrgSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

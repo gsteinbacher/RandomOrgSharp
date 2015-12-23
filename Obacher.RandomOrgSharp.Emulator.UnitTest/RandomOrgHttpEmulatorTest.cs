@@ -1,11 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
-using Obacher.RandomOrgSharp.RequestParameters;
 using Should.Fluent;
 
-namespace RandomOrgSharp.FunctionalTest
+namespace Obacher.RandomOrgSharp.Emulator.UnitTest
 {
     [TestClass]
     public class RandomOrgHttpEmulatorTest

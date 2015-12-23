@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
-using Obacher.RandomOrgSharp.RequestParameters;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest

@@ -1,29 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Properties;
-using Obacher.RandomOrgSharp.RequestParameters;
 
-namespace Obacher.RandomOrgSharp
+namespace Obacher.RandomOrgSharp.Emulator
 {
     public class RandomOrgServiceEmulator : IRandomOrgService
     {
-        private Random _random;
-        private DateTime rollOverTime;
+        private readonly Random _random;
+        private readonly DateTime rollOverTime;
         private int _code;
         private object[] _params;
 
-        private int _bitsUsed = 0;
+        private int _bitsUsed;
         private int _initialBitsLeft;
         private int _bitsLeft;
         private int _initialRequestsLeft;
         private int _requestsLeft;
-        private int _advistoryDelay = 0;
+        private int _advistoryDelay;
 
         /// <summary>
         /// Number of bits remaining for the daily limit.  If value is never set then a random value between 100000 and 100000000 will be generated.
@@ -58,10 +53,6 @@ namespace Obacher.RandomOrgSharp
         // Advisory Delay return in the response.  If value is never set then a random value between 0 and 100 milliseconds will be generated on each request.
         public int AdvisoryDelay
         {
-            private get
-            {
-                return _advistoryDelay;
-            }
             set
             {
                 _advistoryDelay = value;
@@ -321,9 +312,9 @@ namespace Obacher.RandomOrgSharp
 
             JObject response = new JObject(
                 new JProperty("json-rpc", "2.0"),
-                new JProperty("result", 
+                new JProperty("result",
                     new JObject(
-                        new JProperty("random", 
+                        new JProperty("random",
                             new JObject(
                                 new JProperty("data", new JArray(values)),
                                 new JProperty("completionTime", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ssZ"))
@@ -338,20 +329,20 @@ namespace Obacher.RandomOrgSharp
                 new JProperty("id", id)
             );
 
-           // JObject response = new JObject(
-           //     new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-           //         new JObject("result",
-           //             new JObject("random",
-           //                 new JObject("data", new JArray(values)),
-           //                 new JProperty("completionTime", XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc))\
-           //             ),
-           //             new JProperty("bitsUsed", _bitsUsed),
-           //             new JProperty("bitsLeft", BitsLeft),
-           //             new JProperty("requestsLeft", RequestsLeft),
-           //             new JProperty("advisoryDelay", advisoryDelay)
-           //         ),
-           //     new JProperty("id", id)
-           //);
+            // JObject response = new JObject(
+            //     new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
+            //         new JObject("result",
+            //             new JObject("random",
+            //                 new JObject("data", new JArray(values)),
+            //                 new JProperty("completionTime", XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.Utc))\
+            //             ),
+            //             new JProperty("bitsUsed", _bitsUsed),
+            //             new JProperty("bitsLeft", BitsLeft),
+            //             new JProperty("requestsLeft", RequestsLeft),
+            //             new JProperty("advisoryDelay", advisoryDelay)
+            //         ),
+            //     new JProperty("id", id)
+            //);
 
             return response;
         }
@@ -359,7 +350,7 @@ namespace Obacher.RandomOrgSharp
         private JObject CreateErrorResponse(int code, params object[] data)
         {
             int id = _random.Next();
-            string message = string.Format(Strings.ResourceManager.GetString(StringsConstants.ERROR_CODE_KEY + code), _params);
+            string message = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + code, data);
 
             JObject response = new JObject(
                 new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),

@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp.Properties;
-using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp
 {
@@ -106,10 +105,10 @@ namespace Obacher.RandomOrgSharp
                 JToken data = result.GetValue(RandomOrgConstants.JSON_DATA_PARAMETER_NAME);
 
                 if (!data.HasValues)
-                    _message = Strings.ResourceManager.GetString(StringsConstants.ERROR_CODE_KEY + _code);
+                    _message = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + _code);
                 else
                 {
-                    string unformattedMessage = Strings.ResourceManager.GetString(StringsConstants.ERROR_CODE_KEY + _code);
+                    string unformattedMessage = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + _code);
                     if (!string.IsNullOrWhiteSpace(unformattedMessage))
                         _message = string.Format(unformattedMessage, data.Values<object>().ToArray());
                 }
@@ -131,7 +130,7 @@ namespace Obacher.RandomOrgSharp
         public void VerifyResponse(IRequestParameters requestParameters, IResponse response)
         {
             if (requestParameters.Id != response.Id)
-                throw new RandomOrgRunTimeException(Strings.ResourceManager.GetString(StringsConstants.IDS_NOT_MATCHED));
+                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.IDS_NOT_MATCHED));
         }
 
         public void Dispose()

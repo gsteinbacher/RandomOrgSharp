@@ -6,7 +6,6 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
-using Obacher.RandomOrgSharp.RequestParameters;
 using Should.Fluent;
 
 namespace RandomOrgSharp.UnitTest.BasicMethod

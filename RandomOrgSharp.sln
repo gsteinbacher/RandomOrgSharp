@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomOrgSharp", "RandomOrgSharp\RandomOrgSharp.csproj", "{D12E7982-A721-4D2A-AC0C-AD2DB942329D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.RandomOrgSharp", "RandomOrgSharp\Obacher.RandomOrgSharp.csproj", "{D12E7982-A721-4D2A-AC0C-AD2DB942329D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomOrgSharp.UnitTest", "RandomOrgSharpUnitTest\RandomOrgSharp.UnitTest.csproj", "{AB9A399D-01F2-4B69-87EA-1735D9EA882A}"
 EndProject
@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.UnitTest.Tools", "Obacher.UnitTest.Tools\Obacher.UnitTest.Tools.csproj", "{885BD1A0-D92F-4007-A8CC-6F320574BCEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.RandomOrgSharp.Emulator", "Obacher.RandomOrgSharp.Emulator\Obacher.RandomOrgSharp.Emulator.csproj", "{9FC29E0D-C0E9-4CD1-A465-255CF0BA8A10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.RandomOrgSharp.Emulator.UnitTest", "Obacher.RandomOrgSharp.Emulator.UnitTest\Obacher.RandomOrgSharp.Emulator.UnitTest.csproj", "{233214FB-9443-4BD3-9CE3-D05B67891AE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,14 @@ Global
 		{885BD1A0-D92F-4007-A8CC-6F320574BCEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{885BD1A0-D92F-4007-A8CC-6F320574BCEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{885BD1A0-D92F-4007-A8CC-6F320574BCEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FC29E0D-C0E9-4CD1-A465-255CF0BA8A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FC29E0D-C0E9-4CD1-A465-255CF0BA8A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FC29E0D-C0E9-4CD1-A465-255CF0BA8A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FC29E0D-C0E9-4CD1-A465-255CF0BA8A10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{233214FB-9443-4BD3-9CE3-D05B67891AE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233214FB-9443-4BD3-9CE3-D05B67891AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233214FB-9443-4BD3-9CE3-D05B67891AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233214FB-9443-4BD3-9CE3-D05B67891AE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

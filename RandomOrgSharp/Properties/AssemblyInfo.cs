@@ -36,6 +36,7 @@ using Obacher.RandomOrgSharp;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
+[assembly: InternalsVisibleTo("Obacher.RandomOrgSharp.Emulator")]
 [assembly: InternalsVisibleTo("RandomOrgSharp.FunctionalTest")]
 [assembly: InternalsVisibleTo("RandomOrgSharp.UnitTest")]
 [assembly: InternalsVisibleTo("Obacher.UnitTest.Tools")]

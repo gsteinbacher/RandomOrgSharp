@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {

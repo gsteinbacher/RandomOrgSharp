@@ -2,7 +2,7 @@
 using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.RequestParameters;
+using Obacher.RandomOrgSharp.RequestBuilder;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
@@ -19,7 +19,7 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
             // Act
-            new UUIDRequestParameters(numberOfItems);
+            new UUIDJsonParameterBuilder(numberOfItems);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -28,7 +28,7 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             const int numberOfItems = 10000;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new UUIDRequestParameters(numberOfItems);
+            new UUIDJsonParameterBuilder(numberOfItems);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -61,7 +61,7 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             RandomNumberGenerator.Instance = random.Object;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            var target = new UUIDRequestParameters(numberOfItems);
+            var target = new UUIDJsonParameterBuilder(numberOfItems);
             var actual = target.CreateJsonRequest();
 
             actual.Should().Equal(expected);

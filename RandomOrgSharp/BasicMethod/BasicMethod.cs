@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.RequestParameters;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
@@ -26,7 +25,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             _methodCallManager.Delay();
             JObject jsonReponse = _service.SendRequest(jsonRequest);
 
-            var response = HandleResponse(requestParameters, jsonReponse);
+            BasicMethodResponse response = HandleResponse(requestParameters, jsonReponse);
 
             return response.Data.Values<T>();
         }
