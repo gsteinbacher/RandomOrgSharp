@@ -2,10 +2,11 @@
 using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
+using Obacher.RandomOrgSharp.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
-namespace RandomOrgSharp.UnitTest.RequestParameters
+namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
     public class DecimalRequestParametersTest
@@ -19,77 +20,72 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
             // Act
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnGreaterThenMaximumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 10001;
             const int numberOfdecimalPlaces = 10;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            // Act
+            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfDecimalPlacesLessThenMinimumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = int.MinValue;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            // Act
+            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfDecimalPlacesGreaterThanMaximumllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = int.MaxValue;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
+            // Act
+            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenApiIsNull_ExpectException()
         {
+            // Arrange
             SettingsManager.Instance = null;
-            new DecimalRequestParameters(1, 1);
+
+            // Act
+            DecimalParameters.Set(1, 1);
         }
 
-
         [TestMethod]
-        public void WhenParametersCorrect_ExpectJsonReturned()
+        public void WhenAllValuesValid_ExpectValuesSet()
         {
+            // Arrange
             const int numberOfItems = 1;
-            const int numberOfdecimalPlaces = 10;
-            const int id = 999;
-
-            JObject expected =
-                new JObject(
-                    new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, "generateDecimalFractions"),
-                    new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME,
-                        new JObject(
-                            new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                            new JProperty(RandomOrgConstants.JSON_DECIMAL_PLACES_PARAMETER_NAME, numberOfdecimalPlaces),
-                            new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, true),
-                           new JProperty(RandomOrgConstants.APIKEY_KEY, ConfigMocks.MOCK_API_KEY))),
-                        new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, 999));
-
-
-            var random = new Mock<IRandom>();
-            random.Setup(m => m.Next()).Returns(id);
-            RandomNumberGenerator.Instance = random.Object;
+            const int numberOfdecimalPlaces = 100;
+            const bool allowDuplicates = false;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            var target = new DecimalRequestParameters(numberOfItems, numberOfdecimalPlaces);
-            var actual = target.CreateJsonRequest();
+            // Act
+            var result = DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces, allowDuplicates);
 
-            actual.Should().Equal(expected);
+            // Assert
+            result.NumberOfItemsToReturn.Should().Equal(numberOfItems);
+            result.NumberOfDecimalPlaces.Should().Equal(numberOfdecimalPlaces);
+            result.AllowDuplicates.Should().Equal(allowDuplicates);
         }
     }
 }

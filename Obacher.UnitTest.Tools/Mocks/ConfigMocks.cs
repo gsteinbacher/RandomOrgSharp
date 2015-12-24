@@ -12,15 +12,27 @@ namespace Obacher.UnitTest.Tools.Mocks
     {
         public const string MOCK_API_KEY = "mockApiKey";
 
-        public static Mock<ISettingsManager> SetupApiKeyMock(Mock<ISettingsManager> settingsManagerMock = null)
+        public static Mock<ISettingsManager> SetupApiKeyMock(string apiKey = null, Mock<ISettingsManager> settingsManagerMock = null)
         {
             if (settingsManagerMock == null)
                 settingsManagerMock = new Mock<ISettingsManager>();
 
             settingsManagerMock.Setup(m => m.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY))
-                .Returns(MOCK_API_KEY);
+                .Returns(apiKey ?? MOCK_API_KEY);
 
             return settingsManagerMock;
+        }
+
+        public static Mock<IRandom> SetupIdMock(int id = 0, Mock<IRandom> randomNumberGeneratorMock = null)
+        {
+            if (randomNumberGeneratorMock == null)
+                randomNumberGeneratorMock = new Mock<IRandom>();
+
+            randomNumberGeneratorMock.Setup(m => m.Next())
+                .Returns(id);
+
+            return randomNumberGeneratorMock;
+
         }
     }
 }

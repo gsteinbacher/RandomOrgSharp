@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -70,25 +70,20 @@
   <ItemGroup>
     <Compile Include="BasicMethod\BasicMethodTest.cs" />
     <Compile Include="BasicMethod\BlobBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\DecimalBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\GuassianBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\IntegerBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\StringBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\UUIDBasicMethodTest.cs" />
     <Compile Include="RandomOrgHttpEmulatorTest.cs" />
-    <Compile Include="RequestBuilder\BlobJsonParameterBuilderTest.cs" />
-    <Compile Include="RequestBuilder\DecimalJsonParameterBuilderTest.cs" />
-    <Compile Include="RequestBuilder\GuassianJsonParameterBuilderTest.cs" />
-    <Compile Include="RequestBuilder\IntegerJsonParameterBuilderTest.cs" />
-    <Compile Include="RequestBuilder\StringJsonParameterBuilderTest.cs" />
-    <Compile Include="RequestBuilder\UuidJsonParameterBuilder.cs" />
-    <Compile Include="RequestParameters\BlobRequestParametersTest.cs" />
-    <Compile Include="RequestParameters\DecimalRequestParametersTest.cs" />
-    <Compile Include="RequestParameters\GuassianRequestParametersTest.cs" />
-    <Compile Include="RequestParameters\IntegerRequestParametersTest.cs" />
+    <Compile Include="Request\BlobJsonRequestBuilderTest.cs" />
+    <Compile Include="Request\DecimalJsonRequestBuilderTest.cs" />
+    <Compile Include="Request\GuassianJsonRequestBuilderTest.cs" />
+    <Compile Include="Request\IntegerJsonRequestBuilderTest.cs" />
+    <Compile Include="Request\StringJsonRequestBuilderTest.cs" />
+    <Compile Include="Request\UuidJsonRequestBuilder.cs" />
+    <Compile Include="Parameter\BlobParametersTest.cs" />
+    <Compile Include="Parameter\DecimalRequestParametersTest.cs" />
+    <Compile Include="Parameter\GuassianRequestParametersTest.cs" />
+    <Compile Include="Parameter\IntegerRequestParametersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestParameters\StringRequestParametersTest.cs" />
-    <Compile Include="RequestParameters\UUIDRequestParametersTest.cs" />
+    <Compile Include="Parameter\StringRequestParametersTest.cs" />
+    <Compile Include="Parameter\UuidRequestParametersTest.cs" />
     <Compile Include="ResponsesTest.cs" />
     <Compile Include="JsonHelperTest.cs" />
     <Compile Include="MethodCallManagerTest.cs" />
@@ -99,6 +94,10 @@
       <Project>{0aad80a2-3cf4-4f2a-9573-320e3f28af46}</Project>
       <Name>Obacher.Framework.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Obacher.UnitTest.Tools\Obacher.UnitTest.Tools.csproj">
+      <Project>{885bd1a0-d92f-4007-a8cc-6f320574bcee}</Project>
+      <Name>Obacher.UnitTest.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
       <Name>Obacher.RandomOrgSharp</Name>
@@ -107,9 +106,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Parameter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

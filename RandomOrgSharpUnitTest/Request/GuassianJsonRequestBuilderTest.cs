@@ -8,7 +8,7 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.RequestParameters
 {
     [TestClass]
-    public class GuassianRequestParametersTest
+    public class GuassianJsonRequestBuilderTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()

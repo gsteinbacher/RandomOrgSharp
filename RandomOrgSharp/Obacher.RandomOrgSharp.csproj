@@ -59,21 +59,21 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Request\BlobJsonParameterBuilder.cs" />
-    <Compile Include="Request\GuassianJsonParameterBuilder.cs" />
-    <Compile Include="Request\IParameterBuilderFactory.cs" />
-    <Compile Include="Request\IRequestBuilder.cs" />
-    <Compile Include="Request\IntegerJsonParameterBuilder.cs" />
-    <Compile Include="Request\ParameterBuilderFactory.cs" />
-    <Compile Include="Request\StringJsonParameterBuilder.cs" />
-    <Compile Include="Request\DefaultJsonParameterBuilder.cs" />
-    <Compile Include="Request\UuidJsonParameterBuilder.cs" />
+    <Compile Include="Request\BlobJsonRequestBuilder.cs" />
+    <Compile Include="Request\GuassianJsonRequestBuilder.cs" />
+    <Compile Include="Request\IJsonRequestBuilderFactory.cs" />
+    <Compile Include="Request\IJsonRequestBuilder.cs" />
+    <Compile Include="Request\IntegerJsonRequestBuilder.cs" />
+    <Compile Include="Request\JsonRequestBuilderFactory.cs" />
+    <Compile Include="Request\StringJsonRequestBuilder.cs" />
+    <Compile Include="Request\DefaultJsonRequestBuilder.cs" />
+    <Compile Include="Request\UuidJsonRequestBuilder.cs" />
     <Compile Include="Parameter\DecimalParameters.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MethodCallManager.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="Parameter\BlobParameters.cs" />
-    <Compile Include="Request\DecimalJsonParameterBuilder.cs" />
+    <Compile Include="Request\DecimalJsonRequestBuilder.cs" />
     <Compile Include="Parameter\GuassianParameters.cs" />
     <Compile Include="Parameter\CommonParameters.cs" />
     <Compile Include="Parameter\StringParameters.cs" />
@@ -86,6 +86,9 @@
     <Compile Include="Response\IParser.cs" />
     <Compile Include="Response\IResponse.cs" />
     <Compile Include="Response\IUsageMethodResponse.cs" />
+    <Compile Include="Response\UsageMethodResponse.cs" />
+    <Compile Include="Response\UsageMethodResponseParser.cs" />
+    <Compile Include="Response\UuidResponseParser.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="StringsConstants.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
@@ -94,13 +97,12 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <Compile Include="BasicMethod\BasicMethodFactory.cs" />
     <Compile Include="BasicMethod\BlobBasicMethod.cs" />
     <Compile Include="BasicMethod\DecimalBasicMethod.cs" />
     <Compile Include="BasicMethod\GuassianBasicMethod.cs" />
     <Compile Include="BasicMethod\IntegerBasicMethod.cs" />
     <Compile Include="BasicMethod\StringBasicMethod.cs" />
-    <Compile Include="BasicMethod\UUIDBasicMethod.cs" />
+    <Compile Include="BasicMethod\UuidBasicMethod.cs" />
     <Compile Include="BasicMethod\IBasicMethod.cs" />
     <Compile Include="IRandomOrgService.cs" />
     <Compile Include="IRandomOrgSharp.cs" />
@@ -112,7 +114,6 @@
     <Compile Include="RandomOrgException.cs" />
     <Compile Include="RandomOrgHttpService.cs" />
     <Compile Include="Parameter\IntegerParameters.cs" />
-    <Compile Include="Responses.cs" />
     <Compile Include="SettingsManager.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -4,6 +4,7 @@
     {
         Stopped,
         Paused,
-        Running
+        Running,
+        Unknown
     }
 }

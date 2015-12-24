@@ -24,7 +24,7 @@ namespace Obacher.RandomOrgSharp.Parameter
         /// <summary>
         /// Create an instance of <see cref="BlobParameters"/>
         /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 100.</param>
+        /// <param name="numberOfItemsToReturn">How many random blob values you need. Must be between 1 and 100.</param>
         /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
         /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
         /// <returns>Instance of <see cref="BlobParameters"/></returns>

@@ -5,60 +5,81 @@ using Obacher.RandomOrgSharp.Request;
 using Obacher.RandomOrgSharp.Response;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
+{
+    /// <summary>
+    /// Retrieve a lst of random integer values
+    /// </summary>
+    public class UsageMethod
     {
-        public class UsageMethod
+        private readonly IRandomOrgService _service;
+        private readonly IMethodCallManager _methodCallManager;
+        private readonly IJsonRequestBuilder _requestBuilder;
+        private readonly IParser _responseParser;
+
+        /// <summary>
+        /// Create an instance of <see cref="StringBasicMethod"/>.  
+        /// </summary>
+        public UsageMethod(IRandomOrgService service, IMethodCallManager methodCallManager, IJsonRequestBuilder requestBuilder, IParser basicMethodResponseParser)
         {
-            private readonly IRandomOrgService _service;
-            private readonly IMethodCallManager _methodCallManager;
+            _service = service;
+            _methodCallManager = methodCallManager;
+            _requestBuilder = requestBuilder;
+            _responseParser = basicMethodResponseParser;
+        }
 
-            public UsageMethod(IRandomOrgService service, IMethodCallManager methodCallManager)
-            {
-                _service = service;
-                _methodCallManager = methodCallManager;
-            }
+        /// <summary>
+        /// Returns information related to the the usage of a given API key.
+        /// </summary>
+        /// <returns>Information related to usage of a given API key.</returns>
+        public IResponse GetUsage()
+        {
+            _methodCallManager.CanSendRequest();
 
-            public IUsageMethodResponse Generate(IRequestBuilder requestBuilder, IParser basicMethodResponseParser, IParameters parameters)
-            {
-                _methodCallManager.CanSendRequest();
+            // Usage method has no specific parameters
+            var parameters = new UsageParameters();
+            JObject jsonRequest = _requestBuilder.Create(parameters);
 
-                JObject jsonRequest = requestBuilder.Create();
+            _methodCallManager.Delay();
+            JObject jsonResponse = _service.SendRequest(jsonRequest);
 
-                _methodCallManager.Delay();
-                JObject jsonResponse = _service.SendRequest(jsonRequest);
+            IResponse response = HandleResponse(jsonResponse, parameters);
 
-            IUsageMethodResponse response = HandleResponse(jsonResponse, basicMethodResponseParser, parameters);
+            return response;
+        }
 
-                return response;
-            }
 
-            public async Task<IUsageMethodResponse> GenerateAsync(IRequestBuilder requestBuilder, IParser basicMethodResponseParser, IParameters parameters)
-            {
-                _methodCallManager.CanSendRequest();
+        /// <summary>
+        /// Returns information related to the the usage of a given API key as an asynchronous operation.
+        /// </summary>
+        /// <returns>Information related to usage of a given API key.</returns>
+        public async Task<IResponse> GetUsageAsync()
+        {
+            _methodCallManager.CanSendRequest();
 
-                JObject jsonRequest = requestBuilder.Create();
+            // Usage method has no specific parameters
+            var parameters = new UsageParameters();
+            JObject jsonRequest = _requestBuilder.Create(parameters);
 
-                _methodCallManager.Delay();
-                JObject jsonResponse = await _service.SendRequestAsync(jsonRequest);
+            _methodCallManager.Delay();
+            JObject jsonResponse = await _service.SendRequestAsync(jsonRequest);
 
-                IBasicMethodResponse<T> response = HandleResponse(jsonResponse, basicMethodResponseParser, parameters);
+            IResponse response = HandleResponse(jsonResponse, parameters);
 
-                return response;
-            }
+            return response;
+        }
 
-            private IBasicMethodResponse<T> HandleResponse(JObject jsonResponse, IParser basicMethodResponseParser, IParameters parameters)
-            {
-                _methodCallManager.ThrowExceptionOnError(jsonResponse);
+        private IResponse HandleResponse(JObject jsonResponse, IParameters parameters)
+        {
+            _methodCallManager.ThrowExceptionOnError(jsonResponse);
 
-                IResponse response = basicMethodResponseParser.Parse(jsonResponse);
-                _methodCallManager.SetAdvisoryDelay(response.AdvisoryDelay);
-
+            IResponse response = _responseParser.Parse(jsonResponse);
+            if (response != null)
                 _methodCallManager.VerifyResponse(parameters, response);
 
-                return response as IBasicMethodResponse<T>;
-            }
-
+            return response;
         }
-    }
 
+    }
 }
-}
+
+

@@ -15,7 +15,7 @@
         /// <summary>
         /// Create an instance of <see cref="GuassianParameters"/>
         /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
+        /// <param name="numberOfItemsToReturn">How many random guassian values you need. Must be between 1 and 10,000.</param>
         /// <param name="mean">The distribution's mean. Must be between -1,000,000 and 1,000,000.</param>
         /// <param name="standardDeviation">The distribution's standard deviation. Must be between -1,000,000 and 1,000,000</param>
         /// <param name="significantDigits">The number of significant digits to use. Must be between 2 and 20.</param>

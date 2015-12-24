@@ -4,10 +4,13 @@ using Obacher.RandomOrgSharp.Parameter;
 
 namespace Obacher.RandomOrgSharp.Request
 {
-    public class BlobJsonParameterBuilder : IRequestBuilder
+    public class BlobJsonRequestBuilder : IJsonRequestBuilder
     {
         public JObject Create(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             var blobParameters = parameters as BlobParameters;
             if (blobParameters == null)
                 throw new ArgumentException(ResourceHelper.GetString(StringsConstants.EXCEPTION_INVALID_ARGUMENT, "BlobParameters"));
@@ -28,6 +31,9 @@ namespace Obacher.RandomOrgSharp.Request
         /// <returns>True if this class handles the specified parameters</returns>
         public bool CanHandle(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             return parameters.MethodType == MethodType.Blob;
         }
     }

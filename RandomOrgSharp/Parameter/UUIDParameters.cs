@@ -12,7 +12,7 @@
         /// <summary>
         /// Create an instance of <see cref="UuidParameters"/>
         /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 1000.</param>
+        /// <param name="numberOfItemsToReturn">How many random UUID values you need. Must be between 1 and 1000.</param>
         /// <returns>Instance of <see cref="UuidParameters"/></returns>
         public static UuidParameters Set(int numberOfItemsToReturn)
         {

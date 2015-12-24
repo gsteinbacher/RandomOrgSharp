@@ -4,7 +4,7 @@ using Obacher.RandomOrgSharp.Parameter;
 
 namespace Obacher.RandomOrgSharp.Request
 {
-    public class DefaultJsonParameterBuilder : IRequestBuilder
+    public class DefaultJsonRequestBuilder : IJsonRequestBuilder
     {
         public JObject Create(IParameters parameters)
         {

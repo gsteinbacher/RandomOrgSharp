@@ -38,7 +38,7 @@ namespace RandomOrgSharp.FunctionalTest
 
             BlobRequestParameters requestParameters = new BlobRequestParameters(numberToReturn, size, format);
             IParameterBuilder parameterBuilder = new BlobJsonParameterBuilder(requestParameters);
-            IRequestBuilder requestBuilder = new JsonRequestBuilder(parameterBuilder);
+            IJsonRequestBuilder requestBuilder = new JsonRequestBuilder(parameterBuilder);
 
             IRandomOrgService service = new RandomOrgApiService();
             var target = new BlobBasicMethod(service, _manager);

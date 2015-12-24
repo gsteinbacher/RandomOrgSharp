@@ -4,12 +4,26 @@ using Obacher.RandomOrgSharp.Parameter;
 
 namespace Obacher.RandomOrgSharp.Request
 {
-    public class JsonRequestBuilder : IRequestBuilder
+    public class JsonRequestBuilder : IJsonRequestBuilder
     {
-        private readonly IParameterBuilderFactory _factory;
+        private readonly IJsonRequestBuilderFactory _factory;
 
-        public JsonRequestBuilder(IParameterBuilderFactory factory)
+        public JsonRequestBuilder(IJsonRequestBuilderFactory factory = null)
         {
+            // Setup default JsonParameterBuilderFactory
+            if (factory == null)
+            {
+                factory = new JsonRequestBuilderFactory(
+                    new DefaultJsonRequestBuilder(),
+                    new BlobJsonRequestBuilder(),
+                    new DecimalJsonRequestBuilder(),
+                    new GuassianJsonRequestBuilder(),
+                    new IntegerJsonRequestBuilder(),
+                    new StringJsonRequestBuilder(),
+                    new UuidJsonRequestBuilder()
+                );
+            }
+
             _factory = factory;
         }
 

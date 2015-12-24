@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Request;
+using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.UnitTest.BasicMethod
@@ -14,78 +20,90 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
     public class BasicMethodTest
     {
         [TestMethod]
-        public void WhenExecuteCalled_ExpectListOfNumbersReturned()
+        public void WhenGenerateCalled_ExpectWorkflowToMatch()
         {
-            var expected = new List<int> { 1, 5, 4, 6, 6, 4 };
-            var input = JObject.Parse(@"{
-    jsonrpc: '2.0',
-    result: {
-                random: {
-                    data: [" + String.Join(",", expected) + @"],
-            completionTime: '2011-10-10 13:19:12Z'
-        },
-        bitsUsed: 16,
-        bitsLeft: 199984,
-        requestsLeft: 9999,
-        advisoryDelay: 0
-    },
-    id: 42
-}");
+            // Arrange
+            const string apiKey = "API_KEY";
+            const int advisoryDelay = 4444;
+            const int id = 5555;
+
+            var mockJsonRequest = new Mock<JObject>();
+            var mockJsonResponse = new Mock<JObject>();
+
+            var mockParameters = new Mock<IParameters>();
+            mockParameters.Setup(p => p.ApiKey).Returns(apiKey);
+            mockParameters.Setup(p => p.Id).Returns(id);
+            mockParameters.Setup(p => p.MethodType).Returns(MethodType.Integer);
+
+            var mockResponse = new Mock<IBasicMethodResponse<int>>();
+            mockResponse.Setup(m => m.AdvisoryDelay).Returns(advisoryDelay);
+
             var mockCallManager = new Mock<IMethodCallManager>();
             mockCallManager.Setup(m => m.CanSendRequest());
             mockCallManager.Setup(m => m.Delay());
-            mockCallManager.Setup(m => m.ThrowExceptionOnError(It.IsAny<JObject>()));
-            mockCallManager.Setup(m => m.SetAdvisoryDelay(It.IsAny<int>()));
-            mockCallManager.Setup(m => m.VerifyResponse(It.IsAny<IRequestParameters>(), It.IsAny<BasicMethodResponse>()));
+            mockCallManager.Setup(m => m.ThrowExceptionOnError(mockJsonResponse.Object));
+            mockCallManager.Setup(m => m.SetAdvisoryDelay(advisoryDelay));
+            mockCallManager.Setup(m => m.VerifyResponse(mockParameters.Object, mockResponse.Object));
 
-            var mockRequest = new Mock<IRequestParameters>();
-            mockRequest.Setup(m => m.CreateJsonRequest()).Returns(It.IsAny<JObject>());
+            var mockRequestBuilder = new Mock<IJsonRequestBuilder>();
+            mockRequestBuilder.Setup(m => m.Create(mockParameters.Object)).Returns(mockJsonRequest.Object);
 
             var mockService = new Mock<IRandomOrgService>();
-            mockService.Setup(m => m.SendRequest(It.IsAny<JObject>())).Returns(input);
+            mockService.Setup(m => m.SendRequest(mockJsonRequest.Object)).Returns(mockJsonResponse.Object);
 
-            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object);
-            var actual = target.Generate(mockRequest.Object);
+            var mockResponseParser = new Mock<IParser>();
+            mockResponseParser.Setup(m => m.Parse(mockJsonRequest.Object)).Returns(mockResponse.Object);
 
-            actual.Should().Equal(expected);
+            // Act
+            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParser.Object);
+            var actual = target.Generate(mockParameters.Object);
+
+            // Assert
+            actual.Should().Equal(mockResponse.Object);
         }
 
         [TestMethod]
         public async Task WhenExecuteAsyncCalled_ExpectListOfNumbersReturned()
         {
-            var expected = new List<int> {1, 5, 4, 6, 6, 4};
-            var input = JObject.Parse(@"{
-    jsonrpc: '2.0',
-    result: {
-                random: {
-                    data: [" + String.Join(",", expected) + @"],
-            completionTime: '2011-10-10 13:19:12Z'
-        },
-        bitsUsed: 16,
-        bitsLeft: 199984,
-        requestsLeft: 9999,
-        advisoryDelay: 0
-    },
-    id: 42
-}");
+            // Arrange
+            const string apiKey = "API_KEY";
+            const int advisoryDelay = 4444;
+            const int id = 5555;
 
-        var mockCallManager = new Mock<IMethodCallManager>();
+            var mockJsonRequest = new Mock<JObject>();
+            var mockJsonResponse = new Mock<JObject>();
+
+            var mockParameters = new Mock<IParameters>();
+            mockParameters.Setup(p => p.ApiKey).Returns(apiKey);
+            mockParameters.Setup(p => p.Id).Returns(id);
+            mockParameters.Setup(p => p.MethodType).Returns(MethodType.Integer);
+
+            var mockResponse = new Mock<IBasicMethodResponse<int>>();
+            mockResponse.Setup(m => m.AdvisoryDelay).Returns(advisoryDelay);
+
+            var mockCallManager = new Mock<IMethodCallManager>();
             mockCallManager.Setup(m => m.CanSendRequest());
             mockCallManager.Setup(m => m.Delay());
-            mockCallManager.Setup(m => m.ThrowExceptionOnError(It.IsAny<JObject>()));
-            mockCallManager.Setup(m => m.SetAdvisoryDelay(It.IsAny<int>()));
-            mockCallManager.Setup(m => m.VerifyResponse(It.IsAny<IRequestParameters>(), It.IsAny<BasicMethodResponse>()));
+            mockCallManager.Setup(m => m.ThrowExceptionOnError(mockJsonResponse.Object));
+            mockCallManager.Setup(m => m.SetAdvisoryDelay(advisoryDelay));
+            mockCallManager.Setup(m => m.VerifyResponse(mockParameters.Object, mockResponse.Object));
 
-            var mockRequest = new Mock<IRequestParameters>();
-            mockRequest.Setup(m => m.CreateJsonRequest()).Returns(It.IsAny<JObject>());
+            var mockRequestBuilder = new Mock<IJsonRequestBuilder>();
+            mockRequestBuilder.Setup(m => m.Create(mockParameters.Object)).Returns(mockJsonRequest.Object);
 
             var mockService = new Mock<IRandomOrgService>();
-            mockService.Setup(m => m.SendRequestAsync(It.IsAny<JObject>())).ReturnsAsync(input);
+            mockService.Setup(m => m.SendRequestAsync(mockJsonRequest.Object)).ReturnsAsync(mockJsonResponse.Object);
 
-            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object);
-            var actual = await target.GenerateAsync(mockRequest.Object);
+            var mockResponseParser = new Mock<IParser>();
+            mockResponseParser.Setup(m => m.Parse(mockJsonRequest.Object)).Returns(mockResponse.Object);
 
-            actual.Should().Equal(expected);
+            // Act
+            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParser.Object);
+            var actual = await target.GenerateAsync(mockParameters.Object);
+
+            // Assert
+            actual.Should().Equal(mockResponse.Object);
+
         }
     }
 }

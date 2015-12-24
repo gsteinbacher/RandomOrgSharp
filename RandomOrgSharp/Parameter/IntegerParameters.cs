@@ -18,7 +18,7 @@ namespace Obacher.RandomOrgSharp.Parameter
         /// <summary>
         /// Create an instance of <see cref="IntegerParameters"/>
         /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
+        /// <param name="numberOfItemsToReturn">How many random integer values you need. Must be between 1 and 10,000.</param>
         /// <param name="minimumValue">The lower boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000 and 1,000,000,000.</param>
         /// <param name="maximumValue">The upper boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000a and 1,000,000,000.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>

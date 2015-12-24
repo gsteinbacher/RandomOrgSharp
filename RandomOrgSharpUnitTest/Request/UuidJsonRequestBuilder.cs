@@ -9,7 +9,7 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.RequestParameters
 {
     [TestClass]
-    public class UUIDRequestParametersTest
+    public class UuidJsonRequestBuilderTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()
@@ -19,7 +19,7 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
             // Act
-            new UuidJsonParameterBuilder(numberOfItems);
+            new UuidJsonRequestBuilder();
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -28,14 +28,14 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             const int numberOfItems = 10000;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new UuidJsonParameterBuilder(numberOfItems);
+            new UuidJsonRequestBuilder(numberOfItems);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenApiIsNull_ExpectException()
         {
             SettingsManager.Instance = null;
-            new IntegerRequestParameters(1, 1, 1);
+            new UuidJsonRequestBuilder(1, 1, 1);
         }
 
 
@@ -61,8 +61,8 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             RandomNumberGenerator.Instance = random.Object;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            var target = new UuidJsonParameterBuilder(numberOfItems);
-            var actual = target.CreateJsonRequest();
+            var target = new UuidJsonRequestBuilder(numberOfItems);
+            var actual = target.Create(parameters);
 
             actual.Should().Equal(expected);
         }

@@ -3,7 +3,7 @@ using Obacher.RandomOrgSharp.Parameter;
 
 namespace Obacher.RandomOrgSharp.Request
 {
-    public interface IRequestBuilder
+    public interface IJsonRequestBuilder
     {
         JObject Create(IParameters parameters);
         bool CanHandle(IParameters parameters);

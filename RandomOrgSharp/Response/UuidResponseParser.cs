@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Parameter;
 
 namespace Obacher.RandomOrgSharp.Response
 {
     /// <summary>
-    /// Class which parses the responses from Blob, Decimal, Guassian, Integer and String method calls.  
-    /// All these methods return the same information except for the type so I use the same method for all of them.
+    /// Class which parses the responses from the UUID method call.  The UUID method call needs to have its own parser
+    /// because the data returned in the response needs to be specially converted to a GUID type.
     /// </summary>
     /// <typeparam name="T">Type of value being returned in the list of random values</typeparam>
-    public class BasicMethodResponseParser<T> : IParser
+    public class UuidResponseParser
     {
         /// <summary>
         /// Parse the JSON response
@@ -21,7 +22,7 @@ namespace Obacher.RandomOrgSharp.Response
         {
             var version = JsonHelper.JsonToString(json.GetValue(RandomOrgConstants.JSON_RPC_PARAMETER_NAME));
             var completionTime = DateTime.MinValue;
-            IEnumerable<T> data = null;
+            IEnumerable<Guid> data = null;
             var bitsUsed = 0;
             var bitsLeft = 0;
             var requestsLeft = 0;
@@ -35,7 +36,7 @@ namespace Obacher.RandomOrgSharp.Response
                 {
                     var dataArray = random.GetValue(RandomOrgConstants.JSON_DATA_PARAMETER_NAME) as JArray;
                     if (dataArray != null && dataArray.HasValues)
-                        data = dataArray.Values<T>();
+                        data = Array.ConvertAll(dataArray.Values<string>().ToArray(), guid => new Guid(guid));
 
                     completionTime = JsonHelper.JsonToDateTime(random.GetValue(RandomOrgConstants.JSON_COMPLETION_TIME_PARAMETER_NAME));
                 }
@@ -47,7 +48,7 @@ namespace Obacher.RandomOrgSharp.Response
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            return new BasicMethodResponse<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
+            return new BasicMethodResponse<Guid>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
         }
 
         /// <summary>
@@ -57,12 +58,7 @@ namespace Obacher.RandomOrgSharp.Response
         /// <returns>True if this class handles the method call</returns>
         public bool CanHandle(IParameters parameters)
         {
-            return
-                parameters.MethodType == MethodType.Blob ||
-                parameters.MethodType == MethodType.Decimal ||
-                parameters.MethodType == MethodType.Gaussian ||
-                parameters.MethodType == MethodType.Integer ||
-                parameters.MethodType == MethodType.String;
+            return parameters.MethodType == MethodType.Uuid;
         }
     }
 }

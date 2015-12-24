@@ -1,41 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Obacher.RandomOrgSharp.Parameter
+﻿namespace Obacher.RandomOrgSharp.Parameter
 {
+    /// <summary>
+    /// Class which contains the parameters used when requesting random blob values from random.org
+    /// </summary>
     public class UsageParameters : CommonParameters
     {
-        private const int MAX_ITEMS_ALLOWED = 1000;
-
-        public int NumberOfItemsToReturn { get; private set; }
-
         /// <summary>
-        /// Create an instance of <see cref="UuidParameters"/>
+        /// Create an instance of <see cref="UsageParameters"/>.  There are no specific parameters needed for the Usage method
+        /// so only the MethodType is set.
         /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 1000.</param>
-        /// <returns>Instance of <see cref="UuidParameters"/></returns>
-        public static UsageParameters Set(int numberOfItemsToReturn)
+        /// <returns>Instance of <see cref="UsageParameters"/> with specified parameters set properly.</returns>
+        public static UsageParameters Set()
         {
             var parameters = new UsageParameters();
-            parameters.SetParameters(numberOfItemsToReturn);
+            parameters.SetParameters();
             return parameters;
         }
 
         /// <summary>
         /// Validate and set the parameters properties
         /// </summary>
-        private void SetParameters(int numberOfItemsToReturn)
+        private void SetParameters()
         {
-            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > MAX_ITEMS_ALLOWED)
-                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MAX_ITEMS_ALLOWED));
-
-            NumberOfItemsToReturn = numberOfItemsToReturn;
-
             MethodType = MethodType.Usage;
         }
-
     }
 }

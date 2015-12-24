@@ -1,14 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
+using Should.Fluent;
 
-namespace RandomOrgSharp.UnitTest.RequestBuilder
+namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
-    public class BlobJsonParameterBuilderTest
+    public class BlobParametersTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()
@@ -19,78 +18,72 @@ namespace RandomOrgSharp.UnitTest.RequestBuilder
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
             // Act
-            new BlobRequestParameters(numberOfItems, size);
+            BlobParameters.Set(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnGreaterThenMaximumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 101;
             const int size = 1;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new BlobRequestParameters(numberOfItems, size);
+            // Act
+            BlobParameters.Set(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenSizeLessThenMinimumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int size = int.MinValue;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new BlobRequestParameters(numberOfItems, size);
+            // Act
+            BlobParameters.Set(numberOfItems, size);
         }
 
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenSizeGreaterThenMaximumllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int size = int.MaxValue;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            new BlobRequestParameters(numberOfItems, size);
+            // Act
+            BlobParameters.Set(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenApiIsNull_ExpectException()
         {
+            // Arrange
             SettingsManager.Instance = null;
-            new BlobRequestParameters(1, 1);
+
+            // Act
+            BlobParameters.Set(1, 1);
         }
 
-
         [TestMethod]
-        public void WhenParametersCorrect_ExpectJsonReturned()
+        public void WhenAllValuesValid_ExpectValuesSet()
         {
+            // Arrange
             const int numberOfItems = 1;
-            const int size = 8;
-            BlobFormat format = BlobFormat.Base64;
-            const int id = 999;
-
-            JObject expected =
-                new JObject(
-                    new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, RandomOrgConstants.BLOB_METHOD),
-                    new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME,
-                        new JObject(
-                            new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                            new JProperty(RandomOrgConstants.JSON_SIZE_PARAMETER_NAME, size),
-                            new JProperty(RandomOrgConstants.JSON_FORMAT_PARAMETER_NAME, format.ToString().ToLowerInvariant()),
-                           new JProperty(RandomOrgConstants.APIKEY_KEY, ConfigMocks.MOCK_API_KEY))),
-                        new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, 999));
-
-
-            var random = new Mock<IRandom>();
-            random.Setup(m => m.Next()).Returns(id);
-            RandomNumberGenerator.Instance = random.Object;
+            const int size = 1000;
+            const BlobFormat blobFormat = BlobFormat.Hex;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
 
-            var target = new BlobRequestParameters(numberOfItems, size, format);
-            var actual = target.CreateJsonRequest();
+            // Act
+            var result = BlobParameters.Set(numberOfItems, size, blobFormat);
 
-            actual.Should().Equal(expected);
+            // Assert
+            result.NumberOfItemsToReturn.Should().Equal(numberOfItems);
+            result.Size.Should().Equal(size);
+            result.Format.Should().Equal(blobFormat);
         }
     }
 }

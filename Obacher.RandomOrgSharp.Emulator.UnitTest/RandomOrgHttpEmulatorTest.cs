@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace Obacher.RandomOrgSharp.Emulator.UnitTest
@@ -12,23 +15,21 @@ namespace Obacher.RandomOrgSharp.Emulator.UnitTest
         public void SendRequest_WhenIntegerCalledWithBase10_ExpectBase10IntegerValuesReturned()
         {
             // Arrange
-            int numberOfItemsReturned = 100;
-            int minValue = 1;
-            int maxValue = 1000000;
-            RandomOrgServiceEmulator emulator = new RandomOrgServiceEmulator();
-            MethodCallManager callManager = new MethodCallManager();
+            const int numberOfItemsReturned = 100;
+            const int minValue = 1;
+            const int maxValue = 1000000;
+
+            var basicMethodResponseMock = new Mock<IBasicMethodResponse<int>>();
+            var basicMethodMock = new Mock<IBasicMethod<int>>();
+            basicMethodMock.Setup(m => m.Generate(It.IsAny<IntegerParameters>())).Returns(basicMethodResponseMock.Object);
 
             // Act
-            IntegerRequestParameters parameters = new IntegerRequestParameters(numberOfItemsReturned, minValue, maxValue);
-            IntegerBasicMethod target = new IntegerBasicMethod(emulator, callManager);
-            var response = target.Execute(parameters);
+            var target = new IntegerBasicMethod(basicMethodMock.Object);
+            var response = target.GenerateIntegers(numberOfItemsReturned, minValue, maxValue);
 
             // Assert
             response.Should().Not.Be.Null();
-            response.Count().Should().Equal(numberOfItemsReturned);
-
-            foreach (int value in response)
-                value.Should().Be.InRange(minValue, maxValue);
+            response.Should().Equal(basicMethodResponseMock.Object);
         }
     }
 }
