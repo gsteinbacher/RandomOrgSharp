@@ -19,7 +19,12 @@ namespace Obacher.RandomOrgSharp.Parameter
         public int Size { get; private set; }
         public BlobFormat Format { get; private set; }
 
-        private BlobParameters() { }
+        /// <summary>
+        /// Constructor used to pass information to the <see cref="CommonParameters"/> base class
+        /// </summary>
+        /// <param name="method">Method to call at random.org</param>
+        /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>
+        private BlobParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
         /// Create an instance of <see cref="BlobParameters"/>
@@ -27,10 +32,11 @@ namespace Obacher.RandomOrgSharp.Parameter
         /// <param name="numberOfItemsToReturn">How many random blob values you need. Must be between 1 and 100.</param>
         /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
         /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
+        /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>
         /// <returns>Instance of <see cref="BlobParameters"/></returns>
-        public static BlobParameters Set(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
+        public static BlobParameters Create(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64, bool verifyOriginator = false)
         {
-            var parameters = new BlobParameters();
+            var parameters = new BlobParameters(MethodType.Blob, verifyOriginator);
             parameters.SetParameters(numberOfItemsToReturn, size, format);
             return parameters;
         }
@@ -52,8 +58,6 @@ namespace Obacher.RandomOrgSharp.Parameter
             NumberOfItemsToReturn = numberOfItemsToReturn;
             Size = size;
             Format = format;
-
-            MethodType = MethodType.Blob;
         }
     }
 }

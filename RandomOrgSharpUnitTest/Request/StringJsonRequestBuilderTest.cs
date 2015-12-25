@@ -33,7 +33,7 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             // Act
             using (new MockCommonParameters(id))
             {
-                var parameters = StringParameters.Set(numberOfItems, length, charactersAllowed, allowDuplicates);
+                var parameters = StringParameters.Create(numberOfItems, length, charactersAllowed, allowDuplicates);
                 var target = new StringJsonRequestBuilder();
                 var actual = target.Create(parameters);
 

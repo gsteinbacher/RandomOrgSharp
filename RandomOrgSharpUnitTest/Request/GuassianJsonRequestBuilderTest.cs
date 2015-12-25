@@ -34,7 +34,7 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             using (new MockCommonParameters(id))
             {
                 // Act
-                var parameters = GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                var parameters = GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
                 var target = new GuassianJsonRequestBuilder();
                 var actual = target.Create(parameters);
 

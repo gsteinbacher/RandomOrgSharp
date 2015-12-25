@@ -29,7 +29,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of UUID values</returns>
         public IBasicMethodResponse<Guid> GenerateUuids(int numberOfItemsToReturn)
         {
-            var parameters = UuidParameters.Set(numberOfItemsToReturn);
+            var parameters = UuidParameters.Create(numberOfItemsToReturn);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -42,7 +42,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of UUID values</returns>
         public async Task<IBasicMethodResponse<Guid>> GenerateUuidsAsync(int numberOfItemsToReturn)
         {
-            var parameters = UuidParameters.Set(numberOfItemsToReturn);
+            var parameters = UuidParameters.Create(numberOfItemsToReturn);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;

@@ -27,7 +27,7 @@ namespace RandomOrgSharp.UnitTest.Request
             // Act
             using (new MockCommonParameters(id))
             {
-                var parameters = UuidParameters.Set(numberOfItems);
+                var parameters = UuidParameters.Create(numberOfItems);
                 var target = new UuidJsonRequestBuilder();
                 var actual = target.Create(parameters);
 

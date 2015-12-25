@@ -31,7 +31,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of integer values</returns>
         public IBasicMethodResponse<int> GenerateIntegers(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
         {
-            var parameters = IntegerParameters.Set(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
+            var parameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -47,7 +47,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of integer values</returns>
         public async Task<IBasicMethodResponse<int>> GenerateIntegersAsync(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
         {
-            var parameters = IntegerParameters.Set(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
+            var parameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;

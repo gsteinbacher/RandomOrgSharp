@@ -7,7 +7,7 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
-    public class IntegerRequestParametersTest
+    public class IntegerParametersTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()
@@ -19,7 +19,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
+                IntegerParameters.Create(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
+                IntegerParameters.Create(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -45,7 +45,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
+                IntegerParameters.Create(numberOfItems, minimumValue, maximumValue);
         }
 
 
@@ -59,7 +59,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
+                IntegerParameters.Create(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -72,7 +72,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
+                IntegerParameters.Create(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -85,7 +85,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
+                IntegerParameters.Create(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                result = IntegerParameters.Set(numberOfItems, minimumValue, maximumValue, allowDuplicates);
+                result = IntegerParameters.Create(numberOfItems, minimumValue, maximumValue, allowDuplicates);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

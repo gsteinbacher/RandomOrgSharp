@@ -30,7 +30,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of decimal values</returns>
         public IBasicMethodResponse<decimal> GenerateDecimalFractions(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = true)
         {
-            var parameters = DecimalParameters.Set(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
+            var parameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -45,7 +45,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of decimal values</returns>
         public async Task<IBasicMethodResponse<decimal>> GenerateDecimalFractionsAsync(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = true)
         {
-            var parameters = DecimalParameters.Set(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
+            var parameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;

@@ -26,12 +26,12 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random string values you need. Must be between 1 and 10,000.</param>
         /// <param name="length">The length of each string. Must be within the [1,20] range. All strings will be of the same length</param>
-        /// <param name="charactersAllowed">Set of common character sets that are allowed to occur in the random strings</param>
+        /// <param name="charactersAllowed">Create of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of string values</returns>
         public IBasicMethodResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Set(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -47,7 +47,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of string values</returns>
         public IBasicMethodResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Set(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -58,12 +58,12 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random string values you need. Must be between 1 and 10,000.</param>
         /// <param name="length">The length of each string. Must be within the [1,20] range. All strings will be of the same length</param>
-        /// <param name="charactersAllowed">Set of common character sets that are allowed to occur in the random strings</param>
+        /// <param name="charactersAllowed">Create of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of guassian values</returns>
         public async Task<IBasicMethodResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Set(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;
@@ -79,7 +79,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of guassian values</returns>
         public async Task<IBasicMethodResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Set(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;

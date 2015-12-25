@@ -30,7 +30,7 @@ namespace RandomOrgSharp.UnitTest.Request
 
             using (new MockCommonParameters(id))
             {
-                var parameters = BlobParameters.Set(numberOfItems, size, format);
+                var parameters = BlobParameters.Create(numberOfItems, size, format);
                 var target = new BlobJsonRequestBuilder();
                 var actual = target.Create(parameters);
 

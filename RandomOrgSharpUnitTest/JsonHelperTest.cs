@@ -181,5 +181,66 @@ namespace RandomOrgSharp.UnitTest
             actual.Should().Equal(expected);
         }
 
+        [TestMethod]
+        public void JsonToBoolean_WhenUnknownNamePassed_ExpectFalseReturned()
+        {
+            // Arrange
+            const bool expected = false;
+            var json = JObject.Parse(@"{ test: 'true'}");
+            var token = json.GetValue("unknownname");
+
+            // Act
+            var actual = JsonHelper.JsonToBoolean(token);
+
+            // Arrange
+            actual.Should().Equal(expected);
+        }
+
+        [TestMethod]
+        public void JsonToBoolean_WhenUnknownNameAndDefaultValuePassed_ExpectDefaultValueReturned()
+        {
+            // Arrange
+            const bool defaultValue = true;
+            const bool expected = defaultValue;
+            var json = JObject.Parse(@"{ test: 1234}");
+            var token = json.GetValue("unknownname");
+
+            // Act
+            var actual = JsonHelper.JsonToBoolean(token, defaultValue);
+
+            // Arrange
+            actual.Should().Equal(expected);
+        }
+
+        [TestMethod]
+        public void JsonToBoolean_WhenKnownNamePassed_ExpectKnownValueReturned()
+        {
+            // Arrange
+            const bool expected = true;
+            var json = JObject.Parse(@"{ test: '" + expected + "'}");
+            var token = json.GetValue("test");
+
+            // Act
+            var actual = JsonHelper.JsonToBoolean(token);
+
+            // Arrange
+            actual.Should().Equal(expected);
+        }
+
+        [TestMethod]
+        public void JsonToBoolean_WhenValueNotBooleanTypePassed_ExpectDefaultValueReturned()
+        {
+            // Arrange
+            const bool defaultValue = true;
+            const bool expected = defaultValue;
+            var json = JObject.Parse(@"{ test: 'notboolean'}");
+            var token = json.GetValue("test");
+
+            // Act
+            bool actual = JsonHelper.JsonToBoolean(token, defaultValue);
+
+            // Arrange
+            actual.Should().Equal(expected);
+        }
     }
 }

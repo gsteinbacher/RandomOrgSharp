@@ -9,7 +9,7 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
-    public class GuassianRequestParametersTest
+    public class GuassianParametersTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()
@@ -22,7 +22,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -36,7 +36,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -50,7 +50,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
 
@@ -65,7 +65,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -79,7 +79,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -93,7 +93,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -107,7 +107,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -121,7 +121,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                result = GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
+                result = GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

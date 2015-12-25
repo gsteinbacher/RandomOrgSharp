@@ -29,7 +29,7 @@ namespace RandomOrgSharp.UnitTest.Request
             using (new MockCommonParameters(id))
             {
                 // Act
-                var parameters = DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                var parameters = DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
                 var target = new DecimalJsonRequestBuilder();
                 var actual = target.Create(parameters);
 

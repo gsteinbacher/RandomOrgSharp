@@ -18,7 +18,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                BlobParameters.Set(numberOfItems, size);
+                BlobParameters.Create(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -30,7 +30,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                BlobParameters.Set(numberOfItems, size);
+                BlobParameters.Create(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -42,9 +42,8 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                BlobParameters.Set(numberOfItems, size);
+                BlobParameters.Create(numberOfItems, size);
         }
-
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenSizeGreaterThenMaximumllowed_ExpectException()
@@ -55,7 +54,20 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                BlobParameters.Set(numberOfItems, size);
+                BlobParameters.Create(numberOfItems, size);
+        }
+
+
+        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
+        public void WhenSizeNotDivisibleBy8_ExpectException()
+        {
+            // Arrange
+            const int numberOfItems = 1;
+            const int size = 20;
+            using (new MockCommonParameters())
+
+                // Act
+                BlobParameters.Create(numberOfItems, size);
         }
 
         [TestMethod]
@@ -69,7 +81,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
 
             using (new MockCommonParameters())
                 // Act
-                result = BlobParameters.Set(numberOfItems, size, blobFormat);
+                result = BlobParameters.Create(numberOfItems, size, blobFormat);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

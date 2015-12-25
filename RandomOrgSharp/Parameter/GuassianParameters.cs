@@ -1,7 +1,7 @@
 ﻿namespace Obacher.RandomOrgSharp.Parameter
 {
     /// <summary>
-    /// Class which contains the parameters used when requesting random blob values from random.org
+    /// Class which contains the parameters used when requesting random guassian values from random.org
     /// </summary>
     public sealed class GuassianParameters : CommonParameters
     {
@@ -13,16 +13,24 @@
         public int SignificantDigits { get; private set; }
 
         /// <summary>
+        /// Constructor used to pass information to the <see cref="CommonParameters"/> base class
+        /// </summary>
+        /// <param name="method">Method to call at random.org</param>
+        /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>
+        private GuassianParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
+
+        /// <summary>
         /// Create an instance of <see cref="GuassianParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random guassian values you need. Must be between 1 and 10,000.</param>
         /// <param name="mean">The distribution's mean. Must be between -1,000,000 and 1,000,000.</param>
         /// <param name="standardDeviation">The distribution's standard deviation. Must be between -1,000,000 and 1,000,000</param>
         /// <param name="significantDigits">The number of significant digits to use. Must be between 2 and 20.</param>
+        /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>
         /// <returns>Instance of <see cref="GuassianParameters"/></returns>
-        public static GuassianParameters Set(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
+        public static GuassianParameters Create(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits, bool verifyOriginator = false)
         {
-            var parameters = new GuassianParameters();
+            var parameters = new GuassianParameters(MethodType.Gaussian, verifyOriginator);
             parameters.SetParameters(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
             return parameters;
         }
@@ -48,8 +56,6 @@
             Mean = mean;
             StandardDeviation = standardDeviation;
             SignificantDigits = significantDigits;
-
-            MethodType = MethodType.Gaussian;
         }
     }
 }

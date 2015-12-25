@@ -4,53 +4,63 @@ using Newtonsoft.Json.Linq;
 namespace Obacher.RandomOrgSharp.Parameter
 {
     /// <summary>
-    /// Class which contains the parameters used when requesting random blob values from random.org
+    /// Class which contains the parameters that are used by all method calls to random.org
     /// </summary>
     public class CommonParameters : IParameters
     {
         public string ApiKey { get; }
-
         public int Id { get; }
+        public MethodType MethodType { get; }
+        public bool VerifyOriginator { get; }
 
-        public MethodType MethodType { get; protected set; }
-        public bool VerifyOriginator { get; set; }
-
-        public CommonParameters()
+        public CommonParameters(MethodType method, bool verifyOriginator = false)
         {
-            Id = RandomNumberGenerator.Instance.Next();
-
             ApiKey = SettingsManager.Instance.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY);
             if (ApiKey == null)
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.APIKEY_REQUIRED));
+
+            Id = RandomNumberGenerator.Instance.Next();
+
+            MethodType = method;
+            VerifyOriginator = verifyOriginator;
         }
 
         public string GetMethodName()
         {
+            string methodName = null;
+
             switch (MethodType)
             {
                 case MethodType.Integer:
-                    return VerifyOriginator ? RandomOrgConstants.INTEGER_SIGNED_METHOD : RandomOrgConstants.INTEGER_METHOD;
+                    methodName = VerifyOriginator ? RandomOrgConstants.INTEGER_SIGNED_METHOD : RandomOrgConstants.INTEGER_METHOD;
+                    break;
 
                 case MethodType.Decimal:
-                    return VerifyOriginator ? RandomOrgConstants.DECIMAL_SIGNED_METHOD : RandomOrgConstants.DECIMAL_METHOD;
+                    methodName = VerifyOriginator ? RandomOrgConstants.DECIMAL_SIGNED_METHOD : RandomOrgConstants.DECIMAL_METHOD;
+                    break;
 
                 case MethodType.Gaussian:
-                    return VerifyOriginator ? RandomOrgConstants.GAUSSIAN_SIGNED_METHOD : RandomOrgConstants.GAUSSIAN_METHOD;
+                    methodName = VerifyOriginator ? RandomOrgConstants.GAUSSIAN_SIGNED_METHOD : RandomOrgConstants.GAUSSIAN_METHOD;
+                    break;
 
                 case MethodType.String:
-                    return VerifyOriginator ? RandomOrgConstants.STRING_SIGNED_METHOD : RandomOrgConstants.STRING_METHOD;
+                    methodName = VerifyOriginator ? RandomOrgConstants.STRING_SIGNED_METHOD : RandomOrgConstants.STRING_METHOD;
+                    break;
 
                 case MethodType.Uuid:
-                    return VerifyOriginator ? RandomOrgConstants.UUID_SIGNED_METHOD : RandomOrgConstants.UUID_METHOD;
+                    methodName = VerifyOriginator ? RandomOrgConstants.UUID_SIGNED_METHOD : RandomOrgConstants.UUID_METHOD;
+                    break;
 
                 case MethodType.Blob:
-                    return VerifyOriginator ? RandomOrgConstants.BLOB_SIGNED_METHOD : RandomOrgConstants.BLOB_METHOD;
+                    methodName = VerifyOriginator ? RandomOrgConstants.BLOB_SIGNED_METHOD : RandomOrgConstants.BLOB_METHOD;
+                    break;
 
                 case MethodType.Usage:
-                    return RandomOrgConstants.USAGE_METHOD;
+                    methodName = RandomOrgConstants.USAGE_METHOD;
+                    break;
             }
 
-            throw new ArgumentOutOfRangeException();
+            return methodName;
         }
     }
 }

@@ -5,6 +5,6 @@
         string ApiKey { get; }
         int Id { get; }
         MethodType MethodType { get; }
-        bool VerifyOriginator { get; set; }
+        bool VerifyOriginator { get; }
     }
 }

@@ -7,7 +7,7 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
-    public class UUIDRequestParametersTest
+    public class UuidParametersTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()
@@ -17,7 +17,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                UuidParameters.Set(numberOfItems);
+                UuidParameters.Create(numberOfItems);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -27,7 +27,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                UuidParameters.Set(numberOfItems);
+                UuidParameters.Create(numberOfItems);
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                result = UuidParameters.Set(numberOfItems);
+                result = UuidParameters.Create(numberOfItems);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

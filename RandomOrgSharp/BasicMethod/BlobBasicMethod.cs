@@ -30,7 +30,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of blob values</returns>
         public IBasicMethodResponse<string> GenerateBlobs(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
         {
-            var parameters = BlobParameters.Set(numberOfItemsToReturn, size, format);
+            var parameters = BlobParameters.Create(numberOfItemsToReturn, size, format);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -45,7 +45,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of blob values</returns>
         public async Task<IBasicMethodResponse<string>> GenerateBlobsAsync(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
         {
-            var parameters = BlobParameters.Set(numberOfItemsToReturn, size, format);
+            var parameters = BlobParameters.Create(numberOfItemsToReturn, size, format);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;

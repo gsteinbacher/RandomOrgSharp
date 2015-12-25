@@ -3,7 +3,7 @@
 namespace Obacher.RandomOrgSharp.Parameter
 {
     /// <summary>
-    /// Class which contains the parameters used when requesting random blob values from random.org
+    /// Class which contains the parameters used when requesting random integer values from random.org
     /// </summary>
     public sealed class IntegerParameters : CommonParameters
     {
@@ -15,16 +15,24 @@ namespace Obacher.RandomOrgSharp.Parameter
         public bool AllowDuplicates { get; private set; }
 
         /// <summary>
+        /// Constructor used to pass information to the <see cref="CommonParameters"/> base class
+        /// </summary>
+        /// <param name="method">Method to call at random.org</param>
+        /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>
+        private IntegerParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
+
+        /// <summary>
         /// Create an instance of <see cref="IntegerParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random integer values you need. Must be between 1 and 10,000.</param>
         /// <param name="minimumValue">The lower boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000 and 1,000,000,000.</param>
         /// <param name="maximumValue">The upper boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000a and 1,000,000,000.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
+        /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>
         /// <returns>Instance of <see cref="IntegerParameters"/></returns>
-        public static IntegerParameters Set(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
+        public static IntegerParameters Create(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true, bool verifyOriginator = false)
         {
-            var parameters = new IntegerParameters();
+            var parameters = new IntegerParameters(MethodType.Integer, verifyOriginator);
             parameters.SetParameters(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
             return parameters;
         }
@@ -47,8 +55,6 @@ namespace Obacher.RandomOrgSharp.Parameter
             MinimumValue = minimumValue;
             MaximumValue = maximumValue;
             AllowDuplicates = allowDuplicates;
-
-            MethodType = MethodType.Integer;
         }
     }
 }

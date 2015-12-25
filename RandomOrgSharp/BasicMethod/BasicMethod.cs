@@ -16,7 +16,6 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         private readonly IMethodCallManager _methodCallManager;
         private readonly IJsonRequestBuilder _requestBuilder;
         private readonly IJsonResponseParserFactory _responseParserFactory;
-        private bool _verifyOriginator;
 
         public BasicMethod(IRandomOrgService service = null, IMethodCallManager methodCallManager = null, IJsonRequestBuilder requestBuilder = null, IJsonResponseParserFactory responseParserFactory = null)
         {
@@ -32,24 +31,16 @@ namespace Obacher.RandomOrgSharp.BasicMethod
                 );
         }
 
-        public BasicMethod<T> VerifyOriginator()
-        {
-            _verifyOriginator = true;
-            return this;
-        }
-
         public IBasicMethodResponse<T> Generate(IParameters parameters)
         {
             _methodCallManager.CanSendRequest();
 
-            parameters.VerifyOriginator = _verifyOriginator;
             JObject jsonRequest = _requestBuilder.Create(parameters);
 
             _methodCallManager.Delay();
             JObject jsonResponse = _service.SendRequest(jsonRequest);
 
             IBasicMethodResponse<T> response = HandleResponse(jsonResponse, parameters);
-            _verifyOriginator = false;
 
             return response;
         }
@@ -58,14 +49,12 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             _methodCallManager.CanSendRequest();
 
-            parameters.VerifyOriginator = _verifyOriginator;
             JObject jsonRequest = _requestBuilder.Create(parameters);
 
             _methodCallManager.Delay();
             JObject jsonResponse = await _service.SendRequestAsync(jsonRequest);
 
             IBasicMethodResponse<T> response = HandleResponse(jsonResponse, parameters);
-            _verifyOriginator = false;
 
             return response;
         }

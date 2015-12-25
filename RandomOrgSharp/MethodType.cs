@@ -8,14 +8,6 @@
         String,
         Uuid,
         Blob,
-        Usage,
-        VerifySignature
+        Usage
     }
-    //SignedInteger,
-    //    SignedDecimal,
-    //    SignedGaussian,
-    //    SignedString,
-    //    SignedUuid,
-    //    SignedBlob,
-
 }

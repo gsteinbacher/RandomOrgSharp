@@ -15,7 +15,7 @@ namespace Obacher.RandomOrgSharp.Request
             var jsonParameters = new JObject(
                 new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, stringParameters.NumberOfItemsToReturn),
                 new JProperty(RandomOrgConstants.JSON_LENGTH_PARAMETER_NAME, stringParameters.Length),
-                new JProperty(RandomOrgConstants.JSON_CHARACTERS_ALLOWED_PARAMETER_NAME, stringParameters.Allowed),
+                new JProperty(RandomOrgConstants.JSON_CHARACTERS_ALLOWED_PARAMETER_NAME, stringParameters.CharactersAllowed),
                 new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, stringParameters.AllowDuplicates)
                 );
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Fakes;
 using System.Globalization;
 using Microsoft.QualityTools.Testing.Fakes;
@@ -306,14 +307,13 @@ namespace Obacher.Framework.Common.UnitTest.SystemWrapper
             actual.Should().Equal(expected.Month);
         }
 
-        [TestMethod]
+        [TestMethod, ExcludeFromCodeCoverage, Ignore]
         public void WhenNowCalled_ExpectFakedDateReturned()
         {
             // Arrange
-            DateTime expected = DateTime.Now;
-
             using (ShimsContext.Create())
             {
+                DateTime expected = DateTime.Now;
                 ShimDateTime.NowGet = () => expected;
 
                 // Act
@@ -367,7 +367,7 @@ namespace Obacher.Framework.Common.UnitTest.SystemWrapper
             actual.Should().Equal(expected.TimeOfDay);
         }
 
-        [TestMethod]
+        [TestMethod, ExcludeFromCodeCoverage, Ignore]
         public void WhenTodayCalled_ExpectFakedTodayReturned()
         {
             // Arrange
@@ -386,7 +386,7 @@ namespace Obacher.Framework.Common.UnitTest.SystemWrapper
             }
         }
 
-        [TestMethod]
+        [TestMethod, ExcludeFromCodeCoverage, Ignore]
         public void WhenUtcNowCalled_ExpectFakedUtcNowReturned()
         {
             // Arrange

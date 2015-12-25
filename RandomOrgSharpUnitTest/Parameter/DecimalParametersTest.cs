@@ -9,7 +9,7 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
-    public class DecimalRequestParametersTest
+    public class DecimalParametersTest
     {
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnLessThanMinimumAllowed_ExpectException()
@@ -20,7 +20,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -44,7 +44,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
 
@@ -57,7 +57,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace RandomOrgSharp.UnitTest.Parameter
             using (new MockCommonParameters())
 
                 // Act
-                result = DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces, allowDuplicates);
+                result = DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces, allowDuplicates);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

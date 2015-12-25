@@ -31,7 +31,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of guassian values</returns>
         public IBasicMethodResponse<decimal> GenerateGuassians(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
         {
-            var parameters = GuassianParameters.Set(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
+            var parameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -47,7 +47,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <returns>All information returned from random service, include the list of guassian values</returns>
         public async Task<IBasicMethodResponse<decimal>> GenerateGuassiansAsync(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
         {
-            var parameters = GuassianParameters.Set(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
+            var parameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;

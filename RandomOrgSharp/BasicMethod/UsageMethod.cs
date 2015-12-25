@@ -36,7 +36,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             _methodCallManager.CanSendRequest();
 
             // Usage method has no specific parameters
-            var parameters = new UsageParameters();
+            var parameters = UsageParameters.Create();
             JObject jsonRequest = _requestBuilder.Create(parameters);
 
             _methodCallManager.Delay();
@@ -57,7 +57,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
             _methodCallManager.CanSendRequest();
 
             // Usage method has no specific parameters
-            var parameters = new UsageParameters();
+            var parameters = UsageParameters.Create();
             JObject jsonRequest = _requestBuilder.Create(parameters);
 
             _methodCallManager.Delay();

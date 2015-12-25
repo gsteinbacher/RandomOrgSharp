@@ -34,7 +34,7 @@ namespace RandomOrgSharp.UnitTest.Request
             // Act
             using (new MockCommonParameters(id))
             {
-                var parameters = IntegerParameters.Set(numberOfItems, minimumValue, maximumValue, allowDuplicates);
+                var parameters = IntegerParameters.Create(numberOfItems, minimumValue, maximumValue, allowDuplicates);
                 var target = new IntegerJsonRequestBuilder();
                 var actual = target.Create(parameters);
 
