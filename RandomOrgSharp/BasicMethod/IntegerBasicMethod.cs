@@ -18,10 +18,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="basicMethod">BasicMethod class to use to retrieve blob information.  Default is <see cref="BasicMethod{T}"/></param>
         public IntegerBasicMethod(IBasicMethod<int> basicMethod = null)
         {
-            if (basicMethod == null)
-                _basicMethod = new BasicMethod<int>(new RandomOrgApiService(), new MethodCallManager(), new JsonRequestBuilder(), new BasicMethodResponseParser<int>());
-
-            _basicMethod = basicMethod;
+            _basicMethod = basicMethod ?? new BasicMethod<int>();
         }
 
         /// <summary>
@@ -31,12 +28,10 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="minimumValue">The lower boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000 and 1,000,000,000.</param>
         /// <param name="maximumValue">The upper boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000a and 1,000,000,000.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
-        /// <param name="baseNumber">Specifies the base that will be used to display the numbers, default to Base 10</param>
         /// <returns>All information returned from random service, include the list of integer values</returns>
-        public IBasicMethodResponse<int> GenerateIntegers(int numberOfItemsToReturn, int minimumValue, int maximumValue,
-            bool allowDuplicates = true, BaseNumberOptions baseNumber = BaseNumberOptions.Ten)
+        public IBasicMethodResponse<int> GenerateIntegers(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
         {
-            var parameters = IntegerParameters.Set(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates, baseNumber);
+            var parameters = IntegerParameters.Set(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
 
             var response = _basicMethod.Generate(parameters);
             return response;
@@ -49,12 +44,10 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="minimumValue">The lower boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000 and 1,000,000,000.</param>
         /// <param name="maximumValue">The upper boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000a and 1,000,000,000.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
-        /// <param name="baseNumber">Specifies the base that will be used to display the numbers, default to Base 10</param>
         /// <returns>All information returned from random service, include the list of integer values</returns>
-        public async Task<IBasicMethodResponse<int>> GenerateIntegersAsync(int numberOfItemsToReturn, int minimumValue, int maximumValue,
-            bool allowDuplicates = true, BaseNumberOptions baseNumber = BaseNumberOptions.Ten)
+        public async Task<IBasicMethodResponse<int>> GenerateIntegersAsync(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
         {
-            var parameters = IntegerParameters.Set(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates, baseNumber);
+            var parameters = IntegerParameters.Set(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
 
             var response = await _basicMethod.GenerateAsync(parameters);
             return response;

@@ -18,10 +18,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="basicMethod">BasicMethod class to use to retrieve blob information.  Default is <see cref="BasicMethod{T}"/></param>
         public BlobBasicMethod(IBasicMethod<string> basicMethod = null)
         {
-            if (basicMethod == null)
-                _basicMethod = new BasicMethod<string>(new RandomOrgApiService(), new MethodCallManager(), new JsonRequestBuilder(), new BasicMethodResponseParser<string>());
-
-            _basicMethod = basicMethod;
+            _basicMethod = basicMethod ?? new BasicMethod<string>();
         }
 
         /// <summary>
@@ -31,7 +28,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
         /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
         /// <returns>All information returned from random service, include the list of blob values</returns>
-        public IBasicMethodResponse<string> GenerateBlobs(int numberOfItemsToReturn, int size, BlobFormat format)
+        public IBasicMethodResponse<string> GenerateBlobs(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
         {
             var parameters = BlobParameters.Set(numberOfItemsToReturn, size, format);
 
@@ -46,7 +43,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
         /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
         /// <returns>All information returned from random service, include the list of blob values</returns>
-        public async Task<IBasicMethodResponse<string>> GenerateBlobsAsync(int numberOfItemsToReturn, int size, BlobFormat format)
+        public async Task<IBasicMethodResponse<string>> GenerateBlobsAsync(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
         {
             var parameters = BlobParameters.Set(numberOfItemsToReturn, size, format);
 

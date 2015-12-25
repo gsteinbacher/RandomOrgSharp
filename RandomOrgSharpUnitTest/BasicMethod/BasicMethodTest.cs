@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
@@ -52,10 +47,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockService.Setup(m => m.SendRequest(mockJsonRequest.Object)).Returns(mockJsonResponse.Object);
 
             var mockResponseParser = new Mock<IParser>();
-            mockResponseParser.Setup(m => m.Parse(mockJsonRequest.Object)).Returns(mockResponse.Object);
+            mockResponseParser.Setup(m => m.Parse(mockJsonResponse.Object)).Returns(mockResponse.Object);
+            var mockResponseParserFactory = new Mock<IJsonResponseParserFactory>();
+            mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParser.Object);
+            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
             var actual = target.Generate(mockParameters.Object);
 
             // Assert
@@ -95,10 +92,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockService.Setup(m => m.SendRequestAsync(mockJsonRequest.Object)).ReturnsAsync(mockJsonResponse.Object);
 
             var mockResponseParser = new Mock<IParser>();
-            mockResponseParser.Setup(m => m.Parse(mockJsonRequest.Object)).Returns(mockResponse.Object);
+            mockResponseParser.Setup(m => m.Parse(mockJsonResponse.Object)).Returns(mockResponse.Object);
+            var mockResponseParserFactory = new Mock<IJsonResponseParserFactory>();
+            mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParser.Object);
+            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
             var actual = await target.GenerateAsync(mockParameters.Object);
 
             // Assert

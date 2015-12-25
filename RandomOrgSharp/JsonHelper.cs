@@ -32,5 +32,14 @@ namespace Obacher.RandomOrgSharp
             DateTime returnValue;
             return !DateTime.TryParse(token.ToString(), out returnValue) ? localDefaultValue : returnValue;
         }
+
+        internal static bool JsonToBoolean(JToken token, bool defaultValue = false)
+        {
+            if (token == null)
+                return defaultValue;
+
+            bool returnValue;
+            return !bool.TryParse(token.ToString(), out returnValue) ? defaultValue : returnValue;
+        }
     }
 }

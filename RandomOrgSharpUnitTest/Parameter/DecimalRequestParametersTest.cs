@@ -17,10 +17,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = -1;
             const int numberOfdecimalPlaces = 10;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                // Act
+                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -29,10 +29,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 10001;
             const int numberOfdecimalPlaces = 10;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                // Act
+                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -41,10 +41,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = int.MinValue;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
+                // Act
+                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
 
@@ -54,20 +54,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = int.MaxValue;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
-        }
-
-        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenApiIsNull_ExpectException()
-        {
-            // Arrange
-            SettingsManager.Instance = null;
-
-            // Act
-            DecimalParameters.Set(1, 1);
+                // Act
+                DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod]
@@ -75,12 +65,13 @@ namespace RandomOrgSharp.UnitTest.Parameter
         {
             // Arrange
             const int numberOfItems = 1;
-            const int numberOfdecimalPlaces = 100;
+            const int numberOfdecimalPlaces = 15;
             const bool allowDuplicates = false;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            DecimalParameters result;
+            using (new MockCommonParameters())
 
-            // Act
-            var result = DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces, allowDuplicates);
+                // Act
+                result = DecimalParameters.Set(numberOfItems, numberOfdecimalPlaces, allowDuplicates);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

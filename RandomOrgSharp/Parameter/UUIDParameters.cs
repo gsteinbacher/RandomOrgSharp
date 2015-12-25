@@ -3,7 +3,7 @@
     /// <summary>
     /// Class which contains the parameters used when requesting random blob values from random.org
     /// </summary>
-    public class UuidParameters : CommonParameters
+    public sealed class UuidParameters : CommonParameters
     {
         private const int MAX_ITEMS_ALLOWED = 1000;
 

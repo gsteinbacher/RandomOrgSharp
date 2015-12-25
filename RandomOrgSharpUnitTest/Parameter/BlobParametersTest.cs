@@ -15,10 +15,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = -1;
             const int size = 10;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            BlobParameters.Set(numberOfItems, size);
+                // Act
+                BlobParameters.Set(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -27,10 +27,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 101;
             const int size = 1;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            BlobParameters.Set(numberOfItems, size);
+                // Act
+                BlobParameters.Set(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -39,10 +39,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int size = int.MinValue;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            BlobParameters.Set(numberOfItems, size);
+                // Act
+                BlobParameters.Set(numberOfItems, size);
         }
 
 
@@ -52,20 +52,10 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int size = int.MaxValue;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            BlobParameters.Set(numberOfItems, size);
-        }
-
-        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenApiIsNull_ExpectException()
-        {
-            // Arrange
-            SettingsManager.Instance = null;
-
-            // Act
-            BlobParameters.Set(1, 1);
+                // Act
+                BlobParameters.Set(numberOfItems, size);
         }
 
         [TestMethod]
@@ -75,10 +65,11 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int numberOfItems = 1;
             const int size = 1000;
             const BlobFormat blobFormat = BlobFormat.Hex;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            BlobParameters result;
 
-            // Act
-            var result = BlobParameters.Set(numberOfItems, size, blobFormat);
+            using (new MockCommonParameters())
+                // Act
+                result = BlobParameters.Set(numberOfItems, size, blobFormat);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

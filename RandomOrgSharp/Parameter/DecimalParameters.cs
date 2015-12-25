@@ -5,7 +5,7 @@ namespace Obacher.RandomOrgSharp.Parameter
     /// <summary>
     /// Class which contains the parameters used when requesting random decimal values from random.org
     /// </summary>
-    public class DecimalParameters : CommonParameters
+    public sealed class DecimalParameters : CommonParameters
     {
         private const int MAX_ITEMS_ALLOWED = 10000;
 

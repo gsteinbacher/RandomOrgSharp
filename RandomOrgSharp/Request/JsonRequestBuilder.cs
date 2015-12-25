@@ -8,6 +8,8 @@ namespace Obacher.RandomOrgSharp.Request
     {
         private readonly IJsonRequestBuilderFactory _factory;
 
+        public bool VerifyOriginator { get; set; }
+
         public JsonRequestBuilder(IJsonRequestBuilderFactory factory = null)
         {
             // Setup default JsonParameterBuilderFactory
@@ -26,6 +28,7 @@ namespace Obacher.RandomOrgSharp.Request
 
             _factory = factory;
         }
+
 
         public JObject Create(IParameters parameters)
         {

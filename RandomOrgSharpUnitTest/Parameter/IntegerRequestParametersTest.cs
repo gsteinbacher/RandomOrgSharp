@@ -1,11 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
+using Obacher.RandomOrgSharp.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
-namespace RandomOrgSharp.UnitTest.RequestParameters
+namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
     public class IntegerRequestParametersTest
@@ -17,109 +16,98 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             const int numberOfItems = -1;
             const int minimumValue = 10;
             const int maximumValue = 1000;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
+                // Act
+                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnGreaterThenMaximumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 10000;
             const int minimumValue = int.MinValue;
             const int maximumValue = 1000;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
+                // Act
+                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenMinimumNumberLessThenMinimumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int minimumValue = int.MinValue;
             const int maximumValue = 1000;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
+                // Act
+                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
         }
 
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenMinimumNumberGreaterThenMaximumllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int minimumValue = int.MaxValue;
             const int maximumValue = 1000;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
+                // Act
+                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenMaximumNumberLessThenMinimumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int minimumValue = 10;
             const int maximumValue = int.MinValue;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
+                // Act
+                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenMaxmimumNumberGreaterThenMaximumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int minimumValue = 10;
             const int maximumValue = int.MaxValue;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
+                // Act
+                IntegerParameters.Set(numberOfItems, minimumValue, maximumValue);
         }
-
-
-        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenApiIsNull_ExpectException()
-        {
-            SettingsManager.Instance = null;
-            new IntegerRequestParameters(1, 1, 1);
-        }
-
 
         [TestMethod]
-        public void WhenParametersCorrect_ExpectJsonReturned()
+        public void WhenAllValuesValid_ExpectValuesSet()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int minimumValue = 10;
             const int maximumValue = 1000;
-            const int id = 999;
+            const bool allowDuplicates = false;
 
-            JObject expected =
-                new JObject(
-                    new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, "generateIntegers"),
-                    new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME,
-                        new JObject(
-                            new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                            new JProperty(RandomOrgConstants.JSON_MINIMUM_VALUE_PARAMETER_NAME, minimumValue),
-                            new JProperty(RandomOrgConstants.JSON_MAXIMUM_VALUE_PARAMETER_NAME, maximumValue),
-                            new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, true),
-                            new JProperty(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME, 10),
-                           new JProperty(RandomOrgConstants.APIKEY_KEY, ConfigMocks.MOCK_API_KEY))),
-                        new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, 999));
+            IntegerParameters result;
+            using (new MockCommonParameters())
 
+                // Act
+                result = IntegerParameters.Set(numberOfItems, minimumValue, maximumValue, allowDuplicates);
 
-            var random = new Mock<IRandom>();
-            random.Setup(m => m.Next()).Returns(id);
-            RandomNumberGenerator.Instance = random.Object;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
-
-            var target = new IntegerRequestParameters(numberOfItems, minimumValue, maximumValue);
-            var actual = target.CreateJsonRequest();
-
-            actual.Should().Equal(expected);
+            // Assert
+            result.NumberOfItemsToReturn.Should().Equal(numberOfItems);
+            result.MinimumValue.Should().Equal(minimumValue);
+            result.MaximumValue.Should().Equal(maximumValue);
+            result.AllowDuplicates.Should().Equal(allowDuplicates);
         }
     }
 }

@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseNumberOptions.cs" />
     <Compile Include="BasicMethod\BasicMethod.cs" />
     <Compile Include="BasicMethod\UsageMethod.cs" />
     <Compile Include="IMethodCallManager.cs" />
@@ -82,10 +81,13 @@
     <Compile Include="ResourceHelper.cs" />
     <Compile Include="Response\BasicMethodResponse.cs" />
     <Compile Include="Response\BasicMethodResponseParser.cs" />
+    <Compile Include="Response\DefaultMethodParser.cs" />
     <Compile Include="Response\IBasicMethodResponse.cs" />
+    <Compile Include="Response\IJsonResponseParserFactory.cs" />
     <Compile Include="Response\IParser.cs" />
     <Compile Include="Response\IResponse.cs" />
     <Compile Include="Response\IUsageMethodResponse.cs" />
+    <Compile Include="Response\JsonResponseParserFactory.cs" />
     <Compile Include="Response\UsageMethodResponse.cs" />
     <Compile Include="Response\UsageMethodResponseParser.cs" />
     <Compile Include="Response\UuidResponseParser.cs" />

@@ -259,6 +259,15 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Results do not match originators results, tampering suspected..
+        /// </summary>
+        internal static string EXCEPTION_JSON_NOT_VERIFIED {
+            get {
+                return ResourceManager.GetString("EXCEPTION_JSON_NOT_VERIFIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to API Key is not found in the configuration file.  Expecting value to be located in the &amp;lt;appsettings&amp;gt; node with a name of \&quot;APIKEY\&quot;..
         /// </summary>
         internal static string VALIDATION_APIKEY_REQUIRED {

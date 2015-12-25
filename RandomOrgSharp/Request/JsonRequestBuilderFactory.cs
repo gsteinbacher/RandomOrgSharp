@@ -6,8 +6,8 @@ namespace Obacher.RandomOrgSharp.Request
 {
     public class JsonRequestBuilderFactory : IJsonRequestBuilderFactory
     {
-        private readonly IList<IJsonRequestBuilder> _builders;
         private readonly IJsonRequestBuilder _defaultBuilder;
+        private readonly IList<IJsonRequestBuilder> _builders;
 
         /// <summary>
         /// Instantiate the factory to handle creation of the parameters that are specific to each method call.  

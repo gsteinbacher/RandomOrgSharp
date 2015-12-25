@@ -5,6 +5,8 @@ using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp;
+using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
@@ -35,7 +37,6 @@ namespace RandomOrgSharp.UnitTest
         public void CanSendRequest_WhenCodeIs400AndApiKeyDoesNotMatches_ExpectNoException()
         {
             // Arrange
-            const string apiKey = ConfigMocks.MOCK_API_KEY;
             SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
             Mock<IDateTime> dateTimeMock = new Mock<IDateTime>();
 
@@ -44,8 +45,6 @@ namespace RandomOrgSharp.UnitTest
             UnitTestHelper.SetPrivateProperty(target, "_code", 400);
             UnitTestHelper.SetPrivateProperty(target, "_apiKey", "differentApiKey");
             target.CanSendRequest();
-
-            // Assert
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgException))]
@@ -285,7 +284,7 @@ namespace RandomOrgSharp.UnitTest
         public void VerifyResponse_WhenIdsMatch_ExpectNoException()
         {
             const int id = 1234;
-            Mock<IRequestParameters> requestMock = new Mock<IRequestParameters>();
+            Mock<IParameters> requestMock = new Mock<IParameters>();
             requestMock.Setup(p => p.Id).Returns(id);
             Mock<IResponse> responseMock = new Mock<IResponse>();
             responseMock.Setup(p => p.Id).Returns(id);
@@ -297,7 +296,7 @@ namespace RandomOrgSharp.UnitTest
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void VerifyResponse_WhenIdsDotNotMatch_ExpeNoException()
         {
-            Mock<IRequestParameters> requestMock = new Mock<IRequestParameters>();
+            Mock<IParameters> requestMock = new Mock<IParameters>();
             requestMock.Setup(p => p.Id).Returns(1234);
             Mock<IResponse> responseMock = new Mock<IResponse>();
             responseMock.Setup(p => p.Id).Returns(9786);

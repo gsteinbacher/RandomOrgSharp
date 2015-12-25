@@ -13,6 +13,7 @@ namespace Obacher.RandomOrgSharp.Parameter
         public int Id { get; }
 
         public MethodType MethodType { get; protected set; }
+        public bool VerifyOriginator { get; set; }
 
         public CommonParameters()
         {
@@ -23,27 +24,27 @@ namespace Obacher.RandomOrgSharp.Parameter
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.APIKEY_REQUIRED));
         }
 
-        public string GetMethodName(bool signed = false)
+        public string GetMethodName()
         {
             switch (MethodType)
             {
                 case MethodType.Integer:
-                    return signed ? RandomOrgConstants.INTEGER_SIGNED_METHOD : RandomOrgConstants.INTEGER_METHOD;
+                    return VerifyOriginator ? RandomOrgConstants.INTEGER_SIGNED_METHOD : RandomOrgConstants.INTEGER_METHOD;
 
                 case MethodType.Decimal:
-                    return signed ? RandomOrgConstants.DECIMAL_SIGNED_METHOD : RandomOrgConstants.DECIMAL_METHOD;
+                    return VerifyOriginator ? RandomOrgConstants.DECIMAL_SIGNED_METHOD : RandomOrgConstants.DECIMAL_METHOD;
 
                 case MethodType.Gaussian:
-                    return signed ? RandomOrgConstants.GAUSSIAN_SIGNED_METHOD : RandomOrgConstants.GAUSSIAN_METHOD;
+                    return VerifyOriginator ? RandomOrgConstants.GAUSSIAN_SIGNED_METHOD : RandomOrgConstants.GAUSSIAN_METHOD;
 
                 case MethodType.String:
-                    return signed ? RandomOrgConstants.STRING_SIGNED_METHOD : RandomOrgConstants.STRING_METHOD;
+                    return VerifyOriginator ? RandomOrgConstants.STRING_SIGNED_METHOD : RandomOrgConstants.STRING_METHOD;
 
                 case MethodType.Uuid:
-                    return signed ? RandomOrgConstants.UUID_SIGNED_METHOD : RandomOrgConstants.UUID_METHOD;
+                    return VerifyOriginator ? RandomOrgConstants.UUID_SIGNED_METHOD : RandomOrgConstants.UUID_METHOD;
 
                 case MethodType.Blob:
-                    return signed ? RandomOrgConstants.BLOB_SIGNED_METHOD : RandomOrgConstants.BLOB_METHOD;
+                    return VerifyOriginator ? RandomOrgConstants.BLOB_SIGNED_METHOD : RandomOrgConstants.BLOB_METHOD;
 
                 case MethodType.Usage:
                     return RandomOrgConstants.USAGE_METHOD;

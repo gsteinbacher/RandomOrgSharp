@@ -19,6 +19,7 @@
         public const string BLOB_SIGNED_METHOD = "generateSignedBlobs";
 
         public const string USAGE_METHOD = "getUsage";
+        public const string VERIFY_SIGNATURE_METHOD = "verifySignature";
 
         // Parameter names that are used in the JSON request object.
         public const string JSON_RPC_PARAMETER_NAME = "jsonrpc";
@@ -65,6 +66,8 @@
         public const string JSON_REQUESTS_LEFT_PARAMETER_NAME = "requestsLeft";
         public const string JSON_TOTAL_BITS_PARAMETER_NAME = "totalBits";
         public const string JSON_TOTAL_REQUESTS_PARAMETER_NAME = "totalRequests";
+        public const string JSON_SIGNATURE_PARAMETER_NAME = "signature";
+        public const string JSON_AUTHENTICITY_PARAMETER_NAME = "authenticity";
 
         // Parameter names that are used in the JSON error response object
         public const string JSON_ERROR_PARAMETER_NAME = "error";

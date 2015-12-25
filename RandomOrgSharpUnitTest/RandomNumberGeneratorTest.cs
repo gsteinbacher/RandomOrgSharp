@@ -12,7 +12,6 @@ namespace RandomOrgSharp.UnitTest
         [TestMethod]
         public void Next_WhenCalled_ExpectNoException()
         {
-            RandomNumberGenerator.Instance = null;
             RandomNumberGenerator.Instance.Next();
         }
 

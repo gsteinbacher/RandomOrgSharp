@@ -3,7 +3,7 @@
     /// <summary>
     /// Class which contains the parameters used when requesting random blob values from random.org
     /// </summary>
-    public class UsageParameters : CommonParameters
+    public sealed class UsageParameters : CommonParameters
     {
         /// <summary>
         /// Create an instance of <see cref="UsageParameters"/>.  There are no specific parameters needed for the Usage method

@@ -18,10 +18,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="basicMethod">BasicMethod class to use to retrieve string information.  Default is <see cref="BasicMethod{T}"/></param>
         public StringBasicMethod(IBasicMethod<string> basicMethod = null)
         {
-            if (basicMethod == null)
-                _basicMethod = new BasicMethod<string>(new RandomOrgApiService(), new MethodCallManager(), new JsonRequestBuilder(), new BasicMethodResponseParser<string>());
-
-            _basicMethod = basicMethod;
+            _basicMethod = basicMethod ?? new BasicMethod<string>();
         }
 
         /// <summary>

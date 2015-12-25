@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
@@ -10,15 +11,16 @@ using Should.Fluent;
 namespace RandomOrgSharp.UnitTest.BasicMethod
 {
     [TestClass]
-    public class BlobBasicMethodTest
+    public class StringBasicMethodTest
     {
         [TestMethod]
-        public void WhenGenerateBlobsCalled_ExpectNoException()
+        public void WhenGenerateIntegersCalled_ExpectNoException()
         {
             // Arrange
-            const int numberOfItems = 10;
-            const int size = 16;
-            const BlobFormat blobFormat = BlobFormat.Hex;
+            const int numberOfItems = 1;
+            const int length = 10;
+            const string charactersAllowed = "abc";
+            const bool allowDuplicates = false;
 
             Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
             var expected = responseMock.Object;
@@ -26,11 +28,11 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             Mock<IBasicMethod<string>> basicMethodMock = new Mock<IBasicMethod<string>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
-            var target = new BlobBasicMethod(basicMethodMock.Object);
+            var target = new StringBasicMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
-                var actual = target.GenerateBlobs(numberOfItems, size, blobFormat);
+                var actual = target.GenerateStrings(numberOfItems, length, charactersAllowed, allowDuplicates);
 
                 // Assert
                 actual.Should().Equal(expected);
@@ -38,12 +40,13 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
         }
 
         [TestMethod]
-        public async Task WhenGenerateBlobsAsyncCalled_ExpectNoException()
+        public async Task WhenGenerateGuassiansAsyncCalled_ExpectNoException()
         {
             // Arrange
-            const int numberOfItems = 10;
-            const int size = 16;
-            const BlobFormat blobFormat = BlobFormat.Hex;
+            const int numberOfItems = 1;
+            const int length = 10;
+            const string charactersAllowed = "abc";
+            const bool allowDuplicates = false;
 
             Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
             var expected = responseMock.Object;
@@ -51,11 +54,11 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             Mock<IBasicMethod<string>> basicMethodMock = new Mock<IBasicMethod<string>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
-            var target = new BlobBasicMethod(basicMethodMock.Object);
+            var target = new StringBasicMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
-                var actual = await target.GenerateBlobsAsync(numberOfItems, size, blobFormat);
+                var actual = await target.GenerateStringsAsync(numberOfItems, length, charactersAllowed, allowDuplicates);
 
                 // Assert
                 actual.Should().Equal(expected);

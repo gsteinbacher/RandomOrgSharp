@@ -18,10 +18,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="basicMethod">BasicMethod class to use to retrieve decimal information.  Default is <see cref="BasicMethod{T}"/></param>
         public DecimalBasicMethod(IBasicMethod<decimal> basicMethod = null)
         {
-            if (basicMethod == null)
-                _basicMethod = new BasicMethod<decimal>(new RandomOrgApiService(), new MethodCallManager(), new JsonRequestBuilder(), new BasicMethodResponseParser<decimal>());
-
-            _basicMethod = basicMethod;
+            _basicMethod = basicMethod ?? new BasicMethod<decimal>();
         }
 
         /// <summary>

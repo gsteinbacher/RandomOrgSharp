@@ -22,17 +22,5 @@ namespace Obacher.UnitTest.Tools.Mocks
 
             return settingsManagerMock;
         }
-
-        public static Mock<IRandom> SetupIdMock(int id = 0, Mock<IRandom> randomNumberGeneratorMock = null)
-        {
-            if (randomNumberGeneratorMock == null)
-                randomNumberGeneratorMock = new Mock<IRandom>();
-
-            randomNumberGeneratorMock.Setup(m => m.Next())
-                .Returns(id);
-
-            return randomNumberGeneratorMock;
-
-        }
     }
 }

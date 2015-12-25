@@ -70,6 +70,11 @@
   <ItemGroup>
     <Compile Include="BasicMethod\BasicMethodTest.cs" />
     <Compile Include="BasicMethod\BlobBasicMethodTest.cs" />
+    <Compile Include="BasicMethod\DecimalBasicMethodTest.cs" />
+    <Compile Include="BasicMethod\GuassianMethodTest.cs" />
+    <Compile Include="BasicMethod\IntegerMethodTest.cs" />
+    <Compile Include="BasicMethod\StringBasicMethodTest.cs" />
+    <Compile Include="BasicMethod\UuidBasicMethodTest.cs" />
     <Compile Include="RandomOrgHttpEmulatorTest.cs" />
     <Compile Include="Request\BlobJsonRequestBuilderTest.cs" />
     <Compile Include="Request\DecimalJsonRequestBuilderTest.cs" />

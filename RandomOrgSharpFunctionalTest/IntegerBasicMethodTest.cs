@@ -1,74 +1,72 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
+        "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [TestClass]
     public class IntegerBasicMethodTest
     {
         private Random _random;
-        private IMethodCallManager _manager;
 
         [TestInitialize]
         public void InitializeTests()
         {
-            _manager = new MethodCallManager();
             _random = new Random();
-
         }
 
         [TestMethod]
         public void IntegerBasicMethod_Execute_ShouldReturnIntegerValuesInRange()
         {
-            int numberToReturn = _random.Next(5, 20);
+            // Arrange
+            int numberToReturn = 2;
             int minNumber = _random.Next(1, 1000);
             int maxNumber = _random.Next(minNumber + 1, 1000000);
-            const bool allowDuplicates = false;
-            const BaseNumberOptions baseNumber = BaseNumberOptions.Ten;
+            bool allowDuplicates = _random.Next(1, 2) == 1;
 
-            IRandomOrgService service = new RandomOrgApiService();
+            // Act
+            var target = new IntegerBasicMethod();
+            var results = target.GenerateIntegers(numberToReturn, minNumber, maxNumber, allowDuplicates);
 
-            IntegerBasicMethod target = new IntegerBasicMethod(service, _manager);
-
-            IRequestParameters requestParameters = new IntegerRequestParameters(numberToReturn, minNumber, maxNumber, allowDuplicates, baseNumber);
-            var results = target.Execute(requestParameters);
-
-            results.Should().Not.Be.Null();
-            results.Should().Not.Be.Empty();
-            results.Count().Should().Equal(numberToReturn);
-
-            foreach (var result in results)
-                result.Should().Be.InRange(minNumber, maxNumber);
+            // Assert
+            TestResults(results, numberToReturn, minNumber, maxNumber, allowDuplicates);
         }
 
 
         [TestMethod]
         public async Task IntegerBasicMethod_ExecuteAsync_ShouldReturnIntegerValuesInRange()
         {
-            int numberToReturn = _random.Next(5, 20);
+            int numberToReturn = 2;
             int minNumber = _random.Next(1, 1000);
             int maxNumber = _random.Next(minNumber + 1, 1000000);
-            const bool allowDuplicates = false;
-            const BaseNumberOptions baseNumber = BaseNumberOptions.Ten;
+            bool allowDuplicates = _random.Next(1, 2) == 1;
 
-            IRandomOrgService service = new RandomOrgApiService();
+            // Act
+            var target = new IntegerBasicMethod();
+            var results = await target.GenerateIntegersAsync(numberToReturn, minNumber, maxNumber, allowDuplicates);
 
-            IntegerBasicMethod target = new IntegerBasicMethod(service, _manager);
+            TestResults(results, numberToReturn, minNumber, maxNumber, allowDuplicates);
+        }
 
-            IRequestParameters requestParameters = new IntegerRequestParameters(numberToReturn, minNumber, maxNumber, allowDuplicates, baseNumber);
-            var results = await target.ExecuteAsync(requestParameters);
-
+        private static void TestResults(IBasicMethodResponse<int> results, int numberToReturn, int minNumber,
+                                        int maxNumber, bool allowDuplicates)
+        {
             results.Should().Not.Be.Null();
-            results.Should().Not.Be.Empty();
-            results.Count().Should().Equal(numberToReturn);
+            results.Data.Count().Should().Equal(numberToReturn);
 
-            foreach (var result in results)
+            // Ensure there are no duplicates
+            if (!allowDuplicates)
+                CollectionAssert.AllItemsAreUnique(results.Data.ToArray());
+
+            foreach (var result in results.Data)
                 result.Should().Be.InRange(minNumber, maxNumber);
         }
     }

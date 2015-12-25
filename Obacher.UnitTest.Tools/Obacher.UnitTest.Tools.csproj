@@ -56,6 +56,8 @@
     <Compile Include="ExpectedExceptionWithMessage.cs" />
     <Compile Include="FacebookMock.cs" />
     <Compile Include="Mocks\ConfigMocks.cs" />
+    <Compile Include="Mocks\MockCommonParameters.cs" />
+    <Compile Include="Mocks\MockHelper.cs" />
     <Compile Include="UnitTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

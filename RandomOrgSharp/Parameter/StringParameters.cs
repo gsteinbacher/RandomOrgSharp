@@ -15,7 +15,7 @@ namespace Obacher.RandomOrgSharp.Parameter
     /// <summary>
     /// Class which contains the parameters used when requesting random blob values from random.org
     /// </summary>
-    public class StringParameters : CommonParameters
+    public sealed class StringParameters : CommonParameters
     {
         private const int MAX_ITEMS_ALLOWED = 10000;
 

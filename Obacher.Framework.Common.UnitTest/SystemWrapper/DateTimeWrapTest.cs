@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Fakes;
 using System.Globalization;
+using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;  // 
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Parameter;
 
@@ -17,7 +17,7 @@ namespace Obacher.RandomOrgSharp.Request
                 new JProperty(RandomOrgConstants.JSON_MINIMUM_VALUE_PARAMETER_NAME, integerParameters.MinimumValue),
                 new JProperty(RandomOrgConstants.JSON_MAXIMUM_VALUE_PARAMETER_NAME, integerParameters.MaximumValue),
                 new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, integerParameters.AllowDuplicates),
-                new JProperty(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME, (int)integerParameters.BaseNumber)
+                new JProperty(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME, 10)  // Always do Base10 because the client can convert it to whatever base needed once it is returned.
             );
 
             return jsonParameters;

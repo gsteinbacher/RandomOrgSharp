@@ -2,10 +2,11 @@
 using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
+using Obacher.RandomOrgSharp.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
-namespace RandomOrgSharp.UnitTest.RequestParameters
+namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
     public class GuassianRequestParametersTest
@@ -18,137 +19,131 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnGreaterThenMaximumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 10001;
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenMeanLessThenMinimumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int mean = -1000001;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenMeanGreaterThenMaximumllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int mean = 10000001;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenStandardDeviationLessThenMinimumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int mean = 10000;
             const int standardDeviation = -1000001;
             const int significantDigits = 2;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenStandardDeviationGreaterThenMaximumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 21;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenSignificantDigitsLessThenMinimumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 1;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenSignificantDigitsGreaterThenMaximumAllowed_ExpectException()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 21;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
+                // Act
+                GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
         }
-
-        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenApiIsNull_ExpectException()
-        {
-            SettingsManager.Instance = null;
-            new GuassianRequestParameters(1, 1, 1, 2);
-        }
-
 
         [TestMethod]
-        public void WhenParametersCorrect_ExpectJsonReturned()
+        public void WhenAllValuesValid_ExpectValuesSet()
         {
+            // Arrange
             const int numberOfItems = 1;
             const int mean = 10000;
             const int standardDeviation = 10000;
-            const int significantDigits = 2;
-            const int id = 999;
+            const int significantDigits = 15;
+            GuassianParameters result;
 
-            JObject expected =
-                new JObject(
-                    new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, RandomOrgConstants.GAUSSIAN_METHOD),
-                    new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME,
-                        new JObject(
-                            new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                            new JProperty(RandomOrgConstants.JSON_MEAN_PARAMETER_NAME, mean),
-                            new JProperty(RandomOrgConstants.JSON_STANDARD_DEVIATION_PARAMETER_NAME, standardDeviation),
-                            new JProperty(RandomOrgConstants.JSON_SIGNIFICANT_DIGITS_PARAMETER_NAME, significantDigits),
-                           new JProperty(RandomOrgConstants.APIKEY_KEY, ConfigMocks.MOCK_API_KEY))),
-                        new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, 999));
+            using (new MockCommonParameters())
 
+                // Act
+                result = GuassianParameters.Set(numberOfItems, mean, standardDeviation, significantDigits);
 
-            var random = new Mock<IRandom>();
-            random.Setup(m => m.Next()).Returns(id);
-            RandomNumberGenerator.Instance = random.Object;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
-
-            var target = new GuassianRequestParameters(numberOfItems, mean, standardDeviation, significantDigits);
-            var actual = target.CreateJsonRequest();
-
-            actual.Should().Equal(expected);
+            // Assert
+            result.NumberOfItemsToReturn.Should().Equal(numberOfItems);
+            result.Mean.Should().Equal(mean);
+            result.StandardDeviation.Should().Equal(standardDeviation);
+            result.SignificantDigits.Should().Equal(significantDigits);
         }
     }
 }

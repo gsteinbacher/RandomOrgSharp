@@ -5,7 +5,7 @@ namespace Obacher.RandomOrgSharp.Parameter
     /// <summary>
     /// Class which contains the parameters used when requesting random blob values from random.org
     /// </summary>
-    public class IntegerParameters : CommonParameters
+    public sealed class IntegerParameters : CommonParameters
     {
         private const int MAX_ITEMS_ALLOWED = 10000;
 
@@ -13,7 +13,6 @@ namespace Obacher.RandomOrgSharp.Parameter
         public int MinimumValue { get; private set; }
         public int MaximumValue { get; private set; }
         public bool AllowDuplicates { get; private set; }
-        public BaseNumberOptions BaseNumber { get; private set; }
 
         /// <summary>
         /// Create an instance of <see cref="IntegerParameters"/>
@@ -22,20 +21,18 @@ namespace Obacher.RandomOrgSharp.Parameter
         /// <param name="minimumValue">The lower boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000 and 1,000,000,000.</param>
         /// <param name="maximumValue">The upper boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000a and 1,000,000,000.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
-        /// <param name="baseNumber">Specifies the base that will be used to display the numbers, default to Base 10</param>
         /// <returns>Instance of <see cref="IntegerParameters"/></returns>
-        public static IntegerParameters Set(int numberOfItemsToReturn, int minimumValue, int maximumValue,
-            bool allowDuplicates = true, BaseNumberOptions baseNumber = BaseNumberOptions.Ten)
+        public static IntegerParameters Set(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
         {
             var parameters = new IntegerParameters();
-            parameters.SetParameters(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates, baseNumber);
+            parameters.SetParameters(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
             return parameters;
         }
 
         /// <summary>
         /// Validate and set the parameters properties
         /// </summary>
-        private void SetParameters(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates, BaseNumberOptions baseNumber)
+        private void SetParameters(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates)
         {
             if (!numberOfItemsToReturn.Between(1, MAX_ITEMS_ALLOWED))
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MAX_ITEMS_ALLOWED));
@@ -50,7 +47,6 @@ namespace Obacher.RandomOrgSharp.Parameter
             MinimumValue = minimumValue;
             MaximumValue = maximumValue;
             AllowDuplicates = allowDuplicates;
-            BaseNumber = baseNumber;
 
             MethodType = MethodType.Integer;
         }

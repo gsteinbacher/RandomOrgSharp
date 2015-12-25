@@ -19,10 +19,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="basicMethod">BasicMethod class to use to retrieve string information.  Default is <see cref="BasicMethod{T}"/></param>
         public UuidBasicMethod(IBasicMethod<Guid> basicMethod = null)
         {
-            if (basicMethod == null)
-                _basicMethod = new BasicMethod<Guid>(new RandomOrgApiService(), new MethodCallManager(), new JsonRequestBuilder(), new BasicMethodResponseParser<Guid>());
-
-            _basicMethod = basicMethod;
+            _basicMethod = basicMethod ?? new BasicMethod<Guid>();
         }
 
         /// <summary>

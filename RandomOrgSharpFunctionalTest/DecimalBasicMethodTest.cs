@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -15,58 +14,52 @@ namespace RandomOrgSharp.FunctionalTest
     public class DecimalBasicMethodTest
     {
         private Random _random;
-        private IMethodCallManager _manager;
 
         [TestInitialize]
         public void InitializeTests()
         {
-            _manager = new MethodCallManager();
             _random = new Random();
-
         }
 
         [TestMethod]
         public void DecimalBasicMethod_Execute_ShouldReturnDecimalValuesInRange()
         {
-            int numberToReturn = _random.Next(5, 20);
+            // Arrange
+            const int numberToReturn = 2;
             int numberOfDecimalPlaces = _random.Next(1, 20);
             const bool allowDuplicates = false;
 
-            IRandomOrgService service = new RandomOrgApiService();
+            // Act
+            var target = new DecimalBasicMethod();
+            var results = target.GenerateDecimalFractions(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
 
-            var target = new DecimalBasicMethod(service, _manager);
-
-            IRequestParameters requestParameters = new DecimalRequestParameters(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
-            var results = target.Execute(requestParameters);
-
+            // Assert
             TestResults(results, numberToReturn, numberOfDecimalPlaces);
         }
 
         [TestMethod]
         public async Task DecimalBasicMethod_ExecuteAsync_ShouldReturnDecimalValuesInRange()
         {
-            int numberToReturn = _random.Next(5, 20);
+            // Arrange
+            const int numberToReturn = 2;
             int numberOfDecimalPlaces = _random.Next(1, 20);
             const bool allowDuplicates = false;
 
-            IRandomOrgService service = new RandomOrgApiService();
+            // Act
+            var target = new DecimalBasicMethod();
+            var results = await target.GenerateDecimalFractionsAsync(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
 
-            var target = new DecimalBasicMethod(service, _manager);
-
-            IRequestParameters requestParameters = new DecimalRequestParameters(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
-            var results = await target.ExecuteAsync(requestParameters);
-
+            // Assert
             TestResults(results, numberToReturn, numberOfDecimalPlaces);
         }
 
 
-        private static void TestResults(IEnumerable<decimal> results, int numberToReturn, int numberOfDecimalPlaces)
+        private static void TestResults(IBasicMethodResponse<decimal> results, int numberToReturn, int numberOfDecimalPlaces)
         {
             results.Should().Not.Be.Null();
-            results.Should().Not.Be.Empty();
-            results.Count().Should().Equal(numberToReturn);
+            results.Data.Count().Should().Equal(numberToReturn);
 
-            foreach (var result in results)
+            foreach (var result in results.Data)
             {
                 result.Should().Be.GreaterThan(0m);
                 result.Should().Be.LessThan(1m);

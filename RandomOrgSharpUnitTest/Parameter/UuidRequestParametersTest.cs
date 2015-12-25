@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.Request;
+using Obacher.RandomOrgSharp.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
-namespace RandomOrgSharp.UnitTest.RequestParameters
+namespace RandomOrgSharp.UnitTest.Parameter
 {
     [TestClass]
     public class UUIDRequestParametersTest
@@ -16,55 +14,36 @@ namespace RandomOrgSharp.UnitTest.RequestParameters
         {
             // Arrange
             const int numberOfItems = -1;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            using (new MockCommonParameters())
 
-            // Act
-            new UuidJsonParameterBuilder(numberOfItems);
+                // Act
+                UuidParameters.Set(numberOfItems);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnGreaterThenMaximumAllowed_ExpectException()
         {
-            const int numberOfItems = 10000;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
+            const int numberOfItems = 1001;
+            using (new MockCommonParameters())
 
-            new UuidJsonParameterBuilder(numberOfItems);
+                // Act
+                UuidParameters.Set(numberOfItems);
         }
-
-        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenApiIsNull_ExpectException()
-        {
-            SettingsManager.Instance = null;
-            new IntegerRequestParameters(1, 1, 1);
-        }
-
 
         [TestMethod]
-        public void WhenParametersCorrect_ExpectJsonReturned()
+        public void WhenAllValuesValid_ExpectValuesSet()
         {
+            // Arrange
             const int numberOfItems = 1;
-            const int id = 999;
 
-            JObject expected =
-                new JObject(
-                    new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-                    new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, RandomOrgConstants.UUID_METHOD),
-                    new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME,
-                        new JObject(
-                            new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                           new JProperty(RandomOrgConstants.APIKEY_KEY, ConfigMocks.MOCK_API_KEY))),
-                        new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, 999));
+            UuidParameters result;
+            using (new MockCommonParameters())
 
+                // Act
+                result = UuidParameters.Set(numberOfItems);
 
-            var random = new Mock<IRandom>();
-            random.Setup(m => m.Next()).Returns(id);
-            RandomNumberGenerator.Instance = random.Object;
-            SettingsManager.Instance = ConfigMocks.SetupApiKeyMock().Object;
-
-            var target = new UuidJsonParameterBuilder(numberOfItems);
-            var actual = target.CreateJsonRequest();
-
-            actual.Should().Equal(expected);
+            // Assert
+            result.NumberOfItemsToReturn.Should().Equal(numberOfItems);
         }
     }
 }

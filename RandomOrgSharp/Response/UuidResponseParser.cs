@@ -11,7 +11,7 @@ namespace Obacher.RandomOrgSharp.Response
     /// because the data returned in the response needs to be specially converted to a GUID type.
     /// </summary>
     /// <typeparam name="T">Type of value being returned in the list of random values</typeparam>
-    public class UuidResponseParser
+    public class UuidResponseParser : IParser
     {
         /// <summary>
         /// Parse the JSON response

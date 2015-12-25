@@ -7,7 +7,6 @@ namespace Obacher.RandomOrgSharp
         int Next();
     }
 
-
     public sealed class RandomNumberGenerator : IRandom
     {
         private static readonly Random _random;

@@ -19,7 +19,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <summary>
         /// Create an instance of <see cref="StringBasicMethod"/>.  
         /// </summary>
-        public UsageMethod(IRandomOrgService service, IMethodCallManager methodCallManager, IJsonRequestBuilder requestBuilder, IParser basicMethodResponseParser)
+        public UsageMethod(IRandomOrgService service = null, IMethodCallManager methodCallManager = null, IJsonRequestBuilder requestBuilder = null, IParser basicMethodResponseParser = null)
         {
             _service = service;
             _methodCallManager = methodCallManager;
