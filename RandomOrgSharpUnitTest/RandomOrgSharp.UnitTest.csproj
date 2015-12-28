@@ -50,7 +50,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
@@ -78,12 +80,17 @@
     <Compile Include="BasicMethod\UuidBasicMethodTest.cs" />
     <Compile Include="Parameter\CommonParametersTest.cs" />
     <Compile Include="Parameter\UsageParametersTest.cs" />
+    <Compile Include="RandomOrgExceptionTest.cs" />
     <Compile Include="RandomOrgHttpEmulatorTest.cs" />
+    <Compile Include="RandomOrgRuntimeExceptionTest.cs" />
     <Compile Include="Request\BlobJsonRequestBuilderTest.cs" />
     <Compile Include="Request\DecimalJsonRequestBuilderTest.cs" />
+    <Compile Include="Request\DefaultJsonRequestBuilderTest.cs" />
     <Compile Include="Request\GuassianJsonRequestBuilderTest.cs" />
     <Compile Include="Request\IntegerJsonRequestBuilderTest.cs" />
     <Compile Include="Request\StringJsonRequestBuilderTest.cs" />
+    <Compile Include="Request\JsonRequestBuilderTest.cs" />
+    <Compile Include="Request\JsonRequestBuilderFactoryTest.cs" />
     <Compile Include="Request\UuidJsonRequestBuilder.cs" />
     <Compile Include="Parameter\BlobParametersTest.cs" />
     <Compile Include="Parameter\DecimalParametersTest.cs" />

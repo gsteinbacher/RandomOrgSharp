@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpectedExceptionWithMessage.cs" />
+    <Compile Include="ExceptionExpected.cs" />
     <Compile Include="FacebookMock.cs" />
     <Compile Include="Mocks\ConfigMocks.cs" />
     <Compile Include="Mocks\MockCommonParameters.cs" />

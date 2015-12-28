@@ -16,7 +16,7 @@ namespace RandomOrgSharp.UnitTest
     [TestClass]
     public class MethodCallManagerTest
     {
-        [TestMethod, ExpectedException(typeof(RandomOrgException))]
+        [TestMethod, ExceptionExpected(typeof(RandomOrgException), "400")]
         public void CanSendRequest_WhenCodeIs400AndApiKeyMatches_ExpectException()
         {
             // Arrange
@@ -27,6 +27,7 @@ namespace RandomOrgSharp.UnitTest
             // Act
             MethodCallManager target = new MethodCallManager(dateTimeMock.Object);
             UnitTestHelper.SetPrivateProperty(target, "_code", 400);
+            UnitTestHelper.SetPrivateProperty(target, "_message", "Putting 400 in message to ensure confirmation");
             UnitTestHelper.SetPrivateProperty(target, "_apiKey", apiKey);
             target.CanSendRequest();
 
@@ -47,7 +48,7 @@ namespace RandomOrgSharp.UnitTest
             target.CanSendRequest();
         }
 
-        [TestMethod, ExpectedException(typeof(RandomOrgException))]
+        [TestMethod, ExceptionExpected(typeof(RandomOrgException), "402")]
         public void CanSendRequest_WhenCodeIs402AndDatesMatch_ExpectException()
         {
             // Arrange
@@ -58,6 +59,7 @@ namespace RandomOrgSharp.UnitTest
             // Act
             MethodCallManager target = new MethodCallManager(dateTimeMock.Object);
             UnitTestHelper.SetPrivateProperty(target, "_code", 402);
+            UnitTestHelper.SetPrivateProperty(target, "_message", "Putting 402 in message to ensure confirmation");
             UnitTestHelper.SetPrivateProperty(target, "_lastResponse", responseDate);
             target.CanSendRequest();
 
@@ -80,7 +82,7 @@ namespace RandomOrgSharp.UnitTest
             // Assert
         }
 
-        [TestMethod, ExpectedException(typeof(RandomOrgException))]
+        [TestMethod, ExceptionExpected(typeof(RandomOrgException), "403")]
         public void CanSendRequest_WhenCodeIs403AndDatesMatch_ExpectException()
         {
             // Arrange
@@ -91,6 +93,7 @@ namespace RandomOrgSharp.UnitTest
             // Act
             MethodCallManager target = new MethodCallManager(dateTimeMock.Object);
             UnitTestHelper.SetPrivateProperty(target, "_code", 403);
+            UnitTestHelper.SetPrivateProperty(target, "_message", "Putting 403 in message to ensure confirmation");
             UnitTestHelper.SetPrivateProperty(target, "_lastResponse", responseDate);
             target.CanSendRequest();
 
@@ -148,7 +151,7 @@ namespace RandomOrgSharp.UnitTest
             actual.Should().Equal(expected);
         }
 
-        [TestMethod, ExpectedException(typeof(RandomOrgException))]
+        [TestMethod, ExceptionExpected(typeof(RandomOrgException), "Method not found")]
         public void ThrowExceptionOnError_WhenCalled_ExpectException()
         {
             // Arrange
@@ -293,7 +296,7 @@ namespace RandomOrgSharp.UnitTest
             target.VerifyResponse(requestMock.Object, responseMock.Object);
         }
 
-        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
+        [TestMethod, ExceptionExpected(typeof(RandomOrgRunTimeException), "Id passed into the request does not match the Id returned in response")]
         public void VerifyResponse_WhenIdsDotNotMatch_ExpeNoException()
         {
             Mock<IParameters> requestMock = new Mock<IParameters>();

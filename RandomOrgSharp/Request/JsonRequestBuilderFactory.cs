@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Obacher.RandomOrgSharp.Parameter;
 
@@ -24,7 +25,23 @@ namespace Obacher.RandomOrgSharp.Request
 
         public IJsonRequestBuilder GetBuilder(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             return _builders.FirstOrDefault(m => m.CanHandle(parameters)) ?? _defaultBuilder;
+        }
+
+        public static IJsonRequestBuilderFactory GetDefaultBuilders()
+        {
+            return new JsonRequestBuilderFactory(
+                        new DefaultJsonRequestBuilder(),
+                        new BlobJsonRequestBuilder(),
+                        new DecimalJsonRequestBuilder(),
+                        new GuassianJsonRequestBuilder(),
+                        new IntegerJsonRequestBuilder(),
+                        new StringJsonRequestBuilder(),
+                        new UuidJsonRequestBuilder()
+                    );
         }
     }
 }

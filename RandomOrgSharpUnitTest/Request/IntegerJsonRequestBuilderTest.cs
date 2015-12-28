@@ -1,17 +1,42 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Request;
+using Obacher.UnitTest.Tools;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
 namespace RandomOrgSharp.UnitTest.Request
 {
+
     [TestClass]
     public class IntegerJsonRequestBuilderTest
     {
+        [TestMethod, ExceptionExpected(typeof(ArgumentNullException), "parameters")]
+        public void Create_WhenParametersNull_ExpectException()
+        {
+            // Arrange
+            var target = new IntegerJsonRequestBuilder();
+            target.Create(null);
 
+            // Assert
+        }
+
+        [TestMethod, ExceptionExpected(typeof(ArgumentException), "IntegerParameters")]
+        public void Create_WhenParametersNotTypeOfIntegerParameter_ExpectException()
+        {
+            // Arrange
+            Mock<IParameters> parameters = new Mock<IParameters>();
+
+            var target = new IntegerJsonRequestBuilder();
+            target.Create(parameters.Object);
+
+            // Assert
+        }
+ 
         [TestMethod]
         public void WhenParametersCorrect_ExpectJsonReturned()
         {
@@ -41,6 +66,48 @@ namespace RandomOrgSharp.UnitTest.Request
                 // Assert
                 actual.Should().Equal(expected);
             }
+        }
+
+        [TestMethod, ExceptionExpected(typeof(ArgumentNullException), "parameters")]
+        public void CanHandle_WhenParametersNull_ExpectException()
+        {
+            // Arrange
+            var target = new IntegerJsonRequestBuilder();
+            target.CanHandle(null);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenMethodTypeIsInteger_ExpectTrue()
+        {
+            // Arrange
+            const bool expected = true;
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(p => p.MethodType).Returns(MethodType.Integer);
+
+            // Act
+            var target = new IntegerJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Equal(expected);
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenMethodTypeIsNotInteger_ExpectFalse()
+        {
+            // Arrange
+            const bool expected = false;
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(p => p.MethodType).Returns(MethodType.Blob);
+
+            // Act
+            var target = new IntegerJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Equal(expected);
         }
     }
 }

@@ -1,8 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Request;
+using Obacher.UnitTest.Tools;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
@@ -11,8 +14,30 @@ namespace RandomOrgSharp.UnitTest.Request
     [TestClass]
     public class DecimalJsonRequestBuilderTest
     {
+        [TestMethod, ExceptionExpected(typeof(ArgumentNullException), "parameters")]
+        public void Create_WhenParametersNull_ExpectException()
+        {
+            // Arrange
+            var target = new DecimalJsonRequestBuilder();
+            target.Create(null);
+
+            // Assert
+        }
+
+        [TestMethod, ExceptionExpected(typeof(ArgumentException), "DecimalParameters")]
+        public void Create_WhenParametersNotTypeOfBlobParameter_ExpectException()
+        {
+            // Arrange
+            Mock<IParameters> parameters = new Mock<IParameters>();
+
+            var target = new DecimalJsonRequestBuilder();
+            target.Create(parameters.Object);
+
+            // Assert
+        }
+
         [TestMethod]
-        public void WhenParametersCorrect_ExpectJsonReturned()
+        public void Create_WhenParametersCorrect_ExpectJsonReturned()
         {
             // Act
             const int numberOfItems = 1;
@@ -36,6 +61,48 @@ namespace RandomOrgSharp.UnitTest.Request
                 // Assert
                 actual.Should().Equal(expected);
             }
+        }
+
+        [TestMethod, ExceptionExpected(typeof(ArgumentNullException), "parameters")]
+        public void CanHandle_WhenParametersNull_ExpectException()
+        {
+            // Arrange
+            var target = new DecimalJsonRequestBuilder();
+            target.CanHandle(null);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenMethodTypeIsDecimal_ExpectTrue()
+        {
+            // Arrange
+            const bool expected = true;
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(p => p.MethodType).Returns(MethodType.Decimal);
+
+            // Act
+            var target = new DecimalJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Equal(expected);
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenMethodTypeIsNotDecimal_ExpectFalse()
+        {
+            // Arrange
+            const bool expected = false;
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(p => p.MethodType).Returns(MethodType.Blob);
+
+            // Act
+            var target = new DecimalJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Equal(expected);
         }
     }
 }

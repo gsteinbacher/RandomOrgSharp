@@ -8,23 +8,11 @@ namespace Obacher.RandomOrgSharp.Request
     {
         private readonly IJsonRequestBuilderFactory _factory;
 
-        public bool VerifyOriginator { get; set; }
-
         public JsonRequestBuilder(IJsonRequestBuilderFactory factory = null)
         {
             // Setup default JsonParameterBuilderFactory
             if (factory == null)
-            {
-                factory = new JsonRequestBuilderFactory(
-                    new DefaultJsonRequestBuilder(),
-                    new BlobJsonRequestBuilder(),
-                    new DecimalJsonRequestBuilder(),
-                    new GuassianJsonRequestBuilder(),
-                    new IntegerJsonRequestBuilder(),
-                    new StringJsonRequestBuilder(),
-                    new UuidJsonRequestBuilder()
-                );
-            }
+                factory = JsonRequestBuilderFactory.GetDefaultBuilders();
 
             _factory = factory;
         }
@@ -32,6 +20,9 @@ namespace Obacher.RandomOrgSharp.Request
 
         public JObject Create(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             var commonParameters = parameters as CommonParameters;
             if (commonParameters == null)
                 throw new ArgumentException(ResourceHelper.GetString(StringsConstants.EXCEPTION_INVALID_ARGUMENT, "CommonParameters"));

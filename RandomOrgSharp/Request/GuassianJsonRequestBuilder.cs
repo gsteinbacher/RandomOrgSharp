@@ -8,6 +8,9 @@ namespace Obacher.RandomOrgSharp.Request
     {
         public JObject Create(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             var guassianParameters = parameters as GuassianParameters;
             if (guassianParameters == null)
                 throw new ArgumentException(ResourceHelper.GetString(StringsConstants.EXCEPTION_INVALID_ARGUMENT, "GuassianParameters"));
@@ -29,6 +32,9 @@ namespace Obacher.RandomOrgSharp.Request
         /// <returns>True if this class handles the specified parameters</returns>
         public bool CanHandle(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             return parameters.MethodType == MethodType.Gaussian;
         }
     }

@@ -8,6 +8,9 @@ namespace Obacher.RandomOrgSharp.Request
     {
         public JObject Create(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             var integerParameters = parameters as IntegerParameters;
             if (integerParameters == null)
                 throw new ArgumentException(ResourceHelper.GetString(StringsConstants.EXCEPTION_INVALID_ARGUMENT, "IntegerParameters"));
@@ -30,6 +33,9 @@ namespace Obacher.RandomOrgSharp.Request
         /// <returns>True if this class handles the specified parameters</returns>
         public bool CanHandle(IParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             return parameters.MethodType == MethodType.Integer;
         }
     }

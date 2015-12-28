@@ -9,7 +9,12 @@ namespace Obacher.RandomOrgSharp
     [Serializable]
     public class RandomOrgException : Exception
     {
-        public int Code { get; private set; }
+        public int Code { get; }
+
+        public RandomOrgException()
+        {
+            Code = 32000;
+        }
 
         public RandomOrgException(int code, string message) : base(message)
         {
@@ -22,7 +27,16 @@ namespace Obacher.RandomOrgSharp
         }
 
         // Make sure you include this so your Exception is properly Serializable
-        protected RandomOrgException(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) { }
+        protected RandomOrgException(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt)
+        {
+            Code = info.GetInt32("Code");
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Code", Code, typeof(int));
+            base.GetObjectData(info, context);
+        }
     }
 
     /// <summary>
@@ -31,10 +45,9 @@ namespace Obacher.RandomOrgSharp
     [Serializable]
     public class RandomOrgRunTimeException : Exception
     {
+        public RandomOrgRunTimeException() { }
         public RandomOrgRunTimeException(string message) : base(message) { }
-
         public RandomOrgRunTimeException(string message, Exception innerException) : base(message, innerException) { }
-
         protected RandomOrgRunTimeException(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) { }
     }
 }
