@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Fakes;
 using System.Globalization;
-using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
@@ -307,24 +304,6 @@ namespace Obacher.Framework.Common.UnitTest.SystemWrapper
             actual.Should().Equal(expected.Month);
         }
 
-        [TestMethod, ExcludeFromCodeCoverage, Ignore]
-        public void WhenNowCalled_ExpectFakedDateReturned()
-        {
-            // Arrange
-            using (ShimsContext.Create())
-            {
-                DateTime expected = DateTime.Now;
-                ShimDateTime.NowGet = () => expected;
-
-                // Act
-                var target = new DateTimeWrap();
-                var actual = target.Now;
-
-                // Assert
-                actual.DateTimeInstance.Should().Equal(expected);
-            }
-        }
-
         [TestMethod]
         public void WhenSecondCalled_ExpectSameSecondReturned()
         {
@@ -365,44 +344,6 @@ namespace Obacher.Framework.Common.UnitTest.SystemWrapper
 
             // Assert
             actual.Should().Equal(expected.TimeOfDay);
-        }
-
-        [TestMethod, ExcludeFromCodeCoverage, Ignore]
-        public void WhenTodayCalled_ExpectFakedTodayReturned()
-        {
-            // Arrange
-            DateTime expected = DateTime.Today;
-
-            using (ShimsContext.Create())
-            {
-                ShimDateTime.TodayGet = () => expected;
-
-                // Act
-                var target = new DateTimeWrap();
-                var actual = target.Today;
-
-                // Assert
-                actual.DateTimeInstance.Should().Equal(expected);
-            }
-        }
-
-        [TestMethod, ExcludeFromCodeCoverage, Ignore]
-        public void WhenUtcNowCalled_ExpectFakedUtcNowReturned()
-        {
-            // Arrange
-            DateTime expected = DateTime.UtcNow;
-
-            using (ShimsContext.Create())
-            {
-                ShimDateTime.UtcNowGet = () => expected;
-
-                // Act
-                var target = new DateTimeWrap();
-                var actual = target.UtcNow;
-
-                // Assert
-                actual.DateTimeInstance.Should().Equal(expected);
-            }
         }
 
         [TestMethod]

@@ -10,15 +10,15 @@ namespace Obacher.RandomOrgSharp.BasicMethod
     /// </summary>
     public class IntegerBasicMethod
     {
-        private readonly IBasicMethod<int> _basicMethod;
+        private readonly IBasicMethodManager<int> _basicMethodManager;
 
         /// <summary>
         /// Create an instance of <see cref="IntegerBasicMethod"/>.  
         /// </summary>
-        /// <param name="basicMethod">BasicMethod class to use to retrieve blob information.  Default is <see cref="BasicMethod{T}"/></param>
-        public IntegerBasicMethod(IBasicMethod<int> basicMethod = null)
+        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve blob information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
+        public IntegerBasicMethod(IBasicMethodManager<int> basicMethodManager = null)
         {
-            _basicMethod = basicMethod ?? new BasicMethod<int>();
+            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<int>();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
 
-            var response = _basicMethod.Generate(parameters);
+            var response = _basicMethodManager.Generate(parameters);
             return response;
         }
 
@@ -49,7 +49,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
 
-            var response = await _basicMethod.GenerateAsync(parameters);
+            var response = await _basicMethodManager.GenerateAsync(parameters);
             return response;
         }
     }

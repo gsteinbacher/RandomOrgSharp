@@ -4,7 +4,7 @@ using Obacher.RandomOrgSharp.Response;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
-    public interface IBasicMethod<T>
+    public interface IBasicMethodManager<T>
     {
         IBasicMethodResponse<T> Generate(IParameters parameters);
         Task<IBasicMethodResponse<T>> GenerateAsync(IParameters parameters);

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Request;
 using Obacher.RandomOrgSharp.Response;
@@ -7,79 +6,43 @@ using Obacher.RandomOrgSharp.Response;
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
     /// <summary>
-    /// Retrieve a lst of random integer values
+    /// Retrieve a lst of random blob values
     /// </summary>
     public class UsageMethod
     {
-        private readonly IRandomOrgService _service;
-        private readonly IMethodCallManager _methodCallManager;
-        private readonly IJsonRequestBuilder _requestBuilder;
-        private readonly IParser _responseParser;
+        private readonly IBasicMethodManager<string> _basicMethodManager;
 
         /// <summary>
-        /// Create an instance of <see cref="StringBasicMethod"/>.  
+        /// Create an instance of <see cref="UsageMethod"/>.  
         /// </summary>
-        public UsageMethod(IRandomOrgService service = null, IMethodCallManager methodCallManager = null, IJsonRequestBuilder requestBuilder = null, IParser basicMethodResponseParser = null)
+        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve the usage information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
+        public UsageMethod(IBasicMethodManager<string> basicMethodManager = null)
         {
-            _service = service;
-            _methodCallManager = methodCallManager;
-            _requestBuilder = requestBuilder;
-            _responseParser = basicMethodResponseParser;
+            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<string>();
         }
 
         /// <summary>
-        /// Returns information related to the the usage of a given API key.
+        /// Returns information related to the the usage
         /// </summary>
-        /// <returns>Information related to usage of a given API key.</returns>
-        public IResponse GetUsage()
+        /// <returns>Information related to the usage</returns>
+        public IBasicMethodResponse<string> GetUsage()
         {
-            _methodCallManager.CanSendRequest();
-
-            // Usage method has no specific parameters
             var parameters = UsageParameters.Create();
-            JObject jsonRequest = _requestBuilder.Create(parameters);
 
-            _methodCallManager.Delay();
-            JObject jsonResponse = _service.SendRequest(jsonRequest);
-
-            IResponse response = HandleResponse(jsonResponse, parameters);
-
+            var response = _basicMethodManager.Generate(parameters);
             return response;
         }
-
 
         /// <summary>
-        /// Returns information related to the the usage of a given API key as an asynchronous operation.
+        /// Returns information related to the the usage as an asynchronous operation
         /// </summary>
-        /// <returns>Information related to usage of a given API key.</returns>
-        public async Task<IResponse> GetUsageAsync()
+        /// <returns>Information related to the usage</returns>
+        public async Task<IBasicMethodResponse<string>> GetUsageAsync()
         {
-            _methodCallManager.CanSendRequest();
-
-            // Usage method has no specific parameters
             var parameters = UsageParameters.Create();
-            JObject jsonRequest = _requestBuilder.Create(parameters);
 
-            _methodCallManager.Delay();
-            JObject jsonResponse = await _service.SendRequestAsync(jsonRequest);
-
-            IResponse response = HandleResponse(jsonResponse, parameters);
-
+            var response = await _basicMethodManager.GenerateAsync(parameters);
             return response;
         }
-
-        private IResponse HandleResponse(JObject jsonResponse, IParameters parameters)
-        {
-            _methodCallManager.ThrowExceptionOnError(jsonResponse);
-
-            IResponse response = _responseParser.Parse(jsonResponse);
-            if (response != null)
-                _methodCallManager.VerifyResponse(parameters, response);
-
-            return response;
-        }
-
     }
 }
-
-

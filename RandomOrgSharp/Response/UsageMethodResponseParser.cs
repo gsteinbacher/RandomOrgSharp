@@ -18,7 +18,7 @@ namespace Obacher.RandomOrgSharp.Response
 
             if (result != null)
             {
-                var statusString = JsonHelper.JsonToString(json.GetValue(RandomOrgConstants.JSON_STATUS_PARAMETER_NAME));
+                var statusString = JsonHelper.JsonToString(result.GetValue(RandomOrgConstants.JSON_STATUS_PARAMETER_NAME));
                 switch (statusString)
                 {
                     case RandomOrgConstants.JSON_STATUS_STOPPED:
@@ -35,11 +35,11 @@ namespace Obacher.RandomOrgSharp.Response
                         break;
                 }
 
-                creationTime = JsonHelper.JsonToDateTime(json.GetValue(RandomOrgConstants.JSON_CREATION_TIME_PARAMETER_NAME));
-                bitsLeft = JsonHelper.JsonToInt(json.GetValue(RandomOrgConstants.JSON_BITS_LEFT_PARAMETER_NAME));
-                requestsLeft = JsonHelper.JsonToInt(json.GetValue(RandomOrgConstants.JSON_REQUESTS_LEFT_PARAMETER_NAME));
-                totalBits = JsonHelper.JsonToInt(json.GetValue(RandomOrgConstants.JSON_TOTAL_BITS_PARAMETER_NAME));
-                totalRequests = JsonHelper.JsonToInt(json.GetValue(RandomOrgConstants.JSON_TOTAL_REQUESTS_PARAMETER_NAME));
+                creationTime = JsonHelper.JsonToDateTime(result.GetValue(RandomOrgConstants.JSON_CREATION_TIME_PARAMETER_NAME));
+                bitsLeft = JsonHelper.JsonToInt(result.GetValue(RandomOrgConstants.JSON_BITS_LEFT_PARAMETER_NAME));
+                requestsLeft = JsonHelper.JsonToInt(result.GetValue(RandomOrgConstants.JSON_REQUESTS_LEFT_PARAMETER_NAME));
+                totalBits = JsonHelper.JsonToInt(result.GetValue(RandomOrgConstants.JSON_TOTAL_BITS_PARAMETER_NAME));
+                totalRequests = JsonHelper.JsonToInt(result.GetValue(RandomOrgConstants.JSON_TOTAL_REQUESTS_PARAMETER_NAME));
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 

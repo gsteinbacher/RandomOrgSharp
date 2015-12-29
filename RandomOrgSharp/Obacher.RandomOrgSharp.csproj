@@ -48,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicMethod\BasicMethod.cs" />
+    <Compile Include="BasicMethod\BasicMethodManager.cs" />
     <Compile Include="BasicMethod\UsageMethod.cs" />
+    <Compile Include="BasicMethod\UsageMethodManager.cs" />
     <Compile Include="IMethodCallManager.cs" />
     <Compile Include="Parameter\IParameters.cs" />
     <Compile Include="Parameter\UsageParameters.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Response\IBasicMethodResponse.cs" />
     <Compile Include="Response\IJsonResponseParserFactory.cs" />
     <Compile Include="Response\IParser.cs" />
+    <Compile Include="Response\IProcessResponse.cs" />
     <Compile Include="Response\IResponse.cs" />
     <Compile Include="Response\IUsageMethodResponse.cs" />
     <Compile Include="Response\JsonResponseParserFactory.cs" />
@@ -98,6 +100,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Verify\CertificateVerification.cs" />
+    <Compile Include="Verify\RandomOrgVerification.cs" />
     <None Include="app.config" />
     <Compile Include="BasicMethod\BlobBasicMethod.cs" />
     <Compile Include="BasicMethod\DecimalBasicMethod.cs" />
@@ -105,7 +109,7 @@
     <Compile Include="BasicMethod\IntegerBasicMethod.cs" />
     <Compile Include="BasicMethod\StringBasicMethod.cs" />
     <Compile Include="BasicMethod\UuidBasicMethod.cs" />
-    <Compile Include="BasicMethod\IBasicMethod.cs" />
+    <Compile Include="BasicMethod\IBasicMethodManager.cs" />
     <Compile Include="IRandomOrgService.cs" />
     <Compile Include="IRandomOrgSharp.cs" />
     <Compile Include="ISettingsManager.cs" />

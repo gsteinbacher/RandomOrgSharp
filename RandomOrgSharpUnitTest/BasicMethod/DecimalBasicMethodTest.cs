@@ -22,7 +22,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             Mock<IBasicMethodResponse<decimal>> responseMock = new Mock<IBasicMethodResponse<decimal>>();
             var expected = responseMock.Object;
 
-            Mock<IBasicMethod<decimal>> basicMethodMock = new Mock<IBasicMethod<decimal>>();
+            Mock<IBasicMethodManager<decimal>> basicMethodMock = new Mock<IBasicMethodManager<decimal>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
             var target = new DecimalBasicMethod(basicMethodMock.Object);
@@ -46,7 +46,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             Mock<IBasicMethodResponse<decimal>> responseMock = new Mock<IBasicMethodResponse<decimal>>();
             var expected = responseMock.Object;
 
-            Mock<IBasicMethod<decimal>> basicMethodMock = new Mock<IBasicMethod<decimal>>();
+            Mock<IBasicMethodManager<decimal>> basicMethodMock = new Mock<IBasicMethodManager<decimal>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
             var target = new DecimalBasicMethod(basicMethodMock.Object);

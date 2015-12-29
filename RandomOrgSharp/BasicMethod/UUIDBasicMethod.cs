@@ -11,15 +11,15 @@ namespace Obacher.RandomOrgSharp.BasicMethod
     /// </summary>
     public class UuidBasicMethod
     {
-        private readonly IBasicMethod<Guid> _basicMethod;
+        private readonly IBasicMethodManager<Guid> _basicMethodManager;
 
         /// <summary>
         /// Create an instance of <see cref="UuidBasicMethod"/>.  
         /// </summary>
-        /// <param name="basicMethod">BasicMethod class to use to retrieve string information.  Default is <see cref="BasicMethod{T}"/></param>
-        public UuidBasicMethod(IBasicMethod<Guid> basicMethod = null)
+        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve string information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
+        public UuidBasicMethod(IBasicMethodManager<Guid> basicMethodManager = null)
         {
-            _basicMethod = basicMethod ?? new BasicMethod<Guid>();
+            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<Guid>();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = UuidParameters.Create(numberOfItemsToReturn);
 
-            var response = _basicMethod.Generate(parameters);
+            var response = _basicMethodManager.Generate(parameters);
             return response;
         }
 
@@ -44,7 +44,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = UuidParameters.Create(numberOfItemsToReturn);
 
-            var response = await _basicMethod.GenerateAsync(parameters);
+            var response = await _basicMethodManager.GenerateAsync(parameters);
             return response;
         }
     }

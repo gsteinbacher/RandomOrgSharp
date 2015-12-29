@@ -10,15 +10,15 @@ namespace Obacher.RandomOrgSharp.BasicMethod
     /// </summary>
     public class GuassianBasicMethod
     {
-        private readonly IBasicMethod<decimal> _basicMethod;
+        private readonly IBasicMethodManager<decimal> _basicMethodManager;
 
         /// <summary>
         /// Create an instance of <see cref="GuassianBasicMethod"/>.  
         /// </summary>
-        /// <param name="basicMethod">BasicMethod class to use to retrieve blob information.  Default is <see cref="BasicMethod{T}"/></param>
-        public GuassianBasicMethod(IBasicMethod<decimal> basicMethod = null)
+        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve blob information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
+        public GuassianBasicMethod(IBasicMethodManager<decimal> basicMethodManager = null)
         {
-            _basicMethod = basicMethod ?? new BasicMethod<decimal>();
+            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<decimal>();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
 
-            var response = _basicMethod.Generate(parameters);
+            var response = _basicMethodManager.Generate(parameters);
             return response;
         }
 
@@ -49,7 +49,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
 
-            var response = await _basicMethod.GenerateAsync(parameters);
+            var response = await _basicMethodManager.GenerateAsync(parameters);
             return response;
         }
     }

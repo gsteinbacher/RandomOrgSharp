@@ -52,7 +52,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
+            var target = new BasicMethodManager<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
             var actual = target.Generate(mockParameters.Object);
 
             // Assert
@@ -97,7 +97,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new BasicMethod<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
+            var target = new BasicMethodManager<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
             var actual = await target.GenerateAsync(mockParameters.Object);
 
             // Assert

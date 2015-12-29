@@ -22,7 +22,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             Mock<IBasicMethodResponse<Guid>> responseMock = new Mock<IBasicMethodResponse<Guid>>();
             var expected = responseMock.Object;
 
-            Mock<IBasicMethod<Guid>> basicMethodMock = new Mock<IBasicMethod<Guid>>();
+            Mock<IBasicMethodManager<Guid>> basicMethodMock = new Mock<IBasicMethodManager<Guid>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
             var target = new UuidBasicMethod(basicMethodMock.Object);
@@ -45,7 +45,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             Mock<IBasicMethodResponse<Guid>> responseMock = new Mock<IBasicMethodResponse<Guid>>();
             var expected = responseMock.Object;
 
-            Mock<IBasicMethod<Guid>> basicMethodMock = new Mock<IBasicMethod<Guid>>();
+            Mock<IBasicMethodManager<Guid>> basicMethodMock = new Mock<IBasicMethodManager<Guid>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
             var target = new UuidBasicMethod(basicMethodMock.Object);

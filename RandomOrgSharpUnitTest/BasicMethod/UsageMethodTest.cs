@@ -23,7 +23,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
         //    Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
         //    var expected = responseMock.Object;
 
-        //    Mock<IBasicMethod<string>> basicMethodMock = new Mock<IBasicMethod<string>>();
+        //    Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
         //    basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
         //    var target = new UsageMethod(basicMethodMock.Object);

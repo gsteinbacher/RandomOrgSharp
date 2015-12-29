@@ -20,7 +20,7 @@ namespace Obacher.RandomOrgSharp.Emulator.UnitTest
             const int maxValue = 1000000;
 
             var basicMethodResponseMock = new Mock<IBasicMethodResponse<int>>();
-            var basicMethodMock = new Mock<IBasicMethod<int>>();
+            var basicMethodMock = new Mock<IBasicMethodManager<int>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IntegerParameters>())).Returns(basicMethodResponseMock.Object);
 
             // Act

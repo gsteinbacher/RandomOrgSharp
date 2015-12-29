@@ -1,8 +1,4 @@
-﻿using System.Data.SqlTypes;
-using System.Net.NetworkInformation;
-using System.Net.Security;
-using System.Security.Principal;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Request;
@@ -10,14 +6,14 @@ using Obacher.RandomOrgSharp.Response;
 
 namespace Obacher.RandomOrgSharp.BasicMethod
 {
-    public class BasicMethod<T> : IBasicMethod<T>
+    public class BasicMethodManager<T> : IBasicMethodManager<T>
     {
         private readonly IRandomOrgService _service;
         private readonly IMethodCallManager _methodCallManager;
         private readonly IJsonRequestBuilder _requestBuilder;
         private readonly IJsonResponseParserFactory _responseParserFactory;
 
-        public BasicMethod(IRandomOrgService service = null, IMethodCallManager methodCallManager = null, IJsonRequestBuilder requestBuilder = null, IJsonResponseParserFactory responseParserFactory = null)
+        public BasicMethodManager(IRandomOrgService service = null, IMethodCallManager methodCallManager = null, IJsonRequestBuilder requestBuilder = null, IJsonResponseParserFactory responseParserFactory = null)
         {
             _service = service ?? new RandomOrgApiService();
             _methodCallManager = methodCallManager ?? new MethodCallManager();

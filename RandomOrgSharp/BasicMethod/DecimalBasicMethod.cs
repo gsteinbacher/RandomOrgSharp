@@ -10,15 +10,15 @@ namespace Obacher.RandomOrgSharp.BasicMethod
     /// </summary>
     public class DecimalBasicMethod
     {
-        private readonly IBasicMethod<decimal> _basicMethod;
+        private readonly IBasicMethodManager<decimal> _basicMethodManager;
 
         /// <summary>
         /// Create an instance of <see cref="DecimalBasicMethod"/>.  
         /// </summary>
-        /// <param name="basicMethod">BasicMethod class to use to retrieve decimal information.  Default is <see cref="BasicMethod{T}"/></param>
-        public DecimalBasicMethod(IBasicMethod<decimal> basicMethod = null)
+        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve decimal information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
+        public DecimalBasicMethod(IBasicMethodManager<decimal> basicMethodManager = null)
         {
-            _basicMethod = basicMethod ?? new BasicMethod<decimal>();
+            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<decimal>();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
 
-            var response = _basicMethod.Generate(parameters);
+            var response = _basicMethodManager.Generate(parameters);
             return response;
         }
 
@@ -47,7 +47,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
 
-            var response = await _basicMethod.GenerateAsync(parameters);
+            var response = await _basicMethodManager.GenerateAsync(parameters);
             return response;
         }
     }

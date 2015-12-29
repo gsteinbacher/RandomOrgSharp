@@ -10,15 +10,15 @@ namespace Obacher.RandomOrgSharp.BasicMethod
     /// </summary>
     public class StringBasicMethod
     {
-        private readonly IBasicMethod<string> _basicMethod;
+        private readonly IBasicMethodManager<string> _basicMethodManager;
 
         /// <summary>
         /// Create an instance of <see cref="StringBasicMethod"/>.  
         /// </summary>
-        /// <param name="basicMethod">BasicMethod class to use to retrieve string information.  Default is <see cref="BasicMethod{T}"/></param>
-        public StringBasicMethod(IBasicMethod<string> basicMethod = null)
+        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve string information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
+        public StringBasicMethod(IBasicMethodManager<string> basicMethodManager = null)
         {
-            _basicMethod = basicMethod ?? new BasicMethod<string>();
+            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<string>();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
-            var response = _basicMethod.Generate(parameters);
+            var response = _basicMethodManager.Generate(parameters);
             return response;
         }
 
@@ -49,7 +49,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
-            var response = _basicMethod.Generate(parameters);
+            var response = _basicMethodManager.Generate(parameters);
             return response;
         }
 
@@ -65,7 +65,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
-            var response = await _basicMethod.GenerateAsync(parameters);
+            var response = await _basicMethodManager.GenerateAsync(parameters);
             return response;
         }
 
@@ -81,7 +81,7 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
 
-            var response = await _basicMethod.GenerateAsync(parameters);
+            var response = await _basicMethodManager.GenerateAsync(parameters);
             return response;
         }
     }
