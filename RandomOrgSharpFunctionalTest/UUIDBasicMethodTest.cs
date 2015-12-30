@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -15,7 +15,7 @@ namespace RandomOrgSharp.FunctionalTest
         {
             int numberToReturn = 2;
 
-            var target = new UuidBasicMethod();
+            var target = new UuidMethod();
             var results = target.GenerateUuids(numberToReturn);
 
             results.Should().Not.Be.Null();
@@ -28,7 +28,7 @@ namespace RandomOrgSharp.FunctionalTest
         {
             int numberToReturn = 2;
 
-            var target = new UuidBasicMethod();
+            var target = new UuidMethod();
             var results = await target.GenerateUuidsAsync(numberToReturn);
 
             results.Should().Not.Be.Null();

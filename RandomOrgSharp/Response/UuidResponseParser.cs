@@ -48,7 +48,7 @@ namespace Obacher.RandomOrgSharp.Response
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            return new BasicMethodResponse<Guid>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
+            return new DataResponse<Guid>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
         }
 
         /// <summary>

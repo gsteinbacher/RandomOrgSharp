@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools.Mocks;
@@ -19,13 +21,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = 10;
 
-            Mock<IBasicMethodResponse<decimal>> responseMock = new Mock<IBasicMethodResponse<decimal>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<decimal>(null, Enumerable.Empty<decimal>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<decimal>> basicMethodMock = new Mock<IBasicMethodManager<decimal>>();
+            Mock<IDataMethodManager<decimal>> basicMethodMock = new Mock<IDataMethodManager<decimal>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
-            var target = new DecimalBasicMethod(basicMethodMock.Object);
+            var target = new DecimalMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
@@ -43,13 +44,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = 10;
 
-            Mock<IBasicMethodResponse<decimal>> responseMock = new Mock<IBasicMethodResponse<decimal>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<decimal>(null, Enumerable.Empty<decimal>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<decimal>> basicMethodMock = new Mock<IBasicMethodManager<decimal>>();
+            Mock<IDataMethodManager<decimal>> basicMethodMock = new Mock<IDataMethodManager<decimal>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
-            var target = new DecimalBasicMethod(basicMethodMock.Object);
+            var target = new DecimalMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act

@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataCreate="true">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -212,6 +212,12 @@
   </data>
   <data name="VALIDATION_NUMBER_ITEMS_RETURNED_OUT_OF_RANGE" xml:space="preserve">
     <value>Number of items to return must be between 1 and {0}.</value>
+  </data>
+  <data name="VALIDATION_RESULT_REQUIRED" xml:space="preserve">
+    <value>The result is required in order to verify the signature.</value>
+  </data>
+  <data name="VALIDATION_SIGNATURE_REQUIRED" xml:space="preserve">
+    <value>The signature value is required in order to verify the signature.</value>
   </data>
   <data name="VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE" xml:space="preserve">
     <value>Standard Deviation must be between 2 and 20.</value>

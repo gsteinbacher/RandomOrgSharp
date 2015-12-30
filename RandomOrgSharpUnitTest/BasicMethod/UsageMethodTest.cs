@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools.Mocks;
@@ -23,7 +23,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
         //    Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
         //    var expected = responseMock.Object;
 
-        //    Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
+        //    Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
         //    basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
         //    var target = new UsageMethod(basicMethodMock.Object);

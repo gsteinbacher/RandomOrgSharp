@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools.Mocks;
@@ -22,13 +24,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int maximumValue = 1000;
             const bool allowDuplicates = false;
 
-            Mock<IBasicMethodResponse<int>> responseMock = new Mock<IBasicMethodResponse<int>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<int>> basicMethodMock = new Mock<IBasicMethodManager<int>>();
+            Mock<IDataMethodManager<int>> basicMethodMock = new Mock<IDataMethodManager<int>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
-            var target = new IntegerBasicMethod(basicMethodMock.Object);
+            var target = new IntegerMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
@@ -48,13 +49,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int maximumValue = 1000;
             const bool allowDuplicates = false;
 
-            Mock<IBasicMethodResponse<int>> responseMock = new Mock<IBasicMethodResponse<int>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<int>> basicMethodMock = new Mock<IBasicMethodManager<int>>();
+            Mock<IDataMethodManager<int>> basicMethodMock = new Mock<IDataMethodManager<int>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
-            var target = new IntegerBasicMethod(basicMethodMock.Object);
+            var target = new IntegerMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act

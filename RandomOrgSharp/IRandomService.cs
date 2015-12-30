@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp
 {
-    public interface IRandomOrgService
+    public interface IRandomService
     {
         JObject SendRequest(JObject jsonRequest);
 

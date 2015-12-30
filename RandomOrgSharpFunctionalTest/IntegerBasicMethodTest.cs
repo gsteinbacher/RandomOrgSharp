@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
@@ -33,7 +33,7 @@ namespace RandomOrgSharp.FunctionalTest
             bool allowDuplicates = _random.Next(1, 2) == 1;
 
             // Act
-            var target = new IntegerBasicMethod();
+            var target = new IntegerMethod();
             var results = target.GenerateIntegers(numberToReturn, minNumber, maxNumber, allowDuplicates);
 
             // Assert
@@ -50,13 +50,13 @@ namespace RandomOrgSharp.FunctionalTest
             bool allowDuplicates = _random.Next(1, 2) == 1;
 
             // Act
-            var target = new IntegerBasicMethod();
+            var target = new IntegerMethod();
             var results = await target.GenerateIntegersAsync(numberToReturn, minNumber, maxNumber, allowDuplicates);
 
             TestResults(results, numberToReturn, minNumber, maxNumber, allowDuplicates);
         }
 
-        private static void TestResults(IBasicMethodResponse<int> results, int numberToReturn, int minNumber,
+        private static void TestResults(DataResponse<int> results, int numberToReturn, int minNumber,
                                         int maxNumber, bool allowDuplicates)
         {
             results.Should().Not.Be.Null();

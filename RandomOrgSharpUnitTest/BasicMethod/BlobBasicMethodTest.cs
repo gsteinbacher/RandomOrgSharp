@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools.Mocks;
@@ -20,13 +22,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int size = 16;
             const BlobFormat blobFormat = BlobFormat.Hex;
 
-            Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
+            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
-            var target = new BlobBasicMethod(basicMethodMock.Object);
+            var target = new BlobMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
@@ -45,13 +46,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int size = 16;
             const BlobFormat blobFormat = BlobFormat.Hex;
 
-            Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
+            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
-            var target = new BlobBasicMethod(basicMethodMock.Object);
+            var target = new BlobMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act

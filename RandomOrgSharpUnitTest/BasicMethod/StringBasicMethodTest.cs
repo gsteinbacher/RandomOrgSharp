@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools.Mocks;
@@ -22,13 +24,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const string charactersAllowed = "abc";
             const bool allowDuplicates = false;
 
-            Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
+            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
-            var target = new StringBasicMethod(basicMethodMock.Object);
+            var target = new StringMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
@@ -48,13 +49,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const string charactersAllowed = "abc";
             const bool allowDuplicates = false;
 
-            Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
+            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
-            var target = new StringBasicMethod(basicMethodMock.Object);
+            var target = new StringMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
@@ -74,13 +74,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const CharactersAllowed charactersAllowed = CharactersAllowed.Alpha;
             const bool allowDuplicates = false;
 
-            Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
+            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
-            var target = new StringBasicMethod(basicMethodMock.Object);
+            var target = new StringMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
@@ -97,15 +96,14 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             // Arrange
             const int numberOfItems = 1;
             const int length = 10;
-            const CharactersAllowed charactersAllowed = CharactersAllowed.Alpha;const bool allowDuplicates = false;
+            const CharactersAllowed charactersAllowed = CharactersAllowed.Alpha; const bool allowDuplicates = false;
 
-            Mock<IBasicMethodResponse<string>> responseMock = new Mock<IBasicMethodResponse<string>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<string>> basicMethodMock = new Mock<IBasicMethodManager<string>>();
+            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
-            var target = new StringBasicMethod(basicMethodMock.Object);
+            var target = new StringMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act

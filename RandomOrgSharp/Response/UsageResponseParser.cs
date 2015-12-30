@@ -4,7 +4,7 @@ using Obacher.RandomOrgSharp.Parameter;
 
 namespace Obacher.RandomOrgSharp.Response
 {
-    public class UsageMethodResponseParser : IParser {
+    public class UsageResponseParser : IParser {
         public IResponse Parse(JObject json)
         {
             var version = JsonHelper.JsonToString(json.GetValue(RandomOrgConstants.JSON_RPC_VALUE));
@@ -43,7 +43,7 @@ namespace Obacher.RandomOrgSharp.Response
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            var usageResponse = new UsageMethodResponse(version, status, creationTime, bitsLeft, requestsLeft, totalBits, totalRequests, id);
+            var usageResponse = new UsageResponse(version, status, creationTime, bitsLeft, requestsLeft, totalBits, totalRequests, id);
             return usageResponse;
         }
 

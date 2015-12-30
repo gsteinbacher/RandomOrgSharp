@@ -26,6 +26,9 @@
         public const string BLOB_SIZE_OUT_OF_RANGE = VALIDATION_KEY + "BLOB_SIZE_OUT_OF_RANGE";
         public const string BLOB_SIZE_NOT_DIVISIBLE_BY_8 = VALIDATION_KEY + "BLOB_SIZE_NOT_DIVISIBLE_BY_8";
 
+        public const string RESULT_REQUIRED = VALIDATION_KEY + "RESULT_REQUIRED";
+        public const string SIGNATURE_REQUIRED = VALIDATION_KEY + "SIGNATURE_REQUIRED";
+
         public const string IDS_NOT_MATCHED = "ERROR_IDS_NOT_MATCHED";
 
         #endregion

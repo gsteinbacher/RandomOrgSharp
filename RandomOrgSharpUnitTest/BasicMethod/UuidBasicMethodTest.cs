@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools.Mocks;
@@ -19,13 +20,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             // Arrange
             const int numberOfItems = 1;
 
-            Mock<IBasicMethodResponse<Guid>> responseMock = new Mock<IBasicMethodResponse<Guid>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<Guid>(null, Enumerable.Empty<Guid>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<Guid>> basicMethodMock = new Mock<IBasicMethodManager<Guid>>();
+            Mock<IDataMethodManager<Guid>> basicMethodMock = new Mock<IDataMethodManager<Guid>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
-            var target = new UuidBasicMethod(basicMethodMock.Object);
+            var target = new UuidMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act
@@ -42,13 +42,12 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             // Arrange
             const int numberOfItems = 1;
 
-            Mock<IBasicMethodResponse<Guid>> responseMock = new Mock<IBasicMethodResponse<Guid>>();
-            var expected = responseMock.Object;
+            var expected = new DataResponse<Guid>(null, Enumerable.Empty<Guid>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IBasicMethodManager<Guid>> basicMethodMock = new Mock<IBasicMethodManager<Guid>>();
+            Mock<IDataMethodManager<Guid>> basicMethodMock = new Mock<IDataMethodManager<Guid>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
-            var target = new UuidBasicMethod(basicMethodMock.Object);
+            var target = new UuidMethod(basicMethodMock.Object);
             using (new MockCommonParameters())
             {
                 // Act

@@ -11,7 +11,7 @@ using Obacher.RandomOrgSharp.Properties;
 
 namespace Obacher.RandomOrgSharp
 {
-    public class RandomOrgApiService : IRandomOrgService
+    public class RandomOrgApiService : IRandomService
     {
         private const string URL = "https://api.random.org/json-rpc/1/invoke";
         private const string CONTENT_TYPE = "application/json";
@@ -25,7 +25,6 @@ namespace Obacher.RandomOrgSharp
 
         public RandomOrgApiService()
         {
-
             _httpRequestTimeout = SettingsManager.Instance.GetConfigurationValue(HTTP_REQUEST_TIMEOUT_KEY, DEFAULT_REQUEST_TIMEOUT);
             _httpReadWriteTimeout = SettingsManager.Instance.GetConfigurationValue(HTTP_READWRITE_TIMEOUT_KEY, DEFAULT_READWRITE_TIMEOUT);
         }

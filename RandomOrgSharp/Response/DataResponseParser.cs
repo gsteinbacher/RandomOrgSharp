@@ -7,10 +7,10 @@ namespace Obacher.RandomOrgSharp.Response
 {
     /// <summary>
     /// Class which parses the responses from Blob, Decimal, Guassian, Integer and String method calls.  
-    /// All these methods return the same information except for the type so I use the same method for all of them.
+    /// All these methods return the same information except for the type so the same method is used for all of them.
     /// </summary>
     /// <typeparam name="T">Type of value being returned in the list of random values</typeparam>
-    public class BasicMethodResponseParser<T> : IParser
+    public class DataResponseParser<T> : IParser
     {
         /// <summary>
         /// Parse the JSON response
@@ -47,7 +47,7 @@ namespace Obacher.RandomOrgSharp.Response
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            return new BasicMethodResponse<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
+            return new DataResponse<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
         }
 
         /// <summary>

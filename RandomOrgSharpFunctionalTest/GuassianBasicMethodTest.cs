@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
@@ -30,7 +30,7 @@ namespace RandomOrgSharp.FunctionalTest
             int signifantDigits = _random.Next(2, 20);
 
             // Act
-            var target = new GuassianBasicMethod();
+            var target = new GuassianMethod();
             var results = target.GenerateGuassians(numberToReturn, mean, standardDeviation, signifantDigits);
 
             // Assert
@@ -47,7 +47,7 @@ namespace RandomOrgSharp.FunctionalTest
             int signifantDigits = _random.Next(2, 20);
 
             // Act
-            var target = new GuassianBasicMethod();
+            var target = new GuassianMethod();
             var results = await target.GenerateGuassiansAsync(numberToReturn, mean, standardDeviation, signifantDigits);
 
             // Assert
@@ -55,7 +55,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
 
-        private static void TestResults(IBasicMethodResponse<decimal> results, int numberToReturn)
+        private static void TestResults(DataResponse<decimal> results, int numberToReturn)
         {
             results.Should().Not.Be.Null();
             results.Data.Count().Should().Equal(numberToReturn);

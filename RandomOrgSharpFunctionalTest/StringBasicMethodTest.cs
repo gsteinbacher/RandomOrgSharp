@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.FunctionalTest
             const bool allowDuplicates = false;
 
             // Act
-            var target = new StringBasicMethod();
+            var target = new StringMethod();
             var results = target.GenerateStrings(numberToReturn, length, charactersAllowed, allowDuplicates);
 
             TestResults(results, numberToReturn, length,
@@ -48,7 +48,7 @@ namespace RandomOrgSharp.FunctionalTest
             CharactersAllowed charactersAllowed = CharactersAllowed.AlphaNumeric;
             const bool allowDuplicates = false;
 
-            var target = new StringBasicMethod();
+            var target = new StringMethod();
             var results = await target.GenerateStringsAsync(numberToReturn, length, charactersAllowed, allowDuplicates);
 
             TestResults(results, numberToReturn, length,
@@ -56,7 +56,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
 
-        private static void TestResults(IBasicMethodResponse<string> results, int numberToReturn, int length,
+        private static void TestResults(DataResponse<string> results, int numberToReturn, int length,
             string charactersAllowed)
         {
             results.Should().Not.Be.Null();

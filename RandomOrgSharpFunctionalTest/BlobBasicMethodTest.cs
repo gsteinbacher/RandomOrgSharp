@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
@@ -29,7 +29,7 @@ namespace RandomOrgSharp.FunctionalTest
             int size = _random.Next(1, 10) * 8;
 
             // Act
-            var target = new BlobBasicMethod();
+            var target = new BlobMethod();
             var results = target.GenerateBlobs(numberToReturn, size);
 
             // Assert
@@ -45,7 +45,7 @@ namespace RandomOrgSharp.FunctionalTest
             int size = _random.Next(1, 10) * 8;
 
             // Act
-            var target = new BlobBasicMethod();
+            var target = new BlobMethod();
             var results = await target.GenerateBlobsAsync(numberToReturn, size);
 
             // Assert
@@ -53,7 +53,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
 
-        private static void TestResults(IBasicMethodResponse<string> results, int numberToReturn)
+        private static void TestResults(DataResponse<string> results, int numberToReturn)
         {
             results.Should().Not.Be.Null();
             results.Data.Should().Not.Be.Null();

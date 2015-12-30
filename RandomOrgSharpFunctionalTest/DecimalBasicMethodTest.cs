@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
 using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
@@ -30,7 +30,7 @@ namespace RandomOrgSharp.FunctionalTest
             const bool allowDuplicates = false;
 
             // Act
-            var target = new DecimalBasicMethod();
+            var target = new DecimalMethod();
             var results = target.GenerateDecimalFractions(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
 
             // Assert
@@ -46,7 +46,7 @@ namespace RandomOrgSharp.FunctionalTest
             const bool allowDuplicates = false;
 
             // Act
-            var target = new DecimalBasicMethod();
+            var target = new DecimalMethod();
             var results = await target.GenerateDecimalFractionsAsync(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
 
             // Assert
@@ -54,7 +54,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
 
-        private static void TestResults(IBasicMethodResponse<decimal> results, int numberToReturn, int numberOfDecimalPlaces)
+        private static void TestResults(DataResponse<decimal> results, int numberToReturn, int numberOfDecimalPlaces)
         {
             results.Should().Not.Be.Null();
             results.Data.Count().Should().Equal(numberToReturn);

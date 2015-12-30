@@ -3,22 +3,35 @@ using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Request;
 using Obacher.RandomOrgSharp.Response;
 
-namespace Obacher.RandomOrgSharp.BasicMethod
+namespace Obacher.RandomOrgSharp.Method
 {
     /// <summary>
     /// Retrieve a lst of random integer values
     /// </summary>
-    public class StringBasicMethod
+    public class StringMethod
     {
-        private readonly IBasicMethodManager<string> _basicMethodManager;
+        private bool _verifyOriginater;
+        private readonly IDataMethodManager<string> _dataMethodManager;
 
         /// <summary>
-        /// Create an instance of <see cref="StringBasicMethod"/>.  
+        /// Create an instance of <see cref="StringMethod"/>.  
         /// </summary>
-        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve string information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
-        public StringBasicMethod(IBasicMethodManager<string> basicMethodManager = null)
+        /// <param name="dataMethodManager">dataMethodManager class to use to retrieve string information.  Default is <see cref="DataMethodManager{T}"/></param>
+        public StringMethod(IDataMethodManager<string> dataMethodManager = null)
         {
-            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<string>();
+            _dataMethodManager = dataMethodManager ?? new DataMethodManager<string>();
+        }
+
+        /// <summary>
+        /// Verify the originator of the response.
+        /// </summary>
+        /// <example>
+        /// new StringMethod().WithVerification().GenerateStrings(...);
+        /// </example>
+        public StringMethod WithVerification()
+        {
+            _verifyOriginater = true;
+            return this;
         }
 
         /// <summary>
@@ -29,11 +42,12 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="charactersAllowed">Create of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of string values</returns>
-        public IBasicMethodResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
+        public DataResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
+            _verifyOriginater = false;
 
-            var response = _basicMethodManager.Generate(parameters);
+            var response = _dataMethodManager.Generate(parameters);
             return response;
         }
 
@@ -45,11 +59,12 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="charactersAllowed">A string that contains the set of characters that are allowed to occur in the random strings. The maximum number of characters is 80.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of string values</returns>
-        public IBasicMethodResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
+        public DataResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
+            _verifyOriginater = false;
 
-            var response = _basicMethodManager.Generate(parameters);
+            var response = _dataMethodManager.Generate(parameters);
             return response;
         }
 
@@ -61,11 +76,12 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="charactersAllowed">Create of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of guassian values</returns>
-        public async Task<IBasicMethodResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
+        public async Task<DataResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
+            _verifyOriginater = false;
 
-            var response = await _basicMethodManager.GenerateAsync(parameters);
+            var response = await _dataMethodManager.GenerateAsync(parameters);
             return response;
         }
 
@@ -77,11 +93,12 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// <param name="charactersAllowed">A string that contains the set of characters that are allowed to occur in the random strings. The maximum number of characters is 80.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of guassian values</returns>
-        public async Task<IBasicMethodResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
+        public async Task<DataResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
-            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
+            var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
+            _verifyOriginater = false;
 
-            var response = await _basicMethodManager.GenerateAsync(parameters);
+            var response = await _dataMethodManager.GenerateAsync(parameters);
             return response;
         }
     }

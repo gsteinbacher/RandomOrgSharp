@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.BasicMethod;
+using Obacher.RandomOrgSharp.Method;
+using Obacher.RandomOrgSharp.Error;
 using Obacher.RandomOrgSharp.Parameter;
 using Obacher.RandomOrgSharp.Request;
 using Obacher.RandomOrgSharp.Response;
@@ -29,34 +32,35 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockParameters.Setup(p => p.ApiKey).Returns(apiKey);
             mockParameters.Setup(p => p.Id).Returns(id);
             mockParameters.Setup(p => p.MethodType).Returns(MethodType.Integer);
+            mockParameters.Setup(p => p.VerifyOriginator).Returns(false);
 
-            var mockResponse = new Mock<IBasicMethodResponse<int>>();
-            mockResponse.Setup(m => m.AdvisoryDelay).Returns(advisoryDelay);
+            var expected = new DataResponse<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, advisoryDelay, 0);
 
-            var mockCallManager = new Mock<IMethodCallManager>();
-            mockCallManager.Setup(m => m.CanSendRequest());
+            var mockCallManager = new Mock<IAdvisoryDelayManager>();
             mockCallManager.Setup(m => m.Delay());
-            mockCallManager.Setup(m => m.ThrowExceptionOnError(mockJsonResponse.Object));
             mockCallManager.Setup(m => m.SetAdvisoryDelay(advisoryDelay));
-            mockCallManager.Setup(m => m.VerifyResponse(mockParameters.Object, mockResponse.Object));
 
             var mockRequestBuilder = new Mock<IJsonRequestBuilder>();
             mockRequestBuilder.Setup(m => m.Create(mockParameters.Object)).Returns(mockJsonRequest.Object);
 
-            var mockService = new Mock<IRandomOrgService>();
+            var mockResponseHandlerFactory = new Mock<IResponseHandlerFactory>();
+            mockResponseHandlerFactory.Setup(m => m.Execute(mockJsonResponse.Object, mockParameters.Object));
+            mockResponseHandlerFactory.Setup(m => m.GetHandler(It.IsAny<Type>()));
+
+            var mockService = new Mock<IRandomService>();
             mockService.Setup(m => m.SendRequest(mockJsonRequest.Object)).Returns(mockJsonResponse.Object);
 
             var mockResponseParser = new Mock<IParser>();
-            mockResponseParser.Setup(m => m.Parse(mockJsonResponse.Object)).Returns(mockResponse.Object);
+            mockResponseParser.Setup(m => m.Parse(mockJsonResponse.Object)).Returns(expected);
             var mockResponseParserFactory = new Mock<IJsonResponseParserFactory>();
             mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new BasicMethodManager<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
+            var target = new DataMethodManager<int>(mockService.Object, mockRequestBuilder.Object, mockResponseHandlerFactory.Object);
             var actual = target.Generate(mockParameters.Object);
 
             // Assert
-            actual.Should().Equal(mockResponse.Object);
+            actual.Should().Equal(expected);
         }
 
         [TestMethod]
@@ -74,35 +78,38 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockParameters.Setup(p => p.ApiKey).Returns(apiKey);
             mockParameters.Setup(p => p.Id).Returns(id);
             mockParameters.Setup(p => p.MethodType).Returns(MethodType.Integer);
+            mockParameters.Setup(p => p.VerifyOriginator).Returns(false);
 
-            var mockResponse = new Mock<IBasicMethodResponse<int>>();
-            mockResponse.Setup(m => m.AdvisoryDelay).Returns(advisoryDelay);
+            var expected = new DataResponse<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, advisoryDelay, 0);
 
-            var mockCallManager = new Mock<IMethodCallManager>();
-            mockCallManager.Setup(m => m.CanSendRequest());
+            var mockCallManager = new Mock<IAdvisoryDelayManager>();
             mockCallManager.Setup(m => m.Delay());
-            mockCallManager.Setup(m => m.ThrowExceptionOnError(mockJsonResponse.Object));
             mockCallManager.Setup(m => m.SetAdvisoryDelay(advisoryDelay));
-            mockCallManager.Setup(m => m.VerifyResponse(mockParameters.Object, mockResponse.Object));
 
             var mockRequestBuilder = new Mock<IJsonRequestBuilder>();
             mockRequestBuilder.Setup(m => m.Create(mockParameters.Object)).Returns(mockJsonRequest.Object);
 
-            var mockService = new Mock<IRandomOrgService>();
+            var mockService = new Mock<IRandomService>();
             mockService.Setup(m => m.SendRequestAsync(mockJsonRequest.Object)).ReturnsAsync(mockJsonResponse.Object);
 
+            var mockResponseHandlerFactory = new Mock<IResponseHandlerFactory>();
+            mockResponseHandlerFactory.Setup(m => m.Execute(mockJsonResponse.Object, mockParameters.Object));
+            mockResponseHandlerFactory.Setup(m => m.GetHandler(It.IsAny<Type>()));
+
+            var mockErrorHandler = new Mock<IErrorHandler>();
+            mockErrorHandler.Setup(m => m.HasError(It.IsAny<JObject>())).Returns(false);
+
             var mockResponseParser = new Mock<IParser>();
-            mockResponseParser.Setup(m => m.Parse(mockJsonResponse.Object)).Returns(mockResponse.Object);
+            mockResponseParser.Setup(m => m.Parse(mockJsonResponse.Object)).Returns(expected);
             var mockResponseParserFactory = new Mock<IJsonResponseParserFactory>();
             mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new BasicMethodManager<int>(mockService.Object, mockCallManager.Object, mockRequestBuilder.Object, mockResponseParserFactory.Object);
+            var target = new DataMethodManager<int>(mockService.Object, mockRequestBuilder.Object, mockResponseHandlerFactory.Object);
             var actual = await target.GenerateAsync(mockParameters.Object);
 
             // Assert
-            actual.Should().Equal(mockResponse.Object);
-
+            actual.Should().Equal(expected);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace RandomOrgSharp.UnitTest
     },
     id: 42
 }");
-            //var actual = BasicMethodResponse.Parse(input);
+            //var actual = DataResponse.Parse(input);
 
             //"2.0".Should().Equal(actual.Version);
             //expected.Should().Equal(actual.Data.Values<int>());

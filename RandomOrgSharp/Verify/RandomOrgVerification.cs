@@ -5,8 +5,8 @@ namespace Obacher.RandomOrgSharp.Verify
 {
     public class RandomOrgVerification
     {
-        private readonly IRandomOrgService _service;
-        public RandomOrgVerification(IRandomOrgService service = null)
+        private readonly IRandomService _service;
+        public RandomOrgVerification(IRandomService service = null)
         {
             _service = service ?? new RandomOrgApiService();
         }

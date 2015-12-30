@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
-
-namespace Obacher.RandomOrgSharp.Parameter
+﻿namespace Obacher.RandomOrgSharp.Parameter
 {
     /// <summary>
     /// Class which contains the parameters that are used by all method calls to random.org
@@ -57,6 +54,10 @@ namespace Obacher.RandomOrgSharp.Parameter
 
                 case MethodType.Usage:
                     methodName = RandomOrgConstants.USAGE_METHOD;
+                    break;
+
+                case MethodType.VerifySignature:
+                    methodName = RandomOrgConstants.VERIFY_SIGNATURE_METHOD;
                     break;
             }
 

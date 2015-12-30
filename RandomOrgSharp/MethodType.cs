@@ -8,6 +8,7 @@
         String,
         Uuid,
         Blob,
-        Usage
+        Usage,
+        VerifySignature
     }
 }

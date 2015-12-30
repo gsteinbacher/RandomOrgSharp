@@ -1,35 +1,34 @@
 ﻿using System.Threading.Tasks;
 using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Request;
 using Obacher.RandomOrgSharp.Response;
 
-namespace Obacher.RandomOrgSharp.BasicMethod
+namespace Obacher.RandomOrgSharp.Method
 {
     /// <summary>
     /// Retrieve a lst of random blob values
     /// </summary>
     public class UsageMethod
     {
-        private readonly IBasicMethodManager<string> _basicMethodManager;
+        private readonly IUsageMethodManager _usageMethodManager;
 
         /// <summary>
         /// Create an instance of <see cref="UsageMethod"/>.  
         /// </summary>
-        /// <param name="basicMethodManager">basicMethodManager class to use to retrieve the usage information.  Default is <see cref="basicMethodManagerManager{T}"/></param>
-        public UsageMethod(IBasicMethodManager<string> basicMethodManager = null)
+        /// <param name="usageMethodManager">UsageMethodManager class to use to retrieve the usage information.  Default is <see cref="UsageMethodManager"/></param>
+        public UsageMethod(IUsageMethodManager usageMethodManager = null)
         {
-            _basicMethodManager = basicMethodManager ?? new BasicMethodManager<string>();
+            _usageMethodManager = usageMethodManager ?? new UsageMethodManager();
         }
 
         /// <summary>
         /// Returns information related to the the usage
         /// </summary>
         /// <returns>Information related to the usage</returns>
-        public IBasicMethodResponse<string> GetUsage()
+        public UsageResponse GetUsage()
         {
             var parameters = UsageParameters.Create();
 
-            var response = _basicMethodManager.Generate(parameters);
+            var response = _usageMethodManager.Get(parameters);
             return response;
         }
 
@@ -37,11 +36,11 @@ namespace Obacher.RandomOrgSharp.BasicMethod
         /// Returns information related to the the usage as an asynchronous operation
         /// </summary>
         /// <returns>Information related to the usage</returns>
-        public async Task<IBasicMethodResponse<string>> GetUsageAsync()
+        public async Task<UsageResponse> GetUsageAsync()
         {
             var parameters = UsageParameters.Create();
 
-            var response = await _basicMethodManager.GenerateAsync(parameters);
+            var response = await _usageMethodManager.GetAsync(parameters);
             return response;
         }
     }

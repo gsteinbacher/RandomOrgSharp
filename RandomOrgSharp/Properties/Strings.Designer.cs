@@ -349,6 +349,24 @@ namespace Obacher.RandomOrgSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The result is required in order to verify the signature..
+        /// </summary>
+        internal static string VALIDATION_RESULT_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_RESULT_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The signature value is required in order to verify the signature..
+        /// </summary>
+        internal static string VALIDATION_SIGNATURE_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_SIGNATURE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Standard Deviation must be between 2 and 20..
         /// </summary>
         internal static string VALIDATION_SIGNIFICANT_DIGITS_OUT_OF_RANGE {

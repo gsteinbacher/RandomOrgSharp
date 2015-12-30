@@ -2,7 +2,7 @@
 
 namespace Obacher.RandomOrgSharp.Response
 {
-    public class UsageMethodResponse : IUsageMethodResponse
+    public class UsageResponse : IResponse
     {
         public string Version { get; }
 
@@ -14,7 +14,7 @@ namespace Obacher.RandomOrgSharp.Response
         public int TotalRequests { get; }
         public int Id { get; }
 
-        public UsageMethodResponse(string version, StatusType status, DateTime creationTime, int bitsLeft, int requestsLeft, int totalBits, int totalRequests, int id)
+        public UsageResponse(string version, StatusType status, DateTime creationTime, int bitsLeft, int requestsLeft, int totalBits, int totalRequests, int id)
         {
             Version = version;
             Status = status;

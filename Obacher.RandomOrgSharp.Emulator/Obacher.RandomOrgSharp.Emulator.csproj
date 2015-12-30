@@ -51,7 +51,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RandomOrgHttpEmulator.cs" />
+    <Compile Include="RandomOrgApiEmulator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

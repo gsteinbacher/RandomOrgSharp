@@ -86,5 +86,11 @@
         public const string CHARACTERS_ALLOWED_LOWER_NUMERIC = "abcdefghijklmnopqrstuvwxyz0123456789";
         public const string CHARACTERS_ALLOWED_ALPHA_NUMERIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+        // Handler Types
+        public const string HANDLER_TYPE_ERROR = "XYZ_ERROR_XYZ";
+        public const string HANDLER_TYPE_API = "XYZ_RANDOM_ORG_API_XYZ";
+        public const string HANDLER_TYPE_ADVISORY_DELAY = "XYZ_ADVISORY_DELAY_XYZ";
+        public const string HANDLER_TYPE_VERIFY_SIGNATURE = "XYZ_VERIFY_SIGNATURE_XYZ";
+        public const string HANDLER_TYPE_VERIFY_ID = "XYZ_VERIFY_ID_XYZ";
     }
 }
