@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     public interface IParser
     {
-        IResponse Parse(JObject json);
+        IResponseInfo Parse(JObject json);
         bool CanHandle(IParameters parameters);
     }
 }

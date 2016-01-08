@@ -1,6 +1,6 @@
 ﻿using Obacher.Framework.Common;
 
-namespace Obacher.RandomOrgSharp.Parameter
+namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     public enum CharactersAllowed
     {
@@ -17,7 +17,7 @@ namespace Obacher.RandomOrgSharp.Parameter
     /// </summary>
     public sealed class StringParameters : CommonParameters
     {
-        private const int MAX_ITEMS_ALLOWED = 10000;
+        private const int MaxItemsAllowed = 10000;
 
         public int NumberOfItemsToReturn { get; private set; }
         public int Length { get; private set; }
@@ -112,9 +112,9 @@ namespace Obacher.RandomOrgSharp.Parameter
         /// </summary>
         private void SetParameters(int numberOfItemsToReturn, int length, bool allowDuplicates)
         {
-            if (!numberOfItemsToReturn.Between(1, MAX_ITEMS_ALLOWED))
+            if (!numberOfItemsToReturn.Between(1, MaxItemsAllowed))
                 throw new RandomOrgRunTimeException(
-                    ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MAX_ITEMS_ALLOWED));
+                    ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MaxItemsAllowed));
 
             if (!length.Between(1, 20))
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.STRING_LENGTH_OUT_OF_RANGE));

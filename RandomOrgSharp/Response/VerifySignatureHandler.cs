@@ -1,17 +1,26 @@
 ﻿using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Verify
+namespace Obacher.RandomOrgSharp.Core.Response
 {
-    public class RandomOrgVerification
+    /// <summary>
+    /// Verify the response came from random.org and was not tampered with.
+    /// </summary>
+    public class VerifySignatureHandler : IResponseHandler
     {
         private readonly IRandomService _service;
-        public RandomOrgVerification(IRandomService service = null)
+        public VerifySignatureHandler(IRandomService service = null)
         {
             _service = service ?? new RandomOrgApiService();
         }
 
-        public void Verify(JObject json)
+        /// <summary>
+        /// Call random.org to verify the response came from random.org and was not tampered before received
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public bool Process(IParameters parameters, JObject json)
         {
             var result = json.GetValue(RandomOrgConstants.JSON_RESULT_PARAMETER_NAME) as JObject;
             if (result != null)
@@ -43,6 +52,18 @@ namespace Obacher.RandomOrgSharp.Verify
                         throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.JSON_NOT_VERIFIED));
                 }
             }
+
+            return true;
+        }
+
+        /// <summary>
+        /// The signature needs to be verified when the VerifyOriginator is true
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns>True if the VerifyOriginator is true</returns>
+        public bool CanHandle(IParameters parameters)
+        {
+            return parameters.VerifyOriginator;
         }
     }
 }

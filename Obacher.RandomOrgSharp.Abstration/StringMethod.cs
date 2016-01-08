@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Request;
-using Obacher.RandomOrgSharp.Response;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Response;
 
-namespace Obacher.RandomOrgSharp.Method
+namespace Obacher.RandomOrgSharp.Abstration
 {
     /// <summary>
     /// Retrieve a lst of random integer values
@@ -11,19 +11,19 @@ namespace Obacher.RandomOrgSharp.Method
     public class StringMethod
     {
         private bool _verifyOriginater;
-        private readonly IDataMethodManager<string> _dataMethodManager;
+        private readonly IMethodCallBroker _methodCallBroker;
 
         /// <summary>
         /// Create an instance of <see cref="StringMethod"/>.  
         /// </summary>
-        /// <param name="dataMethodManager">dataMethodManager class to use to retrieve string information.  Default is <see cref="DataMethodManager{T}"/></param>
-        public StringMethod(IDataMethodManager<string> dataMethodManager = null)
+        /// <param name="methodCallBroker">methodCallBroker class to use to retrieve string information.  Default is <see cref="MethodCallBroker{T}"/></param>
+        public StringMethod(IMethodCallBroker methodCallBroker = null)
         {
-            _dataMethodManager = dataMethodManager ?? new DataMethodManager<string>();
+            _methodCallBroker = methodCallBroker ?? new MethodCallBroker<string>();
         }
 
         /// <summary>
-        /// Verify the originator of the response.
+        /// Verify the originator of the responseInfo.
         /// </summary>
         /// <example>
         /// new StringMethod().WithVerification().GenerateStrings(...);
@@ -42,13 +42,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="charactersAllowed">Create of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of string values</returns>
-        public DataResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
+        public DataResponseInfo<string> GenerateStrings(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = _dataMethodManager.Generate(parameters);
-            return response;
+            var response = _methodCallBroker.Generate(parameters);
+            return response as DataResponseInfo<string>;
         }
 
         /// <summary>
@@ -59,13 +59,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="charactersAllowed">A string that contains the set of characters that are allowed to occur in the random strings. The maximum number of characters is 80.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of string values</returns>
-        public DataResponse<string> GenerateStrings(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
+        public DataResponseInfo<string> GenerateStrings(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = _dataMethodManager.Generate(parameters);
-            return response;
+            var response = _methodCallBroker.Generate(parameters);
+            return response as DataResponseInfo<string>;
         }
 
         /// <summary>
@@ -76,13 +76,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="charactersAllowed">Create of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of guassian values</returns>
-        public async Task<DataResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
+        public async Task<DataResponseInfo<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = await _dataMethodManager.GenerateAsync(parameters);
-            return response;
+            var response = await _methodCallBroker.GenerateAsync(parameters);
+            return response as DataResponseInfo<string>;
         }
 
         /// <summary>
@@ -93,13 +93,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="charactersAllowed">A string that contains the set of characters that are allowed to occur in the random strings. The maximum number of characters is 80.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of guassian values</returns>
-        public async Task<DataResponse<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
+        public async Task<DataResponseInfo<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
             var parameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = await _dataMethodManager.GenerateAsync(parameters);
-            return response;
+            var response = await _methodCallBroker.GenerateAsync(parameters);
+            return response as DataResponseInfo<string>;
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Request
+namespace Obacher.RandomOrgSharp.Core.Request
 {
     public class JsonRequestBuilderFactory : IJsonRequestBuilderFactory
     {

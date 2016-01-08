@@ -1,12 +1,11 @@
 ﻿using System;
-using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     public interface IResponseHandlerFactory
     {
-        bool Execute(JObject json, IParameters parameters);
+        bool Execute(IResponseInfo responseInfo, IParameters parameters);
         IResponseHandler GetHandler(Type handlerType);
     }
 }

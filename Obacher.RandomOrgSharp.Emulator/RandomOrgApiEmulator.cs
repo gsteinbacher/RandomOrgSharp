@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Core;
 
 namespace Obacher.RandomOrgSharp.Emulator
 {
@@ -110,7 +111,7 @@ namespace Obacher.RandomOrgSharp.Emulator
         /// Emulate the call to the random.org web api
         /// </summary>
         /// <param name="jsonRequest">Request that would be sent to random.org</param>
-        /// <returns>Response that looks the same as a response from the random.org web site</returns>
+        /// <returns>ResponseInfo that looks the same as a response from the random.org web site</returns>
         public JObject SendRequest(JObject jsonRequest)
         {
             var response = SentRequestInternal(jsonRequest);
@@ -132,7 +133,7 @@ namespace Obacher.RandomOrgSharp.Emulator
         /// Creates the response object based on the parameters in the request object
         /// </summary>
         /// <param name="jsonRequest">Request object</param>
-        /// <returns>Response object</returns>
+        /// <returns>ResponseInfo object</returns>
         private JObject SentRequestInternal(JObject jsonRequest)
         {
             JObject response;

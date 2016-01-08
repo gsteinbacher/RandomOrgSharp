@@ -62,9 +62,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.csproj">
+    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{D12E7982-A721-4D2A-AC0C-AD2DB942329D}</Project>
-      <Name>Obacher.RandomOrgSharp</Name>
+      <Name>Obacher.RandomOrgSharp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

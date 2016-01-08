@@ -1,4 +1,4 @@
-﻿namespace Obacher.RandomOrgSharp.Parameter
+﻿namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     public interface IParameters
     {

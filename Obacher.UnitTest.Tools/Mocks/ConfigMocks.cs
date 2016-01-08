@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Moq;
 using Obacher.RandomOrgSharp;
+using Obacher.RandomOrgSharp.Core;
 
 namespace Obacher.UnitTest.Tools.Mocks
 {

@@ -5,11 +5,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Request;
+using Obacher.RandomOrgSharp.Core.Response;
 using Obacher.RandomOrgSharp.Method;
-using Obacher.RandomOrgSharp.Error;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Request;
-using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.UnitTest.BasicMethod
@@ -34,7 +34,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockParameters.Setup(p => p.MethodType).Returns(MethodType.Integer);
             mockParameters.Setup(p => p.VerifyOriginator).Returns(false);
 
-            var expected = new DataResponse<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, advisoryDelay, 0);
+            var expected = new DataResponseInfo<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, advisoryDelay, 0);
 
             var mockCallManager = new Mock<IAdvisoryDelayManager>();
             mockCallManager.Setup(m => m.Delay());
@@ -56,7 +56,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new DataMethodManager<int>(mockService.Object, mockRequestBuilder.Object, mockResponseHandlerFactory.Object);
+            var target = new MethodCallBroker<int>(mockService.Object, mockRequestBuilder.Object, mockResponseHandlerFactory.Object);
             var actual = target.Generate(mockParameters.Object);
 
             // Assert
@@ -80,7 +80,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockParameters.Setup(p => p.MethodType).Returns(MethodType.Integer);
             mockParameters.Setup(p => p.VerifyOriginator).Returns(false);
 
-            var expected = new DataResponse<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, advisoryDelay, 0);
+            var expected = new DataResponseInfo<int>(null, Enumerable.Empty<int>(), DateTime.Now, 0, 0, 0, advisoryDelay, 0);
 
             var mockCallManager = new Mock<IAdvisoryDelayManager>();
             mockCallManager.Setup(m => m.Delay());
@@ -105,7 +105,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockResponseParserFactory.Setup(m => m.GetParser(mockParameters.Object)).Returns(mockResponseParser.Object);
 
             // Act
-            var target = new DataMethodManager<int>(mockService.Object, mockRequestBuilder.Object, mockResponseHandlerFactory.Object);
+            var target = new MethodCallBroker<int>(mockService.Object, mockRequestBuilder.Object, mockResponseHandlerFactory.Object);
             var actual = await target.GenerateAsync(mockParameters.Object);
 
             // Assert

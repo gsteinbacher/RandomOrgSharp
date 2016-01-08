@@ -1,21 +1,36 @@
 ﻿using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Error;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
-    public class ErrorHandlerParse : IErrorHandler, IResponse
+    public class ErrorHandlerParser : IErrorHandler, IResponseInfo
     {
         public int Code { get; private set; }
         public string Message { get; private set; }
 
         public int Id { get; private set; }
 
-        #region IResponse implementation
+        #region IResponseInfo implementation
+ 
+        public bool IsHandlerOfType(string handlerType)
+        {
+            return string.Equals(handlerType, RandomOrgConstants.HANDLER_TYPE_ERROR, StringComparison.InvariantCultureIgnoreCase);
+        }
 
-        public bool Process(JObject json, IParameters parameters)
+        #endregion
+
+        #region IErrorHandler implementation
+
+        public bool HasError(JObject json)
+        {
+            return Code > 0;
+        }
+
+        #endregion
+
+        public bool Process(IParameters parameters, JObject json)
         {
             Id = JsonHelper.JsonToInt(json.GetValue("id"));
 
@@ -43,20 +58,9 @@ namespace Obacher.RandomOrgSharp.Response
             return result != null;
         }
 
-        public bool IsHandlerOfType(string handlerType)
+        public bool CanHandle(IParameters parameters)
         {
-            return string.Equals(handlerType, RandomOrgConstants.HANDLER_TYPE_ERROR, StringComparison.InvariantCultureIgnoreCase);
+            throw new NotImplementedException();
         }
-
-        #endregion
-
-        #region IErrorHandler implementation
-
-        public bool HasError(JObject json)
-        {
-            return Code > 0;
-        }
-
-        #endregion
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Request;
-using Obacher.RandomOrgSharp.Response;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Response;
 
-namespace Obacher.RandomOrgSharp.Method
+namespace Obacher.RandomOrgSharp.Abstration
 {
     /// <summary>
     /// Retrieve a lst of random decimal values
@@ -11,19 +11,19 @@ namespace Obacher.RandomOrgSharp.Method
     public class DecimalMethod
     {
         private bool _verifyOriginater;
-        private readonly IDataMethodManager<decimal> _dataMethodManager;
+        private readonly IMethodCallBroker _methodCallBroker;
 
         /// <summary>
         /// Create an instance of <see cref="DecimalMethod"/>.  
         /// </summary>
-        /// <param name="dataMethodManager">dataMethodManager class to use to retrieve decimal information.  Default is <see cref="DataMethodManager{T}"/></param>
-        public DecimalMethod(IDataMethodManager<decimal> dataMethodManager = null)
+        /// <param name="methodCallBroker">methodCallBroker class to use to retrieve decimal information.  Default is <see cref="MethodCallBroker{T}"/></param>
+        public DecimalMethod(IMethodCallBroker methodCallBroker = null)
         {
-            _dataMethodManager = dataMethodManager ?? new DataMethodManager<decimal>();
+            _methodCallBroker = methodCallBroker ?? new MethodCallBroker<decimal>();
         }
 
         /// <summary>
-        /// Verify the originator of the response.
+        /// Verify the originator of the responseInfo.
         /// </summary>
         /// <example>
         /// new DecimalMethod().WithVerification().GenerateDecimalFractions(...);
@@ -41,13 +41,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="numberOfDecimalPlaces">The number of decimal places to use. Must be between 1 and 20</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of decimal values</returns>
-        public DataResponse<decimal> GenerateDecimalFractions(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = true)
+        public DataResponseInfo<decimal> GenerateDecimalFractions(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = true)
         {
             var parameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = _dataMethodManager.Generate(parameters);
-            return response;
+            var response = _methodCallBroker.Generate(parameters);
+            return response as DataResponseInfo<decimal>;
         }
 
         /// <summary>
@@ -57,13 +57,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="numberOfDecimalPlaces">The number of decimal places to use. Must be between 1 and 20</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of decimal values</returns>
-        public async Task<DataResponse<decimal>> GenerateDecimalFractionsAsync(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = true)
+        public async Task<DataResponseInfo<decimal>> GenerateDecimalFractionsAsync(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = true)
         {
             var parameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = await _dataMethodManager.GenerateAsync(parameters);
-            return response;
+            var response = await _methodCallBroker.GenerateAsync(parameters);
+            return response as DataResponseInfo<decimal>;
         }
     }
 }

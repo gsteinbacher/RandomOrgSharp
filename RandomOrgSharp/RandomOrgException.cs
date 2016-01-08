@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Obacher.RandomOrgSharp
+namespace Obacher.RandomOrgSharp.Core
 {
     /// <summary>
     /// Exceptions that occur during the API request to api.random.org

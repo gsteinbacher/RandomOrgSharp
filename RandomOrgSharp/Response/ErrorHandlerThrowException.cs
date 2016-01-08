@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Error;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
-    public class ErrorHandlerThrowException : IErrorHandler, IResponse
+    public class ErrorHandlerThrowException : IErrorHandler, IResponseInfo
     {
         public int Code { get; private set; }
         public string Message { get; private set; }
         public int Id { get; private set; }
         private bool _hasError;
 
-        #region IResponse implementation
+        #region IResponseInfo implementation
 
         public bool Process(JObject json, IParameters parameters)
         {
@@ -62,5 +61,15 @@ namespace Obacher.RandomOrgSharp.Response
         }
 
         #endregion
+
+        public bool Process(IParameters parameters, JObject json)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CanHandle(IParameters parameters)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

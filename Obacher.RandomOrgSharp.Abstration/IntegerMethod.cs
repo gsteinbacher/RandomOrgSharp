@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Request;
-using Obacher.RandomOrgSharp.Response;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Response;
 
-namespace Obacher.RandomOrgSharp.Method
+namespace Obacher.RandomOrgSharp.Abstration
 {
     /// <summary>
     /// Retrieve a lst of random integer values
@@ -11,19 +11,19 @@ namespace Obacher.RandomOrgSharp.Method
     public class IntegerMethod
     {
         private bool _verifyOriginater;
-        private readonly IDataMethodManager<int> _dataMethodManager;
+        private readonly IMethodCallBroker _methodCallBroker;
 
         /// <summary>
         /// Create an instance of <see cref="IntegerMethod"/>.  
         /// </summary>
-        /// <param name="dataMethodManager">dataMethodManager class to use to retrieve blob information.  Default is <see cref="DataMethodManager{T}"/></param>
-        public IntegerMethod(IDataMethodManager<int> dataMethodManager = null)
+        /// <param name="methodCallBroker">methodCallBroker class to use to retrieve blob information.  Default is <see cref="MethodCallBroker{T}"/></param>
+        public IntegerMethod(IMethodCallBroker methodCallBroker = null)
         {
-            _dataMethodManager = dataMethodManager ?? new DataMethodManager<int>();
+            _methodCallBroker = methodCallBroker ?? new MethodCallBroker<int>();
         }
 
         /// <summary>
-        /// Verify the originator of the response.
+        /// Verify the originator of the responseInfo.
         /// </summary>
         /// <example>
         /// new IntegerMethod().WithVerification().GenerateIntegers(...);
@@ -42,13 +42,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="maximumValue">The upper boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000a and 1,000,000,000.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of integer values</returns>
-        public DataResponse<int> GenerateIntegers(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
+        public DataResponseInfo<int> GenerateIntegers(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
         {
             var parameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = _dataMethodManager.Generate(parameters);
-            return response;
+            var response = _methodCallBroker.Generate(parameters);
+            return response as DataResponseInfo<int>;
         }
 
         /// <summary>
@@ -59,13 +59,13 @@ namespace Obacher.RandomOrgSharp.Method
         /// <param name="maximumValue">The upper boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000a and 1,000,000,000.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>All information returned from random service, include the list of integer values</returns>
-        public async Task<DataResponse<int>> GenerateIntegersAsync(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
+        public async Task<DataResponseInfo<int>> GenerateIntegersAsync(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = true)
         {
             var parameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates, _verifyOriginater);
             _verifyOriginater = false;
 
-            var response = await _dataMethodManager.GenerateAsync(parameters);
-            return response;
+            var response = await _methodCallBroker.GenerateAsync(parameters);
+            return response as DataResponseInfo<int>;
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     public class VerifySignatureResponseParser : IParser
     {
-        public IResponse Parse(JObject json)
+        public IResponseInfo Parse(JObject json)
         {
             var authenticity = false;
 
@@ -15,7 +15,7 @@ namespace Obacher.RandomOrgSharp.Response
 
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            var response = new VerifySignatureResponse(authenticity, id);
+            var response = new VerifySignatureResponseInfo(authenticity, id);
             return response;
         }
 

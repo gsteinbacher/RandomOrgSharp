@@ -1,13 +1,13 @@
 ﻿using Obacher.Framework.Common;
 
-namespace Obacher.RandomOrgSharp.Parameter
+namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     /// <summary>
     /// Class which contains the parameters used when requesting random integer values from random.org
     /// </summary>
     public sealed class IntegerParameters : CommonParameters
     {
-        private const int MAX_ITEMS_ALLOWED = 10000;
+        private const int MaxItemsAllowed = 10000;
 
         public int NumberOfItemsToReturn { get; private set; }
         public int MinimumValue { get; private set; }
@@ -42,8 +42,8 @@ namespace Obacher.RandomOrgSharp.Parameter
         /// </summary>
         private void SetParameters(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates)
         {
-            if (!numberOfItemsToReturn.Between(1, MAX_ITEMS_ALLOWED))
-                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MAX_ITEMS_ALLOWED));
+            if (!numberOfItemsToReturn.Between(1, MaxItemsAllowed))
+                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MaxItemsAllowed));
 
             if (!minimumValue.Between(-1000000000, 1000000000))
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.MINIMUM_VALUE_OUT_OF_RANGE));

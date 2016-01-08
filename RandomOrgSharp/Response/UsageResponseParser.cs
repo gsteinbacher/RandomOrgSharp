@@ -1,11 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     public class UsageResponseParser : IParser {
-        public IResponse Parse(JObject json)
+        public IResponseInfo Parse(JObject json)
         {
             var version = JsonHelper.JsonToString(json.GetValue(RandomOrgConstants.JSON_RPC_VALUE));
             var result = json.GetValue(RandomOrgConstants.JSON_RESULT_PARAMETER_NAME) as JObject;
@@ -43,7 +43,7 @@ namespace Obacher.RandomOrgSharp.Response
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            var usageResponse = new UsageResponse(version, status, creationTime, bitsLeft, requestsLeft, totalBits, totalRequests, id);
+            var usageResponse = new UsageResponseInfo(version, status, creationTime, bitsLeft, requestsLeft, totalBits, totalRequests, id);
             return usageResponse;
         }
 

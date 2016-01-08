@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Obacher.RandomOrgSharp
+namespace Obacher.RandomOrgSharp.Core
 {
     public sealed class SettingsManager : ISettingsManager
     {

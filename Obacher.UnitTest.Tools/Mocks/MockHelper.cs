@@ -1,7 +1,7 @@
 ﻿using System.Net.NetworkInformation;
 using Moq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core;
 
 namespace Obacher.UnitTest.Tools.Mocks
 {

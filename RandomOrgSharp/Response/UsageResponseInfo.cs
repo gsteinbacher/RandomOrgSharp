@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
-    public class UsageResponse : IResponse
+    public class UsageResponseInfo : IResponseInfo
     {
         public string Version { get; }
 
@@ -14,7 +14,7 @@ namespace Obacher.RandomOrgSharp.Response
         public int TotalRequests { get; }
         public int Id { get; }
 
-        public UsageResponse(string version, StatusType status, DateTime creationTime, int bitsLeft, int requestsLeft, int totalBits, int totalRequests, int id)
+        public UsageResponseInfo(string version, StatusType status, DateTime creationTime, int bitsLeft, int requestsLeft, int totalBits, int totalRequests, int id)
         {
             Version = version;
             Status = status;

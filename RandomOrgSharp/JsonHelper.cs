@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 
-namespace Obacher.RandomOrgSharp
+namespace Obacher.RandomOrgSharp.Core
 {
     internal static class JsonHelper
     {

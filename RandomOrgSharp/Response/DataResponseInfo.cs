@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
-    public class DataResponse<T> : IResponse
+    public class DataResponseInfo<T> : IResponseInfo
     {
         public string Version { get; }
         public IEnumerable<T> Data { get; }
@@ -15,7 +14,7 @@ namespace Obacher.RandomOrgSharp.Response
         public int AdvisoryDelay { get; }
         public int Id { get; }
 
-        public DataResponse(string version, IEnumerable<T> data, DateTime completionDate, int bitsUsed, int bitsLeft, int requestsLeft, int advisoryDelay, int id)
+        public DataResponseInfo(string version, IEnumerable<T> data, DateTime completionDate, int bitsUsed, int bitsLeft, int requestsLeft, int advisoryDelay, int id)
         {
             Version = version;
             Data = data;

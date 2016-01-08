@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 

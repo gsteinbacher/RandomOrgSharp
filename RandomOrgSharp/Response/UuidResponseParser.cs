@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     /// <summary>
     /// Class which parses the responses from the UUID method call.  The UUID method call needs to have its own parser
-    /// because the data returned in the response needs to be specially converted to a GUID type.
+    /// because the data returned in the responseInfo needs to be specially converted to a GUID type.
     /// </summary>
     /// <typeparam name="T">Type of value being returned in the list of random values</typeparam>
     public class UuidResponseParser : IParser
     {
         /// <summary>
-        /// Parse the JSON response
+        /// Parse the JSON responseInfo
         /// </summary>
-        /// <param name="json">JSON response</param>
-        /// <returns>Class which contains the information from the JSON response</returns>
-        public IResponse Parse(JObject json)
+        /// <param name="json">JSON responseInfo</param>
+        /// <returns>Class which contains the information from the JSON responseInfo</returns>
+        public IResponseInfo Parse(JObject json)
         {
             var version = JsonHelper.JsonToString(json.GetValue(RandomOrgConstants.JSON_RPC_PARAMETER_NAME));
             var completionTime = DateTime.MinValue;
@@ -48,7 +48,7 @@ namespace Obacher.RandomOrgSharp.Response
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            return new DataResponse<Guid>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
+            return new DataResponseInfo<Guid>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
         }
 
         /// <summary>

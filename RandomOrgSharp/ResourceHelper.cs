@@ -1,6 +1,6 @@
-﻿using Obacher.RandomOrgSharp.Properties;
+﻿using Obacher.RandomOrgSharp.Core.Properties;
 
-namespace Obacher.RandomOrgSharp
+namespace Obacher.RandomOrgSharp.Core
 {
     internal static class ResourceHelper
     {

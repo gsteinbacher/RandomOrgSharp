@@ -1,6 +1,6 @@
 ﻿using Obacher.Framework.Common;
 
-namespace Obacher.RandomOrgSharp.Parameter
+namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     public enum BlobFormat
     {
@@ -13,7 +13,7 @@ namespace Obacher.RandomOrgSharp.Parameter
     /// </summary>
     public sealed class BlobParameters : CommonParameters
     {
-        private const int MAX_ITEMS_ALLOWED = 100;
+        private const int MaxItemsAllowed = 100;
 
         public int NumberOfItemsToReturn { get; private set; }
         public int Size { get; private set; }
@@ -46,8 +46,8 @@ namespace Obacher.RandomOrgSharp.Parameter
         /// </summary>
         private void SetParameters(int numberOfItemsToReturn, int size, BlobFormat format)
         {
-            if (!numberOfItemsToReturn.Between(1, MAX_ITEMS_ALLOWED))
-                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MAX_ITEMS_ALLOWED));
+            if (!numberOfItemsToReturn.Between(1, MaxItemsAllowed))
+                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE, MaxItemsAllowed));
 
             if (!size.Between(1, 1048576))
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.MINIMUM_VALUE_OUT_OF_RANGE));

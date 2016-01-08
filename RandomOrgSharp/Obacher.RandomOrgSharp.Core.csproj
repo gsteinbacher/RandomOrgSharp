@@ -7,8 +7,8 @@
     <ProjectGuid>{D12E7982-A721-4D2A-AC0C-AD2DB942329D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Obacher.RandomOrgSharp</RootNamespace>
-    <AssemblyName>Obacher.RandomOrgSharp</AssemblyName>
+    <RootNamespace>Obacher.RandomOrgSharp.Core</RootNamespace>
+    <AssemblyName>Obacher.RandomOrgSharp.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -48,14 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Method\DataMethodManager.cs" />
-    <Compile Include="Method\IMethodManager.cs" />
-    <Compile Include="Method\IUsageMethodManager.cs" />
-    <Compile Include="Method\UsageMethod.cs" />
-    <Compile Include="Method\UsageMethodManager.cs" />
-    <Compile Include="Method\VerifySignatureMethodManager.cs" />
+    <Compile Include="MethodCallBroker.cs" />
+    <Compile Include="Request\IRequestHandler.cs" />
+    <Compile Include="Request\IRequestHandlerFactory.cs" />
+    <Compile Include="Request\RequestHandlerFactory.cs" />
     <Compile Include="Response\IErrorHandler.cs" />
-    <Compile Include="IAdvisoryDelayManager.cs" />
     <Compile Include="Parameter\IParameters.cs" />
     <Compile Include="Parameter\UsageParameters.cs" />
     <Compile Include="Parameter\VerifySignatureParameters.cs" />
@@ -75,7 +72,6 @@
     <Compile Include="Request\UuidJsonRequestBuilder.cs" />
     <Compile Include="Parameter\DecimalParameters.cs" />
     <Compile Include="JsonHelper.cs" />
-    <Compile Include="AdvisoryDelayManager.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="Parameter\BlobParameters.cs" />
     <Compile Include="Request\DecimalJsonRequestBuilder.cs" />
@@ -86,29 +82,25 @@
     <Compile Include="Request\JsonRequestBuilder.cs" />
     <Compile Include="Request\VerifySignatureRequestBuilder.cs" />
     <Compile Include="ResourceHelper.cs" />
-    <Compile Include="Response\AdvisoryDelayResponseHandler.cs" />
-    <Compile Include="Response\DataResponse.cs" />
-    <Compile Include="Response\ApiResponseHandler.cs" />
+    <Compile Include="Response\AdvisoryDelayHandler.cs" />
+    <Compile Include="Response\DataResponseInfo.cs" />
     <Compile Include="Response\DataResponseParser.cs" />
-    <Compile Include="Response\DefaultMethodParser.cs" />
     <Compile Include="Response\IJsonResponseParserFactory.cs" />
     <Compile Include="Response\IParser.cs" />
     <Compile Include="Response\IProcessResponse.cs" />
-    <Compile Include="Response\IResponse.cs" />
+    <Compile Include="Response\IResponseInfo.cs" />
     <Compile Include="Response\IResponseHandler.cs" />
     <Compile Include="Response\IResponseHandlerFactory.cs" />
     <Compile Include="Response\JsonResponseParserFactory.cs" />
-    <Compile Include="Response\ParseResponse.cs" />
-    <Compile Include="Response\ErrorHandlerParse.cs" />
+    <Compile Include="Response\ErrorHandlerParser.cs" />
     <Compile Include="Response\ErrorHandlerThrowException.cs" />
     <Compile Include="Response\ResponseHandlerFactory.cs" />
-    <Compile Include="Response\UsageResponse.cs" />
-    <Compile Include="Response\UsageResponseHandler.cs" />
+    <Compile Include="Response\UsageResponseInfo.cs" />
     <Compile Include="Response\UsageResponseParser.cs" />
     <Compile Include="Response\UuidResponseParser.cs" />
     <Compile Include="Response\VerifyIdResponseHandler.cs" />
-    <Compile Include="Response\VerifySignatureResponse.cs" />
-    <Compile Include="Response\VerifySignatureResponseHandler.cs" />
+    <Compile Include="Response\VerifySignatureResponseInfo.cs" />
+    <Compile Include="Response\VerifySignatureHandler.cs" />
     <Compile Include="Response\VerifySignatureResponseParser.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="StringsConstants.cs" />
@@ -117,18 +109,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Verify\CertificateVerification.cs" />
-    <Compile Include="Verify\RandomOrgVerification.cs" />
     <None Include="app.config" />
-    <Compile Include="Method\BlobMethod.cs" />
-    <Compile Include="Method\DecimalMethod.cs" />
-    <Compile Include="Method\GuassianMethod.cs" />
-    <Compile Include="Method\IntegerMethod.cs" />
-    <Compile Include="Method\StringMethod.cs" />
-    <Compile Include="Method\UuidMethod.cs" />
-    <Compile Include="Method\IDataMethodManager.cs" />
+    <Compile Include="IMethodCallBroker.cs" />
     <Compile Include="IRandomService.cs" />
-    <Compile Include="IRandomOrgSharp.cs" />
     <Compile Include="ISettingsManager.cs" />
     <Compile Include="MethodType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

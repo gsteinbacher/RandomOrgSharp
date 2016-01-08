@@ -1,4 +1,4 @@
-﻿namespace Obacher.RandomOrgSharp.Response
+﻿namespace Obacher.RandomOrgSharp.Core.Response
 {
     public interface IProcessResponse
     {

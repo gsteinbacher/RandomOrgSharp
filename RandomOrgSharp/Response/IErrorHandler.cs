@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Response;
 
-namespace Obacher.RandomOrgSharp.Error
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     public interface IErrorHandler : IResponseHandler
     {

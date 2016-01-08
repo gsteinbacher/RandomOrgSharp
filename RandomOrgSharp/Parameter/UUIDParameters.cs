@@ -1,4 +1,4 @@
-﻿namespace Obacher.RandomOrgSharp.Parameter
+﻿namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     /// <summary>
     /// Class which contains the parameters used when requesting random blob values from random.org

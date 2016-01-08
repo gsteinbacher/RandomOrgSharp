@@ -66,9 +66,9 @@
       <Project>{9fc29e0d-c0e9-4cd1-a465-255cf0ba8a10}</Project>
       <Name>Obacher.RandomOrgSharp.Emulator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.csproj">
+    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
-      <Name>Obacher.RandomOrgSharp</Name>
+      <Name>Obacher.RandomOrgSharp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

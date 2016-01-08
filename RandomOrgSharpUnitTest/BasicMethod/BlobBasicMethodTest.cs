@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Response;
 using Obacher.RandomOrgSharp.Method;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 
@@ -22,9 +23,9 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int size = 16;
             const BlobFormat blobFormat = BlobFormat.Hex;
 
-            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
+            var expected = new DataResponseInfo<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
+            Mock<IMethodCallBroker<string>> basicMethodMock = new Mock<IMethodCallBroker<string>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IParameters>())).Returns(expected);
 
             var target = new BlobMethod(basicMethodMock.Object);
@@ -46,9 +47,9 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             const int size = 16;
             const BlobFormat blobFormat = BlobFormat.Hex;
 
-            var expected = new DataResponse<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
+            var expected = new DataResponseInfo<string>(null, Enumerable.Empty<string>(), DateTime.Now, 0, 0, 0, 0, 0);
 
-            Mock<IDataMethodManager<string>> basicMethodMock = new Mock<IDataMethodManager<string>>();
+            Mock<IMethodCallBroker<string>> basicMethodMock = new Mock<IMethodCallBroker<string>>();
             basicMethodMock.Setup(m => m.GenerateAsync(It.IsAny<IParameters>())).ReturnsAsync(expected);
 
             var target = new BlobMethod(basicMethodMock.Object);

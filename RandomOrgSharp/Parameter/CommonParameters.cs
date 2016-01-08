@@ -1,4 +1,4 @@
-﻿namespace Obacher.RandomOrgSharp.Parameter
+﻿namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     /// <summary>
     /// Class which contains the parameters that are used by all method calls to random.org

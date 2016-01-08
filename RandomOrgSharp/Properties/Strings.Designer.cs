@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Obacher.RandomOrgSharp.Properties {
+namespace Obacher.RandomOrgSharp.Core.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Obacher.RandomOrgSharp.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Obacher.RandomOrgSharp.Properties.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Obacher.RandomOrgSharp.Core.Properties.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

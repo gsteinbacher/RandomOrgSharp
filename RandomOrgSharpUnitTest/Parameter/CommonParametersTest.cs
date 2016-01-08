@@ -3,7 +3,8 @@ using Microsoft.SqlServer.Server;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 

@@ -1,11 +1,11 @@
-﻿namespace Obacher.RandomOrgSharp.Parameter
+﻿namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     /// <summary>
     /// Class which contains the parameters used when requesting random guassian values from random.org
     /// </summary>
     public sealed class GuassianParameters : CommonParameters
     {
-        private const int MAX_ITEMS_ALLOWED = 10000;
+        private const int MaxItemsAllowed = 10000;
 
         public int NumberOfItemsToReturn { get; private set; }
         public int Mean { get; private set; }
@@ -40,8 +40,8 @@
         /// </summary>
         private void SetParameters(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
         {
-            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > MAX_ITEMS_ALLOWED)
-                throw new RandomOrgRunTimeException(string.Format(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE), MAX_ITEMS_ALLOWED));
+            if (numberOfItemsToReturn < 1 || numberOfItemsToReturn > MaxItemsAllowed)
+                throw new RandomOrgRunTimeException(string.Format(ResourceHelper.GetString(StringsConstants.NUMBER_ITEMS_RETURNED_OUT_OF_RANGE), MaxItemsAllowed));
 
             if (mean < -1000000 || mean > 1000000)
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.MEAN_VALUE_OUT_OF_RANGE));

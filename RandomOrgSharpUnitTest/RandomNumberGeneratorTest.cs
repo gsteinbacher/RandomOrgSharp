@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Obacher.RandomOrgSharp;
+using Obacher.RandomOrgSharp.Core;
 using Should.Fluent;
 
 namespace RandomOrgSharp.UnitTest

@@ -1,6 +1,6 @@
-﻿using Obacher.RandomOrgSharp.Parameter;
+﻿using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     public interface IJsonResponseParserFactory {
         IParser GetParser(IParameters parameters);

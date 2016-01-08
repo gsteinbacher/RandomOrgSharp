@@ -1,6 +1,6 @@
-﻿using Obacher.RandomOrgSharp.Parameter;
+﻿using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Request
+namespace Obacher.RandomOrgSharp.Core.Request
 {
     public interface IJsonRequestBuilderFactory {
         IJsonRequestBuilder GetBuilder(IParameters parameters);

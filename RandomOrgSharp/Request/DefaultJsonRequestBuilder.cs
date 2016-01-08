@@ -1,8 +1,7 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+﻿using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Request
+namespace Obacher.RandomOrgSharp.Core.Request
 {
     public class DefaultJsonRequestBuilder : IJsonRequestBuilder
     {

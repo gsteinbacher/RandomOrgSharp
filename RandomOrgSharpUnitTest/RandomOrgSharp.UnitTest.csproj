@@ -113,9 +113,9 @@
       <Project>{885bd1a0-d92f-4007-a8cc-6f320574bcee}</Project>
       <Name>Obacher.UnitTest.Tools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.csproj">
+    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
-      <Name>Obacher.RandomOrgSharp</Name>
+      <Name>Obacher.RandomOrgSharp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

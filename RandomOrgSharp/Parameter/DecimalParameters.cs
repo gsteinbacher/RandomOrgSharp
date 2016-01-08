@@ -1,6 +1,6 @@
 ﻿using Obacher.Framework.Common;
 
-namespace Obacher.RandomOrgSharp.Parameter
+namespace Obacher.RandomOrgSharp.Core.Parameter
 {
     /// <summary>
     /// Class which contains the parameters used when requesting random decimal values from random.org

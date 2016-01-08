@@ -2,9 +2,10 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Response;
 using Obacher.RandomOrgSharp.Method;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace Obacher.RandomOrgSharp.Emulator.UnitTest
@@ -20,8 +21,8 @@ namespace Obacher.RandomOrgSharp.Emulator.UnitTest
             const int minValue = 1;
             const int maxValue = 1000000;
 
-            var expected = new Mock<DataResponse<int>>();
-            var basicMethodMock = new Mock<IDataMethodManager<int>>();
+            var expected = new Mock<DataResponseInfo<int>>();
+            var basicMethodMock = new Mock<IMethodCallBroker<int>>();
             basicMethodMock.Setup(m => m.Generate(It.IsAny<IntegerParameters>())).Returns(expected.Object);
 
             // Act

@@ -1,4 +1,4 @@
-﻿namespace Obacher.RandomOrgSharp
+﻿namespace Obacher.RandomOrgSharp.Core
 {
     internal static class RandomOrgConstants
     {

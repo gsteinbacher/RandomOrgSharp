@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Obacher.RandomOrgSharp
+namespace Obacher.RandomOrgSharp.Core
 {
     public interface IRandom
     {

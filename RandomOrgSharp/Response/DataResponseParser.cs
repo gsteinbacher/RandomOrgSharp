@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     /// <summary>
     /// Class which parses the responses from Blob, Decimal, Guassian, Integer and String method calls.  
@@ -13,11 +13,11 @@ namespace Obacher.RandomOrgSharp.Response
     public class DataResponseParser<T> : IParser
     {
         /// <summary>
-        /// Parse the JSON response
+        /// Parse the JSON responseInfo
         /// </summary>
-        /// <param name="json">JSON response</param>
-        /// <returns>Class which contains the information from the JSON response</returns>
-        public IResponse Parse(JObject json)
+        /// <param name="json">JSON responseInfo</param>
+        /// <returns>Class which contains the information from the JSON responseInfo</returns>
+        public IResponseInfo Parse(JObject json)
         {
             var version = JsonHelper.JsonToString(json.GetValue(RandomOrgConstants.JSON_RPC_PARAMETER_NAME));
             var completionTime = DateTime.MinValue;
@@ -47,7 +47,7 @@ namespace Obacher.RandomOrgSharp.Response
             }
             var id = JsonHelper.JsonToInt(json.GetValue("id"));
 
-            return new DataResponse<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
+            return new DataResponseInfo<T>(version, data, completionTime, bitsUsed, bitsLeft, requestsLeft, advisoryDelay, id);
         }
 
         /// <summary>

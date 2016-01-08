@@ -5,8 +5,6 @@ using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Response;
 using Obacher.UnitTest.Tools;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
@@ -289,7 +287,7 @@ namespace RandomOrgSharp.UnitTest
         //            const int id = 1234;
         //            Mock<IParameters> requestMock = new Mock<IParameters>();
         //            requestMock.Setup(p => p.Id).Returns(id);
-        //            Mock<IResponse> responseMock = new Mock<IResponse>();
+        //            Mock<IResponseInfo> responseMock = new Mock<IResponseInfo>();
         //            responseMock.Setup(p => p.Id).Returns(id);
 
         //            AdvisoryDelayManager target = new AdvisoryDelayManager();
@@ -301,7 +299,7 @@ namespace RandomOrgSharp.UnitTest
         //        {
         //            Mock<IParameters> requestMock = new Mock<IParameters>();
         //            requestMock.Setup(p => p.Id).Returns(1234);
-        //            Mock<IResponse> responseMock = new Mock<IResponse>();
+        //            Mock<IResponseInfo> responseMock = new Mock<IResponseInfo>();
         //            responseMock.Setup(p => p.Id).Returns(9786);
 
         //            AdvisoryDelayManager target = new AdvisoryDelayManager();

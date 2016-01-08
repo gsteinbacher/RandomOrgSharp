@@ -178,7 +178,7 @@
     <value>Your prepaid account credit is negative; please top up and retry.</value>
   </data>
   <data name="ERROR_IDS_NOT_MATCHED" xml:space="preserve">
-    <value>Id passed into the request does not match the Id returned in response.</value>
+    <value>Id passed into the request does not match the Id returned in responseInfo.</value>
   </data>
   <data name="EXCEPTION_INVALID_ARGUMENT" xml:space="preserve">
     <value>Expected parameter one to be of type {0}.</value>

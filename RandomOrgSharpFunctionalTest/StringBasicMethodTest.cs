@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Response;
 using Obacher.RandomOrgSharp.Method;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -56,7 +56,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
 
-        private static void TestResults(DataResponse<string> results, int numberToReturn, int length,
+        private static void TestResults(DataResponseInfo<string> results, int numberToReturn, int length,
             string charactersAllowed)
         {
             results.Should().Not.Be.Null();

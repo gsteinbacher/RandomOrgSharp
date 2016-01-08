@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Parameter;
+using Obacher.RandomOrgSharp.Core.Parameter;
 
-namespace Obacher.RandomOrgSharp.Response
+namespace Obacher.RandomOrgSharp.Core.Response
 {
     public class ResponseHandlerFactory : IResponseHandlerFactory
     {
@@ -22,6 +22,11 @@ namespace Obacher.RandomOrgSharp.Response
                     return false;
             }
             return true;
+        }
+
+        public bool Execute(IResponseInfo responseInfo, IParameters parameters)
+        {
+            throw new NotImplementedException();
         }
 
         public IResponseHandler GetHandler(Type handlerType)

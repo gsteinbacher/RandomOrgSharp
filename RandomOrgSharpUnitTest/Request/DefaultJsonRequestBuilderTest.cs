@@ -2,8 +2,8 @@
 using Moq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.Parameter;
-using Obacher.RandomOrgSharp.Request;
+using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
 using Should.Fluent.Model;

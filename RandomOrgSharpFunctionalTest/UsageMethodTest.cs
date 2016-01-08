@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Obacher.RandomOrgSharp.Core.Response;
 using Obacher.RandomOrgSharp.Method;
-using Obacher.RandomOrgSharp.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -38,7 +38,7 @@ namespace RandomOrgSharp.FunctionalTest
         }
 
 
-        private static void TestResults(UsageResponse results)
+        private static void TestResults(UsageResponseInfo results)
         {
             results.Should().Not.Be.Null();
         }
