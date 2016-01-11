@@ -16,7 +16,7 @@
         private VerifySignatureParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="VerifySignatureParameters"/>.
+        /// Build an instance of <see cref="VerifySignatureParameters"/>.
         /// </summary>
         /// <returns>Instance of <see cref="VerifySignatureParameters"/> with specified parameters set properly.</returns>
         public static VerifySignatureParameters Create(string result, string signature)

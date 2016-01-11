@@ -21,7 +21,7 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             var target = new BlobJsonRequestBuilder();
-            target.Create(null);
+            target.Build(null);
 
             // Assert
         }
@@ -33,7 +33,7 @@ namespace RandomOrgSharp.UnitTest.Request
             Mock<IParameters> parameters = new Mock<IParameters>();
 
             var target = new BlobJsonRequestBuilder();
-            target.Create(parameters.Object);
+            target.Build(parameters.Object);
 
             // Assert
         }
@@ -49,16 +49,16 @@ namespace RandomOrgSharp.UnitTest.Request
 
             JObject expected =
                 new JObject(
-                    new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                    new JProperty(RandomOrgConstants.JSON_SIZE_PARAMETER_NAME, size),
-                    new JProperty(RandomOrgConstants.JSON_FORMAT_PARAMETER_NAME, format.ToString().ToLowerInvariant())
+                    new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
+                    new JProperty(RandomOrgConstants.SIZE_PARAMETER_NAME, size),
+                    new JProperty(RandomOrgConstants.FORMAT_PARAMETER_NAME, format.ToString().ToLowerInvariant())
                     );
 
             using (new MockCommonParameters(id))
             {
                 var parameters = BlobParameters.Create(numberOfItems, size, format);
                 var target = new BlobJsonRequestBuilder();
-                var actual = target.Create(parameters);
+                var actual = target.Build(parameters);
 
                 // Assert
                 actual.Should().Equal(expected);

@@ -27,7 +27,7 @@ namespace Obacher.RandomOrgSharp.Core.Parameter
         private BlobParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="BlobParameters"/>
+        /// Build an instance of <see cref="BlobParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random blob values you need. Must be between 1 and 100.</param>
         /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>

@@ -20,7 +20,7 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             var target = new GuassianJsonRequestBuilder();
-            target.Create(null);
+            target.Build(null);
 
             // Assert
         }
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.UnitTest.Request
             Mock<IParameters> parameters = new Mock<IParameters>();
 
             var target = new GuassianJsonRequestBuilder();
-            target.Create(parameters.Object);
+            target.Build(parameters.Object);
 
             // Assert
         }
@@ -50,10 +50,10 @@ namespace RandomOrgSharp.UnitTest.Request
             JObject expected =
 
                 new JObject(
-                    new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                    new JProperty(RandomOrgConstants.JSON_MEAN_PARAMETER_NAME, mean),
-                    new JProperty(RandomOrgConstants.JSON_STANDARD_DEVIATION_PARAMETER_NAME, standardDeviation),
-                    new JProperty(RandomOrgConstants.JSON_SIGNIFICANT_DIGITS_PARAMETER_NAME, significantDigits)
+                    new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
+                    new JProperty(RandomOrgConstants.MEAN_PARAMETER_NAME, mean),
+                    new JProperty(RandomOrgConstants.STANDARD_DEVIATION_PARAMETER_NAME, standardDeviation),
+                    new JProperty(RandomOrgConstants.SIGNIFICANT_DIGITS_PARAMETER_NAME, significantDigits)
                 );
 
             using (new MockCommonParameters(id))
@@ -61,7 +61,7 @@ namespace RandomOrgSharp.UnitTest.Request
                 // Act
                 var parameters = GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
                 var target = new GuassianJsonRequestBuilder();
-                var actual = target.Create(parameters);
+                var actual = target.Build(parameters);
 
                 // Assert
                 actual.Should().Equal(expected);

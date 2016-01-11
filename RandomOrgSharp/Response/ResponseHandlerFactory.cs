@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Core.Parameter;
 
 namespace Obacher.RandomOrgSharp.Core.Response
@@ -14,11 +13,17 @@ namespace Obacher.RandomOrgSharp.Core.Response
             _responseHandlers = responseHandlers;
         }
 
-        public bool Execute(JObject json, IParameters parameters)
+        /// <summary>
+        /// Execute the response handlers
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="responseInfo"></param>
+        /// <returns></returns>
+        public bool Execute(IParameters parameters, IResponseInfo responseInfo)
         {
             foreach (IResponseHandler handlers in _responseHandlers)
             {
-                if (!handlers.Process(json, parameters))
+                if (!handlers.Process(parameters, responseInfo))
                     return false;
             }
             return true;

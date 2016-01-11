@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp.Core.Parameter;
@@ -9,7 +8,7 @@ using Obacher.RandomOrgSharp.Core.Request;
 
 namespace Obacher.RandomOrgSharp.Core.Response
 {
-    public class AdvisoryDelayHandler : IRequestHandler, IResponseHandler
+    public class AdvisoryDelayHandler : IRequestCommand, IResponseHandler
     {
         private readonly IDateTime _dateTimeWrap;
         private long _advisoryDelay;
@@ -58,15 +57,14 @@ namespace Obacher.RandomOrgSharp.Core.Response
         /// Set the advisory delay time so it can be used to delay a request that is occurring before the advised delay time
         /// </summary>
         /// <param name="parameters">Parameters passed into the request object</param>
-        /// <param name="json">ResponseInfo object in JSON format</param>
-        public bool Process(IParameters parameters, JObject json)
+        /// <param name="info">ResponseInfo object</param>
+        public bool Process(IParameters parameters, IResponseInfo info)
         {
-            var result = json.GetValue(RandomOrgConstants.JSON_RESULT_PARAMETER_NAME) as JObject;
-            if (result != null)
-            {
-                int advisoryDelay = JsonHelper.JsonToInt(result.GetValue(RandomOrgConstants.JSON_ADVISORY_DELAY_PARAMETER_NAME));
-                _advisoryDelay = _dateTimeWrap.UtcNow.Ticks + advisoryDelay;
-            }
+            if (info.AdvisoryDelay == 0)
+                _advisoryDelay = 0;
+            else
+                _advisoryDelay = _dateTimeWrap.UtcNow.Ticks + info.AdvisoryDelay;
+
 
             // If we get down to here then the Ids match
             return true;

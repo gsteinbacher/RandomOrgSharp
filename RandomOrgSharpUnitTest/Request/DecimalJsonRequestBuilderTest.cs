@@ -20,7 +20,7 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             var target = new DecimalJsonRequestBuilder();
-            target.Create(null);
+            target.Build(null);
 
             // Assert
         }
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.UnitTest.Request
             Mock<IParameters> parameters = new Mock<IParameters>();
 
             var target = new DecimalJsonRequestBuilder();
-            target.Create(parameters.Object);
+            target.Build(parameters.Object);
 
             // Assert
         }
@@ -47,9 +47,9 @@ namespace RandomOrgSharp.UnitTest.Request
 
             JObject expected =
                 new JObject(
-                    new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                    new JProperty(RandomOrgConstants.JSON_DECIMAL_PLACES_PARAMETER_NAME, numberOfdecimalPlaces),
-                    new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, true)
+                    new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
+                    new JProperty(RandomOrgConstants.DECIMAL_PLACES_PARAMETER_NAME, numberOfdecimalPlaces),
+                    new JProperty(RandomOrgConstants.REPLACEMENT_PARAMETER_NAME, true)
                 );
 
             using (new MockCommonParameters(id))
@@ -57,7 +57,7 @@ namespace RandomOrgSharp.UnitTest.Request
                 // Act
                 var parameters = DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
                 var target = new DecimalJsonRequestBuilder();
-                var actual = target.Create(parameters);
+                var actual = target.Build(parameters);
 
                 // Assert
                 actual.Should().Equal(expected);

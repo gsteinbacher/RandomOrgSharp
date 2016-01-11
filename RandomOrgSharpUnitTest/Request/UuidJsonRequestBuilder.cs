@@ -20,7 +20,7 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             var target = new UuidJsonRequestBuilder();
-            target.Create(null);
+            target.Build(null);
 
             // Assert
         }
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.UnitTest.Request
             Mock<IParameters> parameters = new Mock<IParameters>();
 
             var target = new UuidJsonRequestBuilder();
-            target.Create(parameters.Object);
+            target.Build(parameters.Object);
 
             // Assert
         }
@@ -47,7 +47,7 @@ namespace RandomOrgSharp.UnitTest.Request
             JObject expected =
 
                 new JObject(
-                    new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems)
+                    new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems)
                 );
 
             // Act
@@ -55,7 +55,7 @@ namespace RandomOrgSharp.UnitTest.Request
             {
                 var parameters = UuidParameters.Create(numberOfItems);
                 var target = new UuidJsonRequestBuilder();
-                var actual = target.Create(parameters);
+                var actual = target.Build(parameters);
 
                 // Assert
                 actual.Should().Equal(expected);

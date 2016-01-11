@@ -20,7 +20,7 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             var target = new JsonRequestBuilder();
-            target.Create(null);
+            target.Build(null);
 
             // Assert
         }
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.UnitTest.Request
             Mock<IParameters> parameters = new Mock<IParameters>();
 
             var target = new JsonRequestBuilder();
-            target.Create(parameters.Object);
+            target.Build(parameters.Object);
 
             // Assert
         }
@@ -44,11 +44,11 @@ namespace RandomOrgSharp.UnitTest.Request
             const int id = 999;
 
             var expected = new JObject(
-               new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
-               new JProperty(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME, "generateDecimalFractions"),
-               new JProperty(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME, new JObject(
+               new JProperty(RandomOrgConstants.RPC_PARAMETER_NAME, RandomOrgConstants.RPC_VALUE),
+               new JProperty(RandomOrgConstants.METHOD_PARAMETER_NAME, "generateDecimalFractions"),
+               new JProperty(RandomOrgConstants.PARAMETERS_PARAMETER_NAME, new JObject(
                     new JProperty(RandomOrgConstants.APIKEY_KEY, ConfigMocks.MOCK_API_KEY))),
-               new JProperty(RandomOrgConstants.JSON_ID_PARAMETER_NAME, id)
+               new JProperty(RandomOrgConstants.ID_PARAMETER_NAME, id)
                );
 
             // Act
@@ -60,7 +60,7 @@ namespace RandomOrgSharp.UnitTest.Request
                 mockFactory.Setup(m => m.GetBuilder(parameters)).Returns(mockBuilder.Object);
 
                 var target = new JsonRequestBuilder(mockFactory.Object);
-                var actual = target.Create(parameters);
+                var actual = target.Build(parameters);
 
                 // Assert
                 actual.Should().Equal(expected);

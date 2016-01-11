@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Obacher.RandomOrgSharp.Core.Response
+﻿namespace Obacher.RandomOrgSharp.Core.Response
 {
-    public interface IErrorHandler : IResponseHandler
+    public interface IErrorHandler
     {
         int Code { get; }
         string Message { get; }
 
-        bool HasError(JObject json);
+        void Process(string response);
+        bool HasError();
     }
 }

@@ -17,7 +17,7 @@
         private UuidParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="UuidParameters"/>
+        /// Build an instance of <see cref="UuidParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random UUID values you need. Must be between 1 and 1000.</param>
         /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>

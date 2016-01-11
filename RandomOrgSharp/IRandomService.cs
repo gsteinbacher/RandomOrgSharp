@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp.Core
 {
     public interface IRandomService
     {
-        JObject SendRequest(JObject jsonRequest);
+        string SendRequest(string request);
 
-        Task<JObject> SendRequestAsync(JObject jsonRequest);
+        Task<string> SendRequestAsync(string request);
     }
 }

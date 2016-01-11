@@ -21,7 +21,7 @@ namespace RandomOrgSharp.UnitTest.Request
 
             // Act
             var target = new DefaultJsonRequestBuilder();
-            var actual = target.Create(parameters.Object);
+            var actual = target.Build(parameters.Object);
 
             // Assert
             actual.Should().Be.Null();

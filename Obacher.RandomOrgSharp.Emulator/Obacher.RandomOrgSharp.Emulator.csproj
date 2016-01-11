@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRandomGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -62,6 +61,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Obacher.RandomOrgSharp.JsonRPC\Obacher.RandomOrgSharp.JsonRPC.csproj">
+      <Project>{8b17ed8b-ee27-44db-96ef-48b3d750819d}</Project>
+      <Name>Obacher.RandomOrgSharp.JsonRPC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{D12E7982-A721-4D2A-AC0C-AD2DB942329D}</Project>
       <Name>Obacher.RandomOrgSharp.Core</Name>

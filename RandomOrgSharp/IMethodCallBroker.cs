@@ -6,7 +6,7 @@ namespace Obacher.RandomOrgSharp.Core
 {
     public interface IMethodCallBroker
     {
-        IResponseInfo Generate(IParameters parameters);
-        Task<IResponseInfo> GenerateAsync(IParameters parameters);
+        void Generate(IParameters parameters);
+        void GenerateAsync(IParameters parameters);
     }
 }

@@ -3,7 +3,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace Obacher.RandomOrgSharp.Core
 {
@@ -26,22 +25,22 @@ namespace Obacher.RandomOrgSharp.Core
             _httpReadWriteTimeout = SettingsManager.Instance.GetConfigurationValue(HttpReadwriteTimeoutKey, DefaultReadwriteTimeout);
         }
 
-        public JObject SendRequest(JObject jsonRequest)
+        public string SendRequest(string request)
         {
-            HttpWebRequest request = SetupRequest();
+            string response;
+            HttpWebRequest httpRequest = SetupHttpRequest();
 
-            byte[] bytes = Encoding.UTF8.GetBytes(jsonRequest.ToString());
+            byte[] bytes = Encoding.UTF8.GetBytes(request);
 
-            JObject jsonResponse;
             try
             {
-                using (Stream requestStream = request.GetRequestStream())
+                using (Stream requestStream = httpRequest.GetRequestStream())
                 {
                     requestStream.Write(bytes, 0, bytes.Length);
 
-                    using (WebResponse response = request.GetResponse())
+                    using (WebResponse httpResponse = httpRequest.GetResponse())
                     {
-                        jsonResponse = GetResponse(response);
+                        response = GetResponse(httpResponse);
                     }
                 }
             }
@@ -50,25 +49,25 @@ namespace Obacher.RandomOrgSharp.Core
                 throw new RandomOrgRunTimeException(e.Message, e);
             }
 
-            return jsonResponse;
+            return response;
         }
 
-        public async Task<JObject> SendRequestAsync(JObject jsonRequest)
+        public async Task<string> SendRequestAsync(string request)
         {
-            HttpWebRequest request = SetupRequest();
+            string response;
+            HttpWebRequest httpRequest = SetupHttpRequest();
 
-            byte[] bytes = Encoding.UTF8.GetBytes(jsonRequest.ToString());
+            byte[] bytes = Encoding.UTF8.GetBytes(request);
 
-            JObject jsonResponse;
             try
             {
-                using (Stream requestStream = request.GetRequestStream())
+                using (Stream requestStream = httpRequest.GetRequestStream())
                 {
                     await requestStream.WriteAsync(bytes, 0, bytes.Length);
 
-                    using (WebResponse response = await request.GetResponseAsync())
+                    using (WebResponse httpResponse = await httpRequest.GetResponseAsync())
                     {
-                        jsonResponse = GetResponse(response);
+                        response = GetResponse(httpResponse);
                     }
                 }
             }
@@ -77,14 +76,14 @@ namespace Obacher.RandomOrgSharp.Core
                 throw new RandomOrgRunTimeException(e.Message, e);
             }
 
-            return jsonResponse;
+            return response;
         }
 
         /// <summary>
         /// Setup the HTTP Request object
         /// </summary>
         /// <returns>IHttpRequest</returns>
-        private HttpWebRequest SetupRequest()
+        private HttpWebRequest SetupHttpRequest()
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
             request.Timeout = _httpRequestTimeout;
@@ -97,22 +96,23 @@ namespace Obacher.RandomOrgSharp.Core
         /// <summary>
         /// Retrieve the information from the HTTP ResponseInfo stream
         /// </summary>
-        /// <param name="response">Reponse object from random.org</param>
+        /// <param name="httpResponse">Reponse object from random.org</param>
         /// <returns>JSON object containing response from random.org</returns>
-        private static JObject GetResponse(WebResponse response)
+        private static string GetResponse(WebResponse httpResponse)
         {
-            JObject jsonResponse = null;
-            Stream responseStream = response.GetResponseStream();
+            string response = null;
+
+            Stream responseStream = httpResponse.GetResponseStream();
             if (responseStream != null)
             {
                 using (StreamReader reader = new StreamReader(responseStream))
                 {
-                    string content = reader.ReadToEnd();
-                    jsonResponse = JObject.Parse(content);
+                    response = reader.ReadToEnd();
+
                 }
             }
 
-            return jsonResponse;
+            return response;
         }
     }
 }

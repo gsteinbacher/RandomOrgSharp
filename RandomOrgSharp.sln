@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.RandomOrgSharp.Emul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.RandomOrgSharp.Emulator.UnitTest", "Obacher.RandomOrgSharp.Emulator.UnitTest\Obacher.RandomOrgSharp.Emulator.UnitTest.csproj", "{233214FB-9443-4BD3-9CE3-D05B67891AE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.RandomOrgSharp.Abstration", "Obacher.RandomOrgSharp.Abstration\Obacher.RandomOrgSharp.Abstration.csproj", "{5E24B384-A2D6-437E-ADB3-6ACB54AE0CCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obacher.RandomOrgSharp.JsonRPC", "Obacher.RandomOrgSharp.JsonRPC\Obacher.RandomOrgSharp.JsonRPC.csproj", "{8B17ED8B-EE27-44DB-96EF-48B3D750819D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,10 +64,10 @@ Global
 		{233214FB-9443-4BD3-9CE3-D05B67891AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{233214FB-9443-4BD3-9CE3-D05B67891AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{233214FB-9443-4BD3-9CE3-D05B67891AE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E24B384-A2D6-437E-ADB3-6ACB54AE0CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E24B384-A2D6-437E-ADB3-6ACB54AE0CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E24B384-A2D6-437E-ADB3-6ACB54AE0CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E24B384-A2D6-437E-ADB3-6ACB54AE0CCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B17ED8B-EE27-44DB-96EF-48B3D750819D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B17ED8B-EE27-44DB-96EF-48B3D750819D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B17ED8B-EE27-44DB-96EF-48B3D750819D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B17ED8B-EE27-44DB-96EF-48B3D750819D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

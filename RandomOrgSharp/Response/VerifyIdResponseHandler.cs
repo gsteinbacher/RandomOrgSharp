@@ -1,6 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Core.Parameter;
+﻿using Obacher.RandomOrgSharp.Core.Parameter;
 
 namespace Obacher.RandomOrgSharp.Core.Response
 {
@@ -13,13 +11,11 @@ namespace Obacher.RandomOrgSharp.Core.Response
         /// Verify the ID's from the request and response objects match
         /// </summary>
         /// <param name="parameters"></param>
-        /// <param name="json"></param>
+        /// <param name="info"></param>
         /// <returns></returns>
-        public bool Process(IParameters parameters, JObject json)
+        public bool Process(IParameters parameters, IResponseInfo info)
         {
-            var id = JsonHelper.JsonToInt(json.GetValue("id"));
-
-            if (id != parameters.Id)
+            if (info.Id != parameters.Id)
                 throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.IDS_NOT_MATCHED));
 
             // If we get down to here then the Ids match

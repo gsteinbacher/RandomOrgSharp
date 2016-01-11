@@ -20,7 +20,7 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             var target = new StringJsonRequestBuilder();
-            target.Create(null);
+            target.Build(null);
 
             // Assert
         }
@@ -32,7 +32,7 @@ namespace RandomOrgSharp.UnitTest.Request
             Mock<IParameters> parameters = new Mock<IParameters>();
 
             var target = new StringJsonRequestBuilder();
-            target.Create(parameters.Object);
+            target.Build(parameters.Object);
 
             // Assert
         }
@@ -49,10 +49,10 @@ namespace RandomOrgSharp.UnitTest.Request
 
             JObject expected =
                 new JObject(
-                    new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                    new JProperty(RandomOrgConstants.JSON_LENGTH_PARAMETER_NAME, length),
-                    new JProperty(RandomOrgConstants.JSON_CHARACTERS_ALLOWED_PARAMETER_NAME, charactersAllowed),
-                    new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, allowDuplicates)
+                    new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
+                    new JProperty(RandomOrgConstants.LENGTH_PARAMETER_NAME, length),
+                    new JProperty(RandomOrgConstants.CHARACTERS_ALLOWED_PARAMETER_NAME, charactersAllowed),
+                    new JProperty(RandomOrgConstants.REPLACEMENT_PARAMETER_NAME, allowDuplicates)
                 );
 
             // Act
@@ -60,7 +60,7 @@ namespace RandomOrgSharp.UnitTest.Request
             {
                 var parameters = StringParameters.Create(numberOfItems, length, charactersAllowed, allowDuplicates);
                 var target = new StringJsonRequestBuilder();
-                var actual = target.Create(parameters);
+                var actual = target.Build(parameters);
 
                 // Assert
                 actual.Should().Equal(expected);

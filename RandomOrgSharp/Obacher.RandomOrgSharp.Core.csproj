@@ -33,10 +33,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -48,10 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMethod.cs" />
+    <Compile Include="IRequestBuilder.cs" />
+    <Compile Include="Request\IRequestCommand.cs" />
+    <Compile Include="Request\IRequestCommandFactory.cs" />
     <Compile Include="MethodCallBroker.cs" />
-    <Compile Include="Request\IRequestHandler.cs" />
-    <Compile Include="Request\IRequestHandlerFactory.cs" />
-    <Compile Include="Request\RequestHandlerFactory.cs" />
+    <Compile Include="Request\RequestCommandFactory.cs" />
     <Compile Include="Response\IErrorHandler.cs" />
     <Compile Include="Parameter\IParameters.cs" />
     <Compile Include="Parameter\UsageParameters.cs" />
@@ -61,47 +59,24 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Request\BlobJsonRequestBuilder.cs" />
-    <Compile Include="Request\GuassianJsonRequestBuilder.cs" />
-    <Compile Include="Request\IJsonRequestBuilderFactory.cs" />
-    <Compile Include="Request\IJsonRequestBuilder.cs" />
-    <Compile Include="Request\IntegerJsonRequestBuilder.cs" />
-    <Compile Include="Request\JsonRequestBuilderFactory.cs" />
-    <Compile Include="Request\StringJsonRequestBuilder.cs" />
-    <Compile Include="Request\DefaultJsonRequestBuilder.cs" />
-    <Compile Include="Request\UuidJsonRequestBuilder.cs" />
     <Compile Include="Parameter\DecimalParameters.cs" />
-    <Compile Include="JsonHelper.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="Parameter\BlobParameters.cs" />
-    <Compile Include="Request\DecimalJsonRequestBuilder.cs" />
     <Compile Include="Parameter\GuassianParameters.cs" />
     <Compile Include="Parameter\CommonParameters.cs" />
     <Compile Include="Parameter\StringParameters.cs" />
     <Compile Include="Parameter\UuidParameters.cs" />
-    <Compile Include="Request\JsonRequestBuilder.cs" />
-    <Compile Include="Request\VerifySignatureRequestBuilder.cs" />
     <Compile Include="ResourceHelper.cs" />
     <Compile Include="Response\AdvisoryDelayHandler.cs" />
     <Compile Include="Response\DataResponseInfo.cs" />
-    <Compile Include="Response\DataResponseParser.cs" />
-    <Compile Include="Response\IJsonResponseParserFactory.cs" />
-    <Compile Include="Response\IParser.cs" />
-    <Compile Include="Response\IProcessResponse.cs" />
+    <Compile Include="Response\IResponseParser.cs" />
     <Compile Include="Response\IResponseInfo.cs" />
     <Compile Include="Response\IResponseHandler.cs" />
     <Compile Include="Response\IResponseHandlerFactory.cs" />
-    <Compile Include="Response\JsonResponseParserFactory.cs" />
-    <Compile Include="Response\ErrorHandlerParser.cs" />
-    <Compile Include="Response\ErrorHandlerThrowException.cs" />
     <Compile Include="Response\ResponseHandlerFactory.cs" />
     <Compile Include="Response\UsageResponseInfo.cs" />
-    <Compile Include="Response\UsageResponseParser.cs" />
-    <Compile Include="Response\UuidResponseParser.cs" />
     <Compile Include="Response\VerifyIdResponseHandler.cs" />
     <Compile Include="Response\VerifySignatureResponseInfo.cs" />
-    <Compile Include="Response\VerifySignatureHandler.cs" />
-    <Compile Include="Response\VerifySignatureResponseParser.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="StringsConstants.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
@@ -127,9 +102,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SignedMethod\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>

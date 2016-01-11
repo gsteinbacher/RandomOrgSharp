@@ -21,7 +21,7 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             var target = new IntegerJsonRequestBuilder();
-            target.Create(null);
+            target.Build(null);
 
             // Assert
         }
@@ -33,7 +33,7 @@ namespace RandomOrgSharp.UnitTest.Request
             Mock<IParameters> parameters = new Mock<IParameters>();
 
             var target = new IntegerJsonRequestBuilder();
-            target.Create(parameters.Object);
+            target.Build(parameters.Object);
 
             // Assert
         }
@@ -50,11 +50,11 @@ namespace RandomOrgSharp.UnitTest.Request
 
             JObject expected =
                 new JObject(
-                    new JProperty(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
-                    new JProperty(RandomOrgConstants.JSON_MINIMUM_VALUE_PARAMETER_NAME, minimumValue),
-                    new JProperty(RandomOrgConstants.JSON_MAXIMUM_VALUE_PARAMETER_NAME, maximumValue),
-                    new JProperty(RandomOrgConstants.JSON_REPLACEMENT_PARAMETER_NAME, allowDuplicates),
-                    new JProperty(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME, 10)
+                    new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems),
+                    new JProperty(RandomOrgConstants.MINIMUM_VALUE_PARAMETER_NAME, minimumValue),
+                    new JProperty(RandomOrgConstants.MAXIMUM_VALUE_PARAMETER_NAME, maximumValue),
+                    new JProperty(RandomOrgConstants.REPLACEMENT_PARAMETER_NAME, allowDuplicates),
+                    new JProperty(RandomOrgConstants.BASE_NUMBER_PARAMETER_NAME, 10)
                 );
 
             // Act
@@ -62,7 +62,7 @@ namespace RandomOrgSharp.UnitTest.Request
             {
                 var parameters = IntegerParameters.Create(numberOfItems, minimumValue, maximumValue, allowDuplicates);
                 var target = new IntegerJsonRequestBuilder();
-                var actual = target.Create(parameters);
+                var actual = target.Build(parameters);
 
                 // Assert
                 actual.Should().Equal(expected);

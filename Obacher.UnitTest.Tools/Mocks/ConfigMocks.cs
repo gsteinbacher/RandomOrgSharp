@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using Obacher.RandomOrgSharp;
+﻿using Moq;
 using Obacher.RandomOrgSharp.Core;
 
 namespace Obacher.UnitTest.Tools.Mocks
@@ -18,7 +12,7 @@ namespace Obacher.UnitTest.Tools.Mocks
             if (settingsManagerMock == null)
                 settingsManagerMock = new Mock<ISettingsManager>();
 
-            settingsManagerMock.Setup(m => m.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY))
+            settingsManagerMock.Setup(m => m.GetConfigurationValue<string>("apiKey"))
                 .Returns(apiKey ?? MOCK_API_KEY);
 
             return settingsManagerMock;

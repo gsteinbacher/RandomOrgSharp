@@ -21,7 +21,7 @@ namespace Obacher.RandomOrgSharp.Core.Parameter
         private DecimalParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="DecimalParameters"/>
+        /// Build an instance of <see cref="DecimalParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
         /// <param name="numberOfDecimalPlaces">The number of decimal places to use. Must be between 1 and 20</param>

@@ -13,7 +13,7 @@
         private UsageParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="UsageParameters"/>.  There are no specific parameters needed for the Usage method
+        /// Build an instance of <see cref="UsageParameters"/>.  There are no specific parameters needed for the Usage method
         /// so only the MethodType is set.
         /// </summary>
         /// <returns>Instance of <see cref="UsageParameters"/> with specified parameters set properly.</returns>

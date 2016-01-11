@@ -22,7 +22,7 @@ namespace Obacher.RandomOrgSharp.Core.Parameter
         private IntegerParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="IntegerParameters"/>
+        /// Build an instance of <see cref="IntegerParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random integer values you need. Must be between 1 and 10,000.</param>
         /// <param name="minimumValue">The lower boundary for the range from which the random numbers will be picked. Must be between -1,000,000,000 and 1,000,000,000.</param>

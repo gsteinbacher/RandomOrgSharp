@@ -2,7 +2,7 @@
 
 namespace Obacher.RandomOrgSharp.Core
 {
-    internal static class ResourceHelper
+    public static class ResourceHelper
     {
         public static string GetString(string key)
         {

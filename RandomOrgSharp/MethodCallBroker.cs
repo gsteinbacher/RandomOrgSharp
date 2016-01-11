@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
@@ -11,35 +11,38 @@ namespace Obacher.RandomOrgSharp.Core
     /// </summary>
     public class MethodCallBroker : IMethodCallBroker
     {
-        private readonly IRequestHandlerFactory _requestHandlerFactory;
         private readonly IRandomService _service;
-        private readonly IJsonRequestBuilder _requestBuilder;
+        private readonly IMethod _method;
+        private readonly IErrorHandler _errorHandler;
+        private readonly IRequestCommandFactory _requestCommandFactory;
         private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly IJsonResponseParserFactory _responseParserFactory;
 
-        public MethodCallBroker(IRandomService service = null, IJsonRequestBuilder requestBuilder = null, IRequestHandlerFactory requestHandlerFactory = null, IJsonResponseParserFactory responseParserFactory = null, IResponseHandlerFactory responseHandlerFactory = null)
+
+        public MethodCallBroker(IMethod method, IErrorHandler errorHandler, IRandomService service = null, IRequestCommandFactory requestCommandFactory = null, IResponseHandlerFactory responseHandlerFactory = null)
         {
-            _requestHandlerFactory = requestHandlerFactory ?? new RequestHandlerFactory(new AdvisoryDelayHandler());
+            _method = method;
+            _errorHandler = errorHandler;
+
             _service = service ?? new RandomOrgApiService();
-            _responseParserFactory = responseParserFactory ?? GetDefaultParserFactory();
-            _responseHandlerFactory = responseHandlerFactory ?? GetDefaultResponseHandlerFactory();
-            _requestBuilder = requestBuilder ?? new JsonRequestBuilder();
+            _requestCommandFactory = requestCommandFactory;
+            _responseHandlerFactory = responseHandlerFactory;
         }
 
-        public IResponseInfo Generate(IParameters parameters)
+        public void Generate(IParameters parameters)
         {
-            JObject jsonRequest = _requestBuilder.Create(parameters);
+            IRequestBuilder requestBuilder = _method.CreateRequestBuilder();
+            string request = requestBuilder.Build(parameters);
 
-            _requestHandlerFactory.Execute(parameters);
+            _requestCommandFactory?.Execute(parameters);
 
-            JObject jsonResponse = _service.SendRequest(jsonRequest);
+            string response = _service.SendRequest(request);
 
-            IParser parser = _responseParserFactory.GetParser(parameters);
-            IResponseInfo responseInfo = parser.Parse(jsonResponse);
-
-            _responseHandlerFactory.Execute(responseInfo, parameters);
-
-            return responseInfo;
+            _errorHandler.Process(response);
+            if (!_errorHandler.HasError())
+            {
+                _method.ParseResponse(response);
+                _responseHandlerFactory?.Execute(parameters, _method.GetResponseInfo());
+            }
         }
 
         /// <summary>
@@ -47,39 +50,29 @@ namespace Obacher.RandomOrgSharp.Core
         /// </summary>
         /// <param name="parameters">Parameters for the specific method being called</param>
         /// <returns></returns>
-        public async Task<IResponseInfo> GenerateAsync(IParameters parameters)
+        public async void GenerateAsync(IParameters parameters)
         {
-            JObject jsonRequest = _requestBuilder.Create(parameters);
+            IRequestBuilder requestBuilder = _method.CreateRequestBuilder();
+            string request = requestBuilder.Build(parameters);
 
-            _requestHandlerFactory.Execute(parameters);
-            JObject jsonResponse = await _service.SendRequestAsync(jsonRequest);
+            _requestCommandFactory?.Execute(parameters);
 
-            IParser parser = _responseParserFactory.GetParser(parameters);
-            IResponseInfo responseInfo = parser.Parse(jsonResponse);
+            string response = await _service.SendRequestAsync(request);
 
-            _responseHandlerFactory.Execute(responseInfo, parameters);
-
-            return responseInfo;
+            _errorHandler.Process(response);
+            if (!_errorHandler.HasError())
+            {
+                _method.ParseResponse(response);
+                _responseHandlerFactory?.Execute(parameters, _method.GetResponseInfo());
+            }
         }
 
-        private IResponseHandlerFactory GetDefaultResponseHandlerFactory()
-        {
-            var factory = new ResponseHandlerFactory(
-                    new ErrorHandlerThrowException(),
-                    new AdvisoryDelayHandler(),
-                    new VerifyIdResponseHandler(),
-                    new VerifySignatureHandler());
-            return factory;
-        }
-
-        private IJsonResponseParserFactory GetDefaultParserFactory()
-        {
-            return new JsonResponseParserFactory(
-                new DefaultMethodParser(),
-                new DataResponseParser<T>,
-                new UuidResponseParser(),
-                new UsageResponseParser()
-    );
-        }
+        //private IResponseHandlerFactory GetDefaultResponseHandlerFactory()
+        //{
+        //    var factory = new ResponseHandlerFactory(
+        //            new AdvisoryDelayHandler(),
+        //            new VerifyIdResponseHandler());
+        //    return factory;
+        //}
     }
 }

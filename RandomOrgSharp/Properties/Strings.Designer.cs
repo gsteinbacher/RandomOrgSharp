@@ -261,9 +261,9 @@ namespace Obacher.RandomOrgSharp.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Results do not match originators results, tampering suspected..
         /// </summary>
-        internal static string EXCEPTION_JSON_NOT_VERIFIED {
+        internal static string EXCEPTION_NOT_VERIFIED {
             get {
-                return ResourceManager.GetString("EXCEPTION_JSON_NOT_VERIFIED", resourceCulture);
+                return ResourceManager.GetString("EXCEPTION_NOT_VERIFIED", resourceCulture);
             }
         }
         

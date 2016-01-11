@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.JsonRPC;
 
 namespace Obacher.RandomOrgSharp.Emulator
 {
@@ -110,33 +111,34 @@ namespace Obacher.RandomOrgSharp.Emulator
         /// <summary>
         /// Emulate the call to the random.org web api
         /// </summary>
-        /// <param name="jsonRequest">Request that would be sent to random.org</param>
+        /// <param name="request">Request that would be sent to random.org</param>
         /// <returns>ResponseInfo that looks the same as a response from the random.org web site</returns>
-        public JObject SendRequest(JObject jsonRequest)
+        public string SendRequest(string request)
         {
-            var response = SentRequestInternal(jsonRequest);
+            var response = SendRequestInternal(request);
             return response;
         }
 
         /// <summary>
         /// Emulate the call to random.org web api in an asynchronous manner
         /// </summary>
-        /// <param name="jsonRequest">Request that would be sent to random.org</param>
+        /// <param name="request">Request that would be sent to random.org</param>
         /// <returns>A task which will return a response that simulates as a response from the random.org web site</returns>
-        public Task<JObject> SendRequestAsync(JObject jsonRequest)
+        public Task<string> SendRequestAsync(string request)
         {
-            var task = Task.Factory.StartNew(() => SentRequestInternal(jsonRequest));
+            var task = Task.Factory.StartNew(() => SendRequestInternal(request));
             return task;
         }
 
         /// <summary>
         /// Creates the response object based on the parameters in the request object
         /// </summary>
-        /// <param name="jsonRequest">Request object</param>
+        /// <param name="request">Request object</param>
         /// <returns>ResponseInfo object</returns>
-        private JObject SentRequestInternal(JObject jsonRequest)
+        private string SendRequestInternal(string request)
         {
             JObject response;
+            JObject jsonRequest = JObject.Parse(request);
 
             // The UTC time has rolled to a new day, reset the daily limits
             if (_rollOverTime != DateTime.UtcNow)
@@ -149,27 +151,27 @@ namespace Obacher.RandomOrgSharp.Emulator
             if (_code > 0)
             {
                 response = CreateErrorResponse(_code, _params);
-                return response;
+                return response.ToString();
             }
 
             // Extract information from json needed to emulate the random.org request
-            var method = JsonHelper.JsonToString(jsonRequest.GetValue(RandomOrgConstants.JSON_METHOD_PARAMETER_NAME));
-            var id = JsonHelper.JsonToInt(jsonRequest.GetValue(RandomOrgConstants.JSON_ID_PARAMETER_NAME));
+            var method = JsonHelper.JsonToString(jsonRequest.GetValue(JsonRpcConstants.METHOD_PARAMETER_NAME));
+            var id = JsonHelper.JsonToInt(jsonRequest.GetValue(JsonRpcConstants.ID_PARAMETER_NAME));
 
-            var parameter = jsonRequest.GetValue(RandomOrgConstants.JSON_PARAMETERS_PARAMETER_NAME) as JObject;
+            var parameter = jsonRequest.GetValue(JsonRpcConstants.PARAMETERS_PARAMETER_NAME) as JObject;
             if (parameter == null)
-                return CreateErrorResponse(200, "parameter");
+                return CreateErrorResponse(200, "parameter").ToString();
 
-            var numberOfItemsToReturn = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_NUMBER_ITEMS_RETURNED_PARAMETER_NAME));
+            var numberOfItemsToReturn = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME));
 
             // Extract specific parameters for each method and call the correct method to emulate the random.org method.
             switch (method)
             {
                 case "generateIntegers":
                     {
-                        var minValue = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_MINIMUM_VALUE_PARAMETER_NAME));
-                        var maxValue = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_MAXIMUM_VALUE_PARAMETER_NAME));
-                        var baseNumber = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_BASE_NUMBER_PARAMETER_NAME));
+                        var minValue = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.MINIMUM_VALUE_PARAMETER_NAME));
+                        var maxValue = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.MAXIMUM_VALUE_PARAMETER_NAME));
+                        var baseNumber = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.BASE_NUMBER_PARAMETER_NAME));
                         var values = GenerateInteger(numberOfItemsToReturn, minValue, maxValue, baseNumber).ToList();
                         response = CreateResponse(values, id, values.Sum(x => x.ToString().Length * 3));
                     }
@@ -178,7 +180,7 @@ namespace Obacher.RandomOrgSharp.Emulator
                 case "generateDecimalFractions":
                     {
                         var decimalPlaces =
-                            JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_DECIMAL_PLACES_PARAMETER_NAME));
+                            JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.DECIMAL_PLACES_PARAMETER_NAME));
                         var values = GenerateDecimalFractions(numberOfItemsToReturn, decimalPlaces).ToList();
                         response = CreateResponse(values, id, values.Sum(x => (x.ToString().Length - 2) * 3));
                     }
@@ -186,9 +188,9 @@ namespace Obacher.RandomOrgSharp.Emulator
 
                 case "generateGaussians":
                     {
-                        var mean = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_MEAN_PARAMETER_NAME));
-                        var standardDeviation = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_STANDARD_DEVIATION_PARAMETER_NAME));
-                        var significantDigits = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_SIGNIFICANT_DIGITS_PARAMETER_NAME));
+                        var mean = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.MEAN_PARAMETER_NAME));
+                        var standardDeviation = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.STANDARD_DEVIATION_PARAMETER_NAME));
+                        var significantDigits = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.SIGNIFICANT_DIGITS_PARAMETER_NAME));
                         var values = GenerateGaussians(numberOfItemsToReturn, mean, standardDeviation, significantDigits).ToList();
                         response = CreateResponse(values, id, values.Sum(x => (x.ToString().Length - 2) * 3));
                     }
@@ -196,8 +198,8 @@ namespace Obacher.RandomOrgSharp.Emulator
 
                 case "generateStrings":
                     {
-                        var length = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_LENGTH_PARAMETER_NAME));
-                        var characters = JsonHelper.JsonToString(parameter.GetValue(RandomOrgConstants.JSON_CHARACTERS_ALLOWED_PARAMETER_NAME));
+                        var length = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.LENGTH_PARAMETER_NAME));
+                        var characters = JsonHelper.JsonToString(parameter.GetValue(JsonRpcConstants.CHARACTERS_ALLOWED_PARAMETER_NAME));
                         List<string> values = GenerateStrings(numberOfItemsToReturn, length, characters).ToList();
                         response = CreateResponse(values, id, values.Sum(s => s.Length) * 5);
                     }
@@ -212,8 +214,8 @@ namespace Obacher.RandomOrgSharp.Emulator
 
                 case "generateBlobs":
                     {
-                        var size = JsonHelper.JsonToInt(parameter.GetValue(RandomOrgConstants.JSON_SIZE_PARAMETER_NAME));
-                        var format = JsonHelper.JsonToString(parameter.GetValue(RandomOrgConstants.JSON_FORMAT_PARAMETER_NAME));
+                        var size = JsonHelper.JsonToInt(parameter.GetValue(JsonRpcConstants.SIZE_PARAMETER_NAME));
+                        var format = JsonHelper.JsonToString(parameter.GetValue(JsonRpcConstants.FORMAT_PARAMETER_NAME));
                         var values = GenerateBlobs(numberOfItemsToReturn, size, format).ToList();
                         response = CreateResponse(values, id, numberOfItemsToReturn * size);
                     }
@@ -230,7 +232,7 @@ namespace Obacher.RandomOrgSharp.Emulator
                     break;
             }
 
-            return response;
+            return response.ToString();
         }
 
         private IEnumerable<int> GenerateInteger(int numberOfItemsToReturn, int minimumValue, int maximumValue, int baseNumber)
@@ -304,7 +306,7 @@ namespace Obacher.RandomOrgSharp.Emulator
         }
 
         /// <summary>
-        /// Create the json response
+        /// Build the json response
         /// </summary>
         /// <typeparam name="T">Type of values in the data node</typeparam>
         /// <param name="values">List of values in the data node</param>
@@ -347,7 +349,7 @@ namespace Obacher.RandomOrgSharp.Emulator
                 );
 
             // JObject response = new JObject(
-            //     new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
+            //     new JProperty(RandomOrgConstants.RPC_PARAMETER_NAME, RandomOrgConstants.RPC_VALUE),
             //         new JObject("result",
             //             new JObject("random",
             //                 new JObject("data", new JArray(values)),
@@ -365,7 +367,7 @@ namespace Obacher.RandomOrgSharp.Emulator
         }
 
         /// <summary>
-        /// Create the usage response object in the same format as returned by random.org
+        /// Build the usage response object in the same format as returned by random.org
         /// </summary>
         /// <param name="id">Identifier from request object</param>
         /// <returns>Json respresenting a usage response from random.org</returns>
@@ -410,7 +412,7 @@ namespace Obacher.RandomOrgSharp.Emulator
             var message = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + code, data);
 
             var response = new JObject(
-                new JProperty(RandomOrgConstants.JSON_RPC_PARAMETER_NAME, RandomOrgConstants.JSON_RPC_VALUE),
+                new JProperty(JsonRpcConstants.RPC_PARAMETER_NAME, JsonRpcConstants.RPC_VALUE),
                 new JObject("error",
                     new JProperty("code", code.ToString()),
                     new JProperty("message", message),

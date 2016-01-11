@@ -41,7 +41,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockCallManager.Setup(m => m.SetAdvisoryDelay(advisoryDelay));
 
             var mockRequestBuilder = new Mock<IJsonRequestBuilder>();
-            mockRequestBuilder.Setup(m => m.Create(mockParameters.Object)).Returns(mockJsonRequest.Object);
+            mockRequestBuilder.Setup(m => m.Build(mockParameters.Object)).Returns(mockJsonRequest.Object);
 
             var mockResponseHandlerFactory = new Mock<IResponseHandlerFactory>();
             mockResponseHandlerFactory.Setup(m => m.Execute(mockJsonResponse.Object, mockParameters.Object));
@@ -87,7 +87,7 @@ namespace RandomOrgSharp.UnitTest.BasicMethod
             mockCallManager.Setup(m => m.SetAdvisoryDelay(advisoryDelay));
 
             var mockRequestBuilder = new Mock<IJsonRequestBuilder>();
-            mockRequestBuilder.Setup(m => m.Create(mockParameters.Object)).Returns(mockJsonRequest.Object);
+            mockRequestBuilder.Setup(m => m.Build(mockParameters.Object)).Returns(mockJsonRequest.Object);
 
             var mockService = new Mock<IRandomService>();
             mockService.Setup(m => m.SendRequestAsync(mockJsonRequest.Object)).ReturnsAsync(mockJsonResponse.Object);

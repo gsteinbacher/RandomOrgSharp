@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.JsonRpc;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Response;
 using Obacher.RandomOrgSharp.Method;

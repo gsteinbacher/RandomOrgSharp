@@ -32,11 +32,11 @@ namespace Obacher.RandomOrgSharp.Core.Parameter
         private StringParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="StringParameters"/>
+        /// Build an instance of <see cref="StringParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random string values you need. Must be between 1 and 10,000.</param>
         /// <param name="length">The length of each string. Must be within the [1,20] range. All strings will be of the same length</param>
-        /// <param name="charactersAllowed">Create of common character sets that are allowed to occur in the random strings</param>
+        /// <param name="charactersAllowed">Build of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <param name="verifyOriginator">Verify that the response is what was sent by random.org and it was not tampered with before receieved</param>
         /// <returns>Instance of <see cref="StringParameters"/></returns>
@@ -49,7 +49,7 @@ namespace Obacher.RandomOrgSharp.Core.Parameter
         }
 
         /// <summary>
-        /// Create an instance of <see cref="StringParameters"/>
+        /// Build an instance of <see cref="StringParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
         /// <param name="length">The length of each string. Must be within the [1,20] range. All strings will be of the same length</param>

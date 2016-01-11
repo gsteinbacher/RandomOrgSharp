@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Core.Parameter;
+﻿using Obacher.RandomOrgSharp.Core.Parameter;
 
 namespace Obacher.RandomOrgSharp.Core.Response
 {
@@ -9,9 +8,9 @@ namespace Obacher.RandomOrgSharp.Core.Response
         /// Process the response 
         /// </summary>
         /// <param name="parameters">Parameters passed into the request object</param>
-        /// <param name="json">ResponseInfo object in JSON format</param>
+        /// <param name="responseInfo"></param>
         /// <returns>True if the process can continue to process subsequent handlers</returns>
-        bool Process(IParameters parameters, JObject json);
+        bool Process(IParameters parameters, IResponseInfo responseInfo);
 
         /// <summary>
         /// Should the <c>Process</c> method be called for the implementation of this interface

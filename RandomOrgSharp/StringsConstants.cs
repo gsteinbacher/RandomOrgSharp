@@ -36,7 +36,7 @@
         #region Exception messages
 
         public const string EXCEPTION_INVALID_ARGUMENT = EXCEPTION_KEY + "INVALID_ARGUMENT";
-        public const string JSON_NOT_VERIFIED = EXCEPTION_KEY + "ERROR_JSON_NOT_VERIFIED";
+        public const string NOT_VERIFIED = EXCEPTION_KEY + "ERROR_NOT_VERIFIED";
 
         #endregion
     }

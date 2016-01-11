@@ -20,7 +20,7 @@
         private GuassianParameters(MethodType method, bool verifyOriginator) : base(method, verifyOriginator) { }
 
         /// <summary>
-        /// Create an instance of <see cref="GuassianParameters"/>
+        /// Build an instance of <see cref="GuassianParameters"/>
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random guassian values you need. Must be between 1 and 10,000.</param>
         /// <param name="mean">The distribution's mean. Must be between -1,000,000 and 1,000,000.</param>
