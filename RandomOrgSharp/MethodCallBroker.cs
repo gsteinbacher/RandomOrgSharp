@@ -37,12 +37,8 @@ namespace Obacher.RandomOrgSharp.Core
 
             string response = _service.SendRequest(request);
 
-            _errorHandler.Process(response);
-            if (!_errorHandler.HasError())
-            {
                 _method.ParseResponse(response);
-                _responseHandlerFactory?.Execute(parameters, _method.GetResponseInfo());
-            }
+                _responseHandlerFactory?.Execute(parameters, response);
         }
 
         /// <summary>

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading;
+using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Properties;
 using Obacher.RandomOrgSharp.Core.Request;
+using Obacher.RandomOrgSharp.JsonRPC;
 
 namespace Obacher.RandomOrgSharp.Core.Response
 {
@@ -53,31 +55,27 @@ namespace Obacher.RandomOrgSharp.Core.Response
 
         #region IResponseHandler implementation
 
-        /// <summary>
-        /// Set the advisory delay time so it can be used to delay a request that is occurring before the advised delay time
-        /// </summary>
-        /// <param name="parameters">Parameters passed into the request object</param>
-        /// <param name="info">ResponseInfo object</param>
-        public bool Process(IParameters parameters, IResponseInfo info)
+        public bool Execute(IParameters parameters, string response)
         {
-            if (info.AdvisoryDelay == 0)
+            JObject jsonResponse = JObject.Parse(response);
+            int advisoryDelay = JsonHelper.JsonToInt(jsonResponse.GetValue(JsonRpcConstants.ADVISORY_DELAY_PARAMETER_NAME, 0));
+
+            if (advisoryDelay == 0)
                 _advisoryDelay = 0;
             else
-                _advisoryDelay = _dateTimeWrap.UtcNow.Ticks + info.AdvisoryDelay;
+                _advisoryDelay = _dateTimeWrap.UtcNow.Ticks + advisoryDelay;
 
-
-            // If we get down to here then the Ids match
             return true;
         }
 
         /// <summary>
-        /// Is the advisory delay needed for the current method call.  Currently advisory delay is used for all methods except GetUsage
+        /// Is the advisory delay needed for the current method call.  Currently advisory delay is used for all methods except GetUsage and VerifySignature
         /// </summary>
         /// <param name="parameters">Parameters passed into the request object</param>
-        /// <returns>True if the method being called is not the GetUsage method</returns>
+        /// <returns>True if the method being called is not the GetUsage or VerifySignature method</returns>
         public bool CanHandle(IParameters parameters)
         {
-            return parameters.MethodType != MethodType.Usage;
+            return parameters.MethodType != MethodType.Usage && parameters.MethodType != MethodType.VerifySignature;
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
     /// <summary>
     /// Error handler which throws an exception when an error occurs
     /// </summary>
-    public class ErrorHandlerThrowException : IErrorHandler, IResponseHandler
+    public class ErrorHandler : IErrorHandler, IResponseHandler
     {
         private readonly IResponseParser _errorParser;
 
@@ -22,7 +22,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         /// Constructor for <see cref="ErrorHandlerThrowException"/>
         /// </summary>
         /// <param name="errorParser">Parser to parse the json containing the error information</param>
-        public ErrorHandlerThrowException(IResponseParser errorParser)
+        public ErrorHandler(IResponseParser errorParser)
         {
             _errorParser = errorParser;
         }
@@ -42,11 +42,10 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
             if (ErrorInfo?.Code > 0)
             {
                 _hasError = true;
-                throw new RandomOrgException(ErrorInfo.Code, ErrorInfo.Message);
             }
 
             // If we get down to this then no errors occurred
-            return true;
+            return _hasError;
         }
 
         /// <summary>

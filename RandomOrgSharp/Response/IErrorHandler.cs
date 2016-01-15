@@ -2,10 +2,8 @@
 {
     public interface IErrorHandler
     {
-        int Code { get; }
-        string Message { get; }
+        ErrorResponseInfo ErrorInfo { get; }
 
-        void Process(string response);
         bool HasError();
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Response;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Response
 {
     /// <summary>
     /// Verify the response came from random.org and was not tampered with.
     /// </summary>
-    public class VerifySignatureHandler
+    public class VerifySignatureHandler : IResponseHandler
     {
         private readonly IRandomService _service;
         public VerifySignatureHandler(IRandomService service = null)
@@ -18,12 +19,14 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         /// <summary>
         /// Call random.org to verify the response came from random.org and was not tampered before received
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="json"></param>
-        /// <returns></returns>
-        public bool Process(IParameters parameters, JObject json)
+        /// <param name="parameters">Parameters passed into the request object</param>
+        /// <param name="response">Response returned from <see cref="IRandomService"/></param>
+        /// <returns>True if the signature is verified</returns>
+        public bool Execute(IParameters parameters, string response)
         {
-            var result = json.GetValue(JsonRpcConstants.RESULT_PARAMETER_NAME) as JObject;
+            JObject jsonbResponse = JObject.Parse(response);
+
+            var result = jsonbResponse.GetValue(JsonRpcConstants.RESULT_PARAMETER_NAME) as JObject;
             if (result != null)
             {
                 var random = result.GetValue(JsonRpcConstants.RANDOM_PARAMETER_NAME) as JObject;
@@ -46,8 +49,8 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
 
                     string verifyResponse = _service.SendRequest(jsonRequest.ToString());
 
-                    JObject jsonResponse = JObject.Parse(verifyResponse);
-                    var verifyResult = jsonResponse.GetValue(JsonRpcConstants.RESULT_PARAMETER_NAME) as JObject;
+                    JObject jsonVerifyResponse = JObject.Parse(verifyResponse);
+                    var verifyResult = jsonVerifyResponse.GetValue(JsonRpcConstants.RESULT_PARAMETER_NAME) as JObject;
                     var authenticity = verifyResult != null && JsonHelper.JsonToBoolean(verifyResult.GetValue(JsonRpcConstants.AUTHENTICITY_PARAMETER_NAME));
 
                     if (!authenticity)

@@ -16,27 +16,22 @@ namespace Obacher.RandomOrgSharp.Core.Response
         /// <summary>
         /// Execute the response handlers
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="responseInfo"></param>
-        /// <returns></returns>
-        public bool Execute(IParameters parameters, IResponseInfo responseInfo)
+        /// <param name="parameters">Parameters passed into <see cref="IRandomService"/></param>
+        /// <param name="response">Response returnred from <see cref="IRandomService"/></param>
+        /// <returns>True is the process should continue to the next <see cref="IResponseHandler"/> in the list, false to stop processing response handlers</returns>
+        public bool Execute(IParameters parameters, string response)
         {
             foreach (IResponseHandler handlers in _responseHandlers)
             {
-                if (!handlers.Process(parameters, responseInfo))
+                if (!handlers.Execute(parameters, response))
                     return false;
             }
             return true;
         }
 
-        public bool Execute(IResponseInfo responseInfo, IParameters parameters)
+        public IResponseHandler GetHandler(Type responseHandler)
         {
-            throw new NotImplementedException();
-        }
-
-        public IResponseHandler GetHandler(Type handlerType)
-        {
-            return _responseHandlers.FirstOrDefault(handler => handler.GetType() == handlerType);
+            return _responseHandlers.FirstOrDefault(handler => handler.GetType() == responseHandler);
         }
     }
 }

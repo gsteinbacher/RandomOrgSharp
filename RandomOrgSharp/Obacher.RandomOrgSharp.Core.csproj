@@ -45,11 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMethod.cs" />
-    <Compile Include="IRequestBuilder.cs" />
+    <Compile Include="Request\IRequestBuilder.cs" />
     <Compile Include="Request\IRequestCommand.cs" />
     <Compile Include="Request\IRequestCommandFactory.cs" />
     <Compile Include="MethodCallBroker.cs" />
     <Compile Include="Request\RequestCommandFactory.cs" />
+    <Compile Include="Response\ErrorResponseInfo.cs" />
     <Compile Include="Response\IErrorHandler.cs" />
     <Compile Include="Parameter\IParameters.cs" />
     <Compile Include="Parameter\UsageParameters.cs" />
@@ -67,7 +68,6 @@
     <Compile Include="Parameter\StringParameters.cs" />
     <Compile Include="Parameter\UuidParameters.cs" />
     <Compile Include="ResourceHelper.cs" />
-    <Compile Include="Response\AdvisoryDelayHandler.cs" />
     <Compile Include="Response\DataResponseInfo.cs" />
     <Compile Include="Response\IResponseParser.cs" />
     <Compile Include="Response\IResponseInfo.cs" />

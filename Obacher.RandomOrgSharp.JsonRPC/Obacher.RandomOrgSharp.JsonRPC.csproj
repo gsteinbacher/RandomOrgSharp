@@ -68,7 +68,9 @@
     <Compile Include="Request\StringJsonRequestBuilder.cs" />
     <Compile Include="Request\UuidJsonRequestBuilder.cs" />
     <Compile Include="Request\VerifySignatureJsonRequestBuilder.cs" />
-    <Compile Include="Response\ErrorHandlerParser.cs" />
+    <Compile Include="Response\AdvisoryDelayHandler.cs" />
+    <Compile Include="Response\ErrorHandler.cs" />
+    <Compile Include="Response\ErrorParser.cs" />
     <Compile Include="Response\ErrorHandlerThrowException.cs" />
     <Compile Include="Response\GenericResponseParser.cs" />
     <Compile Include="Response\UsageResponseParser.cs" />
@@ -77,6 +79,10 @@
     <Compile Include="Response\VerifySignatureResponseParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Obacher.Framework.Common\Obacher.Framework.Common.csproj">
+      <Project>{0aad80a2-3cf4-4f2a-9573-320e3f28af46}</Project>
+      <Name>Obacher.Framework.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
       <Name>Obacher.RandomOrgSharp.Core</Name>
