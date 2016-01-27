@@ -2,25 +2,6 @@
 {
     internal static class JsonRpcConstants
     {
-        public const string APIKEY_KEY = "apiKey";
-        public const string APIKEY_VALUE = "a0fc5d8d-8812-4093-851d-5bf64b4310d0";
-
-        public const string INTEGER_METHOD = "generateIntegers";
-        public const string DECIMAL_METHOD = "generateDecimalFractions";
-        public const string GAUSSIAN_METHOD = "generateGaussians";
-        public const string STRING_METHOD = "generateStrings";
-        public const string UUID_METHOD = "generateUUIDs";
-        public const string BLOB_METHOD = "generateBlobs";
-        public const string INTEGER_SIGNED_METHOD = "generateSignedIntegers";
-        public const string DECIMAL_SIGNED_METHOD = "generateSignedDecimalFractions";
-        public const string GAUSSIAN_SIGNED_METHOD = "generateSignedGaussians";
-        public const string STRING_SIGNED_METHOD = "generateSignedStrings";
-        public const string UUID_SIGNED_METHOD = "generateSignedUUIDs";
-        public const string BLOB_SIGNED_METHOD = "generateSignedBlobs";
-
-        public const string USAGE_METHOD = "getUsage";
-        public const string VERIFY_SIGNATURE_METHOD = "verifySignature";
-
         // Parameter names that are used in the JSON request object.
         public const string RPC_PARAMETER_NAME = "jsonrpc";
         public const string RPC_VALUE = "2.0";

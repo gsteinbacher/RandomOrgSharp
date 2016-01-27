@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Response;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Response
@@ -18,6 +19,11 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
 
             var responseInfo = new VerifySignatureResponseInfo(authenticity, id);
             return responseInfo;
+        }
+
+        public bool CanHandle(IParameters parameters)
+        {
+            return parameters.VerifyOriginator;
         }
     }
 }

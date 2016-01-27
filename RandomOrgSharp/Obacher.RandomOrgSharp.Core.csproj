@@ -47,9 +47,9 @@
     <Compile Include="IMethod.cs" />
     <Compile Include="Request\IRequestBuilder.cs" />
     <Compile Include="Request\IRequestCommand.cs" />
-    <Compile Include="Request\IRequestCommandFactory.cs" />
+    <Compile Include="Request\IPrecedingRequestCommandFactory.cs" />
     <Compile Include="MethodCallBroker.cs" />
-    <Compile Include="Request\RequestCommandFactory.cs" />
+    <Compile Include="Request\PrecedingRequestCommandFactory.cs" />
     <Compile Include="Response\ErrorResponseInfo.cs" />
     <Compile Include="Response\IErrorHandler.cs" />
     <Compile Include="Parameter\IParameters.cs" />
@@ -75,7 +75,6 @@
     <Compile Include="Response\IResponseHandlerFactory.cs" />
     <Compile Include="Response\ResponseHandlerFactory.cs" />
     <Compile Include="Response\UsageResponseInfo.cs" />
-    <Compile Include="Response\VerifyIdResponseHandler.cs" />
     <Compile Include="Response\VerifySignatureResponseInfo.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="StringsConstants.cs" />

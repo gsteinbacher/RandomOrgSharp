@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
+using Obacher.Framework.Common.SystemWrapper;
 using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 
@@ -7,10 +8,12 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Request
 {
     public class JsonRequestBuilder : IRequestBuilder
     {
+        private readonly ISettingsManager _settingsManager;
         private readonly IJsonRequestBuilder _builder;
 
-        public JsonRequestBuilder(IJsonRequestBuilder builder)
+        public JsonRequestBuilder(IJsonRequestBuilder builder, ISettingsManager settingsManager = null)
         {
+            _settingsManager = settingsManager ?? new SettingsManager(new ConfigurationManagerWrap());
             _builder = builder;
         }
 
@@ -29,7 +32,9 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Request
                 throw new ArgumentException(ResourceHelper.GetString(StringsConstants.EXCEPTION_INVALID_ARGUMENT, "CommonParameters"));
 
             var jsonParameters = _builder.Build(parameters) ?? new JObject();
-            jsonParameters.Add(JsonRpcConstants.APIKEY_KEY, commonParameters.ApiKey);
+
+            string apiKey = _settingsManager.GetApiKey();
+            jsonParameters.Add(RandomOrgConstants.APIKEY_KEY, apiKey);
 
             var jsonRequest = new JObject(
                 new JProperty(JsonRpcConstants.RPC_PARAMETER_NAME, JsonRpcConstants.RPC_VALUE),

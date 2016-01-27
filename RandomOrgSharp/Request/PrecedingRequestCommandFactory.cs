@@ -4,11 +4,11 @@ using Obacher.RandomOrgSharp.Core.Parameter;
 
 namespace Obacher.RandomOrgSharp.Core.Request
 {
-    public class RequestCommandFactory : IRequestCommandFactory
+    public class PrecedingRequestCommandFactory : IPrecedingRequestCommandFactory
     {
         private readonly IRequestCommand[] _requestHandlers;
 
-        public RequestCommandFactory(params IRequestCommand[] requestHandlers)
+        public PrecedingRequestCommandFactory(params IRequestCommand[] requestHandlers)
         {
             _requestHandlers = requestHandlers;
         }

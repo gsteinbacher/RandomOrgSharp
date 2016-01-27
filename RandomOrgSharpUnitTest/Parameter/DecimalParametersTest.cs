@@ -18,10 +18,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = -1;
             const int numberOfdecimalPlaces = 10;
-            using (new MockCommonParameters())
 
-                // Act
-                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
+            // Act
+            DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -30,10 +29,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 10001;
             const int numberOfdecimalPlaces = 10;
-            using (new MockCommonParameters())
 
-                // Act
-                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
+            // Act
+            DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -42,10 +40,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = int.MinValue;
-            using (new MockCommonParameters())
 
-                // Act
-                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
+            // Act
+            DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
 
@@ -55,10 +52,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = int.MaxValue;
-            using (new MockCommonParameters())
 
-                // Act
-                DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
+            // Act
+            DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces);
         }
 
         [TestMethod]
@@ -69,10 +65,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int numberOfdecimalPlaces = 15;
             const bool allowDuplicates = false;
             DecimalParameters result;
-            using (new MockCommonParameters())
 
-                // Act
-                result = DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces, allowDuplicates);
+            // Act
+            result = DecimalParameters.Create(numberOfItems, numberOfdecimalPlaces, allowDuplicates);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

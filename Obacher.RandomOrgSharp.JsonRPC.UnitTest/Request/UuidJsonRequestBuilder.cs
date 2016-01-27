@@ -6,6 +6,8 @@ using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Request;
+using Obacher.RandomOrgSharp.JsonRPC;
+using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.UnitTest.Tools;
 using Obacher.UnitTest.Tools.Mocks;
 using Should.Fluent;
@@ -47,19 +49,16 @@ namespace RandomOrgSharp.UnitTest.Request
             JObject expected =
 
                 new JObject(
-                    new JProperty(RandomOrgConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems)
+                    new JProperty(JsonRpcConstants.NUMBER_ITEMS_RETURNED_PARAMETER_NAME, numberOfItems)
                 );
 
             // Act
-            using (new MockCommonParameters(id))
-            {
-                var parameters = UuidParameters.Create(numberOfItems);
-                var target = new UuidJsonRequestBuilder();
-                var actual = target.Build(parameters);
+            var parameters = UuidParameters.Create(numberOfItems);
+            var target = new UuidJsonRequestBuilder();
+            var actual = target.Build(parameters);
 
-                // Assert
-                actual.Should().Equal(expected);
-            }
+            // Assert
+            actual.Should().Equal(expected);
         }
 
         [TestMethod, ExceptionExpected(typeof(ArgumentNullException), "parameters")]
@@ -78,7 +77,7 @@ namespace RandomOrgSharp.UnitTest.Request
             // Arrange
             const bool expected = true;
             Mock<IParameters> parameters = new Mock<IParameters>();
-            parameters.Setup(p => p.MethodType).Returns(MethodType.Uuid);
+            //parameters.Setup(p => p.MethodType).Returns(MethodType.Uuid);
 
             // Act
             var target = new UuidJsonRequestBuilder();
@@ -94,7 +93,7 @@ namespace RandomOrgSharp.UnitTest.Request
             // Arrange
             const bool expected = false;
             Mock<IParameters> parameters = new Mock<IParameters>();
-            parameters.Setup(p => p.MethodType).Returns(MethodType.Blob);
+            //parameters.Setup(p => p.MethodType).Returns(MethodType.Blob);
 
             // Act
             var target = new UuidJsonRequestBuilder();

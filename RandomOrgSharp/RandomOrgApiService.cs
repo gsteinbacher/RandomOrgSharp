@@ -3,26 +3,26 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Obacher.Framework.Common.SystemWrapper;
 
 namespace Obacher.RandomOrgSharp.Core
 {
     public class RandomOrgApiService : IRandomService
     {
-        private const string Url = "https://api.random.org/json-rpc/1/invoke";
         private const string ContentType = "application/json";
 
-        private const string HttpRequestTimeoutKey = "HttpRequestTimeout";
-        private const string HttpReadwriteTimeoutKey = "HttpReadWriteTimeout";
-        private const int DefaultRequestTimeout = 180000;
-        private const int DefaultReadwriteTimeout = 180000;
-
+        private readonly string _url;
         private readonly int _httpRequestTimeout;
         private readonly int _httpReadWriteTimeout;
 
-        public RandomOrgApiService()
+        public RandomOrgApiService(ISettingsManager settingsManager = null)
         {
-            _httpRequestTimeout = SettingsManager.Instance.GetConfigurationValue(HttpRequestTimeoutKey, DefaultRequestTimeout);
-            _httpReadWriteTimeout = SettingsManager.Instance.GetConfigurationValue(HttpReadwriteTimeoutKey, DefaultReadwriteTimeout);
+            if (settingsManager == null)
+                settingsManager = new SettingsManager(new ConfigurationManagerWrap());
+
+            _url = settingsManager.GetUrl();
+            _httpRequestTimeout = settingsManager.GetHttpRequestTimeout();
+            _httpReadWriteTimeout = settingsManager.GetHttpReadWriteTimeout();
         }
 
         public string SendRequest(string request)
@@ -85,7 +85,7 @@ namespace Obacher.RandomOrgSharp.Core
         /// <returns>IHttpRequest</returns>
         private HttpWebRequest SetupHttpRequest()
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
             request.Timeout = _httpRequestTimeout;
             request.ReadWriteTimeout = _httpReadWriteTimeout;
             request.Method = "POST";

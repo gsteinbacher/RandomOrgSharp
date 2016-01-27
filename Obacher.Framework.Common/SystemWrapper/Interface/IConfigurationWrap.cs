@@ -8,6 +8,23 @@ namespace Obacher.Framework.Common.SystemWrapper.Interface
     /// </summary>
     public interface IConfigurationManager
     {
+        /// <summary>
+        /// Retrieve the value from the configuration file based on the specified key
+        /// </summary>
+        /// <typeparam name="T">Type of the value to be returend</typeparam>
+        /// <param name="key">Name in the configuration file</param>
+        /// <returns>Value in the configuration file.  Returns default(T) if the value is not found</returns>
+        T GetAppSettingValue<T>(string key);
+
+        /// <summary>
+        /// Retrieve the value from the configuration file based on the specified key
+        /// </summary>
+        /// <typeparam name="T">Type of the value to be returned</typeparam>
+        /// <param name="key">Name in the configuration file</param>
+        /// <param name="defaultValue">Default value if key is not found in configuration file</param>
+        /// <returns>Value in the configuration file.  Returns <param name="defaultValue"></param> if the value is not found</returns>
+        T GetAppSettingValue<T>(string key, T defaultValue);
+
         // Properties
 
         /// <summary>

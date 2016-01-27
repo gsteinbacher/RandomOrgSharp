@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.Core.Response;
-using Obacher.RandomOrgSharp.Method;
+using Obacher.Framework.Common.SystemWrapper;
+using Obacher.RandomOrgSharp.JsonRPC.Method;
+using Obacher.RandomOrgSharp.JsonRPC.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -15,10 +17,20 @@ namespace RandomOrgSharp.FunctionalTest
     {
         private Random _random;
 
-        [TestInitialize]
+        private AdvisoryDelayHandler _advisoryDelayHandler;
+
+        [ClassInitialize]
         public void InitializeTests()
         {
             _random = new Random();
+            _advisoryDelayHandler = new AdvisoryDelayHandler(new DateTimeWrap());
+        }
+
+        [ClassCleanup]
+        public void CleanupTest()
+        {
+            _random = null;
+            _advisoryDelayHandler = null;
         }
 
         [TestMethod]
@@ -29,12 +41,13 @@ namespace RandomOrgSharp.FunctionalTest
             int numberOfDecimalPlaces = _random.Next(1, 20);
             const bool allowDuplicates = false;
 
-            // Act
-            var target = new DecimalMethod();
-            var results = target.GenerateDecimalFractions(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
+            //RandomOrgApiEmulator service = new RandomOrgApiEmulator();
 
-            // Assert
-            TestResults(results, numberToReturn, numberOfDecimalPlaces);
+            // Act
+            var target = new DecimalBasicMethod(_advisoryDelayHandler);
+            var actual = target.GenerateDecimalsFractions(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
+
+            TestResults(actual.ToList(), numberToReturn, numberOfDecimalPlaces);
         }
 
         [TestMethod]
@@ -45,21 +58,23 @@ namespace RandomOrgSharp.FunctionalTest
             int numberOfDecimalPlaces = _random.Next(1, 20);
             const bool allowDuplicates = false;
 
+            //RandomOrgApiEmulator service = new RandomOrgApiEmulator();
+
             // Act
-            var target = new DecimalMethod();
-            var results = await target.GenerateDecimalFractionsAsync(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
+            var target = new DecimalBasicMethod(_advisoryDelayHandler);
+            var actual = await target.GenerateDecimalsFractionsAsync(numberToReturn, numberOfDecimalPlaces, allowDuplicates);
 
             // Assert
-            TestResults(results, numberToReturn, numberOfDecimalPlaces);
+            TestResults(actual.ToList(), numberToReturn, numberOfDecimalPlaces);
         }
 
 
-        private static void TestResults(DataResponseInfo<decimal> results, int numberToReturn, int numberOfDecimalPlaces)
+        private static void TestResults(IList<decimal> results, int numberToReturn, int numberOfDecimalPlaces)
         {
             results.Should().Not.Be.Null();
-            results.Data.Count().Should().Equal(numberToReturn);
+            results.Count().Should().Equal(numberToReturn);
 
-            foreach (var result in results.Data)
+            foreach (var result in results)
             {
                 result.Should().Be.GreaterThan(0m);
                 result.Should().Be.LessThan(1m);

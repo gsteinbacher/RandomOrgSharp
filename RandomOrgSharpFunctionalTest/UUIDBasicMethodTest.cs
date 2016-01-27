@@ -1,25 +1,44 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.Method;
+using Obacher.Framework.Common.SystemWrapper;
+using Obacher.RandomOrgSharp.JsonRPC.Method;
+using Obacher.RandomOrgSharp.JsonRPC.Response;
 using Should.Fluent;
+
 
 namespace RandomOrgSharp.FunctionalTest
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [TestClass]
-    public class UUIDBasicMethodTest
+    public class UuidBasicMethodTest
     {
+        private AdvisoryDelayHandler _advisoryDelayHandler;
+
+        [ClassInitialize]
+        public void InitializeTests()
+        {
+            _advisoryDelayHandler = new AdvisoryDelayHandler(new DateTimeWrap());
+        }
+
+        [ClassCleanup]
+        public void CleanupTest()
+        {
+            _advisoryDelayHandler = null;
+        }
+
         [TestMethod]
         public void UuidBasicMethod_Execute_ShouldReturnGuidValues()
         {
             int numberToReturn = 2;
 
-            var target = new UuidMethod();
-            var results = target.GenerateUuids(numberToReturn);
+            var target = new UuidBasicMethod(_advisoryDelayHandler);
+            IEnumerable<Guid> results = target.GenerateUuids(numberToReturn);
 
             results.Should().Not.Be.Null();
-            results.Data.Count().Should().Equal(numberToReturn);
+            results.Count().Should().Equal(numberToReturn);
         }
 
 
@@ -28,11 +47,11 @@ namespace RandomOrgSharp.FunctionalTest
         {
             int numberToReturn = 2;
 
-            var target = new UuidMethod();
-            var results = await target.GenerateUuidsAsync(numberToReturn);
+            var target = new UuidBasicMethod(_advisoryDelayHandler);
+            IEnumerable<Guid> results = await target.GenerateUuidsAsync(numberToReturn);
 
             results.Should().Not.Be.Null();
-            results.Data.Count().Should().Equal(numberToReturn);
+            results.Count().Should().Equal(numberToReturn);
         }
     }
 }

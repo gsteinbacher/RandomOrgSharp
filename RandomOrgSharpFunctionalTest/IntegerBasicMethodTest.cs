@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp;
-using Obacher.RandomOrgSharp.Core.Response;
-using Obacher.RandomOrgSharp.Method;
+using Obacher.Framework.Common.SystemWrapper;
+using Obacher.RandomOrgSharp.JsonRPC.Method;
+using Obacher.RandomOrgSharp.JsonRPC.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -17,10 +17,20 @@ namespace RandomOrgSharp.FunctionalTest
     {
         private Random _random;
 
-        [TestInitialize]
+        private AdvisoryDelayHandler _advisoryDelayHandler;
+
+        [ClassInitialize]
         public void InitializeTests()
         {
             _random = new Random();
+            _advisoryDelayHandler = new AdvisoryDelayHandler(new DateTimeWrap());
+        }
+
+        [ClassCleanup]
+        public void CleanupTest()
+        {
+            _random = null;
+            _advisoryDelayHandler = null;
         }
 
         [TestMethod]
@@ -33,11 +43,11 @@ namespace RandomOrgSharp.FunctionalTest
             bool allowDuplicates = _random.Next(1, 2) == 1;
 
             // Act
-            var target = new IntegerMethod();
+            var target = new IntegerBasicMethod(_advisoryDelayHandler);
             var results = target.GenerateIntegers(numberToReturn, minNumber, maxNumber, allowDuplicates);
 
             // Assert
-            TestResults(results, numberToReturn, minNumber, maxNumber, allowDuplicates);
+            TestResults(results.ToList(), numberToReturn, minNumber, maxNumber, allowDuplicates);
         }
 
 
@@ -50,23 +60,23 @@ namespace RandomOrgSharp.FunctionalTest
             bool allowDuplicates = _random.Next(1, 2) == 1;
 
             // Act
-            var target = new IntegerMethod();
+            var target = new IntegerBasicMethod(_advisoryDelayHandler);
             var results = await target.GenerateIntegersAsync(numberToReturn, minNumber, maxNumber, allowDuplicates);
 
-            TestResults(results, numberToReturn, minNumber, maxNumber, allowDuplicates);
+            TestResults(results.ToList(), numberToReturn, minNumber, maxNumber, allowDuplicates);
         }
 
-        private static void TestResults(DataResponseInfo<int> results, int numberToReturn, int minNumber,
+        private static void TestResults(IList<int> results, int numberToReturn, int minNumber,
                                         int maxNumber, bool allowDuplicates)
         {
             results.Should().Not.Be.Null();
-            results.Data.Count().Should().Equal(numberToReturn);
+            results.Count().Should().Equal(numberToReturn);
 
             // Ensure there are no duplicates
             if (!allowDuplicates)
-                CollectionAssert.AllItemsAreUnique(results.Data.ToArray());
+                CollectionAssert.AllItemsAreUnique(results.ToArray());
 
-            foreach (var result in results.Data)
+            foreach (var result in results)
                 result.Should().Be.InRange(minNumber, maxNumber);
         }
     }

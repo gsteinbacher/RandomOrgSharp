@@ -62,9 +62,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Obacher.Framework.Common\Obacher.Framework.Common.csproj">
+      <Project>{0aad80a2-3cf4-4f2a-9573-320e3f28af46}</Project>
+      <Name>Obacher.Framework.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Obacher.RandomOrgSharp.Emulator\Obacher.RandomOrgSharp.Emulator.csproj">
       <Project>{9fc29e0d-c0e9-4cd1-a465-255cf0ba8a10}</Project>
       <Name>Obacher.RandomOrgSharp.Emulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Obacher.RandomOrgSharp.JsonRPC\Obacher.RandomOrgSharp.JsonRPC.csproj">
+      <Project>{8b17ed8b-ee27-44db-96ef-48b3d750819d}</Project>
+      <Name>Obacher.RandomOrgSharp.JsonRPC</Name>
     </ProjectReference>
     <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>

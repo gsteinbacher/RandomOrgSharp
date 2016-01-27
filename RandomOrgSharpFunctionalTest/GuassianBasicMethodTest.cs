@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp.Core.Response;
-using Obacher.RandomOrgSharp.Method;
+using Obacher.Framework.Common.SystemWrapper;
+using Obacher.RandomOrgSharp.JsonRPC.Method;
+using Obacher.RandomOrgSharp.JsonRPC.Response;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -14,10 +16,20 @@ namespace RandomOrgSharp.FunctionalTest
     {
         private Random _random;
 
-        [TestInitialize]
+        private AdvisoryDelayHandler _advisoryDelayHandler;
+
+        [ClassInitialize]
         public void InitializeTests()
         {
             _random = new Random();
+            _advisoryDelayHandler = new AdvisoryDelayHandler(new DateTimeWrap());
+        }
+
+        [ClassCleanup]
+        public void CleanupTest()
+        {
+            _random = null;
+            _advisoryDelayHandler = null;
         }
 
         [TestMethod]
@@ -30,11 +42,11 @@ namespace RandomOrgSharp.FunctionalTest
             int signifantDigits = _random.Next(2, 20);
 
             // Act
-            var target = new GuassianMethod();
+            var target = new GuassianBasicMethod(_advisoryDelayHandler);
             var results = target.GenerateGuassians(numberToReturn, mean, standardDeviation, signifantDigits);
 
             // Assert
-            TestResults(results, numberToReturn);
+            TestResults(results.ToList(), numberToReturn);
         }
 
         [TestMethod]
@@ -47,18 +59,18 @@ namespace RandomOrgSharp.FunctionalTest
             int signifantDigits = _random.Next(2, 20);
 
             // Act
-            var target = new GuassianMethod();
+            var target = new GuassianBasicMethod(_advisoryDelayHandler);
             var results = await target.GenerateGuassiansAsync(numberToReturn, mean, standardDeviation, signifantDigits);
 
             // Assert
-            TestResults(results, numberToReturn);
+            TestResults(results.ToList(), numberToReturn);
         }
 
 
-        private static void TestResults(DataResponseInfo<decimal> results, int numberToReturn)
+        private static void TestResults(IList<decimal> results, int numberToReturn)
         {
             results.Should().Not.Be.Null();
-            results.Data.Count().Should().Equal(numberToReturn);
+            results.Count().Should().Equal(numberToReturn);
         }
     }
 }

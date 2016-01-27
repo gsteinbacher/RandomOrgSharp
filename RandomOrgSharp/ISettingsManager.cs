@@ -2,7 +2,9 @@
 {
     public interface ISettingsManager
     {
-        T GetConfigurationValue<T>(string key);
-        T GetConfigurationValue<T>(string key, T defaultValue);
+        string GetApiKey();
+        string GetUrl();
+        int GetHttpRequestTimeout();
+        int GetHttpReadWriteTimeout();
     }
 }

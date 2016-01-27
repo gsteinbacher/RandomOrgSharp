@@ -12,63 +12,52 @@ namespace Obacher.RandomOrgSharp.Core
     public class MethodCallBroker : IMethodCallBroker
     {
         private readonly IRandomService _service;
-        private readonly IMethod _method;
-        private readonly IErrorHandler _errorHandler;
-        private readonly IRequestCommandFactory _requestCommandFactory;
+        private readonly IRequestBuilder _requestBuilder;
+        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
         private readonly IResponseHandlerFactory _responseHandlerFactory;
 
 
-        public MethodCallBroker(IMethod method, IErrorHandler errorHandler, IRandomService service = null, IRequestCommandFactory requestCommandFactory = null, IResponseHandlerFactory responseHandlerFactory = null)
+        public MethodCallBroker(IRequestBuilder requestBuilder, IRandomService service = null, IPrecedingRequestCommandFactory precedingRequestCommandFactory = null, IResponseHandlerFactory responseHandlerFactory = null)
         {
-            _method = method;
-            _errorHandler = errorHandler;
-
+            _requestBuilder = requestBuilder;
             _service = service ?? new RandomOrgApiService();
-            _requestCommandFactory = requestCommandFactory;
+            _precedingRequestCommandFactory = precedingRequestCommandFactory;
             _responseHandlerFactory = responseHandlerFactory;
         }
 
-        public void Generate(IParameters parameters)
+        public bool Generate(IParameters parameters)
         {
-            IRequestBuilder requestBuilder = _method.CreateRequestBuilder();
-            string request = requestBuilder.Build(parameters);
+            string request = _requestBuilder.Build(parameters);
 
-            _requestCommandFactory?.Execute(parameters);
+            _precedingRequestCommandFactory?.Execute(parameters);
 
             string response = _service.SendRequest(request);
 
-                _method.ParseResponse(response);
-                _responseHandlerFactory?.Execute(parameters, response);
+            bool result = true;
+            if (_responseHandlerFactory != null)
+                result = _responseHandlerFactory.Execute(parameters, response);
+
+            return result;
         }
 
         /// <summary>
         /// Call method to generate random values in an asynchronous manner
         /// </summary>
         /// <param name="parameters">Parameters for the specific method being called</param>
-        /// <returns></returns>
-        public async void GenerateAsync(IParameters parameters)
+        /// <returns>Response object that is returned from service</returns>
+        public async Task<bool> GenerateAsync(IParameters parameters)
         {
-            IRequestBuilder requestBuilder = _method.CreateRequestBuilder();
-            string request = requestBuilder.Build(parameters);
+            string request = _requestBuilder.Build(parameters);
 
-            _requestCommandFactory?.Execute(parameters);
+            _precedingRequestCommandFactory?.Execute(parameters);
 
             string response = await _service.SendRequestAsync(request);
 
-            _errorHandler.Process(response);
-            if (!_errorHandler.HasError())
-            {
-                _method.ParseResponse(response);
-                _responseHandlerFactory?.Execute(parameters, _method.GetResponseInfo());
-            }
-        }
+            bool result = true;
+            if (_responseHandlerFactory != null)
+                result = _responseHandlerFactory.Execute(parameters, response);
 
-        //private IResponseHandlerFactory GetDefaultResponseHandlerFactory()
-        //{
-        //    var factory = new ResponseHandlerFactory(
-        //            new AdvisoryDelayHandler(),
-        //            new VerifyIdResponseHandler());
-        //    return factory;
-        //}
+            return result;
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Obacher.RandomOrgSharp.Core.Response
     public interface IResponseHandlerFactory
     {
         /// <summary>
-        /// Execute code against the response returned from <see cref="IRandomService"/>
+        /// Handle code against the response returned from <see cref="IRandomService"/>
         /// </summary>
         /// <param name="parameters">Parameters passed into <see cref="IRandomService"/></param>
         /// <param name="response">Response returnred from <see cref="IRandomService"/></param>

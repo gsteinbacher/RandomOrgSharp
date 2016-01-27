@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Configuration;
 using Obacher.Framework.Common.SystemWrapper.Interface;
 
@@ -9,6 +10,34 @@ namespace Obacher.Framework.Common.SystemWrapper
     /// </summary>
     public class ConfigurationManagerWrap : IConfigurationManager
     {
+        /// <inheritdoc />
+        public T GetAppSettingValue<T>(string key)
+        {
+            return GetAppSettingValue(key, default(T));
+        }
+
+        /// <inheritdoc />
+        public T GetAppSettingValue<T>(string key, T defaultValue)
+        {
+            T value = defaultValue;
+
+            object valueObject = ConfigurationManager.AppSettings[key];
+            if (valueObject != null)
+            {
+                try
+                {
+                    value = (T)Convert.ChangeType(valueObject, typeof(T));
+                }
+                catch
+                {
+                    value = defaultValue;
+                }
+            }
+
+            return value;
+
+        }
+
         /// <inheritdoc />
         public NameValueCollection AppSettings => ConfigurationManager.AppSettings;
 

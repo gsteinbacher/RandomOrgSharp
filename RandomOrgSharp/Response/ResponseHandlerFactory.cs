@@ -14,7 +14,7 @@ namespace Obacher.RandomOrgSharp.Core.Response
         }
 
         /// <summary>
-        /// Execute the response handlers
+        /// Handle the response handlers
         /// </summary>
         /// <param name="parameters">Parameters passed into <see cref="IRandomService"/></param>
         /// <param name="response">Response returnred from <see cref="IRandomService"/></param>
@@ -23,7 +23,7 @@ namespace Obacher.RandomOrgSharp.Core.Response
         {
             foreach (IResponseHandler handlers in _responseHandlers)
             {
-                if (!handlers.Execute(parameters, response))
+                if (!handlers.Handle(parameters, response))
                     return false;
             }
             return true;

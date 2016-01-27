@@ -10,7 +10,7 @@ namespace Obacher.RandomOrgSharp.Core.Response
         /// <param name="parameters">Parameters passed into the request object</param>
         /// <param name="response">Response returned from <see cref="IRandomService"/></param>
         /// <returns>True if the process can continue to process subsequent handlers</returns>
-        bool Execute(IParameters parameters, string response);
+        bool Handle(IParameters parameters, string response);
 
         /// <summary>
         /// Should the <c>Process</c> method be called for the implementation of this interface

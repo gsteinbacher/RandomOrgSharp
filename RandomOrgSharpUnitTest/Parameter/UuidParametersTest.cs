@@ -15,20 +15,18 @@ namespace RandomOrgSharp.UnitTest.Parameter
         {
             // Arrange
             const int numberOfItems = -1;
-            using (new MockCommonParameters())
 
-                // Act
-                UuidParameters.Create(numberOfItems);
+            // Act
+            UuidParameters.Create(numberOfItems);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
         public void WhenNumberOfItemsToReturnGreaterThenMaximumAllowed_ExpectException()
         {
             const int numberOfItems = 1001;
-            using (new MockCommonParameters())
 
-                // Act
-                UuidParameters.Create(numberOfItems);
+            // Act
+            UuidParameters.Create(numberOfItems);
         }
 
         [TestMethod]
@@ -38,10 +36,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int numberOfItems = 1;
 
             UuidParameters result;
-            using (new MockCommonParameters())
 
-                // Act
-                result = UuidParameters.Create(numberOfItems);
+            // Act
+            result = UuidParameters.Create(numberOfItems);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

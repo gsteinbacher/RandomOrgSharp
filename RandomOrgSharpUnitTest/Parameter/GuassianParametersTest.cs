@@ -20,10 +20,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -34,10 +33,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -48,10 +46,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = -1000001;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
 
@@ -63,10 +60,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = 10000001;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -77,10 +73,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = 10000;
             const int standardDeviation = -1000001;
             const int significantDigits = 2;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -91,10 +86,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 21;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -105,10 +99,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 1;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -119,10 +112,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 21;
-            using (new MockCommonParameters())
 
-                // Act
-                GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
         }
 
         [TestMethod]
@@ -135,10 +127,8 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int significantDigits = 15;
             GuassianParameters result;
 
-            using (new MockCommonParameters())
-
-                // Act
-                result = GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
+            // Act
+            result = GuassianParameters.Create(numberOfItems, mean, standardDeviation, significantDigits);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

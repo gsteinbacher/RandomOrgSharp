@@ -33,7 +33,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         }
 
 
-        public bool Execute(IParameters parameters, string response)
+        public bool Handle(IParameters parameters, string response)
         {
             _hasError = false;
 

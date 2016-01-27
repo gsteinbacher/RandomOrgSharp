@@ -16,10 +16,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = -1;
             const int size = 10;
-            using (new MockCommonParameters())
 
-                // Act
-                BlobParameters.Create(numberOfItems, size);
+            // Act
+            BlobParameters.Create(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -28,10 +27,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 101;
             const int size = 1;
-            using (new MockCommonParameters())
 
-                // Act
-                BlobParameters.Create(numberOfItems, size);
+            // Act
+            BlobParameters.Create(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -40,10 +38,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int size = int.MinValue;
-            using (new MockCommonParameters())
 
-                // Act
-                BlobParameters.Create(numberOfItems, size);
+            // Act
+            BlobParameters.Create(numberOfItems, size);
         }
 
         [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
@@ -52,10 +49,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int size = int.MaxValue;
-            using (new MockCommonParameters())
 
-                // Act
-                BlobParameters.Create(numberOfItems, size);
+            // Act
+            BlobParameters.Create(numberOfItems, size);
         }
 
 
@@ -65,10 +61,9 @@ namespace RandomOrgSharp.UnitTest.Parameter
             // Arrange
             const int numberOfItems = 1;
             const int size = 20;
-            using (new MockCommonParameters())
 
-                // Act
-                BlobParameters.Create(numberOfItems, size);
+            // Act
+            BlobParameters.Create(numberOfItems, size);
         }
 
         [TestMethod]
@@ -80,9 +75,8 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const BlobFormat blobFormat = BlobFormat.Hex;
             BlobParameters result;
 
-            using (new MockCommonParameters())
-                // Act
-                result = BlobParameters.Create(numberOfItems, size, blobFormat);
+            // Act
+            result = BlobParameters.Create(numberOfItems, size, blobFormat);
 
             // Assert
             result.NumberOfItemsToReturn.Should().Equal(numberOfItems);

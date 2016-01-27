@@ -21,108 +21,86 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const MethodType expectedMethod = MethodType.Integer;
             const bool expectedVerifyOriginator = true;
 
-            using (new MockCommonParameters(expectedId))
-            {
-                // Act
-                var actual = new CommonParameters(expectedMethod, expectedVerifyOriginator);
+            // Act
+            var actual = new CommonParameters(expectedMethod, expectedVerifyOriginator);
 
-                // Assert
-                actual.MethodType.Should().Equal(expectedMethod);
-                actual.VerifyOriginator.Should().Equal(expectedVerifyOriginator);
-                actual.Id.Should().Equal(expectedId);
-            }
+            // Assert
+            actual.MethodType.Should().Equal(expectedMethod);
+            actual.VerifyOriginator.Should().Equal(expectedVerifyOriginator);
+            actual.Id.Should().Equal(expectedId);
         }
 
         [TestMethod]
         public void GetMethodName_WhenCalled_ExpectCorrectMethodName()
         {
             // Arrange
-            using (new MockCommonParameters())
-            {
-                // Act
-                var target = new CommonParameters(MethodType.Blob);
-                var actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.BLOB_METHOD);
-
-                target = new CommonParameters(MethodType.Blob, true);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.BLOB_SIGNED_METHOD);
-
-                target = new CommonParameters(MethodType.Decimal);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.DECIMAL_METHOD);
-
-                target = new CommonParameters(MethodType.Decimal, true);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.DECIMAL_SIGNED_METHOD);
-
-                target = new CommonParameters(MethodType.Gaussian);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.GAUSSIAN_METHOD);
-
-                target = new CommonParameters(MethodType.Gaussian, true);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.GAUSSIAN_SIGNED_METHOD);
-
-                target = new CommonParameters(MethodType.Integer);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.INTEGER_METHOD);
-
-                target = new CommonParameters(MethodType.Integer, true);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.INTEGER_SIGNED_METHOD);
-
-                target = new CommonParameters(MethodType.String);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.STRING_METHOD);
-
-                target = new CommonParameters(MethodType.String, true);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.STRING_SIGNED_METHOD);
-
-                target = new CommonParameters(MethodType.Uuid);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.UUID_METHOD);
-
-                target = new CommonParameters(MethodType.Uuid, true);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.UUID_SIGNED_METHOD);
-
-                target = new CommonParameters(MethodType.Usage);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.USAGE_METHOD);
-
-                target = new CommonParameters(MethodType.Usage, true);
-                actual = target.GetMethodName();
-                actual.Should().Equal(RandomOrgConstants.USAGE_METHOD);
-            }
-        }
-
-        //[TestMethod]
-        //public void GetMethodName_WhenNull_ExpectCorrectMethodName()
-        //{
-        //    // Arrange
-        //    using (new MockCommonParameters())
-        //    {
-        //        // Act
-        //        var target = new CommonParameters(MethodType.Blob);
-        //        var actual = target.GetMethodName();
-        //        actual.Should().Equal(RandomOrgConstants.BLOB_METHOD);
-        //    }
-        //}
-
-        [TestMethod, ExpectedException(typeof(RandomOrgRunTimeException))]
-        public void WhenApiIsNull_ExpectException()
-        {
-            // Arrange
-            var settingsManagerMock = new Mock<ISettingsManager>();
-            settingsManagerMock.Setup(m => m.GetConfigurationValue<string>(RandomOrgConstants.APIKEY_KEY))
-                .Returns((string)null);
-
-            SettingsManager.Instance = settingsManagerMock.Object;
 
             // Act
-            new CommonParameters(MethodType.Blob);
+            var target = new CommonParameters(MethodType.Blob);
+            var actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.BLOB_METHOD);
+
+            target = new CommonParameters(MethodType.Blob, true);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.BLOB_SIGNED_METHOD);
+
+            target = new CommonParameters(MethodType.Decimal);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.DECIMAL_METHOD);
+
+            target = new CommonParameters(MethodType.Decimal, true);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.DECIMAL_SIGNED_METHOD);
+
+            target = new CommonParameters(MethodType.Gaussian);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.GAUSSIAN_METHOD);
+
+            target = new CommonParameters(MethodType.Gaussian, true);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.GAUSSIAN_SIGNED_METHOD);
+
+            target = new CommonParameters(MethodType.Integer);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.INTEGER_METHOD);
+
+            target = new CommonParameters(MethodType.Integer, true);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.INTEGER_SIGNED_METHOD);
+
+            target = new CommonParameters(MethodType.String);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.STRING_METHOD);
+
+            target = new CommonParameters(MethodType.String, true);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.STRING_SIGNED_METHOD);
+
+            target = new CommonParameters(MethodType.Uuid);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.UUID_METHOD);
+
+            target = new CommonParameters(MethodType.Uuid, true);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.UUID_SIGNED_METHOD);
+
+            target = new CommonParameters(MethodType.Usage);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.USAGE_METHOD);
+
+            target = new CommonParameters(MethodType.Usage, true);
+            actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.USAGE_METHOD);
+        }
+
+        [TestMethod]
+        public void GetMethodName_WhenNull_ExpectCorrectMethodName()
+        {
+            // Arrange
+            // Act
+            var target = new CommonParameters(MethodType.Blob);
+            var actual = target.GetMethodName();
+            actual.Should().Equal(RandomOrgConstants.BLOB_METHOD);
         }
     }
 }

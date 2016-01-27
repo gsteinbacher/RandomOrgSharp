@@ -1,55 +1,48 @@
-﻿using System;
-using System.Configuration;
+﻿using Obacher.Framework.Common.SystemWrapper;
+using Obacher.Framework.Common.SystemWrapper.Interface;
 
 namespace Obacher.RandomOrgSharp.Core
 {
     public sealed class SettingsManager : ISettingsManager
     {
-        /// <remarks>
-        /// An instance of the <see cref="SettingsManager"/> is always called, even if the Instance variable it set to a different class.
-        /// I decided to take this approach to make the singleton thread safe, since the only time the Instance variable will be set to a different
-        /// value is during unit testing.
-        /// </remarks>
+        private const string DefaultUrl = "https://api.random.org/json-rpc/1/invoke";
+        private const string UrlKey = "Url";
 
-        public static ISettingsManager Instance { get; set; } = new SettingsManager();
+        private const string HttpRequestTimeoutKey = "HttpRequestTimeout";
+        private const string HttpReadwriteTimeoutKey = "HttpReadWriteTimeout";
+        private const int DefaultRequestTimeout = 180000;
+        private const int DefaultReadwriteTimeout = 180000;
 
-        /// <summary>
-        /// Retrieve the value from the configuration file based on the specified key
-        /// </summary>
-        /// <typeparam name="T">Type of the value to be returend</typeparam>
-        /// <param name="key">Name in the configuration file</param>
-        /// <returns>Value in the configuration file.  Returns default(T) if the value is not found</returns>
-        public T GetConfigurationValue<T>(string key)
+
+        private readonly IConfigurationManager _configurationManager;
+
+        public SettingsManager(IConfigurationManager configurationManager = null)
         {
-            return GetConfigurationValue<T>(key, default(T));
+            _configurationManager = configurationManager ?? new ConfigurationManagerWrap();
         }
 
-        /// <summary>
-        /// Retrieve the value from the configuration file based on the specified key
-        /// </summary>
-        /// <typeparam name="T">Type of the value to be returend</typeparam>
-        /// <param name="key">Name in the configuration file</param>
-        /// <param name="defaultValue">Default value if key is not found in configuration file</param>
-        /// <returns>Value in the configuration file.  Returns <param name="defaultValue"></param> if the value is not found</returns>
-        public T GetConfigurationValue<T>(string key, T defaultValue)
+        public string GetApiKey()
         {
-            T value = defaultValue;
+            string apiKey = _configurationManager.GetAppSettingValue<string>(RandomOrgConstants.APIKEY_KEY);
+            if (apiKey == null)
+                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.APIKEY_REQUIRED));
 
-            object timeoutObject = ConfigurationManager.AppSettings[key];
-            if (timeoutObject != null)
-            {
-                try
-                {
-                    value = (T)Convert.ChangeType(timeoutObject, typeof(T));
-                }
-                catch
-                {
-                    value = defaultValue;
-                }
-            }
+            return apiKey;
+        }
 
-            return value;
+        public string GetUrl()
+        {
+            return _configurationManager.GetAppSettingValue(UrlKey, DefaultUrl);
+        }
 
+        public int GetHttpRequestTimeout()
+        {
+            return _configurationManager.GetAppSettingValue(HttpRequestTimeoutKey, DefaultRequestTimeout);
+        }
+
+        public int GetHttpReadWriteTimeout()
+        {
+            return _configurationManager.GetAppSettingValue(HttpReadwriteTimeoutKey, DefaultReadwriteTimeout);
         }
     }
 }

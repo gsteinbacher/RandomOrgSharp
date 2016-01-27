@@ -12,8 +12,8 @@ namespace Obacher.UnitTest.Tools.Mocks
             if (settingsManagerMock == null)
                 settingsManagerMock = new Mock<ISettingsManager>();
 
-            settingsManagerMock.Setup(m => m.GetConfigurationValue<string>("apiKey"))
-                .Returns(apiKey ?? MOCK_API_KEY);
+            //settingsManagerMock.Setup(m => m.GetConfigurationValue<string>("apiKey"))
+            //    .Returns(apiKey ?? MOCK_API_KEY);
 
             return settingsManagerMock;
         }

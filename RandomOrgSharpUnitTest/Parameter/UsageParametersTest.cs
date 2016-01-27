@@ -14,8 +14,6 @@ namespace RandomOrgSharp.UnitTest.Parameter
         public void WhenCalled_ExpectPropertiesSetProperly()
         {
             // Arrange
-            using (new MockCommonParameters())
-            {
                 // Arrange
                 const MethodType expectedMethodType = MethodType.Usage;
                 const bool expectedVerifyOriginator = false;
@@ -25,7 +23,6 @@ namespace RandomOrgSharp.UnitTest.Parameter
                 // Arrange
                 parameters.MethodType.Should().Equal(expectedMethodType);
                 parameters.VerifyOriginator.Should().Equal(expectedVerifyOriginator);
-            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Request
 
             var jsonRequest = new JObject(
                 new JProperty(JsonRpcConstants.RPC_PARAMETER_NAME, JsonRpcConstants.RPC_VALUE),
-                new JProperty(JsonRpcConstants.METHOD_PARAMETER_NAME, JsonRpcConstants.VERIFY_SIGNATURE_METHOD),
+                new JProperty(JsonRpcConstants.METHOD_PARAMETER_NAME, RandomOrgConstants.VERIFY_SIGNATURE_METHOD),
                 new JProperty(JsonRpcConstants.PARAMETERS_PARAMETER_NAME, jsonParameters),
                 new JProperty(JsonRpcConstants.ID_PARAMETER_NAME, parameters.Id)
                 );

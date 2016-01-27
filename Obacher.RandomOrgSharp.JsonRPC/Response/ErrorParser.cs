@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Newtonsoft.Json.Linq;
 using Obacher.RandomOrgSharp.Core;
+using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Response;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Response
@@ -39,6 +40,12 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
             }
 
             return new ErrorResponseInfo(id, code, message);
+        }
+
+        public bool CanHandle(IParameters parameters)
+        {
+            // Error Parser can always be called
+            return true;
         }
     }
 }

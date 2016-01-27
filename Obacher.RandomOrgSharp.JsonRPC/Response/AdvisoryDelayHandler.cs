@@ -3,12 +3,12 @@ using System.Threading;
 using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.Framework.Common.SystemWrapper.Interface;
+using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
-using Obacher.RandomOrgSharp.Core.Properties;
 using Obacher.RandomOrgSharp.Core.Request;
-using Obacher.RandomOrgSharp.JsonRPC;
+using Obacher.RandomOrgSharp.Core.Response;
 
-namespace Obacher.RandomOrgSharp.Core.Response
+namespace Obacher.RandomOrgSharp.JsonRPC.Response
 {
     public class AdvisoryDelayHandler : IRequestCommand, IResponseHandler
     {
@@ -30,7 +30,6 @@ namespace Obacher.RandomOrgSharp.Core.Response
         public AdvisoryDelayHandler(IDateTime dateTimeWrap)
         {
             _dateTimeWrap = dateTimeWrap;
-            _advisoryDelay = Settings.Default.LastResponse;
         }
 
         #region IRequestHandler implementation
@@ -55,7 +54,7 @@ namespace Obacher.RandomOrgSharp.Core.Response
 
         #region IResponseHandler implementation
 
-        public bool Execute(IParameters parameters, string response)
+        public bool Handle(IParameters parameters, string response)
         {
             JObject jsonResponse = JObject.Parse(response);
             int advisoryDelay = JsonHelper.JsonToInt(jsonResponse.GetValue(JsonRpcConstants.ADVISORY_DELAY_PARAMETER_NAME, 0));

@@ -70,28 +70,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BasicMethod\BasicMethodTest.cs" />
-    <Compile Include="BasicMethod\BlobBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\DecimalBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\GuassianMethodTest.cs" />
-    <Compile Include="BasicMethod\IntegerMethodTest.cs" />
-    <Compile Include="BasicMethod\StringBasicMethodTest.cs" />
-    <Compile Include="BasicMethod\UsageMethodTest.cs" />
-    <Compile Include="BasicMethod\UuidBasicMethodTest.cs" />
     <Compile Include="Parameter\CommonParametersTest.cs" />
     <Compile Include="Parameter\UsageParametersTest.cs" />
     <Compile Include="RandomOrgExceptionTest.cs" />
     <Compile Include="RandomOrgHttpEmulatorTest.cs" />
     <Compile Include="RandomOrgRuntimeExceptionTest.cs" />
-    <Compile Include="Request\BlobJsonRequestBuilderTest.cs" />
-    <Compile Include="Request\DecimalJsonRequestBuilderTest.cs" />
-    <Compile Include="Request\DefaultJsonRequestBuilderTest.cs" />
-    <Compile Include="Request\GuassianJsonRequestBuilderTest.cs" />
-    <Compile Include="Request\IntegerJsonRequestBuilderTest.cs" />
-    <Compile Include="Request\StringJsonRequestBuilderTest.cs" />
-    <Compile Include="Request\JsonRequestBuilderTest.cs" />
-    <Compile Include="Request\JsonRequestBuilderFactoryTest.cs" />
-    <Compile Include="Request\UuidJsonRequestBuilder.cs" />
     <Compile Include="Parameter\BlobParametersTest.cs" />
     <Compile Include="Parameter\DecimalParametersTest.cs" />
     <Compile Include="Parameter\GuassianParametersTest.cs" />
@@ -100,7 +83,6 @@
     <Compile Include="Parameter\StringParametersTest.cs" />
     <Compile Include="Parameter\UuidParametersTest.cs" />
     <Compile Include="ResponsesTest.cs" />
-    <Compile Include="JsonHelperTest.cs" />
     <Compile Include="MethodCallManagerTest.cs" />
     <Compile Include="RandomNumberGeneratorTest.cs" />
   </ItemGroup>
@@ -121,7 +103,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BasicMethod\" />
+    <Folder Include="Request\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

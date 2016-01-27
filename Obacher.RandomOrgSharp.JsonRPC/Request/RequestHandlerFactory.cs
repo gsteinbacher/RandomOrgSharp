@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Obacher.RandomOrgSharp.Core.Parameter;
-using Obacher.RandomOrgSharp.JsonRPC.Request;
 
-namespace Obacher.RandomOrgSharp.Core.Request
+namespace Obacher.RandomOrgSharp.JsonRPC.Request
 {
     public class RequestHandlerFactory : IRequestHandlerFactory
     {
