@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Obacher.RandomOrgSharp.Core.Response;
+using Obacher.RandomOrgSharp.JsonRPC.Method;
 using Should.Fluent;
 
 namespace RandomOrgSharp.FunctionalTest
@@ -29,11 +30,11 @@ namespace RandomOrgSharp.FunctionalTest
 
 
             // Act
-            //var target = new UsageMethod();
-            //var results = await target.GetUsageAsync();
+            var target = new UsageMethod();
+            var results = await target.GetUsageAsync();
 
-            //// Assert
-            //TestResults(results);
+            // Assert
+            TestResults(results);
         }
 
 

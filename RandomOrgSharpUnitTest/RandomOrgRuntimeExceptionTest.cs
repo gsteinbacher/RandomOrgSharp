@@ -3,7 +3,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Soap;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.Core;
 using Should.Fluent;
 
@@ -47,23 +46,21 @@ namespace RandomOrgSharp.UnitTest
             RandomOrgRunTimeException target = new RandomOrgRunTimeException();
 
             IFormatter formatter = new SoapFormatter();
-            using (MemoryStream stream = new MemoryStream())
+            MemoryStream stream = new MemoryStream();
+            formatter.Serialize(stream, target);
+            stream.Position = 0;
+
+            using (var sr = new StreamReader(stream))
             {
-                formatter.Serialize(stream, target);
+                var actualMessage = sr.ReadToEnd();
+
+                // Assert
+                actualMessage.Should().Contain("RandomOrgRunTimeException");
+
                 stream.Position = 0;
-
-                using (var sr = new StreamReader(stream))
-                {
-                    var actualMessage = sr.ReadToEnd();
-
-                    // Assert
-                    actualMessage.Should().Contain("RandomOrgRunTimeException");
-
-                    stream.Position = 0;
-                    RandomOrgRunTimeException ex = formatter.Deserialize(stream) as RandomOrgRunTimeException;
-                    ex.Should().Not.Be.Null();
-                    ex?.Message.Should().Contain("RandomOrgRunTimeException");
-                }
+                RandomOrgRunTimeException ex = formatter.Deserialize(stream) as RandomOrgRunTimeException;
+                ex.Should().Not.Be.Null();
+                ex?.Message.Should().Contain("RandomOrgRunTimeException");
             }
         }
     }

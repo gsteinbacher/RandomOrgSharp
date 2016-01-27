@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization.Formatters.Soap;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.Core;
 using Should.Fluent;
 
@@ -69,24 +67,23 @@ namespace RandomOrgSharp.UnitTest
             RandomOrgException target = new RandomOrgException(expectedCode, expectedMessage);
 
             IFormatter formatter = new SoapFormatter();
-            using (MemoryStream stream = new MemoryStream())
+            MemoryStream stream = new MemoryStream();
+            formatter.Serialize(stream, target);
+            stream.Position = 0;
+
+            using (var sr = new StreamReader(stream))
             {
-                formatter.Serialize(stream, target);
+                var actualMessage = sr.ReadToEnd();
+
+                // Assert
+                actualMessage.Should().Contain(expectedMessage);
+
                 stream.Position = 0;
-
-                using (var sr = new StreamReader(stream))
-                {
-                    var actualMessage = sr.ReadToEnd();
-
-                    // Assert
-                    actualMessage.Should().Contain(expectedMessage);
-
-                    stream.Position = 0;
-                    RandomOrgException ex = formatter.Deserialize(stream) as RandomOrgException;
-                    ex.Code.Should().Equal(expectedCode);
-                    ex.Message.Should().Equal(expectedMessage);
-                }
+                RandomOrgException ex = formatter.Deserialize(stream) as RandomOrgException;
+                ex.Code.Should().Equal(expectedCode);
+                ex.Message.Should().Equal(expectedMessage);
             }
+
         }
     }
 }

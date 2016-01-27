@@ -43,7 +43,6 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
             const int minimumValue = 10;
             const int maximumValue = 1000;
             const bool allowDuplicates = false;
-            const int id = 999;
 
             JObject expected =
                 new JObject(

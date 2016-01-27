@@ -42,7 +42,6 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
             const int length = 10;
             const string charactersAllowed = "abc";
             const bool allowDuplicates = false;
-            const int id = 999;
 
             JObject expected =
                 new JObject(

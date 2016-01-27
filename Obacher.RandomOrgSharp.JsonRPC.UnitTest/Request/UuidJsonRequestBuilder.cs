@@ -40,7 +40,6 @@ namespace RandomOrgSharp.UnitTest.Request
         {
             // Arrange
             const int numberOfItems = 1;
-            const int id = 999;
 
             JObject expected =
 

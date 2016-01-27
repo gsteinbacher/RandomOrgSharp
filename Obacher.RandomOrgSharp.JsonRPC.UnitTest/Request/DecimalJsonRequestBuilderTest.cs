@@ -40,7 +40,6 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
             // Act
             const int numberOfItems = 1;
             const int numberOfdecimalPlaces = 10;
-            const int id = 999;
 
             JObject expected =
                 new JObject(

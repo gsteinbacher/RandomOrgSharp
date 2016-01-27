@@ -46,10 +46,8 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <summary>
         /// Retrieve the usage information
         /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
-
-        /// <returns>List of random blob values</returns>
-        public UsageResponseInfo GetUsage(int numberOfItemsToReturn)
+        /// <returns>Usage information</returns>
+        public UsageResponseInfo GetUsage()
         {
             IParameters requestParameters = UsageParameters.Create();
             IMethodCallBroker broker = new MethodCallBroker(null, _randomService, null, _responseHandlerFactory);
@@ -61,9 +59,8 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <summary>
         /// Retrieve the usage information in an asynchronous manners
         /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
-        /// <returns>List of random blob values</returns>
-        public async Task<UsageResponseInfo> GetUsageAsync(int numberOfItemsToReturn)
+        /// <returns>Usage information</returns>
+        public async Task<UsageResponseInfo> GetUsageAsync()
         {
             IParameters requestParameters = UsageParameters.Create();
             MethodCallBroker broker = new MethodCallBroker(null, _randomService, null, _responseHandlerFactory);

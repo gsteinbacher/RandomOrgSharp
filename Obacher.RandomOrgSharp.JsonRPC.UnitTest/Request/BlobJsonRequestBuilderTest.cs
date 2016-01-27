@@ -41,7 +41,6 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
             const int numberOfItems = 1;
             const int size = 8;
             const BlobFormat format = BlobFormat.Hex;
-            const int id = 999;
 
             JObject expected =
                 new JObject(

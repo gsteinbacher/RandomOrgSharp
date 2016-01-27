@@ -42,7 +42,6 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
             const int mean = 10000;
             const int standardDeviation = 10000;
             const int significantDigits = 2;
-            const int id = 999;
 
             JObject expected =
 
