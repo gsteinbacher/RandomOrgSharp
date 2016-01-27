@@ -1,4 +1,5 @@
-﻿using Obacher.RandomOrgSharp.Core.Response;
+﻿using Obacher.RandomOrgSharp.Core.Request;
+using Obacher.RandomOrgSharp.Core.Response;
 
 namespace Obacher.RandomOrgSharp.Core
 {

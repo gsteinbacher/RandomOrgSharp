@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RandomOrgSharp.UnitTest</RootNamespace>
     <AssemblyName>RandomOrgSharp.UnitTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>True</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Parameter\CommonParametersTest.cs" />
     <Compile Include="Parameter\UsageParametersTest.cs" />
+    <Compile Include="RandomOrgApiServiceTest.cs" />
     <Compile Include="RandomOrgExceptionTest.cs" />
     <Compile Include="RandomOrgHttpEmulatorTest.cs" />
     <Compile Include="RandomOrgRuntimeExceptionTest.cs" />
@@ -83,8 +85,9 @@
     <Compile Include="Parameter\StringParametersTest.cs" />
     <Compile Include="Parameter\UuidParametersTest.cs" />
     <Compile Include="ResponsesTest.cs" />
-    <Compile Include="MethodCallManagerTest.cs" />
+    <Compile Include="MethodCallBrokerTest.cs" />
     <Compile Include="RandomNumberGeneratorTest.cs" />
+    <Compile Include="SettingsManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Obacher.Framework.Common\Obacher.Framework.Common.csproj">

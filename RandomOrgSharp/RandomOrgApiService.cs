@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Obacher.Framework.Common.SystemWrapper;
@@ -9,14 +8,16 @@ namespace Obacher.RandomOrgSharp.Core
 {
     public class RandomOrgApiService : IRandomService
     {
+        private readonly IHttpWebRequestFactory _httpWebRequestFactory;
         private const string ContentType = "application/json";
 
         private readonly string _url;
         private readonly int _httpRequestTimeout;
         private readonly int _httpReadWriteTimeout;
 
-        public RandomOrgApiService(ISettingsManager settingsManager = null)
+        public RandomOrgApiService(ISettingsManager settingsManager = null, IHttpWebRequestFactory httpWebRequestFactory = null)
         {
+            _httpWebRequestFactory = httpWebRequestFactory ?? new HttpWebRequestFactory();
             if (settingsManager == null)
                 settingsManager = new SettingsManager(new ConfigurationManagerWrap());
 
@@ -28,7 +29,7 @@ namespace Obacher.RandomOrgSharp.Core
         public string SendRequest(string request)
         {
             string response;
-            HttpWebRequest httpRequest = SetupHttpRequest();
+            IHttpWebRequest httpRequest = SetupHttpRequest();
 
             byte[] bytes = Encoding.UTF8.GetBytes(request);
 
@@ -38,7 +39,7 @@ namespace Obacher.RandomOrgSharp.Core
                 {
                     requestStream.Write(bytes, 0, bytes.Length);
 
-                    using (WebResponse httpResponse = httpRequest.GetResponse())
+                    using (IHttpWebResponse httpResponse = httpRequest.GetResponse())
                     {
                         response = GetResponse(httpResponse);
                     }
@@ -55,7 +56,7 @@ namespace Obacher.RandomOrgSharp.Core
         public async Task<string> SendRequestAsync(string request)
         {
             string response;
-            HttpWebRequest httpRequest = SetupHttpRequest();
+            IHttpWebRequest httpRequest = SetupHttpRequest();
 
             byte[] bytes = Encoding.UTF8.GetBytes(request);
 
@@ -65,7 +66,7 @@ namespace Obacher.RandomOrgSharp.Core
                 {
                     await requestStream.WriteAsync(bytes, 0, bytes.Length);
 
-                    using (WebResponse httpResponse = await httpRequest.GetResponseAsync())
+                    using (IHttpWebResponse httpResponse = await httpRequest.GetResponseAsync())
                     {
                         response = GetResponse(httpResponse);
                     }
@@ -83,9 +84,9 @@ namespace Obacher.RandomOrgSharp.Core
         /// Setup the HTTP Request object
         /// </summary>
         /// <returns>IHttpRequest</returns>
-        private HttpWebRequest SetupHttpRequest()
+        private IHttpWebRequest SetupHttpRequest()
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
+            IHttpWebRequest request = _httpWebRequestFactory.Create(_url);
             request.Timeout = _httpRequestTimeout;
             request.ReadWriteTimeout = _httpReadWriteTimeout;
             request.Method = "POST";
@@ -98,7 +99,7 @@ namespace Obacher.RandomOrgSharp.Core
         /// </summary>
         /// <param name="httpResponse">Reponse object from random.org</param>
         /// <returns>JSON object containing response from random.org</returns>
-        private static string GetResponse(WebResponse httpResponse)
+        private static string GetResponse(IHttpWebResponse httpResponse)
         {
             string response = null;
 
@@ -106,10 +107,7 @@ namespace Obacher.RandomOrgSharp.Core
             if (responseStream != null)
             {
                 using (StreamReader reader = new StreamReader(responseStream))
-                {
                     response = reader.ReadToEnd();
-
-                }
             }
 
             return response;

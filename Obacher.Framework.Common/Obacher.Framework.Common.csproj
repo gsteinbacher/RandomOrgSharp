@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemWrapper\ConfigurationWrap.cs" />
     <Compile Include="SystemWrapper\DateTimeWrap.cs" />
+    <Compile Include="SystemWrapper\HttpWrap.cs" />
     <Compile Include="SystemWrapper\Interface\IConfigurationWrap.cs" />
     <Compile Include="SystemWrapper\Interface\IDateTime.cs" />
   </ItemGroup>

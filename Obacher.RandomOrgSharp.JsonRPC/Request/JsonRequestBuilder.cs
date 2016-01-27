@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Obacher.Framework.Common.SystemWrapper;
 using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
+using Obacher.RandomOrgSharp.Core.Request;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Request
 {

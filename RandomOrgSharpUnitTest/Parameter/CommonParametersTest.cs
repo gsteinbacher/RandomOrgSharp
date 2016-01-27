@@ -1,8 +1,5 @@
-﻿using System;
-using Microsoft.SqlServer.Server;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Obacher.RandomOrgSharp;
 using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.UnitTest.Tools.Mocks;
@@ -20,6 +17,8 @@ namespace RandomOrgSharp.UnitTest.Parameter
             const int expectedId = 9999;
             const MethodType expectedMethod = MethodType.Integer;
             const bool expectedVerifyOriginator = true;
+
+            RandomNumberGenerator.Instance = MockHelper.SetupIdMock(expectedId).Object;
 
             // Act
             var actual = new CommonParameters(expectedMethod, expectedVerifyOriginator);

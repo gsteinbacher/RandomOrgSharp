@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Obacher.RandomOrgSharp.JsonRPC</RootNamespace>
     <AssemblyName>Obacher.RandomOrgSharp.JsonRPC</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,22 +50,16 @@
     <Compile Include="Method\BlobBasicMethod.cs" />
     <Compile Include="Method\BlobSignedMethod.cs" />
     <Compile Include="Method\DecimalBasicMethod.cs" />
-    <Compile Include="Method\DecimalMethod.cs" />
     <Compile Include="Method\DecimalSignedMethod.cs" />
     <Compile Include="Method\GuassianBasicMethod.cs" />
-    <Compile Include="Method\GuassianMethod.cs" />
     <Compile Include="Method\GuassianSignedMethod.cs" />
     <Compile Include="Method\IntegerBasicMethod.cs" />
-    <Compile Include="Method\IntegerMethod.cs" />
     <Compile Include="Method\IntegerSignedMethod.cs" />
     <Compile Include="Method\StringBasicMethod.cs" />
-    <Compile Include="Method\StringMethod.cs" />
     <Compile Include="Method\StringSignedMethod.cs" />
     <Compile Include="Method\UsageMethod.cs" />
     <Compile Include="Method\UuidBasicMethod.cs" />
-    <Compile Include="Method\UuidMethod.cs" />
     <Compile Include="Method\UuidSignedMethod.cs" />
-    <Compile Include="Method\VerifySignatureMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\BlobJsonRequestBuilder.cs" />
     <Compile Include="Request\DecimalJsonRequestBuilder.cs" />

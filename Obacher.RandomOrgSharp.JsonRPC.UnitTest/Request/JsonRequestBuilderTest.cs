@@ -1,14 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Newtonsoft.Json.Linq;
-using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
-using Obacher.RandomOrgSharp.Core.Response;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.UnitTest.Tools;
-using Obacher.UnitTest.Tools.Mocks;
-using Should.Fluent;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
 {

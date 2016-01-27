@@ -15,18 +15,18 @@ namespace RandomOrgSharp.FunctionalTest
     [TestClass]
     public class BlobBasicMethodTest
     {
-        private Random _random;
-        private AdvisoryDelayHandler _advisoryDelayHandler;
+        private static Random _random;
+        private static AdvisoryDelayHandler _advisoryDelayHandler;
 
         [ClassInitialize]
-        public void InitializeTests()
+        public static void InitializeTests(TestContext context)
         {
             _random = new Random();
             _advisoryDelayHandler = new AdvisoryDelayHandler(new DateTimeWrap());
         }
 
         [ClassCleanup]
-        public void CleanupTest()
+        public static void CleanupTest()
         {
             _random = null;
             _advisoryDelayHandler = null;

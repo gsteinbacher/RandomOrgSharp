@@ -1,12 +1,14 @@
-﻿using System.Net.NetworkInformation;
-using Moq;
-using Obacher.RandomOrgSharp;
+﻿using Moq;
+using Obacher.Framework.Common.SystemWrapper.Interface;
 using Obacher.RandomOrgSharp.Core;
 
 namespace Obacher.UnitTest.Tools.Mocks
 {
     public static class MockHelper
     {
+        const string MockApiKey = "mockApiKey";
+        const string MockUrl = "http://mock.random.org";
+
         /// <summary>
         /// Mock the <see cref="RandomNumberGenerator"/> when generating an Id value that is stored in the request object
         /// </summary>
@@ -22,6 +24,19 @@ namespace Obacher.UnitTest.Tools.Mocks
                 .Returns(id);
 
             return randomNumberGeneratorMock;
+        }
+
+        public static Mock<ISettingsManager> MockSettingsManager(string apiKey = null, string url = null, int requestTimeout = 18000, int readWriteTimeout = 18000, Mock<ISettingsManager> settingsManagerMock = null)
+        {
+            if (settingsManagerMock == null)
+                settingsManagerMock = new Mock<ISettingsManager>();
+
+            settingsManagerMock.Setup(m => m.GetApiKey()).Returns(apiKey ?? MockApiKey);
+            settingsManagerMock.Setup(m => m.GetUrl()).Returns(url ?? MockUrl);
+            settingsManagerMock.Setup(m => m.GetHttpRequestTimeout()).Returns(requestTimeout);
+            settingsManagerMock.Setup(m => m.GetHttpReadWriteTimeout()).Returns(readWriteTimeout);
+
+            return settingsManagerMock;
         }
     }
 }
