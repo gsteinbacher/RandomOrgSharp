@@ -6,23 +6,27 @@ namespace Obacher.RandomOrgSharp.Core.Request
 {
     public class PrecedingRequestCommandFactory : IPrecedingRequestCommandFactory
     {
-        private readonly IRequestCommand[] _requestHandlers;
+        private readonly IRequestCommand[] _requestCommand;
 
-        public PrecedingRequestCommandFactory(params IRequestCommand[] requestHandlers)
+        public PrecedingRequestCommandFactory(params IRequestCommand[] requestCommand)
         {
-            _requestHandlers = requestHandlers;
+            _requestCommand = requestCommand;
         }
 
         public bool Execute(IParameters parameters)
         {
-            foreach (IRequestCommand handlers in _requestHandlers)
+            if (_requestCommand != null)
             {
-                if (handlers.CanHandle(parameters))
+                foreach (IRequestCommand handlers in _requestCommand)
                 {
-                    if (!handlers.Process(parameters))
-                        return false;
+                    if (handlers.CanHandle(parameters))
+                    {
+                        if (!handlers.Process(parameters))
+                            return false;
+                    }
                 }
             }
+
             return true;
         }
     }

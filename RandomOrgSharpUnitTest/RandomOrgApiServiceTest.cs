@@ -90,7 +90,8 @@ namespace RandomOrgSharp.UnitTest
                 var settingsManagerMock = MockHelper.MockSettingsManager();
 
                 // Act
-                RandomOrgApiService target = new RandomOrgApiService(settingsManagerMock.Object, webRequestFactoryMock.Object);
+                RandomOrgApiService target = new RandomOrgApiService(settingsManagerMock.Object,
+                    webRequestFactoryMock.Object);
                 var actual = await target.SendRequestAsync(requestString);
 
                 // assert
@@ -98,7 +99,7 @@ namespace RandomOrgSharp.UnitTest
             }
         }
 
-        [TestMethod, ExceptionExpected(typeof (RandomOrgRunTimeException), "Operation is not valid")]
+        [TestMethod, ExceptionExpected(typeof(RandomOrgRunTimeException), "Operation is not valid")]
         public void SendRequest_ShouldThrowException()
         {
             // arrange
@@ -135,8 +136,10 @@ namespace RandomOrgSharp.UnitTest
             var settingsManagerMock = MockHelper.MockSettingsManager();
 
             // Act
-            RandomOrgApiService target = new RandomOrgApiService(settingsManagerMock.Object, webRequestFactoryMock.Object);
+            RandomOrgApiService target = new RandomOrgApiService(settingsManagerMock.Object,
+                webRequestFactoryMock.Object);
             await target.SendRequestAsync(requestString);
         }
+
     }
 }

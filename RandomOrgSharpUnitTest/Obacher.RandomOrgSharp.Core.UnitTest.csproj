@@ -84,9 +84,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parameter\StringParametersTest.cs" />
     <Compile Include="Parameter\UuidParametersTest.cs" />
+    <Compile Include="Request\PrecedingRequestCommandFactoryTest.cs" />
     <Compile Include="ResponsesTest.cs" />
     <Compile Include="MethodCallBrokerTest.cs" />
     <Compile Include="RandomNumberGeneratorTest.cs" />
+    <Compile Include="Response\DataResponseInfoTest.cs" />
+    <Compile Include="Response\ErrorResponseInfoTest.cs" />
+    <Compile Include="Response\ResponseHandlerFactoryTest.cs" />
+    <Compile Include="Response\UsageResponseInfoTest.cs" />
     <Compile Include="SettingsManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,10 +111,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BasicMethod\" />
-    <Folder Include="Request\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

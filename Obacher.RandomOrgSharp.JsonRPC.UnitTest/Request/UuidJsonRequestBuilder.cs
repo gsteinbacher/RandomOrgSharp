@@ -2,13 +2,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
-using Obacher.RandomOrgSharp.JsonRPC;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.UnitTest.Tools;
 using Should.Fluent;
 
-namespace RandomOrgSharp.UnitTest.Request
+namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
 {
     [TestClass]
     public class UuidJsonRequestBuilderTest
@@ -72,7 +72,7 @@ namespace RandomOrgSharp.UnitTest.Request
             // Arrange
             const bool expected = true;
             Mock<IParameters> parameters = new Mock<IParameters>();
-            //parameters.Setup(p => p.MethodType).Returns(MethodType.Uuid);
+            parameters.Setup(p => p.MethodType).Returns(MethodType.Uuid);
 
             // Act
             var target = new UuidJsonRequestBuilder();

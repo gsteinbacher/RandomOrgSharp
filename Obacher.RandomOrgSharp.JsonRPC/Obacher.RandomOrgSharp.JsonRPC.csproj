@@ -63,17 +63,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\BlobJsonRequestBuilder.cs" />
     <Compile Include="Request\DecimalJsonRequestBuilder.cs" />
-    <Compile Include="Request\DefaultJsonRequestBuilder.cs" />
     <Compile Include="Request\GuassianJsonRequestBuilder.cs" />
     <Compile Include="Request\IntegerJsonRequestBuilder.cs" />
     <Compile Include="Request\IJsonRequestBuilder.cs" />
     <Compile Include="Request\IRequestHandler.cs" />
     <Compile Include="Request\IRequestHandlerFactory.cs" />
     <Compile Include="Request\JsonRequestBuilder.cs" />
-    <Compile Include="Request\RequestHandlerFactory.cs" />
     <Compile Include="Request\StringJsonRequestBuilder.cs" />
     <Compile Include="Request\UuidJsonRequestBuilder.cs" />
-    <Compile Include="Request\VerifySignatureJsonRequestBuilder.cs" />
     <Compile Include="Response\AdvisoryDelayHandler.cs" />
     <Compile Include="Response\ErrorHandler.cs" />
     <Compile Include="Response\ErrorParser.cs" />
@@ -83,7 +80,6 @@
     <Compile Include="Response\UsageResponseParser.cs" />
     <Compile Include="Response\UuidResponseParser.cs" />
     <Compile Include="Response\VerifySignatureHandler.cs" />
-    <Compile Include="Response\VerifySignatureResponseParser.cs" />
     <Compile Include="Response\VerifyIdResponseHandler.cs" />
   </ItemGroup>
   <ItemGroup>

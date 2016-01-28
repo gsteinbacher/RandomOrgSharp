@@ -54,7 +54,6 @@
     <Compile Include="Response\IErrorHandler.cs" />
     <Compile Include="Parameter\IParameters.cs" />
     <Compile Include="Parameter\UsageParameters.cs" />
-    <Compile Include="Parameter\VerifySignatureParameters.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -75,7 +74,6 @@
     <Compile Include="Response\IResponseHandlerFactory.cs" />
     <Compile Include="Response\ResponseHandlerFactory.cs" />
     <Compile Include="Response\UsageResponseInfo.cs" />
-    <Compile Include="Response\VerifySignatureResponseInfo.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="StringsConstants.cs" />
     <Compile Include="Properties\Strings.Designer.cs">

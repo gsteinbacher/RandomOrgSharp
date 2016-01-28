@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.UnitTest.Tools;
@@ -35,7 +36,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
         }
 
         [TestMethod]
-        public void WhenParametersCorrect_ExpectJsonReturned()
+        public void Create_WhenParametersCorrect_ExpectJsonReturned()
         {
             // Arrange
             const int numberOfItems = 1;
@@ -59,6 +60,48 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
 
                 // Assert
                 actual.Should().Equal(expected);
+        }
+        
+        [TestMethod, ExceptionExpected(typeof(ArgumentNullException), "parameters")]
+        public void CanHandle_WhenParametersNull_ExpectException()
+        {
+            // Arrange
+
+            // Act
+            var target = new GuassianJsonRequestBuilder();
+            target.CanHandle(null);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenParametersMethodTypeIsGuassian_ShouldReturnTrue()
+        {
+            // Arrange
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(m => m.MethodType).Returns(MethodType.Gaussian);
+
+            // Act
+            var target = new GuassianJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Be.True();
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenParametersMethodTypeIsNotGuassian_ShouldReturnFalse()
+        {
+            // Arrange
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(m => m.MethodType).Returns(MethodType.Decimal);
+
+            // Act
+            var target = new GuassianJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Be.False();
         }
     }
 }

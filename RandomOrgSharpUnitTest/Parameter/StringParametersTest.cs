@@ -96,6 +96,25 @@ namespace RandomOrgSharp.UnitTest.Parameter
             paramaters.CharactersAllowed.Should().Equal(expectedCharactersAllowed);
         }
 
+
+        [TestMethod]
+        public void WhenAllParametersAllowed_ExpectNOException()
+        {
+            // Arrange
+            const int numberOfItems = 1;
+            const int length = 10;
+            const string charactersAllowed = "ABCDEFGabcdefg";
+
+            // Act
+            var actual = StringParameters.Create(numberOfItems, length, charactersAllowed);
+
+            // Assert
+            actual.NumberOfItemsToReturn.Should().Equal(numberOfItems);
+            actual.Length.Should().Equal(length);
+            actual.CharactersAllowed.Should().Equal(charactersAllowed);
+            actual.AllowDuplicates.Should().Be.True();
+        }
+
         [TestMethod]
         public void WhenCharactersAllowedSet_ExpectValidCharactersAllowedReturned()
         {

@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.UnitTest.Tools;
@@ -60,6 +61,48 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
 
             // Assert
             actual.Should().Equal(expected);
+        }
+
+        [TestMethod, ExceptionExpected(typeof(ArgumentNullException), "parameters")]
+        public void CanHandle_WhenParametersNull_ExpectException()
+        {
+            // Arrange
+
+            // Act
+            var target = new IntegerJsonRequestBuilder();
+            target.CanHandle(null);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenParametersMethodTypeIsInteger_ShouldReturnTrue()
+        {
+            // Arrange
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(m => m.MethodType).Returns(MethodType.Integer);
+
+            // Act
+            var target = new IntegerJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Be.True();
+        }
+
+        [TestMethod]
+        public void CanHandle_WhenParametersMethodTypeIsNoInteger_ShouldReturnFalse()
+        {
+            // Arrange
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(m => m.MethodType).Returns(MethodType.Decimal);
+
+            // Act
+            var target = new IntegerJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
+
+            // Assert
+            actual.Should().Be.False();
         }
     }
 }

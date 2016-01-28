@@ -24,5 +24,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Request
 
             return jsonParameters;
         }
+
+
+        /// <summary>
+        /// Identify this class as one that handles Blob parameters
+        /// </summary>
+        /// <param name="parameters">List of parameters</param>
+        /// <returns>True if this class handles the specified parameters</returns>
+        public bool CanHandle(IParameters parameters)
+        {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            return parameters.MethodType == MethodType.Blob;
+        }
     }
 }

@@ -51,10 +51,6 @@
                 case MethodType.Usage:
                     methodName = RandomOrgConstants.USAGE_METHOD;
                     break;
-
-                case MethodType.VerifySignature:
-                    methodName = RandomOrgConstants.VERIFY_SIGNATURE_METHOD;
-                    break;
             }
 
             return methodName;

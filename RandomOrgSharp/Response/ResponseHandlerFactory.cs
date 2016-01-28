@@ -21,11 +21,15 @@ namespace Obacher.RandomOrgSharp.Core.Response
         /// <returns>True is the process should continue to the next <see cref="IResponseHandler"/> in the list, false to stop processing response handlers</returns>
         public bool Execute(IParameters parameters, string response)
         {
-            foreach (IResponseHandler handlers in _responseHandlers)
+            if (_responseHandlers != null)
             {
-                if (!handlers.Handle(parameters, response))
-                    return false;
+                foreach (IResponseHandler handlers in _responseHandlers)
+                {
+                    if (!handlers.Handle(parameters, response))
+                        return false;
+                }
             }
+
             return true;
         }
 

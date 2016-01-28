@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
+using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.UnitTest.Tools;
@@ -73,33 +74,33 @@ namespace Obacher.RandomOrgSharp.JsonRPC.UnitTest.Request
         [TestMethod]
         public void CanHandle_WhenMethodTypeIsString_ExpectTrue()
         {
-            //// Arrange
-            //const bool expected = true;
-            //Mock<IParameters> parameters = new Mock<IParameters>();
-            //parameters.Setup(p => p.MethodType).Returns(MethodType.String);
+            // Arrange
+            const bool expected = true;
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(p => p.MethodType).Returns(MethodType.String);
 
-            //// Act
-            //var target = new StringJsonRequestBuilder();
-            //var actual = target.CanHandle(parameters.Object);
+            // Act
+            var target = new StringJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
 
-            //// Assert
-            //actual.Should().Equal(expected);
+            // Assert
+            actual.Should().Equal(expected);
         }
 
         [TestMethod]
         public void CanHandle_WhenMethodTypeIsNotString_ExpectFalse()
         {
-            //// Arrange
-            //const bool expected = false;
-            //Mock<IParameters> parameters = new Mock<IParameters>();
-            //parameters.Setup(p => p.MethodType).Returns(MethodType.Blob);
+            // Arrange
+            const bool expected = false;
+            Mock<IParameters> parameters = new Mock<IParameters>();
+            parameters.Setup(p => p.MethodType).Returns(MethodType.Blob);
 
-            //// Act
-            //var target = new StringJsonRequestBuilder();
-            //var actual = target.CanHandle(parameters.Object);
+            // Act
+            var target = new StringJsonRequestBuilder();
+            var actual = target.CanHandle(parameters.Object);
 
-            //// Assert
-            //actual.Should().Equal(expected);
+            // Assert
+            actual.Should().Equal(expected);
         }
     }
 }
