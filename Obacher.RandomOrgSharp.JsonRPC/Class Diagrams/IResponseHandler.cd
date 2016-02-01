@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Obacher.RandomOrgSharp.JsonRPC.Response.AdvisoryDelayHandler" Collapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAggAAAAACAAAAACIAAAAAAAAAAAg=</HashCode>
+      <FileName>Response\AdvisoryDelayHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Obacher.RandomOrgSharp.JsonRPC.Response.ErrorHandler" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAQCAAAAAAIIAAAAAAQAAAA=</HashCode>
+      <FileName>Response\ErrorHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Obacher.RandomOrgSharp.JsonRPC.Response.ErrorHandlerThrowException" Collapsed="true">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAQCAAAAAAIIAAAAAAQAAAA=</HashCode>
+      <FileName>Response\ErrorHandlerThrowException.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Obacher.RandomOrgSharp.JsonRPC.Response.VerifyIdResponseHandler" Collapsed="true">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Response\VerifyIdResponseHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Obacher.RandomOrgSharp.JsonRPC.Response.VerifySignatureHandler" Collapsed="true">
+    <Position X="3.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAgAAAAACAAAAAAIAAAAAAAAAAAg=</HashCode>
+      <FileName>Response\VerifySignatureHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
