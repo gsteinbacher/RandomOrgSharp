@@ -87,12 +87,15 @@
       <Project>{0aad80a2-3cf4-4f2a-9573-320e3f28af46}</Project>
       <Name>Obacher.Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
+    <ProjectReference Include="..\Obacher.RandomOrgSharp.Core\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
       <Name>Obacher.RandomOrgSharp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Class Diagrams\IJsonRequestBuilder.cd" />
+    <None Include="Class Diagrams\IRequestCommand.cd" />
+    <None Include="Class Diagrams\IResponseHandler.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

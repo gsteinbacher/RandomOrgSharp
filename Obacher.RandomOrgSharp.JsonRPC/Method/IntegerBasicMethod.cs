@@ -4,6 +4,7 @@ using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
+using Obacher.RandomOrgSharp.Core.Service;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.RandomOrgSharp.JsonRPC.Response;
 
@@ -27,7 +28,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     {
         protected IRandomService RandomService;
         protected IRequestBuilder RequestBuilder;
-        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IBeforeRequestCommandFactory BeforeRequestCommandFactory;
         protected IResponseHandlerFactory ResponseHandlerFactory;
         protected JsonResponseParserFactory ResponseParser;
 
@@ -44,7 +45,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
             RandomService = randomService ?? new RandomOrgApiService();
             RequestBuilder = new JsonRequestBuilder(new IntegerJsonRequestBuilder());
 
-            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            BeforeRequestCommandFactory = new BeforeRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
             ResponseParser = new JsonResponseParserFactory(new GenericResponseParser<int>());
@@ -68,7 +69,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         public virtual IEnumerable<int> GenerateIntegers(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = false)
         {
             IParameters requestParameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
-            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, BeforeRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
             return (ResponseParser.ResponseInfo as DataResponseInfo<int>)?.Data;
@@ -85,7 +86,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         public virtual async Task<IEnumerable<int>> GenerateIntegersAsync(int numberOfItemsToReturn, int minimumValue, int maximumValue, bool allowDuplicates = false)
         {
             IParameters requestParameters = IntegerParameters.Create(numberOfItemsToReturn, minimumValue, maximumValue, allowDuplicates);
-            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, null, PrecedingRequestCommandFactory, ResponseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, null, BeforeRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
             return (ResponseParser.ResponseInfo as DataResponseInfo<int>)?.Data;

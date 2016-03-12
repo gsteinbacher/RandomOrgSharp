@@ -2,6 +2,7 @@
 using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Response;
+using Obacher.RandomOrgSharp.Core.Service;
 using Obacher.RandomOrgSharp.JsonRPC.Response;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Method

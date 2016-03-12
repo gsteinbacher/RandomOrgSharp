@@ -4,6 +4,7 @@ using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
+using Obacher.RandomOrgSharp.Core.Service;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.RandomOrgSharp.JsonRPC.Response;
 
@@ -27,7 +28,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     {
         protected IRandomService RandomService;
         protected IRequestBuilder RequestBuilder;
-        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IBeforeRequestCommandFactory BeforeRequestCommandFactory;
         protected IResponseHandlerFactory ResponseHandlerFactory;
         protected JsonResponseParserFactory ResponseParser;
 
@@ -44,7 +45,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
             RandomService = randomService ?? new RandomOrgApiService();
             RequestBuilder = new JsonRequestBuilder(new DecimalJsonRequestBuilder());
 
-            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            BeforeRequestCommandFactory = new BeforeRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
             ResponseParser = new JsonResponseParserFactory(new GenericResponseParser<decimal>());
@@ -67,10 +68,10 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         public virtual IEnumerable<decimal> GenerateDecimalsFractions(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = false)
         {
             IParameters requestParameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, BeforeRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
         }
 
         /// <summary>
@@ -83,10 +84,10 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         public virtual async Task<IEnumerable<decimal>> GenerateDecimalsFractionsAsync(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = false)
         {
             IParameters requestParameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, BeforeRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
         }
     }
 }

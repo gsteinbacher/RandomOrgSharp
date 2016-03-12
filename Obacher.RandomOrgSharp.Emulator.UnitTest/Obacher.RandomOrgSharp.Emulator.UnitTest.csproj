@@ -68,7 +68,7 @@
       <Name>Obacher.Framework.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Obacher.RandomOrgSharp.Emulator\Obacher.RandomOrgSharp.Emulator.csproj">
-      <Project>{9fc29e0d-c0e9-4cd1-a465-255cf0ba8a10}</Project>
+      <Project>{a5c84e42-b85d-4dc9-b8ee-b8cc55dc6a10}</Project>
       <Name>Obacher.RandomOrgSharp.Emulator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Obacher.RandomOrgSharp.JsonRPC\Obacher.RandomOrgSharp.JsonRPC.csproj">

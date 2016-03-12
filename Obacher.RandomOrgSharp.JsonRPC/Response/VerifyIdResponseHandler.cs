@@ -21,7 +21,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
             JObject jsonResponse = JObject.Parse(response);
             int id = JsonHelper.JsonToInt(jsonResponse.GetValue(JsonRpcConstants.ID_PARAMETER_NAME, 0));
             if (id != parameters.Id)
-                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.IDS_NOT_MATCHED));
+                throw new RandomOrgRuntimeException(ResourceHelper.GetString(StringsConstants.IDS_NOT_MATCHED));
 
             // If we get down to here then the Ids match
             return true;

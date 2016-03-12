@@ -1,6 +1,7 @@
 ﻿using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
+using Obacher.RandomOrgSharp.Core.Service;
 using Obacher.RandomOrgSharp.JsonRPC.Response;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Method
@@ -35,7 +36,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
             // We just need to setup the Verification Signature class, other than that everything else is the same.
             var verifySignatureHandler = new VerifySignatureHandler(RandomService);
 
-            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler, verifySignatureHandler);
+            BeforeRequestCommandFactory = new BeforeRequestCommandFactory(advisoryDelayHandler, verifySignatureHandler);
 
             ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),

@@ -260,8 +260,8 @@ namespace Obacher.RandomOrgSharp.Emulator
         {
             for (var x = 0; x < numberOfItemsToReturn; x++)
             {
-                var startNumber = mean - standardDeviation;
-                var endNumber = mean + standardDeviation;
+                var startNumber = mean - Math.Abs(standardDeviation);
+                var endNumber = mean + Math.Abs(standardDeviation);
                 var decimalPlaces = _random.Next(0, significantDigits);
 
                 var value = _random.Next(startNumber, endNumber).ToString();
@@ -330,7 +330,7 @@ namespace Obacher.RandomOrgSharp.Emulator
                 advisoryDelay = _random.Next(0, 100);
 
             var response = new JObject(
-                new JProperty("json-rpc", "2.0"),
+                new JProperty("jsonrpc", "2.0"),
                 new JProperty("result",
                     new JObject(
                         new JProperty("random",
@@ -375,17 +375,17 @@ namespace Obacher.RandomOrgSharp.Emulator
         {
             var response =
                 new JObject(
-                    new JProperty("json-rpc", "2.0"),
+                    new JProperty("jsonrpc", "2.0"),
                     new JProperty("result",
                         new JObject(
-                                    new JProperty("status", "running"),
-                                    new JProperty("creationTime", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ssZ"))
-                                ),
+                            new JProperty("status", "running"),
+                            new JProperty("creationTime", DateTime.UtcNow.AddDays(_random.Next(-1825, -1)).ToString("yyyy-MM-dd HH:mm:ssZ")),
                             new JProperty("bitsLeft", _bitsLeft),
                             new JProperty("requestsLeft", _requestsLeft),
                             new JProperty("totalBits", _initialBitsLeft - _bitsLeft),
                             new JProperty("totalRequests", _initialRequestCount - _requestsLeft)
-                        ),
+                        )
+                    ),
                     new JProperty("id", id)
                     );
 

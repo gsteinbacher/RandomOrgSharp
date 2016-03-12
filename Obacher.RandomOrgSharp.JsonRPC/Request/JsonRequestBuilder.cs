@@ -12,7 +12,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Request
         private readonly ISettingsManager _settingsManager;
         private readonly IJsonRequestBuilder _builder;
 
-        public JsonRequestBuilder(IJsonRequestBuilder builder, ISettingsManager settingsManager = null)
+        public JsonRequestBuilder(IJsonRequestBuilder builder = null, ISettingsManager settingsManager = null)
         {
             _settingsManager = settingsManager ?? new SettingsManager(new ConfigurationManagerWrap());
             _builder = builder;
@@ -32,7 +32,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Request
             if (commonParameters == null)
                 throw new ArgumentException(ResourceHelper.GetString(StringsConstants.EXCEPTION_INVALID_ARGUMENT, "CommonParameters"));
 
-            var jsonParameters = _builder.Build(parameters) ?? new JObject();
+            var jsonParameters = _builder?.Build(parameters) ?? new JObject();
 
             string apiKey = _settingsManager.GetApiKey();
             jsonParameters.Add(RandomOrgConstants.APIKEY_KEY, apiKey);

@@ -3,19 +3,22 @@ using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
+using Obacher.RandomOrgSharp.Core.Service;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Response
 {
     /// <summary>
     /// Verify the response came from random.org and was not tampered with.
     /// </summary>
-    public class VerifySignatureHandler : IResponseHandler, IRequestCommand
+    public class VerifySignatureHandler : IRequestCommand, IResponseHandler
     {
         private readonly IRandomService _service;
         public VerifySignatureHandler(IRandomService service = null)
         {
             _service = service ?? new RandomOrgApiService();
         }
+
+        #region IResponseHandler implemention
 
         /// <summary>
         /// Call random.org to verify the response came from random.org and was not tampered before received
@@ -59,14 +62,8 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
             }
 
             if (!authenticity)
-                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.NOT_VERIFIED));
+                throw new RandomOrgRuntimeException(ResourceHelper.GetString(StringsConstants.NOT_VERIFIED));
 
-            return true;
-        }
-
-        public bool Process(IParameters parameters)
-        {
-            parameters.VerifyOriginator = true;
             return true;
         }
 
@@ -77,7 +74,29 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         /// <returns>True if the VerifyOriginator is true</returns>
         public bool CanHandle(IParameters parameters)
         {
+            return parameters.VerifyOriginator;
+        }
+
+        #endregion
+
+        #region IResponseHandler implemention
+
+        public bool Process(IParameters parameters)
+        {
+            parameters.VerifyOriginator = true;
             return true;
         }
+
+        /// <summary>
+        /// Indicates that the <see cref="VerifySignatureHandler"/> can currently execute the <c>Process</c> method
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns>Always returns true, Assumes if the class is instantiated then the <c>Process</c> method can always run</returns>
+        public bool CanProcess(IParameters parameters)
+        {
+            return true;
+        }
+
+        #endregion
     }
 }

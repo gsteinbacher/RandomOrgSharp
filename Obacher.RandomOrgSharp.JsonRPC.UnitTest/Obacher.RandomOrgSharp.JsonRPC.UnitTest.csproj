@@ -66,6 +66,16 @@
     <Compile Include="Request\JsonRequestBuilderTest.cs" />
     <Compile Include="Request\StringJsonRequestBuilderTest.cs" />
     <Compile Include="Request\UuidJsonRequestBuilder.cs" />
+    <Compile Include="Response\AdvisoryDelayHandlerTest.cs" />
+    <Compile Include="Response\ErrorHandlerTest.cs" />
+    <Compile Include="Response\ErrorHandlerThrowExceptionTest.cs" />
+    <Compile Include="Response\ErrorParserTest.cs" />
+    <Compile Include="Response\GenericResponseParserTest.cs" />
+    <Compile Include="Response\JsonResponseParserFactoryTest.cs" />
+    <Compile Include="Response\UsageResponseParserTest.cs" />
+    <Compile Include="Response\UuidResponseParserTest.cs" />
+    <Compile Include="Response\VerifyIdResponseHandlerTest.cs" />
+    <Compile Include="Response\VerifySignatureHandlerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -87,7 +97,7 @@
       <Project>{885bd1a0-d92f-4007-a8cc-6f320574bcee}</Project>
       <Name>Obacher.UnitTest.Tools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
+    <ProjectReference Include="..\Obacher.RandomOrgSharp.Core\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
       <Name>Obacher.RandomOrgSharp.Core</Name>
     </ProjectReference>
@@ -95,6 +105,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

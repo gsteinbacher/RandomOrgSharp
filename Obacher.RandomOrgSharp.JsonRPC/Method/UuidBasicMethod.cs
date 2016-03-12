@@ -5,6 +5,7 @@ using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
+using Obacher.RandomOrgSharp.Core.Service;
 using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.RandomOrgSharp.JsonRPC.Response;
 
@@ -28,7 +29,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     {
         protected IRandomService RandomService;
         protected IRequestBuilder RequestBuilder;
-        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IBeforeRequestCommandFactory BeforeRequestCommandFactory;
         protected IResponseHandlerFactory ResponseHandlerFactory;
         protected JsonResponseParserFactory ResponseParser;
 
@@ -45,7 +46,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
             RandomService = randomService ?? new RandomOrgApiService();
             RequestBuilder = new JsonRequestBuilder(new UuidJsonRequestBuilder());
 
-            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            BeforeRequestCommandFactory = new BeforeRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
             ResponseParser = new JsonResponseParserFactory(new UuidResponseParser());
@@ -67,7 +68,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         public virtual IEnumerable<Guid> GenerateUuids(int numberOfItemsToReturn)
         {
             IParameters requestParameters = UuidParameters.Create(numberOfItemsToReturn);
-            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, BeforeRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
             return (ResponseParser.ResponseInfo as DataResponseInfo<Guid>)?.Data;
@@ -81,7 +82,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         public virtual async Task<IEnumerable<Guid>> GenerateUuidsAsync(int numberOfItemsToReturn)
         {
             IParameters requestParameters = UuidParameters.Create(numberOfItemsToReturn);
-            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, BeforeRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
             return (ResponseParser.ResponseInfo as DataResponseInfo<Guid>)?.Data;

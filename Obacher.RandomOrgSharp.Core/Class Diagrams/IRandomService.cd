@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="There are other classes that implment IRandomService.  The emulator is for test environment only and the rest of them are experimental so I am not going to include any of them here.  RandomOrgApiService is the service that will request the random values from random.org">
+    <Position X="4.25" Y="0.5" Height="2.594" Width="1.7" />
+  </Comment>
+  <Class Name="Obacher.RandomOrgSharp.Core.Service.RandomOrgApiService" Collapsed="true">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAABAAAAAACACAQEAAAAAAEUAAAAAAA=</HashCode>
+      <FileName>Service\RandomOrgApiService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.252" />
+  </Class>
+  <Interface Name="Obacher.RandomOrgSharp.Core.IRandomService" Collapsed="true">
+    <Position X="1" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>IRandomService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

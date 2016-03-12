@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Parameter;
 using Obacher.RandomOrgSharp.Core.Response;
@@ -22,9 +23,12 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
 
         public bool Handle(IParameters parameters, string response)
         {
-            IResponseParser parser = _parsers.FirstOrDefault(m => m.CanHandle(parameters));
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
+            IResponseParser parser = _parsers.FirstOrDefault(m => m.CanParse(parameters));
             if (parser == null)
-                throw new RandomOrgRunTimeException(ResourceHelper.GetString(StringsConstants.ERROR_CODE_100));
+                throw new RandomOrgRuntimeException(ResourceHelper.GetString(StringsConstants.ERROR_CODE_100));
 
             ResponseInfo = parser.Parse(response);
 

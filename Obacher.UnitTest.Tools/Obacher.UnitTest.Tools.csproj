@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="ExceptionExpected.cs" />
     <Compile Include="Mocks\MockHelper.cs" />
+    <Compile Include="RandomGenerator.cs" />
     <Compile Include="UnitTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,7 +65,7 @@
       <Project>{0aad80a2-3cf4-4f2a-9573-320e3f28af46}</Project>
       <Name>Obacher.Framework.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RandomOrgSharp\Obacher.RandomOrgSharp.Core.csproj">
+    <ProjectReference Include="..\Obacher.RandomOrgSharp.Core\Obacher.RandomOrgSharp.Core.csproj">
       <Project>{d12e7982-a721-4d2a-ac0c-ad2db942329d}</Project>
       <Name>Obacher.RandomOrgSharp.Core</Name>
     </ProjectReference>

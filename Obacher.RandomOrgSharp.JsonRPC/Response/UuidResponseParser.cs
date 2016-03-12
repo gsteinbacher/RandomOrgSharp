@@ -21,6 +21,9 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         /// <returns>Class which contains the information from the JSON responseInfo</returns>
         public IResponseInfo Parse(string response)
         {
+            if (string.IsNullOrWhiteSpace(response))
+                throw new RandomOrgRuntimeException(ResourceHelper.GetString(StringsConstants.EXCEPTION_CANNOT_BE_NULLOREMPTY, nameof(response)));
+
             JObject json = JObject.Parse(response);
 
             var version = JsonHelper.JsonToString(json.GetValue(JsonRpcConstants.RPC_PARAMETER_NAME));
@@ -59,7 +62,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         /// </summary>
         /// <param name="parameters">Parameters which are utilized by class</param>
         /// <returns>True if this class handles the method call</returns>
-        public bool CanHandle(IParameters parameters)
+        public bool CanParse(IParameters parameters)
         {
             return parameters.MethodType == MethodType.Uuid;
         }

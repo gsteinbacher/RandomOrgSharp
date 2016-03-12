@@ -37,15 +37,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         {
             _hasError = false;
 
-            ErrorInfo = _errorParser.Parse(response) as ErrorResponseInfo;
-
-            if (ErrorInfo?.Code > 0)
+            if (_errorParser.CanParse(parameters))
             {
-                _hasError = true;
+                ErrorInfo = _errorParser.Parse(response) as ErrorResponseInfo;
+
+                if (ErrorInfo?.Code > 0)
+                {
+                    _hasError = true;
+                }
             }
 
-            // If we get down to this then no errors occurred
-            return _hasError;
+            // This return value is indicating whether errors occurred while running the error parsing process, 
+            // not whether errors were returned from the IRandomService call, 
+            return true;
         }
 
         /// <summary>

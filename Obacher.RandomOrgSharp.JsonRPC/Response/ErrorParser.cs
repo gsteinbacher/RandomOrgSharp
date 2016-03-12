@@ -14,20 +14,24 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
     {
         public IResponseInfo Parse(string response)
         {
-            JObject json = JObject.Parse(response);
+            if (string.IsNullOrWhiteSpace(response))
+                return ErrorResponseInfo.Empty();
 
-            int id = JsonHelper.JsonToInt(json.GetValue("id"));
-            int code = 0;
-            string message = null;
+            JObject json = JObject.Parse(response);
+            var version = JsonHelper.JsonToString(json.GetValue(JsonRpcConstants.RPC_PARAMETER_NAME));
+            ErrorResponseInfo returnValue = ErrorResponseInfo.Empty(version);
 
             var result = json.GetValue(JsonRpcConstants.ERROR_PARAMETER_NAME) as JObject;
             if (result != null)
             {
-                code = JsonHelper.JsonToInt(result.GetValue(JsonRpcConstants.CODE_PARAMETER_NAME));
+                string message = null;
+                var code = JsonHelper.JsonToInt(result.GetValue(JsonRpcConstants.CODE_PARAMETER_NAME));
                 var data = result.GetValue(JsonRpcConstants.DATA_PARAMETER_NAME);
 
                 if (!data.HasValues)
+                {
                     message = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + code);
+                }
                 else
                 {
                     var unformattedMessage = ResourceHelper.GetString(StringsConstants.ERROR_CODE_KEY + code);
@@ -36,13 +40,21 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
                 }
 
                 if (string.IsNullOrWhiteSpace(message))
+                {
                     message = JsonHelper.JsonToString(result.GetValue(JsonRpcConstants.MESSAGE_PARAMETER_NAME));
+                    if (data.HasValues)
+                        message = string.Format(message, data.Values<object>().ToArray());
+                }
+
+                int id = JsonHelper.JsonToInt(json.GetValue("id"));
+
+                returnValue = new ErrorResponseInfo(version, id, code, message);
             }
 
-            return new ErrorResponseInfo(id, code, message);
+            return returnValue;
         }
 
-        public bool CanHandle(IParameters parameters)
+        public bool CanParse(IParameters parameters)
         {
             // Error Parser can always be called
             return true;

@@ -10,9 +10,12 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
     {
         public IResponseInfo Parse(string response)
         {
+            if (string.IsNullOrWhiteSpace(response))
+                throw new RandomOrgRuntimeException(ResourceHelper.GetString(StringsConstants.EXCEPTION_CANNOT_BE_NULLOREMPTY, nameof(response)));
+
             JObject json = JObject.Parse(response);
 
-            var version = JsonHelper.JsonToString(json.GetValue(JsonRpcConstants.RPC_VALUE));
+            var version = JsonHelper.JsonToString(json.GetValue(JsonRpcConstants.RPC_PARAMETER_NAME));
             var result = json.GetValue(JsonRpcConstants.RESULT_PARAMETER_NAME) as JObject;
             StatusType status = StatusType.Unknown;
             DateTime creationTime = DateTime.MinValue;
@@ -57,7 +60,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         /// </summary>
         /// <param name="parameters">Parameters which are utilized by class</param>
         /// <returns>True if this class handles the method call</returns>
-        public bool CanHandle(IParameters parameters)
+        public bool CanParse(IParameters parameters)
         {
             return parameters.MethodType == MethodType.Usage;
         }

@@ -50,6 +50,11 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
             return true;
         }
 
+        public bool CanProcess(IParameters parameters)
+        {
+            return true;
+        }
+
         #endregion
 
         #region IResponseHandler implementation
@@ -57,13 +62,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Response
         public bool Handle(IParameters parameters, string response)
         {
             JObject jsonResponse = JObject.Parse(response);
-            int advisoryDelay = JsonHelper.JsonToInt(jsonResponse.GetValue(JsonRpcConstants.ADVISORY_DELAY_PARAMETER_NAME, 0));
+            if (jsonResponse != null)
+            {
+                var result = jsonResponse.GetValue(JsonRpcConstants.RESULT_PARAMETER_NAME) as JObject;
+                if (result != null)
+                {
+                    int advisoryDelay = JsonHelper.JsonToInt(result.GetValue(JsonRpcConstants.ADVISORY_DELAY_PARAMETER_NAME, 0));
 
-            if (advisoryDelay == 0)
-                _advisoryDelay = 0;
-            else
-                _advisoryDelay = _dateTimeWrap.UtcNow.Ticks + advisoryDelay;
-
+                    if (advisoryDelay == 0)
+                        _advisoryDelay = 0;
+                    else
+                        _advisoryDelay = _dateTimeWrap.UtcNow.Ticks + advisoryDelay;
+                }
+            }
             return true;
         }
 
