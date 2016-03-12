@@ -25,11 +25,11 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     /// </remarks>
     public class StringBasicMethod
     {
-        private readonly IRandomService _randomService;
-        private readonly IRequestBuilder _requestBuilder;
-        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
-        private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly JsonResponseParserFactory _responseParser;
+        protected IRandomService RandomService;
+        protected IRequestBuilder RequestBuilder;
+        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IResponseHandlerFactory ResponseHandlerFactory;
+        protected JsonResponseParserFactory ResponseParser;
 
         /// <summary>
         /// Constructor
@@ -41,19 +41,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="randomService"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
         public StringBasicMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService randomService = null)
         {
-            _randomService = randomService ?? new RandomOrgApiService();
-            _requestBuilder = new JsonRequestBuilder(new StringJsonRequestBuilder());
+            RandomService = randomService ?? new RandomOrgApiService();
+            RequestBuilder = new JsonRequestBuilder(new StringJsonRequestBuilder());
 
-            _precedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
-            _responseParser = new JsonResponseParserFactory(new GenericResponseParser<string>());
+            ResponseParser = new JsonResponseParserFactory(new GenericResponseParser<string>());
 
-            _responseHandlerFactory = new ResponseHandlerFactory(
+            ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),
                 advisoryDelayHandler,
                 new VerifyIdResponseHandler(),
-                _responseParser
+                ResponseParser
             );
         }
 
@@ -65,13 +65,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="charactersAllowed">Build of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>List of random blob values</returns>
-        public IEnumerable<string> GenerateStrings(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
+        public virtual IEnumerable<string> GenerateStrings(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
             IParameters requestParameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
         }
 
         /// <summary>
@@ -82,13 +82,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="charactersAllowed">A string that contains the set of characters that are allowed to occur in the random strings. The maximum number of characters is 80.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>List of random blob values</returns>
-        public IEnumerable<string> GenerateStrings(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
+        public virtual IEnumerable<string> GenerateStrings(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
             IParameters requestParameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
         }
 
         /// <summary>
@@ -99,13 +99,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="charactersAllowed">Build of common character sets that are allowed to occur in the random strings</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
+        public virtual async Task<IEnumerable<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, CharactersAllowed charactersAllowed, bool allowDuplicates = true)
         {
             IParameters requestParameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
         }
 
         /// <summary>
@@ -116,13 +116,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="charactersAllowed">A string that contains the set of characters that are allowed to occur in the random strings. The maximum number of characters is 80.</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
+        public virtual async Task<IEnumerable<string>> GenerateStringsAsync(int numberOfItemsToReturn, int length, string charactersAllowed, bool allowDuplicates = true)
         {
             IParameters requestParameters = StringParameters.Create(numberOfItemsToReturn, length, charactersAllowed, allowDuplicates);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Obacher.RandomOrgSharp.Core.Parameter
     /// </summary>
     public sealed class BlobParameters : CommonParameters
     {
-        private const int MaxItemsAllowed = 100;
+        public const int MaxItemsAllowed = 100;
 
         public int NumberOfItemsToReturn { get; private set; }
         public int Size { get; private set; }

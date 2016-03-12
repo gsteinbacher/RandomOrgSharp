@@ -26,11 +26,11 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     /// </remarks>
     public class UuidBasicMethod
     {
-        private readonly IRandomService _randomService;
-        private readonly IRequestBuilder _requestBuilder;
-        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
-        private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly JsonResponseParserFactory _responseParser;
+        protected IRandomService RandomService;
+        protected IRequestBuilder RequestBuilder;
+        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IResponseHandlerFactory ResponseHandlerFactory;
+        protected JsonResponseParserFactory ResponseParser;
 
         /// <summary>
         /// Constructor
@@ -42,19 +42,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="randomService"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
         public UuidBasicMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService randomService = null)
         {
-            _randomService = randomService ?? new RandomOrgApiService();
-            _requestBuilder = new JsonRequestBuilder(new UuidJsonRequestBuilder());
+            RandomService = randomService ?? new RandomOrgApiService();
+            RequestBuilder = new JsonRequestBuilder(new UuidJsonRequestBuilder());
 
-            _precedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
-            _responseParser = new JsonResponseParserFactory(new UuidResponseParser());
+            ResponseParser = new JsonResponseParserFactory(new UuidResponseParser());
 
-            _responseHandlerFactory = new ResponseHandlerFactory(
+            ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),
                 advisoryDelayHandler,
                 new VerifyIdResponseHandler(),
-                _responseParser
+                ResponseParser
             );
         }
 
@@ -64,13 +64,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
 
         /// <returns>List of random blob values</returns>
-        public IEnumerable<Guid> GenerateUuids(int numberOfItemsToReturn)
+        public virtual IEnumerable<Guid> GenerateUuids(int numberOfItemsToReturn)
         {
             IParameters requestParameters = UuidParameters.Create(numberOfItemsToReturn);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<Guid>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<Guid>)?.Data;
         }
 
         /// <summary>
@@ -78,13 +78,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// </summary>
         /// <param name="numberOfItemsToReturn">How many random decimal fractions you need. Must be between 1 and 10,000.</param>
         /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<Guid>> GenerateUuidsAsync(int numberOfItemsToReturn)
+        public virtual async Task<IEnumerable<Guid>> GenerateUuidsAsync(int numberOfItemsToReturn)
         {
             IParameters requestParameters = UuidParameters.Create(numberOfItemsToReturn);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<Guid>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<Guid>)?.Data;
         }
     }
 }

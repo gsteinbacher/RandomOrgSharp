@@ -25,11 +25,11 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     /// </remarks>
     public class GuassianBasicMethod
     {
-        private readonly IRandomService _randomService;
-        private readonly IRequestBuilder _requestBuilder;
-        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
-        private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly JsonResponseParserFactory _responseParser;
+        protected IRandomService RandomService;
+        protected IRequestBuilder RequestBuilder;
+        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IResponseHandlerFactory ResponseHandlerFactory;
+        protected JsonResponseParserFactory ResponseParser;
 
         /// <summary>
         /// Constructor
@@ -41,19 +41,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="randomService"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
         public GuassianBasicMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService randomService = null)
         {
-            _randomService = randomService ?? new RandomOrgApiService();
-            _requestBuilder = new JsonRequestBuilder(new GuassianJsonRequestBuilder());
+            RandomService = randomService ?? new RandomOrgApiService();
+            RequestBuilder = new JsonRequestBuilder(new GuassianJsonRequestBuilder());
 
-            _precedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
-            _responseParser = new JsonResponseParserFactory(new GenericResponseParser<decimal>());
+            ResponseParser = new JsonResponseParserFactory(new GenericResponseParser<decimal>());
 
-            _responseHandlerFactory = new ResponseHandlerFactory(
+            ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),
                 advisoryDelayHandler,
                 new VerifyIdResponseHandler(),
-                _responseParser
+                ResponseParser
             );
         }
 
@@ -65,13 +65,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="standardDeviation">The distribution's standard deviation. Must be between -1,000,000 and 1,000,000</param>
         /// <param name="significantDigits">The number of significant digits to use. Must be between 2 and 20.</param>
         /// <returns>List of random blob values</returns>
-        public IEnumerable<decimal> GenerateGuassians(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
+        public virtual IEnumerable<decimal> GenerateGuassians(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
         {
             IParameters requestParameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
         }
 
         /// <summary>
@@ -82,13 +82,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="standardDeviation">The distribution's standard deviation. Must be between -1,000,000 and 1,000,000</param>
         /// <param name="significantDigits">The number of significant digits to use. Must be between 2 and 20.</param>
         /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<decimal>> GenerateGuassiansAsync(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
+        public virtual async Task<IEnumerable<decimal>> GenerateGuassiansAsync(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
         {
             IParameters requestParameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
         }
     }
 }

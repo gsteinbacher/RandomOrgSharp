@@ -241,11 +241,20 @@ namespace Obacher.RandomOrgSharp.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Id passed into the request does not match the Id returned in response..
+        ///   Looks up a localized string similar to Id passed into the request does not match the Id returned in responseInfo..
         /// </summary>
         internal static string ERROR_IDS_NOT_MATCHED {
             get {
                 return ResourceManager.GetString("ERROR_IDS_NOT_MATCHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset method not allowed on this type of enumerator..
+        /// </summary>
+        internal static string EXCEPTION_CANNOT_CALL_RESET {
+            get {
+                return ResourceManager.GetString("EXCEPTION_CANNOT_CALL_RESET", resourceCulture);
             }
         }
         
@@ -255,6 +264,15 @@ namespace Obacher.RandomOrgSharp.Core.Properties {
         internal static string EXCEPTION_INVALID_ARGUMENT {
             get {
                 return ResourceManager.GetString("EXCEPTION_INVALID_ARGUMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No data was returned on the last call to the random.org API serivce.random.org service.
+        /// </summary>
+        internal static string EXCEPTION_NO_DATA_RETURNED {
+            get {
+                return ResourceManager.GetString("EXCEPTION_NO_DATA_RETURNED", resourceCulture);
             }
         }
         

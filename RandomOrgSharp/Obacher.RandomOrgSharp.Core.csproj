@@ -88,7 +88,6 @@
     <Compile Include="MethodType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomOrgConstants.cs" />
-    <Compile Include="RandomOrgEnumerator.cs" />
     <Compile Include="RandomOrgException.cs" />
     <Compile Include="RandomOrgApiService.cs" />
     <Compile Include="Parameter\IntegerParameters.cs" />

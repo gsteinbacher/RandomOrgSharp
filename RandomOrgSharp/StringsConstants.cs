@@ -38,6 +38,8 @@
 
         public const string EXCEPTION_INVALID_ARGUMENT = ExceptionKey + "INVALID_ARGUMENT";
         public const string NOT_VERIFIED = ExceptionKey + "ERROR_NOT_VERIFIED";
+        public const string NO_DATA_RETURNED = ExceptionKey + "NO_DATA_RETURNED";
+        public const string CANNOT_CALL_RESET = ExceptionKey + "CANNOT_CALL_RESET";
 
         #endregion
     }

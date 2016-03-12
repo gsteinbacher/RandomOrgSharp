@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Obacher.RandomOrgSharp.Core;
-using Obacher.RandomOrgSharp.Core.Parameter;
+﻿using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
-using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.RandomOrgSharp.JsonRPC.Response;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Method
@@ -24,14 +20,8 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     ///     Verify the Id returned in the response matches the id passed into the request
     ///     Parse the response into a <see cref="DataResponseInfo{T}"/> so the blob values can be extracted
     /// </remarks>
-    public class BlobSignedMethod
+    public class BlobSignedMethod : BlobBasicMethod
     {
-        private readonly IRequestBuilder _requestBuilder;
-        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
-        private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly JsonResponseParserFactory _responseParser;
-        private readonly IRandomService _service;
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -39,58 +29,21 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// Class which handles the apprioriate delay before the request is called.
         /// It is required that this class be passed into the method because the same instance of the <see cref="AdvisoryDelayHandler"/> must be passed in on every request.
         /// </param>
-        public BlobSignedMethod(AdvisoryDelayHandler advisoryDelayHandler)
+        /// <param name="randomService"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
+        public BlobSignedMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService randomService = null) : base(advisoryDelayHandler, randomService)
         {
-            _service = new RandomOrgApiService();
+            // We just need to setup the Verification Signature class, other than that everything else is the same.
+            var verifySignatureHandler = new VerifySignatureHandler(RandomService);
 
-            _requestBuilder = new JsonRequestBuilder(new BlobJsonRequestBuilder());
+            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler, verifySignatureHandler);
 
-            var verifySignatureHandler = new VerifySignatureHandler(_service);
-
-            _precedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler, verifySignatureHandler);
-
-            // We need to keep this separate so we can retrieve the blob values that will be returned
-            _responseParser = new JsonResponseParserFactory(new GenericResponseParser<string>());
-
-            _responseHandlerFactory = new ResponseHandlerFactory(
+            ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),
                 verifySignatureHandler,
                 advisoryDelayHandler,
                 new VerifyIdResponseHandler(),
-                _responseParser
+                ResponseParser
             );
-        }
-
-        /// <summary>
-        /// Retrieves a list of random blob values
-        /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random blob values you need. Must be between 1 and 100.</param>
-        /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
-        /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
-        /// <returns>List of random blob values</returns>
-        public IEnumerable<string> GenerateSignedBlobs(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
-        {
-            IParameters requestParameters = BlobParameters.Create(numberOfItemsToReturn, size, format);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _service, _precedingRequestCommandFactory, _responseHandlerFactory);
-            broker.Generate(requestParameters);
-
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
-        }
-
-        /// <summary>
-        /// Retrieves a list of random blob values in an asynchronous manners
-        /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random blob values you need. Must be between 1 and 100.</param>
-        /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
-        /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
-        /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<string>> GenerateSignedBlobsAsync(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
-        {
-            IParameters requestParameters = BlobParameters.Create(numberOfItemsToReturn, size, format);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _service, _precedingRequestCommandFactory, _responseHandlerFactory);
-            await broker.GenerateAsync(requestParameters);
-
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
         }
     }
 }

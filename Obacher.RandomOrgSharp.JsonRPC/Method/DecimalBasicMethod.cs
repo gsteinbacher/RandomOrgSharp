@@ -25,11 +25,11 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     /// </remarks>
     public class DecimalBasicMethod
     {
-        private readonly IRandomService _randomService;
-        private readonly IRequestBuilder _requestBuilder;
-        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
-        private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly JsonResponseParserFactory _responseParser;
+        protected IRandomService RandomService;
+        protected IRequestBuilder RequestBuilder;
+        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IResponseHandlerFactory ResponseHandlerFactory;
+        protected JsonResponseParserFactory ResponseParser;
 
         /// <summary>
         /// Constructor
@@ -41,19 +41,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="randomService"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
         public DecimalBasicMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService randomService = null)
         {
-            _randomService = randomService ?? new RandomOrgApiService();
-            _requestBuilder = new JsonRequestBuilder(new DecimalJsonRequestBuilder());
+            RandomService = randomService ?? new RandomOrgApiService();
+            RequestBuilder = new JsonRequestBuilder(new DecimalJsonRequestBuilder());
 
-            _precedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
-            _responseParser = new JsonResponseParserFactory(new GenericResponseParser<decimal>());
+            ResponseParser = new JsonResponseParserFactory(new GenericResponseParser<decimal>());
 
-            _responseHandlerFactory = new ResponseHandlerFactory(
+            ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),
                 advisoryDelayHandler,
                 new VerifyIdResponseHandler(),
-                _responseParser
+                ResponseParser
             );
         }
 
@@ -64,7 +64,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="numberOfDecimalPlaces">The number of decimal places to use. Must be between 1 and 20</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>List of random blob values</returns>
-        public IEnumerable<decimal> GenerateDecimalsFractions(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = false)
+        public virtual IEnumerable<decimal> GenerateDecimalsFractions(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = false)
         {
             IParameters requestParameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
             IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);
@@ -80,7 +80,7 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="numberOfDecimalPlaces">The number of decimal places to use. Must be between 1 and 20</param>
         /// <param name="allowDuplicates">True if duplicate values are allowed in the random values, default to <c>true</c></param>
         /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<decimal>> GenerateDecimalsFractionsAsync(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = false)
+        public virtual async Task<IEnumerable<decimal>> GenerateDecimalsFractionsAsync(int numberOfItemsToReturn, int numberOfDecimalPlaces, bool allowDuplicates = false)
         {
             IParameters requestParameters = DecimalParameters.Create(numberOfItemsToReturn, numberOfDecimalPlaces, allowDuplicates);
             MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _randomService, _precedingRequestCommandFactory, _responseHandlerFactory);

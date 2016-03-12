@@ -25,11 +25,11 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     /// </remarks>
     public class BlobBasicMethod
     {
-        private readonly IRandomService _service;
-        private readonly IRequestBuilder _requestBuilder;
-        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
-        private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly JsonResponseParserFactory _responseParser;
+        protected IRandomService RandomService;
+        protected IRequestBuilder RequestBuilder;
+        protected IPrecedingRequestCommandFactory PrecedingRequestCommandFactory;
+        protected IResponseHandlerFactory ResponseHandlerFactory;
+        protected JsonResponseParserFactory ResponseParser;
 
         /// <summary>
         /// Constructor
@@ -41,19 +41,19 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="randomService"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
         public BlobBasicMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService randomService = null)
         {
-            _service = randomService ?? new RandomOrgApiService();
-            _requestBuilder = new JsonRequestBuilder(new BlobJsonRequestBuilder());
+            RandomService = randomService ?? new RandomOrgApiService();
+            RequestBuilder = new JsonRequestBuilder(new BlobJsonRequestBuilder());
 
-            _precedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
+            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler);
 
             // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
-            _responseParser = new JsonResponseParserFactory(new GenericResponseParser<string>());
+            ResponseParser = new JsonResponseParserFactory(new GenericResponseParser<string>());
 
-            _responseHandlerFactory = new ResponseHandlerFactory(
+            ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),
                 advisoryDelayHandler,
                 new VerifyIdResponseHandler(),
-                _responseParser
+                ResponseParser
             );
         }
 
@@ -64,13 +64,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
         /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
         /// <returns>List of random blob values</returns>
-        public IEnumerable<string> GenerateBlobs(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
+        public virtual IEnumerable<string> GenerateBlobs(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
         {
             IParameters requestParameters = BlobParameters.Create(numberOfItemsToReturn, size, format);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _service, _precedingRequestCommandFactory, _responseHandlerFactory);
+            IMethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             broker.Generate(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
         }
 
         /// <summary>
@@ -80,13 +80,13 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// <param name="size">The size of each blob, measured in bits. Must be between 1 and 1048576 and must be divisible by 8.</param>
         /// <param name="format">Specifies the format in which the blobs will be returned, default value is Base64</param>
         /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<string>> GenerateBlobsAsync(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
+        public virtual async Task<IEnumerable<string>> GenerateBlobsAsync(int numberOfItemsToReturn, int size, BlobFormat format = BlobFormat.Base64)
         {
             IParameters requestParameters = BlobParameters.Create(numberOfItemsToReturn, size, format);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _service, _precedingRequestCommandFactory, _responseHandlerFactory);
+            MethodCallBroker broker = new MethodCallBroker(RequestBuilder, RandomService, PrecedingRequestCommandFactory, ResponseHandlerFactory);
             await broker.GenerateAsync(requestParameters);
 
-            return (_responseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
+            return (ResponseParser.ResponseInfo as DataResponseInfo<string>)?.Data;
         }
     }
 }

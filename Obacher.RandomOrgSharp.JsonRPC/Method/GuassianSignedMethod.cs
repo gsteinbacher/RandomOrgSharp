@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Obacher.RandomOrgSharp.Core;
-using Obacher.RandomOrgSharp.Core.Parameter;
+﻿using Obacher.RandomOrgSharp.Core;
 using Obacher.RandomOrgSharp.Core.Request;
 using Obacher.RandomOrgSharp.Core.Response;
-using Obacher.RandomOrgSharp.JsonRPC.Request;
 using Obacher.RandomOrgSharp.JsonRPC.Response;
 
 namespace Obacher.RandomOrgSharp.JsonRPC.Method
@@ -23,14 +19,8 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
     ///     Verify the Id returned in the response matches the id passed into the request
     ///     Parse the response into a <see cref="DataResponseInfo{T}"/> so the blob values can be extracted
     /// </remarks>
-    public class GuassianSignedMethod
+    public class GuassianSignedMethod : GuassianBasicMethod
     {
-        private readonly IRandomService _service;
-        private readonly IRequestBuilder _requestBuilder;
-        private readonly IPrecedingRequestCommandFactory _precedingRequestCommandFactory;
-        private readonly IResponseHandlerFactory _responseHandlerFactory;
-        private readonly JsonResponseParserFactory _responseParser;
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -38,60 +28,20 @@ namespace Obacher.RandomOrgSharp.JsonRPC.Method
         /// Class which handles the apprioriate delay before the request is called.
         /// It is required that this class be passed into the method because the same instance of the <see cref="AdvisoryDelayHandler"/> must be passed in on every request.
         /// </param>
-        /// <param name="service"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
-        public GuassianSignedMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService service = null)
+        /// <param name="randomService"><see cref="IRandomService"/> to use to get random values.  Defaults to <see cref="RandomOrgApiService"/></param>
+        public GuassianSignedMethod(AdvisoryDelayHandler advisoryDelayHandler, IRandomService randomService = null) : base (advisoryDelayHandler, randomService)
         {
-            _service = service ?? new RandomOrgApiService();
-            _requestBuilder = new JsonRequestBuilder(new GuassianJsonRequestBuilder());
+            var verifySignatureHandler = new VerifySignatureHandler(RandomService);
 
-            var verifySignatureHandler = new VerifySignatureHandler(_service);
+            PrecedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler, verifySignatureHandler);
 
-            _precedingRequestCommandFactory = new PrecedingRequestCommandFactory(advisoryDelayHandler, verifySignatureHandler);
-
-            // We need to keep this separate so we can retrieve the list of values that are returned from to the caller
-            _responseParser = new JsonResponseParserFactory(new GenericResponseParser<decimal>());
-
-            _responseHandlerFactory = new ResponseHandlerFactory(
+            ResponseHandlerFactory = new ResponseHandlerFactory(
                 new ErrorHandlerThrowException(new ErrorParser()),
                 verifySignatureHandler,
                 advisoryDelayHandler,
                 new VerifyIdResponseHandler(),
-                _responseParser
+                ResponseParser
             );
-        }
-
-        /// <summary>
-        /// Retrieves a list of random blob values
-        /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random guassian values you need. Must be between 1 and 10,000.</param>
-        /// <param name="mean">The distribution's mean. Must be between -1,000,000 and 1,000,000.</param>
-        /// <param name="standardDeviation">The distribution's standard deviation. Must be between -1,000,000 and 1,000,000</param>
-        /// <param name="significantDigits">The number of significant digits to use. Must be between 2 and 20.</param>
-        /// <returns>List of random blob values</returns>
-        public IEnumerable<decimal> GenerateGuassians(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
-        {
-            IParameters requestParameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits, true);
-            IMethodCallBroker broker = new MethodCallBroker(_requestBuilder, _service, _precedingRequestCommandFactory, _responseHandlerFactory);
-            broker.Generate(requestParameters);
-
-            return (_responseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
-        }
-
-        /// <summary>
-        /// Retrieves a list of random blob values in an asynchronous manners
-        /// </summary>
-        /// <param name="numberOfItemsToReturn">How many random guassian values you need. Must be between 1 and 10,000.</param>
-        /// <param name="mean">The distribution's mean. Must be between -1,000,000 and 1,000,000.</param>
-        /// <param name="standardDeviation">The distribution's standard deviation. Must be between -1,000,000 and 1,000,000</param>
-        /// <param name="significantDigits">The number of significant digits to use. Must be between 2 and 20.</param>
-        /// <returns>List of random blob values</returns>
-        public async Task<IEnumerable<decimal>> GenerateGuassiansAsync(int numberOfItemsToReturn, int mean, int standardDeviation, int significantDigits)
-        {
-            IParameters requestParameters = GuassianParameters.Create(numberOfItemsToReturn, mean, standardDeviation, significantDigits, true);
-            MethodCallBroker broker = new MethodCallBroker(_requestBuilder, _service, _precedingRequestCommandFactory, _responseHandlerFactory);
-            await broker.GenerateAsync(requestParameters);
-
-            return (_responseParser.ResponseInfo as DataResponseInfo<decimal>)?.Data;
         }
     }
 }
